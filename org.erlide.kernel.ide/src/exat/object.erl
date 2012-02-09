@@ -146,7 +146,7 @@ call(Object, Method, Params) when is_record(Object,object) ->
 %%     io:format("----- 1. Call/3 ~w,~w,~w\n", [Object,Method,Params]),
     Obj1 = Object#object {context = Object#object.class},
     X = call(Obj1, Method, Object#object.class, Params),
-    %%io:format("Result is ~w,~w\n", [Object,X]),
+%% io:format("Result is ~w,~w\n", [Object,X]),
     X.
 
 call(Object, Method, nil, _) -> exit({undef, [method, Object, Method]});
@@ -587,10 +587,12 @@ executor_do(Object, State) ->
 
 make_event_list(Object, []) -> [];
 make_event_list(Object, [{Event, Proc}|T]) ->
-%% 	io:format("[]~w:~w] make event list: ~w~n",[Event]),
+%% 	io:format("[~w:~w] make event list: ~w~n",[?MODULE,?LINE,{Event,Proc}]),
     {EventType, PatternName} = call(Object, event, [Event]),
     Pattern = getpattern(Object, PatternName),
-    [ {EventType, Pattern, Proc} | make_event_list(Object, T)].
+    [ {EventType, Pattern, Proc} | make_event_list(Object, T)];
+make_event_list(Object, Other) -> 
+	exit({undef, [event, Object, Other]}).
 
 make_multi_sync_tasks(M, Agent, []) -> ok;
 make_multi_sync_tasks(M, Agent, [{acl, Pattern, Proc}|T]) ->

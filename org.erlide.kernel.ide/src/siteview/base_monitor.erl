@@ -16,8 +16,8 @@ extends () -> nil .
 ?ACTION(disabled) -> [{timed_enable_event,enable},{enable_event, enable_action}];
 ?ACTION(logging) -> {logging_event, logging_action};
 ?ACTION(waiting) -> [
-%% 					{disable_event,disable_action},
-%% 					{refresh_event,request_refresh_resource_action},
+					{disable_event,disable_action},
+					{refresh_event,request_refresh_resource_action},
 					{frequency_event,update_action}
 					];
 ?ACTION(waiting_for_resource) -> [{resource_allocated_event,update_action}].
@@ -36,17 +36,18 @@ extends () -> nil .
 ?PATTERN(logging_pattern)-> {?VALUE(name), get, {logging}};
 ?PATTERN(refresh_pattern)-> {?VALUE(name), get, {refresh}};
 ?PATTERN(enable)-> [{?VALUE(name), get, {enable}},{?VALUE(name), get, {enable,fun(Time)-> Time >= 0 end}}];
-?PATTERN(disable_pattern)-> [{?VALUE(name), get, {disable}},{?VALUE(name), get, {disable,fun(Time)-> Time >= 0 end}}];
+?PATTERN(disable_pattern)-> {?VALUE(name), get, {disable,'_'}};
+%% ?PATTERN(disable_pattern)-> [{?VALUE(name), get, {disable}},{?VALUE(name), get, {disable,fun(Time)-> Time >= 0 end}}];
 ?PATTERN(frequency_pattern) -> ?VALUE(?FREQUENCY)*1000;
-?PATTERN(disable_time) -> ?VALUE(disable_time)*10000.
+?PATTERN(disable_time) -> ?VALUE(disable_time)*1000.
 
 init_action(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=init,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,waiting).
 
-%% update_action(Self,EventType,Pattern,State) ->
-%% 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
-%% 	object:do(Self,start).
+update_action(Self,EventType,Pattern,State) ->
+	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
+	object:do(Self,waiting).
 
 base_monitor (Self,Name) ->
 	?SETVALUE(?NAME,monitor),
