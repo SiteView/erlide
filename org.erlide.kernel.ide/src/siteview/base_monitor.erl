@@ -16,37 +16,37 @@ extends () -> nil .
 ?ACTION(disabled) -> [{timed_enable_event,enable},{enable_event, enable_action}];
 ?ACTION(logging) -> {logging_event, logging_action};
 ?ACTION(waiting) -> [
-					{disable_event,disable_action},
-					{refresh_event,request_refresh_resource_action},
-					{frequency_event,request_resource_action}
+%% 					{disable_event,disable_action},
+%% 					{refresh_event,request_refresh_resource_action},
+					{frequency_event,update_action}
 					];
 ?ACTION(waiting_for_resource) -> [{resource_allocated_event,update_action}].
 
-?EVENT(wakeup_event)-> {eresye,wakeup};
+?EVENT(wakeup_event)-> {eresye,wakeup_pattern};
 ?EVENT(disable_event)-> {eresye,disable_pattern};
 ?EVENT(enable_event)-> {eresye,enable};
-?EVENT(frequency_event) -> {timeout,?FREQUENCY};
+?EVENT(frequency_event) -> {timeout,frequency_pattern};
 ?EVENT(resource_allocated_event)-> {eresye,resource_allocated_pattern};
 ?EVENT(logging_event)-> {eresye,logging_pattern};
 ?EVENT(refresh_event)-> {eresye,logging_pattern};
 ?EVENT(timed_enable_event) -> {timeout,disable_time}.
 
 ?PATTERN(resource_allocated_pattern)-> {resource_pool, get, {?VALUE(name),resource_allocated}}; 
-?PATTERN(wakeup)-> {?VALUE(name), get, {wakeup}};
+?PATTERN(wakeup_pattern)-> {?VALUE(name), get, {wakeup}};
 ?PATTERN(logging_pattern)-> {?VALUE(name), get, {logging}};
 ?PATTERN(refresh_pattern)-> {?VALUE(name), get, {refresh}};
 ?PATTERN(enable)-> [{?VALUE(name), get, {enable}},{?VALUE(name), get, {enable,fun(Time)-> Time >= 0 end}}];
 ?PATTERN(disable_pattern)-> [{?VALUE(name), get, {disable}},{?VALUE(name), get, {disable,fun(Time)-> Time >= 0 end}}];
-?PATTERN(?FREQUENCY ) -> ?VALUE(?FREQUENCY)*1000;
+?PATTERN(frequency_pattern) -> ?VALUE(?FREQUENCY)*1000;
 ?PATTERN(disable_time) -> ?VALUE(disable_time)*10000.
 
 init_action(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=init,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,waiting).
 
-update_action(Self,EventType,Pattern,State) ->
-	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
-	object:do(Self,start).
+%% update_action(Self,EventType,Pattern,State) ->
+%% 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
+%% 	object:do(Self,start).
 
 base_monitor (Self,Name) ->
 	?SETVALUE(?NAME,monitor),
@@ -105,7 +105,7 @@ test(Name) ->
 		[] -> 
 				X = object:new(?MODULE,[Name]),
 				object:start(X),
-				eresye:assert(Name,{wakeup}),
+				object:add_fact(Name,{wakeup}),
 				X;
 		_ -> atom_to_list(Name) ++ " not available, choose a new name"
 	end.

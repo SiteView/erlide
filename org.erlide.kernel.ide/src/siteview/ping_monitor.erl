@@ -20,7 +20,7 @@ ping_monitor_(Self)->eresye:stop(?VALUE(name)).
 
 init(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
-	object:do(Self,waiting).
+	object:do(Self,start).
 
 get_max() -> 10.  %max number of this type of monitor can be run in parallel
 
@@ -28,7 +28,7 @@ do_pong(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,start).
 
-update(Self,EventType,Pattern,State) ->
+update_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
   	Start = erlang:now(),
 	object:do(Self,running),
@@ -44,9 +44,10 @@ update(Self,EventType,Pattern,State) ->
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
  	io:format("[~w:~w] finish in ~w ms, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
-	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
-	object:super(Self, post_updating,[]),	
-	object:do(Self,logging).
+%% 	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
+%% 	object:super(Self, post_updating,[]),	
+	object:do(Self,waiting).
+%% 	object:do(Self,logging).
 
 start(Name) ->
 	case object:get_by_name(Name) of

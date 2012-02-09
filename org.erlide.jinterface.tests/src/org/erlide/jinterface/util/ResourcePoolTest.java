@@ -1,21 +1,37 @@
 package org.erlide.jinterface.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.siteview.object.ErlObject;
+import com.ericsson.otp.erlang.OtpErlangAtom;
 import com.siteview.object.ErlObjectStore;
 
 public class ResourcePoolTest {
     @Test
-    public void wakeupTest() throws Throwable {
-    	ErlObjectStore.delete_all();
-    	
-    	ErlObject ping1 = ErlObjectStore.create("ping_monitor","ping1");
-    	
-    	Assert.assertEquals("start", ping1.getState());
-    	ping1.add_fact("wakeup");
-    	Assert.assertEquals("waiting", ping1.getState());
+    public void singleTest() throws Throwable {
+    	List<Object> list = new ArrayList<Object>();
+    	list.add(new OtpErlangAtom("ping1"));
+    	list.add(new OtpErlangAtom("single_test"));
+    	ErlObjectStore.add_fact("pool",list );
+        final String expected = "ok";
+        final String actual = (String)ErlObjectStore.get_by_name("pool").get("test");        
+        Assert.assertEquals(expected, actual);
+        ErlObjectStore.get_by_name("pool").set("test","error");
+    }
+    
+    @Test
+    public void doubleTest() throws Throwable {
+    	List<Object> list = new ArrayList<Object>();
+    	list.add(new OtpErlangAtom("ping1"));
+    	list.add(new OtpErlangAtom("double_test"));
+    	ErlObjectStore.add_fact("pool",list );
+        final String expected = "ok";
+        final String actual = (String)ErlObjectStore.get_by_name("pool").get("test");        
+        Assert.assertEquals(expected, actual);
+        ErlObjectStore.get_by_name("pool").set("test","error");
     }
 }

@@ -541,8 +541,6 @@ read_parameters ([{var, _, _} | Tail], RecordList) ->
     Conditions.
 
 
-
-
 extract_parameters ([], Acc, RecordList) ->
     lists:reverse (Acc);
 

@@ -21,17 +21,19 @@
 
 extends () -> nil .
 
-?PATTERN(test_pattern) -> {?POOLNAME,get,{'_',test}};
+?PATTERN(single_test_pattern) -> {?POOLNAME,get,{'_',single_test}};
+?PATTERN(double_test_pattern) -> [{?POOLNAME,get,{'_',single_test}},{?POOLNAME,get,{'_',second_test}}];
 ?PATTERN(request_resource_pattern)-> [{?POOLNAME, get, {'_',request_resource}},{?POOLNAME, get, {'_',request_refresh_resource}}];
 ?PATTERN(release_resource_pattern)-> {?POOLNAME, get, {'_',release_resource}}.
 
-?EVENT(test_event) -> {eresye,test_pattern};
+?EVENT(single_test_event) -> [{eresye,single_test_pattern}, {eresye,double_test_pattern}];
 ?EVENT(request_resource_event)-> {eresye,request_resource_pattern};
 ?EVENT(release_resource_event)-> {eresye,release_resource_pattern}.
 
 ?ACTION(start) -> [
-				   {test_event,test_action},
-%% 				   {request_resource_event,request_resource_action},
+				   {single_test_event,test_action},
+				   {double_test_event,test_action},
+				   {request_resource_event,request_resource_action},
 				   {release_resource_event,release_resource_action}
 				  ].
 
@@ -61,6 +63,7 @@ release(Name) ->
 	eresye:assert(?POOLNAME, {Name,release_resource}).
 
 test_action(Self,EventType,Pattern,State) ->
+	?SETVALUE(test,ok),
 	io:format ( "[~w:~w]Action: test_action, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
 	ok.
 

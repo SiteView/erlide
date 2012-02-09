@@ -12,7 +12,7 @@ extends () -> base_monitor.
 
 init(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=init,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
-	object:do(Self,running).
+	object:do(Self,start).
 
 update(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),

@@ -24,8 +24,8 @@
 %% Arguments: none
 %%====================================================================
 start_link() ->	
-	eresye:start(object_store),
-	resource_pool:start().
+	eresye:start(object_store).
+%% 	resource_pool:start().
 start()->start_link().
 
 %% @spec new()->{ok,{parent,Parent}} | {error,Resean}
@@ -587,6 +587,7 @@ executor_do(Object, State) ->
 
 make_event_list(Object, []) -> [];
 make_event_list(Object, [{Event, Proc}|T]) ->
+%% 	io:format("[]~w:~w] make event list: ~w~n",[Event]),
     {EventType, PatternName} = call(Object, event, [Event]),
     Pattern = getpattern(Object, PatternName),
     [ {EventType, Pattern, Proc} | make_event_list(Object, T)].
