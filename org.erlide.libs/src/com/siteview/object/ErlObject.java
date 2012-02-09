@@ -110,4 +110,13 @@ public class ErlObject
     	return (Map<String,Object>) OtpGateway.getOtpInterface().call("object", "get_system_attrs", list);
     }
     
+    public void add_fact(List<Object> fact) throws Exception{
+        ErlObjectStore.add_fact(Name, fact);
+    }
+    
+    public void add_fact(String fact) throws Exception{
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(fact));
+        ErlObjectStore.add_fact(Name, list);
+    }
 }

@@ -44,7 +44,7 @@ update(Self,EventType,Pattern,State) ->
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
  	io:format("[~w:~w] finish in ~w ms, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
-	eresye:assert(resource_pool,{?VALUE(name),release_resource}), %%trigging the release_resource_pattern in resource_pool module
+	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
 	object:super(Self, post_updating,[]),	
 	object:do(Self,logging).
 

@@ -43,3 +43,5 @@
 
 % call super class's function if no clause matched.
 -define(SUPERCLAUSE(X),X(Self,Other) -> object:super(Self, X, [Other]))  .
+
+-define(POOLNAME,'pool').

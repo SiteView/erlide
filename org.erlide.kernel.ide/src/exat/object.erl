@@ -23,15 +23,16 @@
 %% Func: start_link/1
 %% Arguments: none
 %%====================================================================
-start_link() ->
-	eresye:start(object_store).
+start_link() ->	
+	eresye:start(object_store),
+	resource_pool:start().
 start()->start_link().
 
 %% @spec new()->{ok,{parent,Parent}} | {error,Resean}
 %% @doc Create a new object, will call the object constructor, the parameters must be a @type List 
 %%
 new(Class,P) ->
-	io:format("[~w:~w]Class is ~w, Parameter is:~w~n", [?MODULE,?LINE,Class,P]),
+%% 	io:format("[~w:~w]Class is ~w, Parameter is:~w~n", [?MODULE,?LINE,Class,P]),
     PropertyServerPid = spawn(object, property_server, [dict:new()]),
     server_call(PropertyServerPid,
                 {self(), set, ?PROPERTY_STATUS, ?INIT_STATUS}),
@@ -292,6 +293,10 @@ stateof(Object) when is_record(Object,object) ->
 stateof(ObjectList) when is_list(ObjectList) ->
 	[get(X,?PROPERTY_STATUS)||X <- ObjectList].
 
+add_fact(Object,Fact) when is_atom(Object) -> eresye:assert(Object,Fact);
+add_fact(Object,Fact) when is_record(Object,object) -> eresye:assert(nameof(Object),Fact);
+add_fact(Other,Fact) -> name_not_exist.
+	
 total_mem(Object) ->
 	{memory,PropMem} = erlang:process_info(property_server_of(Object), memory),
 	{memory,ExeMem} = erlang:process_info(executorof(Object), memory),
@@ -332,7 +337,8 @@ isAttribute(Object,AttrName) when is_record(Object,object) ->
 %%
 getAttributes(Object) when is_atom(Object) -> getAttributes(get_by_name(Object));
 getAttributes(Object) when is_record(Object,object) ->
-    lists:sort(server_call(Object#object.property_server, {self(), list_values})).
+    lists:sort(server_call(Object#object.property_server, {self(), list_values}));
+getAttributes(Other) -> name_not_exist.  %%TODO: add this all funcs
 
 %% ----------------------------------------------
 %%

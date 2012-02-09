@@ -6,6 +6,7 @@ import java.util.List;
 
 import javolution.util.FastList;
 
+import com.ericsson.otp.erlang.OtpConverter;
 import com.ericsson.otp.erlang.OtpErlangAtom;
 import com.ericsson.otp.erlang.OtpErlangObject;
 import com.ericsson.otp.erlang.OtpGateway;
@@ -113,6 +114,13 @@ public final class ErlObjectStore
 		return isValidName(Name) ? new ErlObject(Name) : null;		
     }
     
+    public static void add_fact(String engine,List<Object> fact) throws Exception{
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(engine));
+        list.add(OtpConverter.Object2OtpErlangObject(fact.toArray()));        
+        OtpGateway.getOtpInterface().call("object", "add_fact", list);      
+    }
+    
     public static List<ErlObject> get_by_attr(String AttributeName, String AttributeValue) throws Exception{
 		List<Object> list = new ArrayList<Object>();
 		List<ErlObject> objList = new ArrayList<ErlObject>();
@@ -168,5 +176,7 @@ public final class ErlObjectStore
     	System.out.println(list.toString());
     	System.out.println(objlist.toString());
     }
+    
+    
     
 }

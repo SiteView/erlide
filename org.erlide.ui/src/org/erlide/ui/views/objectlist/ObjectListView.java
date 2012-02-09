@@ -1,5 +1,4 @@
-//TODO: create an object, edit object in a seperate view
-//TODO: use the PDE as editor
+//TODO: packaging it as a new product.
 
 package org.erlide.ui.views.objectlist;
 
@@ -45,16 +44,11 @@ import org.erlide.backend.IBackend;
 import org.erlide.backend.IErlideBackendVisitor;
 import org.erlide.backend.events.ErlangEventHandler;
 import org.erlide.jinterface.rpc.IRpcCallSite;
+import org.erlide.ui.ErlideUIConstants;
 import org.erlide.ui.views.BackendContentProvider;
 import org.erlide.ui.views.BackendLabelProvider;
 import org.osgi.service.event.Event;
 
-import com.ericsson.otp.erlang.OtpConverter;
-import com.ericsson.otp.erlang.OtpErlangList;
-import com.ericsson.otp.erlang.OtpErlangObject;
-import com.ericsson.otp.erlang.OtpErlangPid;
-import com.ericsson.otp.erlang.OtpErlangString;
-import com.ericsson.otp.erlang.OtpErlangTuple;
 import com.siteview.object.ErlObject;
 import com.siteview.object.ErlObjectStore;
 
@@ -70,6 +64,7 @@ public class ObjectListView extends ViewPart {
     private ComboViewer backends;
     TableViewer viewer;
     private Action refreshAction;
+    private Action addAction;
     private Action deleteAction;
     Action doubleClickAction;
 
@@ -197,15 +192,12 @@ public class ObjectListView extends ViewPart {
 
         backends = new ComboViewer(container, SWT.SINGLE | SWT.V_SCROLL);
         final Combo combo = backends.getCombo();
-        combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-                1));
-        backends.getControl().setSize(
-                new org.eclipse.swt.graphics.Point(319, 18));
+        combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,1));
+        backends.getControl().setSize(new org.eclipse.swt.graphics.Point(319, 18));
         backends.setContentProvider(new BackendContentProvider());
         backends.setLabelProvider(new BackendLabelProvider());
         backends.setInput(BackendCore.getBackendManager());
-        viewer = new TableViewer(container, SWT.SINGLE | SWT.V_SCROLL
-                | SWT.FULL_SELECTION);
+        viewer = new TableViewer(container, SWT.SINGLE | SWT.V_SCROLL | SWT.FULL_SELECTION);
         final Table table = viewer.getTable();
         final GridData layoutData = new GridData(SWT.FILL, SWT.FILL, false,
                 true, 2, 1);
@@ -298,6 +290,7 @@ public class ObjectListView extends ViewPart {
 
     private void fillLocalToolBar(final IToolBarManager manager) {
         manager.add(refreshAction);
+        manager.add(addAction);
     }
 
     private void makeActions() {
@@ -312,7 +305,21 @@ public class ObjectListView extends ViewPart {
         refreshAction.setToolTipText("Refresh object list");
         refreshAction.setImageDescriptor(PlatformUI.getWorkbench()
                 .getSharedImages()
-                .getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+                .getImageDescriptor(ErlideUIConstants.IMG_REFRESH));
+        
+        addAction = new Action() {
+
+            @Override
+            public void run() {
+                viewer.refresh();
+            }
+        };
+        addAction.setText("Add");
+        addAction.setToolTipText("Add a new object");
+        addAction.setImageDescriptor(PlatformUI.getWorkbench()
+                .getSharedImages()
+                .getImageDescriptor(ISharedImages.IMG_TOOL_NEW_WIZARD));
+        
         
         deleteAction = new Action() {
 
