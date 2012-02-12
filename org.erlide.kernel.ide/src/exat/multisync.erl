@@ -38,7 +38,7 @@ add_task(Sync, Module, Proc, Params) ->
 
 wait_one(Sync) ->
     Result = object:call(Sync, wait),
-    %%io:format("Wait result ~w\n", [Result]),
+%% 	io:format("[~w:~w]Wait result ~w\n", [?MODULE,?LINE,Result]),
     kill_all(object:get(Sync, 'tasklist')),
     object:delete(Sync),
     Result.

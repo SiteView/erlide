@@ -1,3 +1,5 @@
+// TODO: how to test sequence
+
 package org.erlide.jinterface.util;
 
 import junit.framework.Assert;

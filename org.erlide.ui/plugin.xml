@@ -203,6 +203,14 @@
             id="org.erlide.ui.views.objectlist.ObjectListView"
             name="Object list view">
       </view>
+      <view
+            allowMultiple="false"
+            category="org.erlide.views"
+            class="org.erlide.ui.views.objectlist.ResourcePoolView"
+            icon="icons/erl/erlang-notext016.gif"
+            id="org.erlide.ui.views.objectlist.ResourcePoolView"
+            name="Resource Pool View">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">

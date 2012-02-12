@@ -109,7 +109,14 @@ public class ErlObject
         list.add(new OtpErlangAtom(Name));
     	return (Map<String,Object>) OtpGateway.getOtpInterface().call("object", "get_system_attrs", list);
     }
-    
+
+    public Long get_max() throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+//        list.add(new OtpErlangAtom(Type));
+        return (Long) OtpGateway.getOtpInterface().call(Type, "get_max", list);
+    }
+
     public void add_fact(List<Object> fact) throws Exception{
         ErlObjectStore.add_fact(Name, fact);
     }

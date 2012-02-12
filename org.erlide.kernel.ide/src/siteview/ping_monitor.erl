@@ -5,10 +5,12 @@
 
 extends () -> atomic_monitor .
 
+%%@doc the action, event and pattern are specificed in base_monitor
 ?SUPERCLAUSE(action).
 ?SUPERCLAUSE(event).
 ?SUPERCLAUSE(pattern).
 
+%%@doc the constructor, specific the input parameters into the monitor
 ping_monitor(Self, Name)->
 	?SETVALUE(timeout,1000),
 	?SETVALUE(size,4),	
@@ -17,22 +19,24 @@ ping_monitor(Self, Name)->
 
 ping_monitor_(Self)->eresye:stop(?VALUE(name)).
 
-
+%%@doc called as start up
 init_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w]:Type=~w,Action=update\n",	[?VALUE(name),?MODULE]),
 %% 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,waiting).
 
-get_max() -> 10.  %max number of this type of monitor can be run in parallel
+%%doc max number of this type of monitor can be run in parallel, need be set per the system resource
+get_max() -> 10.  
 
-do_pong(Self,EventType,Pattern,State) ->
-	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
-	object:do(Self,start).
+%%@doc the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
+get_resource_type() -> ?MODULE.
 
+%%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
-%% 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
+%% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
   	Start = erlang:now(),
 	object:do(Self,running),
+	
 %% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
 %% 	Cmd = "ping -n 4 -l " ++ object:get(Size,'value') ++ " -w " ++ object:get(Timeout,'value') ++ "  " ++ object:get(Hostname,'value'),
 
@@ -40,21 +44,55 @@ update_action(Self,EventType,Pattern,State) ->
 
 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
 	?SETVALUE(packetsgood,random:uniform(4)),
+%% 	timer:sleep(random:uniform(10)*1000),
+	timer:sleep(2*1000),
 	
-	Diff = timer:now_diff(erlang:now(), Start)/10000000,
+	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
- 	io:format("[~w:~w] ~w finish in ~w ms, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+%%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
 %% 	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
-%% 	object:super(Self, post_updating,[]),	
-	object:do(Self,waiting).
-%% 	object:do(Self,logging).
+%% 	object:super(Self, post_run,[]),	
+ 	io:format("[~w:~w] ~w-3 Counter=~w, finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+	resource_pool:release(?VALUE(name)), 	
+	eresye:assert(?VALUE(name), {logging}),
+%% 	object:do(Self,waiting).
+	object:do(Self,logging).
 
+run(Self) -> 
+	object:do(Self,running),
+	Worker = spawn(?MODULE,worker,[Self]).
+
+worker(Self) ->
+  	Start = erlang:now(),
+%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
+%% 	Cmd = "ping -n 4 -l " ++ object:get(Size,'value') ++ " -w " ++ object:get(Timeout,'value') ++ "  " ++ object:get(Hostname,'value'),
+
+%% 	simulated random data
+
+	?SETVALUE(round_trip_time,100 * random:uniform(10)),
+	?SETVALUE(packetsgood,random:uniform(4)),
+%% 	timer:sleep(random:uniform(10)*1000),
+	timer:sleep(2*1000),
+	
+	Diff = timer:now_diff(erlang:now(), Start)/1000000,
+	?SETVALUE(?MEASUREMENTTIME,Diff),
+	?SETVALUE(?LASTUPDATE,erlang:now()),	
+%%  	io:format("[~w:~w]~w: finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+ 	io:format("[~w:~w]~w: ~w finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", 
+			  [?MODULE,?LINE,self(),?VALUE(name),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+%% 	object:super(Self, post_run,[]).
+	resource_pool:release(?VALUE(name)), 	
+	eresye:assert(?VALUE(name), {logging}),
+	object:do(?VALUE(name),waiting).
+
+%%@doc startup, the name must be unique
 start(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 
 				X = object:new(?MODULE,[Name]),
 				object:start(X),
+				resource_pool:register(object:getClass(Name)),
 				eresye:assert(Name,{wakeup}),
 				X;
 		_ -> atom_to_list(Name) ++ " already existed, choose a new name"

@@ -10,7 +10,8 @@
 %% 		3. object store in the form of KB, allows flexible query
 %% @end
 %%
-%%TODO: create monitors to monitor the health condition of object
+%%TODO: 1. create monitors to monitor the health condition of object
+%% 		2. creating queue for attributes, for timed modification, each attribute has a queue
 
 -module(object).
 -compile(export_all).
@@ -24,8 +25,9 @@
 %% Arguments: none
 %%====================================================================
 start_link() ->	
-	eresye:start(object_store).
-%% 	resource_pool:start().
+	eresye:start(object_store),
+%% 	log_analyzer:start(),
+	resource_pool:start().
 start()->start_link().
 
 %% @spec new()->{ok,{parent,Parent}} | {error,Resean}
@@ -68,9 +70,9 @@ new(Class,P) ->
 	
     c_tor_call(Object, Class, P),
 
-	%%the name is set in constructor
+	%%the name is registerred the object in object store and register the class in resource pool
 	if Class == 'sync' -> nil;
-	   true -> eresye:assert(object_store, {object,Object,name,get(Object,name)})
+	   true -> eresye:assert(object_store, {object,Object,name,get_name(Object)})
 	end,
 
     Object.
@@ -104,7 +106,12 @@ delete(Object) when is_record(Object,object) ->
         S =/= nil -> catch(multisync:abort(M));
         true -> nil
     end,
-    %% Destroy the property server
+%% release the resource in the resource pool
+	case Class of
+		sync -> nil;
+ 		_ -> resource_pool:release(get_name(Object))
+	end,
+	%% Destroy the property server
 %% 	io:format("After d_tor II ~w\n", [Object]),
     catch(exit(Object#object.property_server, kill)),
     %% Destroy the executor
@@ -113,7 +120,7 @@ delete(Object) when is_record(Object,object) ->
 %% 	io:format("After d_tor executor ~w\n", [Object]),
 	%%delete all related KB facts 	
 	eresye:retract_match(object_store, {object,Object,'_','_'}),
-%%TODO: get it work
+%%TODO: need delete from the resource_pool too
 %%  	erlide_jrpc:event(objectlist, {erlang:now(), self()}),
 %% 	io:format("After retract_match~w\n", [Object]),
 	ok;
@@ -198,6 +205,11 @@ super_ (Object) ->
     Method = Parent ++ "_",
     super_class(Object, Parent, Method, []).
 
+set_name(Self,Name) when is_atom(Name) ->
+	case isValidName(Name) of
+		false -> set(Self,name,Name), Name;
+		true -> name_not_available
+	end.
 
 %%
 %% behavioural procedures
@@ -269,9 +281,9 @@ executorof(ObjectList) when is_list(ObjectList) ->
 %%
 %%  get the name of the object or a list of objects
 %%  return the name or name list  
-nameof(Object) when is_record(Object,object) ->
+get_name(Object) when is_record(Object,object) ->
     get(Object,name);
-nameof(ObjectList) when is_list(ObjectList) ->
+get_name(ObjectList) when is_list(ObjectList) ->
 	[get(X,name)||X <- ObjectList].
 
 %%
@@ -294,7 +306,7 @@ stateof(ObjectList) when is_list(ObjectList) ->
 	[get(X,?PROPERTY_STATUS)||X <- ObjectList].
 
 add_fact(Object,Fact) when is_atom(Object) -> eresye:assert(Object,Fact);
-add_fact(Object,Fact) when is_record(Object,object) -> eresye:assert(nameof(Object),Fact);
+add_fact(Object,Fact) when is_record(Object,object) -> eresye:assert(get_name(Object),Fact);
 add_fact(Other,Fact) -> name_not_exist.
 	
 total_mem(Object) ->
@@ -524,10 +536,10 @@ executor() ->
     end.
 
 executor_loop(Object) ->
-    %%io:format("Executor: ~w\n", [Object]),
+%% 	io:format("[~w:~w]Executor: ~w\n", [?MODULE,?LINE,Object]),
     V = get(Object, ?PROPERTY_STATUS),
     T = not(get(Object, ?TERMINATING)),
-%%     io:format("Value: ~w,~w\n", [Object, V]),
+%%     io:format("[~w:~w]Value: ~w,~w\n", [?MODULE,?LINE,Object, V]),
     if
         T  ->
             case catch(executor_do(Object, V)) of
@@ -575,19 +587,23 @@ executor_do(Object, State) ->
         {'EXIT', _ } -> Agent = ?NO_AGENT;
         Other -> Agent = Other
     end,
-%% 	io:format("[~w] Event list = ~w\n", [?LINE,CompleteEventList]),
+%% 	io:format("[~w:~w] Event list = ~w\n", [?MODULE,?LINE,CompleteEventList]),
     M = multisync:new(),
+%% 	io:format("[~w:~w] M = ~w\n", [?MODULE,?LINE,M]),
     set(Object, ?MULTISYNC, M),
+%% 	io:format("[~w:~w] M = ~w\n", [?MODULE,?LINE,M]),
     make_multi_sync_tasks(M, Agent, CompleteEventList),
+%% 	io:format("[~w:~w] M = ~w\n", [?MODULE,?LINE,M]),
     {FiredEvent, PatternValue, Proc} = multisync:wait_one(M),
-    set(Object, ?MULTISYNC, nil),
 %% 	io:format("[~w] ~w,~w,~w\n", [?LINE,FiredEvent, PatternValue,Proc]),
+    set(Object, ?MULTISYNC, nil),
     call(Object, Proc, [FiredEvent, PatternValue, State]).
 
 
 make_event_list(Object, []) -> [];
 make_event_list(Object, [{Event, Proc}|T]) ->
 %% 	io:format("[~w:~w] make event list: ~w~n",[?MODULE,?LINE,{Event,Proc}]),
+%% 	io:format("[~w:~w] make event list: ~w~n",[?MODULE,?LINE,call(Object, event, [Event])]),
     {EventType, PatternName} = call(Object, event, [Event]),
     Pattern = getpattern(Object, PatternName),
     [ {EventType, Pattern, Proc} | make_event_list(Object, T)];
@@ -734,6 +750,9 @@ get_by_executor(Pid) ->
 %%
 get_by_state(Value) ->
 	get_by_attr(state,Value).
+
+get_num_of_state(Value) ->
+	length(get_by_attr(state,Value)).
 
 jget_by_state(Value) ->
 	[get(X,name)||X<-get_by_attr(state,Value)].

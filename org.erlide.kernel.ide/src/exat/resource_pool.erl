@@ -13,7 +13,7 @@
 %% 
 %% 
 %% @end
-%% TODO: using regular rule, not the object
+
 -module(resource_pool).
 -compile(export_all).
 -include("object.hrl").
@@ -22,18 +22,14 @@
 extends () -> nil .
 
 ?PATTERN(single_test_pattern) -> {?POOLNAME,get,{'_',single_test}};
-?PATTERN(double_test_pattern) -> [{?POOLNAME,get,{'_',single_test}},{?POOLNAME,get,{'_',second_test}}];
-?PATTERN(request_resource_pattern)-> [{?POOLNAME, get, {'_',request_resource}},{?POOLNAME, get, {'_',request_refresh_resource}}];
 ?PATTERN(release_resource_pattern)-> {?POOLNAME, get, {'_',release_resource}}.
 
-?EVENT(single_test_event) -> [{eresye,single_test_pattern}, {eresye,double_test_pattern}];
-?EVENT(request_resource_event)-> {eresye,request_resource_pattern};
+%% can NOT return a list
+?EVENT(single_test_event) -> {eresye,single_test_pattern};
 ?EVENT(release_resource_event)-> {eresye,release_resource_pattern}.
 
 ?ACTION(start) -> [
 				   {single_test_event,test_action},
-				   {double_test_event,test_action},
-				   {request_resource_event,request_resource_action},
 				   {release_resource_event,release_resource_action}
 				  ].
 
@@ -42,77 +38,93 @@ extends () -> nil .
 start()->
 	Pool = object:new(?MODULE),
 	object:start(Pool),
+	eresye:start(?POOLNAME),
 	Pool.
 
 resource_pool(Self)->
-	?SETVALUE(name,?POOLNAME),
-	eresye:start(?POOLNAME).
+	?SETVALUE(name,resource_pool_object),
+	eresye:start(?VALUE(name)).
 
 resource_pool_(Self)->eresye:stop(?VALUE(name)).
 
-request(Name) -> 
-	eresye:assert(?POOLNAME, {Name,request_resource}).
+request(Name,RequestType) ->
+	Self = ?POOLOBJ,
+	ClassName = object:getClass(Name),
 
-refresh_request(Name) -> 
-	eresye:assert(?POOLNAME, {Name,request_refresh_resource}). 
+	Max = erlang:apply(ClassName, get_max,[]),
+	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
 
-allocate(Name) ->
-	eresye:assert(?POOLNAME, {Name,resource_allocated}).
-
-release(Name) -> 
-	eresye:assert(?POOLNAME, {Name,release_resource}).
-
-test_action(Self,EventType,Pattern,State) ->
-	?SETVALUE(test,ok),
-	io:format ( "[~w:~w]Action: test_action, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
-	ok.
-
-get_counter(ResourceType) -> {Counter,Queue} = object:get(?POOLNAME,ResourceType), Counter.
-
-get_queue_length(ResourceType) -> {Counter,Queue} = object:get(?POOLNAME,ResourceType), queue:len(Queue).
-
-request_resource_action(Self,EventType,Pattern,State) ->
-	io:format ( "[~w:~w]Action: request_resource_action, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
-	{Name,RequestType} = Pattern,
-	ResourceType = object:getClass(Name),
-	%% get resource capacity and current resource consumption
-	%% TODO: this max can be set based on sysinfo and usage model, can be sophisticated resource allocation, need create a model
-	%% based on OS info, erlang system and process info, number of each ResourceType and monitor frequency, empirical limits, queue history, to come up an optimal max for each resource type 
-	Max = erlang:apply(ResourceType, get_max,[]),
-
-	%% initialize if not an attribute
-	IsAttribute = object:isAttribute(Self,ResourceType),
-	if IsAttribute -> ok;
-	   true -> ?SETVALUE(ResourceType,{0,queue:new()})
-	end,
-	
 	{Counter,Queue} = ?VALUE(ResourceType),
 	
 	if Counter < Max -> 
+%% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
 		   ?SETVALUE(ResourceType,{Counter+1,Queue}),
-		   allocate(Name) ; %trigginng the resource_allocated_pattern in each monitor (base_monitor)
-	   true -> %reach the max, add into queue, will be allocated in release() once resourse released by others
+%% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
+		   object:add_fact(Name,{resource_allocated});
+%% 		   object:call(Name,run);
+	   true -> %reach the max, add into queue, will be droped in release() once resourse released by others
+		   io:format("[~w:~w] ~w:~w Counter=~w/~w,Queue=~w,running=~w,waiting=~w~n", 
+					 [?MODULE,?LINE,ResourceType,Name,Counter,Max,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting)]),
 		   case RequestType of
-			   request_resource -> ?SETVALUE(ResourceType,{Counter,queue:in(Name,Queue)});
-			   refresh_request_resource -> ?SETVALUE(ResourceType,{Counter,queue:in_r(Name,Queue)})
+			   frequency -> ?SETVALUE(ResourceType,{Counter,queue:in(Name,Queue)});%%for frequency timeout request, put into the tail of the queue
+			   refresh -> ?SETVALUE(ResourceType,{Counter,queue:in_r(Name,Queue)}) %%for refresh request, put into the head of the queue
 		   end
-	end,
-	object:do(Self,start).
+	end.
 
-release_resource_action(Self,EventType,Pattern,State) ->
-	io:format ( "Action: release_resource_action, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[State,EventType,Pattern]),
-	{Name,_} = Pattern,
-	ResourceType = object:getClass(Name),
+refresh_request(Name) -> 
+	eresye:assert(?POOLNAME, {Name,request_resource,refresh}).
+
+release(Name) -> 
+	Self = ?POOLOBJ,
+	ClassName = object:getClass(Name),
+
+	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
 	{Counter,Queue} = ?VALUE(ResourceType),
 	Len = queue:len(Queue) ,
 	if Len == 0 ->
-		   ?SETVALUE(ResourceType,{Counter-1,Queue});
-	   true -> %get the next item and drop it from the queue
-		  allocate(queue:get(Queue)), 
-		  ?SETVALUE(ResourceType,{Counter,queue:drop(Name,Queue)})
-	end,
-	io:format("[~w:~w] Resource pool ~w", [?MODULE,?LINE,?VALUE(ResourceType)]),
-	object:do(Self,start).
+%% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Queue=~w,running=~w,waiting=~w,wait for res=~w~n", 
+%% 					[?MODULE,?LINE,Name,Counter,ResourceType,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),		   
+		  ?SETVALUE(ResourceType,{Counter-1,Queue});
+	   true -> %get the next item to run and drop it from the queue
+		  NextName = queue:get(Queue),
+%% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Next=~w,Queue=~w,running=~w,waiting=~w,wait for res~w~n", 
+%% 					[?MODULE,?LINE,Name,Counter,ResourceType,NextName,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),		   
+		  ?SETVALUE(ResourceType,{Counter,queue:drop(Queue)}),
+		  object:add_fact(NextName,{resource_allocated})
+		  %%TODO: is run time out, should still release the resource
+	end.
+
+%% register the object's resource type, the same type only once.
+%% called in object:new
+register(ResourceType) -> 	
+	Self = ?POOLOBJ, 
+	IsAttribute = object:isAttribute(Self,ResourceType),
+	if IsAttribute -> ok;
+	   true -> ?SETVALUE(ResourceType,{0,queue:new()})
+	end.
+
+get_counter(Name) -> 
+	IsValidName = object:isValidName(Name) ,
+	if IsValidName->
+			IsAttribute = object:isAttribute(?POOLOBJ,object:getClass(Name)),
+			if IsAttribute -> {Counter,_} = object:get(?POOLOBJ,object:getClass(Name)), Counter;
+		   		true -> 0
+			end;
+	   true -> 0
+	end.
+	
+
+set_counter(Name,Value) -> 
+	ResourceType = object:getClass(Name),
+	{_,Queue} = object:get(?POOLOBJ,ResourceType),	
+	object:set(?POOLOBJ,ResourceType,{Value,Queue}).
+
+get_queue_length(ResourceType) -> {Counter,Queue} = object:get(?POOLOBJ,ResourceType), queue:len(Queue).
+
+get_pools() ->
+	PoolList = object:get_defined_attrs(?POOLOBJ),
+	[{ResourceType,Counter,erlang:apply(ResourceType, get_max,[]),queue:to_list(Queue)}
+			||{ResourceType,{Counter,Queue}}<-PoolList].
 
 %%TODO: check for error	
 %% 	if Len == 0 andalso Counter > Max -> % this should never happen, serious error.
@@ -123,5 +135,5 @@ release_resource_action(Self,EventType,Pattern,State) ->
 %%TODO:stat info of the resource pool: number of pool, max, queue max/size/avg, create a monitor for it
 %%TODO: create a monitors to monitor the health condition of pool
 
-test() ->
-	start().
+%% test() ->
+%% 	start().

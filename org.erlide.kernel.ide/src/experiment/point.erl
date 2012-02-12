@@ -45,13 +45,12 @@ on_starting(Self) ->
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
 
-test(Name) ->
+start(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 
 				X = object:new(?MODULE,[Name]),
 				object:start(X),
 				eresye:assert(Name,{wakeup}),
 				X;
-		_ -> atom_to_list(Name) ++ " not available, choose a new name"
+		_ -> atom_to_list(Name) ++ " already existed, choose a new name"
 	end.
-

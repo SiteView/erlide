@@ -45,3 +45,4 @@
 -define(SUPERCLAUSE(X),X(Self,Other) -> object:super(Self, X, [Other]))  .
 
 -define(POOLNAME,'pool').
+-define(POOLOBJ,'resource_pool_object').

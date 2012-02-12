@@ -4,5 +4,5 @@ external_includes=
 external_modules=
 include_dirs=include
 output_dir=ebin
-source_dirs=src/utils;src/UI;src/siteview;src/experiment;src/exat;src;src/erl_debugger;src/parsing;src/pprint;src/syntax
+source_dirs=src/test;src/exago/sample_logs;src/exago/sample_examples;src/exago/splitter_type;src/exago/field_type;src/exago;src/utils;src/UI;src/siteview;src/experiment;src/exat;src;src/erl_debugger;src/parsing;src/pprint;src/syntax
 use_pathz=false
