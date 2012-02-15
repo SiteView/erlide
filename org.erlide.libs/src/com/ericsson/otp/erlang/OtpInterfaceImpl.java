@@ -10,7 +10,7 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.StackObjectPool;
 
 public class OtpInterfaceImpl implements OtpInterface {
-	private final Log log = LogFactory.getLog(OtpInterfaceImpl.class);
+//	private final Log log = LogFactory.getLog(OtpInterfaceImpl.class);
 	private final static ObjectPool pool = new StackObjectPool(new OtpPoolFactory("master","erlide","java"));
 	
 	public Object call(String module,String function, List<Object> param)
@@ -25,7 +25,7 @@ public class OtpInterfaceImpl implements OtpInterface {
 				return OtpConverter.OtpErlangObject2Object(retobj);
 			}finally{
 				pool.returnObject(conn);
-				log.debug(module + ":" + function + "  --> " + param + "  timelong=" +  (System.currentTimeMillis() - timer) + "mms");
+//				log.debug(module + ":" + function + "  --> " + param + "  timelong=" +  (System.currentTimeMillis() - timer) + "mms");
 			}
 		}
 	}

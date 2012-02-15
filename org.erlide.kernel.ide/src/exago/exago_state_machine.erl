@@ -98,7 +98,7 @@ check_constraints([Constraint|Cs], DeltaTime, Result) ->
 
 %% @doc This function takes:
 %% Input: A transition input (see event.hrl)
-%% DeltaTime: The time it took to transition from the last event, to the current one.
+%% DeltaTime: The time it took to transition from the last event, to the current one, in second
 %% StateMachine: The abstract state machine model
 %% CurrentState: Information on the current state
 -spec(execute_input/4 :: (list(), integer(), #state_machine{}, tuple()) -> list()).

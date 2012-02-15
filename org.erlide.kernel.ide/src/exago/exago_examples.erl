@@ -66,10 +66,10 @@ tutorial_row_format() ->
 %% @doc The tutorial 1 example in full
 -spec(tutorial_example/0 :: () -> tuple()).
 tutorial_example() ->
-    {ok, IoDevice} = file:open("./src/sample_logs/circular.log", [write]),
+    {ok, IoDevice} = file:open("./src/exago/sample_logs/circular.log", [write]),
 
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Start", "parse"]),
-    InputRows    = exago_parser:parse_csv("./src/sample_logs/tutorial.log"),
+    InputRows    = exago_parser:parse_csv("./src/exago/sample_logs/tutorial.log"),
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Parse CSV File", "construct_state_machine"]),
 
     StateMachine = tutorial_state_machine(),
@@ -79,6 +79,7 @@ tutorial_example() ->
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Define Row Format", "create_event_source"]),
 
     EventSource  = exago_event:new_source("tutorial", InputRows, RowFormat),
+	io:format(EventSource),
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Create Event Source", "analyse_event_source"]),
 
     Result       = exago_state_machine:analyse_event_source(EventSource, StateMachine),
@@ -119,7 +120,7 @@ circular_state_machine() ->
 %% @doc Analyses the tutorial event log
 -spec(circular_example/0 :: () -> tuple()).
 circular_example() ->
-    InputRows    = exago_parser:parse_csv("./src/sample_logs/circular.log"),
+    InputRows    = exago_parser:parse_csv("./src/exago/sample_logs/circular.log"),
     StateMachine = circular_state_machine(),
     RowFormat    = circular_row_format(),
     EventSource  = exago_event:new_source("circular", InputRows, RowFormat),
@@ -241,7 +242,7 @@ elevator_example() ->
     %% parse_csv is a helper function which comes with Exago, but you are
     %% certainly not required to use it. As long as the input data is a 
     %% list of tuples, everything will work fine.
-    InputData = exago_parser:parse_csv("./src/sample_logs/elevator_log.log"),
+    InputData = exago_parser:parse_csv("./src/exago/sample_logs/elevator_log.log"),
 
     RowFormat = elevator_row_format(),
 
@@ -252,6 +253,7 @@ elevator_example() ->
 				[transition_input, "floor1", "floor2"]}),
 
     StateMachine = elevator_state_machine(),
+	io:format(EventSource),
 
     Result = exago_state_machine:analyse_event_source(EventSource, StateMachine),
 
@@ -314,11 +316,11 @@ sms_state_machine () ->
 %% A more complex example:
 -spec(sms_example/0 :: () -> list()).
 sms_example() ->
-    AckSMSData = exago_parser:parse_csv("./src/sample_logs/etc_ex_AckSMS.log"),
-    ReqAckData = exago_parser:parse_csv("./src/sample_logs/etc_ex_ReqAck.log"),
-    ReqErrData = exago_parser:parse_csv("./src/sample_logs/etc_ex_ReqErr.log"),
-    ReqData    = exago_parser:parse_csv("./src/sample_logs/etc_ex_Req.log"),
-    ReqSMSData = exago_parser:parse_csv("./src/sample_logs/etc_ex_ReqSMS.log"),
+    AckSMSData = exago_parser:parse_csv("./src/exago/sample_logs/etc_ex_AckSMS.log"),
+    ReqAckData = exago_parser:parse_csv("./src/exago/sample_logs/etc_ex_ReqAck.log"),
+    ReqErrData = exago_parser:parse_csv("./src/exago/sample_logs/etc_ex_ReqErr.log"),
+    ReqData    = exago_parser:parse_csv("./src/exago/sample_logs/etc_ex_Req.log"),
+    ReqSMSData = exago_parser:parse_csv("./src/exago/sample_logs/etc_ex_ReqSMS.log"),
     
     AckSMSFormat = [exago_field:parser(transition_input),
 		    exago_field:parser(timestamp, "'yyyy-MM-dd hh:mm:ss:fffffff'"),

@@ -17,7 +17,6 @@
 -module(resource_pool).
 -compile(export_all).
 -include("object.hrl").
--include_lib("eunit/include/eunit.hrl").
 
 extends () -> nil .
 
@@ -42,12 +41,12 @@ start()->
 	Pool.
 
 resource_pool(Self)->
-	?SETVALUE(name,resource_pool_object),
+	?SETVALUE(name,?POOLOBJ),
 	eresye:start(?VALUE(name)).
 
 resource_pool_(Self)->eresye:stop(?VALUE(name)).
 
-request(Name,RequestType) ->
+request(Name,Session,RequestType) ->
 	Self = ?POOLOBJ,
 	ClassName = object:getClass(Name),
 
@@ -60,11 +59,14 @@ request(Name,RequestType) ->
 %% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
 		   ?SETVALUE(ResourceType,{Counter+1,Queue}),
 %% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
-		   object:add_fact(Name,{resource_allocated});
+		   object:add_fact(Name,{Session,resource_allocated});
+%% 	   	   eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),State}),
+
 %% 		   object:call(Name,run);
 	   true -> %reach the max, add into queue, will be droped in release() once resourse released by others
 		   io:format("[~w:~w] ~w:~w Counter=~w/~w,Queue=~w,running=~w,waiting=~w~n", 
 					 [?MODULE,?LINE,ResourceType,Name,Counter,Max,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting)]),
+%% 	   	   eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),State}),
 		   case RequestType of
 			   frequency -> ?SETVALUE(ResourceType,{Counter,queue:in(Name,Queue)});%%for frequency timeout request, put into the tail of the queue
 			   refresh -> ?SETVALUE(ResourceType,{Counter,queue:in_r(Name,Queue)}) %%for refresh request, put into the head of the queue
@@ -74,7 +76,7 @@ request(Name,RequestType) ->
 refresh_request(Name) -> 
 	eresye:assert(?POOLNAME, {Name,request_resource,refresh}).
 
-release(Name) -> 
+release(Name,Session) -> 
 	Self = ?POOLOBJ,
 	ClassName = object:getClass(Name),
 
@@ -83,14 +85,15 @@ release(Name) ->
 	Len = queue:len(Queue) ,
 	if Len == 0 ->
 %% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Queue=~w,running=~w,waiting=~w,wait for res=~w~n", 
-%% 					[?MODULE,?LINE,Name,Counter,ResourceType,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),		   
+%% 					[?MODULE,?LINE,Name,Counter,ResourceType,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),
+		  		   
 		  ?SETVALUE(ResourceType,{Counter-1,Queue});
 	   true -> %get the next item to run and drop it from the queue
 		  NextName = queue:get(Queue),
 %% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Next=~w,Queue=~w,running=~w,waiting=~w,wait for res~w~n", 
 %% 					[?MODULE,?LINE,Name,Counter,ResourceType,NextName,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),		   
 		  ?SETVALUE(ResourceType,{Counter,queue:drop(Queue)}),
-		  object:add_fact(NextName,{resource_allocated})
+		  object:add_fact(NextName,{Session,resource_allocated})
 		  %%TODO: is run time out, should still release the resource
 	end.
 
@@ -119,7 +122,15 @@ set_counter(Name,Value) ->
 	{_,Queue} = object:get(?POOLOBJ,ResourceType),	
 	object:set(?POOLOBJ,ResourceType,{Value,Queue}).
 
-get_queue_length(ResourceType) -> {Counter,Queue} = object:get(?POOLOBJ,ResourceType), queue:len(Queue).
+get_queue_length(Name) -> 
+	IsValidName = object:isValidName(Name) ,
+	if IsValidName->
+			IsAttribute = object:isAttribute(?POOLOBJ,object:getClass(Name)),
+			if IsAttribute -> {_,Queue} = object:get(?POOLOBJ,object:getClass(Name)), queue:len(Queue);
+		   		true -> 0
+			end;
+	   true -> 0
+	end.
 
 get_pools() ->
 	PoolList = object:get_defined_attrs(?POOLOBJ),

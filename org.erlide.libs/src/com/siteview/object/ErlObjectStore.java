@@ -102,10 +102,11 @@ public final class ErlObjectStore
     public static ErlObject create(String Type, String Name) throws Exception{
 		List<Object> list = new ArrayList<Object>();
 		list.add(new OtpErlangAtom(Type)); 
+		list.add(new OtpErlangAtom("start")); 
 		List<Object> paramList = new ArrayList<Object>();
 		paramList.add(new OtpErlangAtom(Name));
 		list.add(paramList);
-		String rtnObj = (String) OtpGateway.getOtpInterface().call("object", "create", list);
+		String rtnObj = (String) OtpGateway.getOtpInterface().call("erlang", "apply", list);
     	return new ErlObject(Type,rtnObj);
     }
     

@@ -33,6 +33,8 @@ point_(Self)->
 %% 	io:format("point destructor."),
 	eresye:stop(?VALUE(name)).
 
+get_resource_type() -> ?MODULE.
+
 print(Self,P)  ->
 	io:format("X:~w,Y:~w,P:~s~n", [object:get(Self,'X'),object:get(Self,'Y'),P]).
 

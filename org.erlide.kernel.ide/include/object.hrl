@@ -46,3 +46,5 @@
 
 -define(POOLNAME,'pool').
 -define(POOLOBJ,'resource_pool_object').
+-define(LOGOBJ,'log_analyzer_object').
+-define(LOGNAME,'logger').

@@ -1,21 +1,15 @@
 package com.ericsson.otp.erlang;
 
+import java.net.InetAddress;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.net.InetAddress;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.BasePoolableObjectFactory;
-
-import com.ericsson.otp.erlang.OtpConnection;
-import com.ericsson.otp.erlang.OtpPeer;
-import com.ericsson.otp.erlang.OtpSelf;
 
 
 public class OtpPoolFactory extends BasePoolableObjectFactory {
-	private static final Log loger = LogFactory.getLog(OtpPoolFactory.class);
+//	private static final Log loger = LogFactory.getLog(OtpPoolFactory.class);
 	
 	public String self_node_prefix = "java";
 	public String cookie = "erlide";
@@ -42,7 +36,7 @@ public class OtpPoolFactory extends BasePoolableObjectFactory {
 			other = (remotenode.indexOf("@") > 0) ? new OtpPeer(remotenode) : new OtpPeer(remotenode + "@" + InetAddress.getLocalHost().getHostName());
 		}	
 		OtpConnection conn = self.connect(other);
-		loger.info("makeObject nodename=" + nodename);
+//		loger.info("makeObject nodename=" + nodename);
 		keys.add(nodename);
 		return conn;
 	}

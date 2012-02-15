@@ -12,17 +12,15 @@
 %
 extends () -> nil .
 
-?ACTION(start) -> [{wakeup_event,init_action}];
-?ACTION(disabled) -> [{timed_enable_event,enable},{enable_event, enable_action}];
-?ACTION(logging) -> {logging_event, logging_action};
-?ACTION(waiting) -> [
-					{disable_event,disable_action},
-					{refresh_event,request_refresh_resource_action},
-					{frequency_event,request_resource_action}
-%% 					{frequency_event,update_action}
-					];
-?ACTION(running) -> {frequency_event,request_resource_action};
-?ACTION(waiting_for_resource) -> [{resource_allocated_event,update_action}].
+?PATTERN(resource_allocated_pattern)-> {?VALUE(name), get, {'_',resource_allocated}}; 
+?PATTERN(wakeup_pattern)-> {?VALUE(name), get, {wakeup}};
+?PATTERN(logging_pattern)-> {?VALUE(name), get, {'_',logging}};
+?PATTERN(refresh_pattern)-> {?VALUE(name), get, {refresh}};
+?PATTERN(enable)-> [{?VALUE(name), get, {enable}},{?VALUE(name), get, {enable,fun(Time)-> Time >= 0 end}}];
+?PATTERN(disable_pattern)-> {?VALUE(name), get, {disable,'_'}};
+?PATTERN(frequency_pattern) -> ?VALUE(?FREQUENCY)*1000;
+?PATTERN(disable_time) -> ?VALUE(disable_time)*1000.
+%% ?PATTERN(disable_pattern)-> [{?VALUE(name), get, {disable}},{?VALUE(name), get, {disable,fun(Time)-> Time >= 0 end}}];
 
 ?EVENT(wakeup_event)-> {eresye,wakeup_pattern};
 ?EVENT(disable_event)-> {eresye,disable_pattern};
@@ -33,16 +31,16 @@ extends () -> nil .
 ?EVENT(refresh_event)-> {eresye,refresh_pattern};
 ?EVENT(timed_enable_event) -> {timeout,disable_time}.
 
-?PATTERN(resource_allocated_pattern)-> {?VALUE(name), get, {resource_allocated}}; 
-?PATTERN(wakeup_pattern)-> {?VALUE(name), get, {wakeup}};
-?PATTERN(logging_pattern)-> {?VALUE(name), get, {logging}};
-?PATTERN(refresh_pattern)-> {?VALUE(name), get, {refresh}};
-?PATTERN(enable)-> [{?VALUE(name), get, {enable}},{?VALUE(name), get, {enable,fun(Time)-> Time >= 0 end}}];
-?PATTERN(disable_pattern)-> {?VALUE(name), get, {disable,'_'}};
-%% ?PATTERN(disable_pattern)-> [{?VALUE(name), get, {disable}},{?VALUE(name), get, {disable,fun(Time)-> Time >= 0 end}}];
-?PATTERN(frequency_pattern) -> ?VALUE(?FREQUENCY)*1000;
-?PATTERN(disable_time) -> ?VALUE(disable_time)*1000.
-
+?ACTION(start) -> [{wakeup_event,init_action}];
+?ACTION(disabled) -> [{timed_enable_event,enable},{enable_event, enable_action}];
+?ACTION(logging) -> {logging_event, logging_action};
+?ACTION(waiting) -> [
+					{disable_event,disable_action},
+					{refresh_event,request_refresh_resource_action},
+					{frequency_event,request_resource_action}
+					];
+?ACTION(running) -> {frequency_event,request_resource_action};
+?ACTION(waiting_for_resource) -> [{resource_allocated_event,update_action}].
 init_action(Self,EventType,Pattern,State) ->
 	io:format ( "[~w]:Type=~w,Action=init,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,waiting).
@@ -79,7 +77,11 @@ disable_action(Self,EventType,Pattern,State) ->
 request_resource_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w:~w] ~w-1 Counter=~w, Action: request_resource_action, State=~w, Event type=~w, Pattern=~w '\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
 %% 	resource_pool:request(?VALUE(name), frequency),
-	spawn(resource_pool,request,[?VALUE(name), frequency]),
+	{Mega,Sec,MilliSec} = erlang:now(),
+%% 	Session = list_to_atom(atom_to_list(?VALUE(name)) ++ integer_to_list(MilliSec)),
+	Session = Mega+Sec+MilliSec,
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),State,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
+	spawn(resource_pool,request,[?VALUE(name), Session,frequency]),
 %% 	object:do(Self,waiting).
 	object:do(Self,waiting_for_resource).
 
@@ -106,7 +108,11 @@ post_run(Self) ->
 %%@doc logging the measurement into database
 logging_action(Self,EventType,Pattern,State) -> 
 	%TODO: logging data to database
-%% 	io:format ( "[~w:~w] Action: logging, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
+	{Session,_} = Pattern,
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),State,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
+	timer:sleep(random:uniform(2)*1000),  % simulate the logging time
+	io:format ( "[~w:~w] Action: logging, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),finished,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),	
 	object:do(Self,waiting).
 
 allocate_resource(Self) ->

@@ -26,7 +26,7 @@
 %%====================================================================
 start_link() ->	
 	eresye:start(object_store),
-%% 	log_analyzer:start(),
+	log_analyzer:start(),
 	resource_pool:start().
 start()->start_link().
 
@@ -88,7 +88,7 @@ create(Class,P) ->
 delete(Name) when is_atom(Name) ->
 	Object = get_by_name(Name),
 	if
-        length(Object)  == 0 -> name_not_exist;
+        is_list(Object)  -> name_not_exist;
         true -> delete(Object)
     end;
 delete(Object) when is_record(Object,object) ->
@@ -109,7 +109,9 @@ delete(Object) when is_record(Object,object) ->
 %% release the resource in the resource pool
 	case Class of
 		sync -> nil;
- 		_ -> resource_pool:release(get_name(Object))
+		resource_pool -> nil;
+		log_analyzer -> nil;
+ 		_ -> resource_pool:release(get_name(Object),0)
 	end,
 	%% Destroy the property server
 %% 	io:format("After d_tor II ~w\n", [Object]),
