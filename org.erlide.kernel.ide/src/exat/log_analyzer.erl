@@ -39,13 +39,36 @@ finished_action(Self,EventType,Pattern,State) ->
 	%% TODO: check for completeness: feed the MonitorStateList into exago
 	%% convert MonitorState to event format
 	%% TODO: check for counter and queue
+	
+	RowFormat = monitor_row_format(),
+	MonitorStateTest = [{"ping1","1111","2010-10-12 16:50:20:0868702","frequency","0","0"},{"ping1","1111","2010-10-12 16:50:25:0868702","resource_allocated","0","0"},
+						{"ping1","1111","2010-10-12 16:50:30:0868702","update","0","0"},{"ping1","1111","2010-10-12 16:50:35:0868702","logging","0","0"}],
+	
+    EventSource  = exago_event:new_source("monitor_state_log", MonitorStateTest, RowFormat),
+%% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
+%% 	io:format("[~w:~w] EventSource = ~w~n", [?MODULE,?LINE,EventSource]),
+%%     EventSource = 
+%% 	exago_event:new_source("monitor_state_log", MonitorStateList, RowFormat, 
+%% 			       {?MODULE, monitor_input_filter},
+%% 			       {?MODULE, monitor_input_modifier, 
+%% 				[transition_input, "Counter", "QueueLen"]}),
+
+    StateMachine = monitor_state_machine(),
+%% 	io:format(EventSource),
+
+    Result = exago_state_machine:analyse_event_source(EventSource, StateMachine),
+	%% error alert based on the Result
+	exago_printer:print_result(Result),
+
+
 	Len = length(MonitorStateList),
 	lists:foreach(
 	  fun(MonitorState) -> 
-			  {Name1,Session1,Timestamp,State1, Counter,QueueLen} = MonitorState,
-			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,State=~w,Counter=~w,QueueLen=~w~n",
-						[?MODULE,?LINE, Name1,Session1,Timestamp,State1, Counter,QueueLen])
-	  end, MonitorStateList).
+			  {Name1,Session1,Timestamp,State1, Counter,QueueLen} = MonitorState
+%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,State=~w,Counter=~w,QueueLen=~w~n",
+%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1, Counter,QueueLen])
+	  end, MonitorStateList),
+ok.
 
 %%@doc timeout monitoring
 monitor_timeout_action (Self,EventType,Pattern,State) ->
@@ -71,7 +94,7 @@ monitor_state_machine() ->
 	   #transition{from=3, to=4, input="update"},
 	   #transition{from=4, to=5, input="logging"}],
       start=0,
-      accept=[0,1,4]},
+      accept=[0,1,5]},
     StateMachine.
 
 %% @doc Each log file should have a row format which specifies the required
@@ -92,10 +115,11 @@ monitor_state_machine() ->
 -spec(monitor_row_format/0 :: () -> list()).
 monitor_row_format() ->
     [
-     exago_field:parser(group_id),%% name+session
-     exago_field:parser(annotation, "Session"),
+     exago_field:parser(annotation, "Name"),
+     exago_field:parser(group_id),%% session
+%% 	 exago_field:parser(timestamp,[]), %%time 
 	 exago_field:parser(timestamp, "yyyy-MM-dd hh:mm:ss:fffffff"), %%time 
-     exago_field:parser(transition_input), %%action
+     exago_field:parser(transition_input), %%state
      exago_field:parser(annotation, "Counter"),
      exago_field:parser(annotation, "QueueLen")
 	].
@@ -128,11 +152,12 @@ monitor_input_modifier(Fields) ->
 -spec(monitor_input_filter/1 :: (list()) -> true | false).
 monitor_input_filter(Input) ->
     case Input of
-	"reset"       ++ _ -> true;
-	"open"             -> true;
-	"close"            -> true;
-	"approaching" ++ _ -> true;
-	"stopped_at"  ++ _ -> true;
+	"frequency"       -> true;
+	"disable"             -> true;
+	"enable"            -> true;
+	"resource_allocated" -> true;
+	"update"  -> true;
+	"logging"   -> true;
 	_                  -> false
     end.
 

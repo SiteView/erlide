@@ -79,6 +79,7 @@ tutorial_example() ->
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Define Row Format", "create_event_source"]),
 
     EventSource  = exago_event:new_source("tutorial", InputRows, RowFormat),
+	io:format(InputRows),
 	io:format(EventSource),
     exago_util:write_csv_event(IoDevice, [exago_util:now_timestamp(), instance_1, "Create Event Source", "analyse_event_source"]),
 
@@ -253,7 +254,8 @@ elevator_example() ->
 				[transition_input, "floor1", "floor2"]}),
 
     StateMachine = elevator_state_machine(),
-	io:format(EventSource),
+	io:format(InputData),
+%% 	io:format(EventSource),
 
     Result = exago_state_machine:analyse_event_source(EventSource, StateMachine),
 

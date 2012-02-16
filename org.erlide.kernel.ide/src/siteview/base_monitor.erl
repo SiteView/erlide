@@ -78,7 +78,7 @@ request_resource_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w:~w] ~w-1 Counter=~w, Action: request_resource_action, State=~w, Event type=~w, Pattern=~w '\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
 %% 	resource_pool:request(?VALUE(name), frequency),
 	{Mega,Sec,MilliSec} = erlang:now(),
-%% 	Session = list_to_atom(atom_to_list(?VALUE(name)) ++ integer_to_list(MilliSec)),
+%% 	TODO: using PID as session, can be used to communicate with the update action
 	Session = Mega+Sec+MilliSec,
 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),State,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
 	spawn(resource_pool,request,[?VALUE(name), Session,frequency]),
