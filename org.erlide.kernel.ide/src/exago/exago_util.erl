@@ -88,6 +88,10 @@ extract_fields(Fields, Row) ->
 -spec(delta_time/2 :: (tuple(), tuple() | 0) -> integer()).
 delta_time({_D1, _M1}, 0) ->
     0;
+delta_time({{_Mega1,_Sec1,_MilliSec1}}, 0) ->
+    0;
+delta_time({{Mega1,Sec1,MilliSec1}}, {{Mega2,Sec2,MilliSec2}}) ->
+	timer:now_diff({Mega1,Sec1,MilliSec1}, {Mega2,Sec2,MilliSec2})/1000000;
 delta_time({D1, M1}, {D2, M2}) ->
     {{Days, {Hours, Minutes, Seconds}}, MicroSeconds} = {calendar:time_difference(D2, D1), M1-M2},
     DeltaS = Seconds * 1000000,

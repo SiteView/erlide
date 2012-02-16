@@ -41,10 +41,12 @@ finished_action(Self,EventType,Pattern,State) ->
 	%% TODO: check for counter and queue
 	
 	RowFormat = monitor_row_format(),
-	MonitorStateTest = [{"ping1","1111","2010-10-12 16:50:20:0868702","frequency","0","0"},{"ping1","1111","2010-10-12 16:50:25:0868702","resource_allocated","0","0"},
-						{"ping1","1111","2010-10-12 16:50:30:0868702","update","0","0"},{"ping1","1111","2010-10-12 16:50:35:0868702","logging","0","0"}],
+	MonitorStateTest = [{ping1,1111,"2010-10-12 16:50:20:0868702",frequency,0,0},{ping1,1111,"2010-10-12 16:50:25:0868702",resource_allocated,0,0},
+						{ping1,1111,"2010-10-12 16:50:30:0868702",update,0,0},{ping1,1111,"2010-10-12 16:50:35:0868702",logging,0,0}],
+	MonitorStateTest1 = [{ping1,1111,{1329,382742,399800},frequency,0,0},{ping1,1111,{1329,382742,499800},resource_allocated,0,0},
+						{ping1,1111,{1329,382762,399800},update,0,0},{ping1,1111,{1329,382842,399800},logging,0,0}],
 	
-    EventSource  = exago_event:new_source("monitor_state_log", MonitorStateTest, RowFormat),
+    EventSource  = exago_event:new_source("monitor_state_log", MonitorStateTest1, RowFormat),
 %% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
 %% 	io:format("[~w:~w] EventSource = ~w~n", [?MODULE,?LINE,EventSource]),
 %%     EventSource = 
@@ -59,7 +61,6 @@ finished_action(Self,EventType,Pattern,State) ->
     Result = exago_state_machine:analyse_event_source(EventSource, StateMachine),
 	%% error alert based on the Result
 	exago_printer:print_result(Result),
-
 
 	Len = length(MonitorStateList),
 	lists:foreach(
@@ -80,19 +81,19 @@ monitor_state_machine() ->
     StateMachine =
 	#state_machine{
       states= %%state, adding finish state
-	  [#state{number=0, name="waiting"},
-	   #state{number=1, name="disabled"},
-	   #state{number=2, name="waiting_for_resource"},
-	   #state{number=3, name="running"},
-	   #state{number=4, name="logging"},
-	   #state{number=5, name="finished"}],
+	  [#state{number=0, name=waiting},
+	   #state{number=1, name=disabled},
+	   #state{number=2, name=waiting_for_resource},
+	   #state{number=3, name=running},
+	   #state{number=4, name=logging},
+	   #state{number=5, name=finished}],
       transitions= %%pattern
-	  [#transition{from=0, to=2, input="frequency"},
-	   #transition{from=0, to=1, input="disable"},
-	   #transition{from=1, to=0, input="enable"},
-	   #transition{from=2, to=3, input="resource_allocated"},
-	   #transition{from=3, to=4, input="update"},
-	   #transition{from=4, to=5, input="logging"}],
+	  [#transition{from=0, to=2, input=frequency},
+	   #transition{from=0, to=1, input=disable},
+	   #transition{from=1, to=0, input=enable},
+	   #transition{from=2, to=3, input=resource_allocated},
+	   #transition{from=3, to=4, input=update},
+	   #transition{from=4, to=5, input=logging}],
       start=0,
       accept=[0,1,5]},
     StateMachine.
@@ -117,8 +118,8 @@ monitor_row_format() ->
     [
      exago_field:parser(annotation, "Name"),
      exago_field:parser(group_id),%% session
-%% 	 exago_field:parser(timestamp,[]), %%time 
-	 exago_field:parser(timestamp, "yyyy-MM-dd hh:mm:ss:fffffff"), %%time 
+	 exago_field:parser(timestamp,noparse), %%time 
+%% 	 exago_field:parser(timestamp, "yyyy-MM-dd hh:mm:ss:fffffff"), %%time 
      exago_field:parser(transition_input), %%state
      exago_field:parser(annotation, "Counter"),
      exago_field:parser(annotation, "QueueLen")

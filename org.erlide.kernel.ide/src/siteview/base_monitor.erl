@@ -32,7 +32,7 @@ extends () -> nil .
 ?EVENT(timed_enable_event) -> {timeout,disable_time}.
 
 ?ACTION(start) -> [{wakeup_event,init_action}];
-?ACTION(disabled) -> [{timed_enable_event,enable},{enable_event, enable_action}];
+?ACTION(disabled) -> [{timed_enable_event,enable_action},{enable_event, enable_action}];
 ?ACTION(logging) -> {logging_event, logging_action};
 ?ACTION(waiting) -> [
 					{disable_event,disable_action},
