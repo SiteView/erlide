@@ -16,6 +16,8 @@ diskspace_monitor(Self, Name)->
 	?SETVALUE(name,Name),
 	object:super(Self, [Name]).
 
+get_resource_type() -> ?MODULE .
+
 diskspace_monitor_(Self)->eresye:stop(?VALUE(name)).
 
 init(Self,EventType,Pattern,State) ->
