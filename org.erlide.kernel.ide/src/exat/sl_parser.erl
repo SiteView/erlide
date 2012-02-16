@@ -185,7 +185,7 @@ yecctoken2string(Other) ->
 
 
 
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.erl", 188).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.erl", 188).
 
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(S, Cat, Ss, Stack, T, Ts, Tzr);
@@ -2042,7 +2042,7 @@ yeccgoto_wsp(133, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_134(134, Cat, Ss, Stack, T, Ts, Tzr).
 
 -compile({inline,yeccpars2_5_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 83).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 83).
 yeccpars2_5_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2050,7 +2050,7 @@ yeccpars2_5_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_7_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 85).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 85).
 yeccpars2_7_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2058,7 +2058,7 @@ yeccpars2_7_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_17_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 53).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 53).
 yeccpars2_17_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2066,7 +2066,7 @@ yeccpars2_17_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_18_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 0).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 0).
 yeccpars2_18_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2074,7 +2074,7 @@ yeccpars2_18_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_23_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 46).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 46).
 yeccpars2_23_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2082,7 +2082,7 @@ yeccpars2_23_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_110_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 60).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 60).
 yeccpars2_110_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2090,7 +2090,7 @@ yeccpars2_110_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_115_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 87).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 87).
 yeccpars2_115_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2098,7 +2098,7 @@ yeccpars2_115_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_116_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 89).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 89).
 yeccpars2_116_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -2106,7 +2106,7 @@ yeccpars2_116_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_123_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 97).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 97).
 yeccpars2_123_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2114,7 +2114,7 @@ yeccpars2_123_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_124_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 88).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 88).
 yeccpars2_124_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2122,7 +2122,7 @@ yeccpars2_124_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_125_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 61).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 61).
 yeccpars2_125_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2130,7 +2130,7 @@ yeccpars2_125_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_126_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 0).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 0).
 yeccpars2_126_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2138,7 +2138,7 @@ yeccpars2_126_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_127_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 54).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 54).
 yeccpars2_127_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2146,7 +2146,7 @@ yeccpars2_127_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_128_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 55).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 55).
 yeccpars2_128_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2154,7 +2154,7 @@ yeccpars2_128_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_130_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 48).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 48).
 yeccpars2_130_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2162,7 +2162,7 @@ yeccpars2_130_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_131_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 50).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 50).
 yeccpars2_131_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2170,7 +2170,7 @@ yeccpars2_131_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_132_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 84).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 84).
 yeccpars2_132_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2178,7 +2178,7 @@ yeccpars2_132_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_135_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 49).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 49).
 yeccpars2_135_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -2186,7 +2186,7 @@ yeccpars2_135_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_136_/1}).
--file("C:/Users/John/git/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 51).
+-file("E:/exatSiteview/erlide/org.erlide.kernel.ide/src/exat/sl_parser.yrl", 51).
 yeccpars2_136_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin

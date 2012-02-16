@@ -165,7 +165,8 @@ public final class ErlObjectStore
     	ErlObjectStore store = new ErlObjectStore();
     	List<String> list = new ArrayList<String>();
     	List<ErlObject> objlist = new ArrayList<ErlObject>();
-    	store.create("point","point99");
+//    	store.create("point","point99");
+        store.create("ping_monitor","point99");
         ErlObject pointTest = store.get_by_name("point99");
 
         final String actual = pointTest.getName();
