@@ -8,7 +8,11 @@
 %% 
 %%  monitor state machine:
 %%  get the exago recognize exat's facts
-
+%% logic to verify the counter: in running state, finished
+%% 
+%% 
+%% 
+%% 
 
 -module (log_analyzer).
 -compile ([export_all]).
@@ -18,11 +22,8 @@
 
 extends () -> nil .
 
-%% 	eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),object:stateof(Self),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
-%% name, session, timestamp, state,counter,queueLen
-
-?PATTERN(monitor_timeout_pattern) -> {?LOGNAME,read,{'_', '_', fun(X)-> Diff = timer:now_diff(erlang:now(), X)/1000000, Diff > 100 end, running,'_','_'}};
-?PATTERN(finished_pattern) -> {?LOGNAME, read, {'_','_','_',finished, '_','_'}}.
+%% ?PATTERN(monitor_timeout_pattern) -> {?LOGNAME,read,{'_', '_', fun(X)-> Diff = timer:now_diff(erlang:now(), X)/1000000, Diff > 100 end, running,'_','_'}};
+?PATTERN(finished_pattern) -> {?LOGNAME, read, {'_','_','_',log}}. %% name, session, timestamp, state
 
 ?EVENT(finished_event)-> {eresye,finished_pattern}.
 
@@ -31,9 +32,9 @@ extends () -> nil .
 
 %% @doc check the completeness of monitoring sequence
 finished_action(Self,EventType,Pattern,State) -> 
-	{Name,Session,_,_,_,_} = Pattern,
-	Pattern1 = {Name,Session,'_','_','_','_'},
-	MonitorStateList = eresye:query_kb(?LOGNAME, Pattern1),
+	{Name,Session,_,_} = Pattern,
+	Pattern1 = {Name,Session,'_','_'},
+	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),
 %% 	io:format("[~w:~w] MonitorStateList=~w~n",[?MODULE,?LINE,MonitorStateList]),
 	eresye:retract(?LOGNAME, MonitorStateList),
 	%% TODO: check for completeness: feed the MonitorStateList into exago
@@ -42,11 +43,15 @@ finished_action(Self,EventType,Pattern,State) ->
 	
 	RowFormat = monitor_row_format(),
 	MonitorStateTest = [{ping1,1111,"2010-10-12 16:50:20:0868702",frequency,0,0},{ping1,1111,"2010-10-12 16:50:25:0868702",resource_allocated,0,0},
-						{ping1,1111,"2010-10-12 16:50:30:0868702",update,0,0},{ping1,1111,"2010-10-12 16:50:35:0868702",logging,0,0}],
-	MonitorStateTest1 = [{ping1,1111,{1329,382742,399800},frequency,0,0},{ping1,1111,{1329,382742,499800},resource_allocated,0,0},
-						{ping1,1111,{1329,382762,399800},update,0,0},{ping1,1111,{1329,382842,399800},logging,0,0}],
+						{ping1,1111,"2010-10-12 16:50:30:0868702",update,0,0},{ping1,1111,"2010-10-12 16:50:35:0868702",log,0,0}],
+	MonitorStateTest1 = [
+						 {ping_monitor,ping1,1111,{1329,408188,548251},frequency,0,0},
+						 {ping_monitor,ping1,1111,{1329,408188,610250},resource_allocated,0,0},
+						 {ping_monitor,ping1,1111,{1329,408193,618252},update,0,0},
+						 {ping_monitor,ping1,1111,{1329,408195,692250},log,0,0}
+						],
 	
-    EventSource  = exago_event:new_source("monitor_state_log", MonitorStateTest1, RowFormat),
+    EventSource  = exago_event:new_source("monitor_state_log", MonitorStateList, RowFormat),
 %% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
 %% 	io:format("[~w:~w] EventSource = ~w~n", [?MODULE,?LINE,EventSource]),
 %%     EventSource = 
@@ -60,14 +65,25 @@ finished_action(Self,EventType,Pattern,State) ->
 
     Result = exago_state_machine:analyse_event_source(EventSource, StateMachine),
 	%% error alert based on the Result
-	exago_printer:print_result(Result),
+	{result, SMResult, ExecutionAnalysis} = Result,
+	{execution_analysis, {n_instances, N}, {history_analysis, HistoryAnalysis}} = ExecutionAnalysis,
+%% 	NofOk = exago_printer:count_acceptant_executions(HistoryAnalysis, 0) , 
+%% 	io:format("[~w:~w] Success = ~w~n", [?MODULE,?LINE,NofOk]),
+%% 	if NofOk < N 
+%% 		 -> io:format("!!! failing monitor execution:~w~n", [exago_printer:list_failing_executions(HistoryAnalysis, 0)]);
+%% 	   true -> 
+%% 		   io:format("success monitor execution:~w~n", [exago_printer:list_acceptant_executions(HistoryAnalysis, 0)]),
+%% 		   ok
+%% 	end,
+	
+%% 	exago_printer:print_result(Result),
 
 	Len = length(MonitorStateList),
 	lists:foreach(
 	  fun(MonitorState) -> 
-			  {Name1,Session1,Timestamp,State1, Counter,QueueLen} = MonitorState
-%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,State=~w,Counter=~w,QueueLen=~w~n",
-%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1, Counter,QueueLen])
+			  {Name1,Session1,Timestamp,State1} = MonitorState
+%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
+%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
 	  end, MonitorStateList),
 ok.
 
@@ -91,9 +107,9 @@ monitor_state_machine() ->
 	  [#transition{from=0, to=2, input=frequency},
 	   #transition{from=0, to=1, input=disable},
 	   #transition{from=1, to=0, input=enable},
-	   #transition{from=2, to=3, input=resource_allocated},
+	   #transition{from=2, to=3, input=allocate_resource},
 	   #transition{from=3, to=4, input=update},
-	   #transition{from=4, to=5, input=logging}],
+	   #transition{from=4, to=5, input=log}],
       start=0,
       accept=[0,1,5]},
     StateMachine.
@@ -120,9 +136,7 @@ monitor_row_format() ->
      exago_field:parser(group_id),%% session
 	 exago_field:parser(timestamp,noparse), %%time 
 %% 	 exago_field:parser(timestamp, "yyyy-MM-dd hh:mm:ss:fffffff"), %%time 
-     exago_field:parser(transition_input), %%state
-     exago_field:parser(annotation, "Counter"),
-     exago_field:parser(annotation, "QueueLen")
+     exago_field:parser(transition_input) %%state
 	].
 %% name, session, timestamp, state,counter,queueLen
 

@@ -106,12 +106,12 @@ delete(Object) when is_record(Object,object) ->
         S =/= nil -> catch(multisync:abort(M));
         true -> nil
     end,
-%% release the resource in the resource pool
+%% release the resource in the resource pool, ignore the system objects
 	case Class of
 		sync -> nil;
 		resource_pool -> nil;
 		log_analyzer -> nil;
- 		_ -> resource_pool:release(get_name(Object),0)
+ 		_ -> resource_pool:release(get_name(Object))
 	end,
 	%% Destroy the property server
 %% 	io:format("After d_tor II ~w\n", [Object]),

@@ -58,6 +58,17 @@ list_acceptant_executions([{_, {instance_status, InstanceStatus}, _, _, _}|Histo
 	    list_acceptant_executions(HistoryAnalysis, Acc)
     end.
 
+-spec(list_failing_executions/2 :: (list(), list()) -> list()).
+list_failing_executions([], Acc) ->
+    Acc;
+list_failing_executions([{_, {instance_status, InstanceStatus}, _, _, _}|HistoryAnalysis], Acc) ->
+    case InstanceStatus of
+	{failure, _StateN} ->
+	    list_failing_executions(HistoryAnalysis, [InstanceStatus|Acc]);
+	{success, _StateN} ->
+	    list_failing_executions(HistoryAnalysis, Acc)
+    end.
+
 -spec(count_failing_transitions/2 :: (list(), Acc::integer()) -> integer()).
 count_failing_transitions([], N) ->
     N;

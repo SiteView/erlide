@@ -20,15 +20,20 @@
 
 extends () -> nil .
 
-?PATTERN(single_test_pattern) -> {?POOLNAME,get,{'_',single_test}};
+
+%% 	{_Request,Name,Session,RequestType} = Pattern,
+?PATTERN(frequency_request_pattern) -> {?POOLNAME,get,{'_','_','_','_',frequency_request,'_','_'}};%%  {ResourceType,Name,Session,Now,RequestType,Counter,QueueLen}
+?PATTERN(refresh_request_pattern) -> {?POOLNAME,get,{'_','_','_','_',refresh_request,'_','_'}};%%  {ResourceType,Name,Session,Now,RequestType,Counter,QueueLen}
 ?PATTERN(release_resource_pattern)-> {?POOLNAME, get, {'_',release_resource}}.
 
 %% can NOT return a list
-?EVENT(single_test_event) -> {eresye,single_test_pattern};
+?EVENT(frequency_request_event) -> {eresye,frequency_request_pattern};
+?EVENT(refresh_request_event) -> {eresye,refresh_request_pattern};
 ?EVENT(release_resource_event)-> {eresye,release_resource_pattern}.
 
 ?ACTION(start) -> [
-				   {single_test_event,test_action},
+				   {frequency_request_event,frequency_request_action},
+				   {refresh_request_event,refresh_request_action},
 				   {release_resource_event,release_resource_action}
 				  ].
 
@@ -46,58 +51,80 @@ resource_pool(Self)->
 
 resource_pool_(Self)->eresye:stop(?VALUE(name)).
 
+%%@doc request resource from the pool,   insert the resource into its queue
+%% 1. check if any list empty
+%% 2. if empty, insert into it
+%% 3. if no empty list, if the number of lists reaches max
+%% 3.1. if not, create a new list, insert into it
+%% 3.2. if yes, insert the request into a least length list
+%% 4. if more than one list empty, delete one
+
+%%@doc add patterns to monitor,resource pool and log to trigger the next action
+%% monitor: trigger update_action in monitor, e.g. ping_monitor:update_action
+%% resource pool: create a new resource consumption, not further action
+%% log_analyzer: logging, no further action
 request(Name,Session,RequestType) ->
-	Self = ?POOLOBJ,
-	ClassName = object:getClass(Name),
-
-	Max = erlang:apply(ClassName, get_max,[]),
-	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
-
-	{Counter,Queue} = ?VALUE(ResourceType),
-	
+	ResourceType = erlang:apply(object:getClass(Name), get_resource_type,[]),
+	Max = get_max(ResourceType),
+	Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
+	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
+	eresye:assert(?LOGNAME, {Name,Session,now(),frequency}),
 	if Counter < Max -> 
-%% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
-		   ?SETVALUE(ResourceType,{Counter+1,Queue}),
-%% 		   io:format("[~w:~w] ~w:~w Counter = ~w/~w, Queue= ~w, Num of running = ~w~n", [?MODULE,?LINE,ResourceType,Name,get_counter(Name),Max,queue:len(Queue),object:get_num_of_state(running)]),
-		   object:add_fact(Name,{Session,resource_allocated});
-%% 	   	   eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),State}),
-
-%% 		   object:call(Name,run);
-	   true -> %reach the max, add into queue, will be droped in release() once resourse released by others
-		   io:format("[~w:~w] ~w:~w Counter=~w/~w,Queue=~w,running=~w,waiting=~w~n", 
-					 [?MODULE,?LINE,ResourceType,Name,Counter,Max,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting)]),
-%% 	   	   eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),State}),
-		   case RequestType of
-			   frequency -> ?SETVALUE(ResourceType,{Counter,queue:in(Name,Queue)});%%for frequency timeout request, put into the tail of the queue
-			   refresh -> ?SETVALUE(ResourceType,{Counter,queue:in_r(Name,Queue)}) %%for refresh request, put into the head of the queue
-		   end
+		   eresye:assert(Name,{Session,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
+	       eresye:assert(?POOLNAME,{ResourceType,Name,Session,now()}),
+		   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource});
+	   true -> %%add into queue
+		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType}),
+		   eresye:assert(?LOGNAME, {Name,Session,now(),waiting_for_resource})
 	end.
 
-refresh_request(Name) -> 
-	eresye:assert(?POOLNAME, {Name,request_resource,refresh}).
+%%@doc get the max parallel number for each resource type
+%%TODO: need a table to map the resource to max, first static, then dynamically allocate resource
+-spec(get_max/1 :: (atom) -> int).
+get_max(ResourceType) -> 10.
 
+
+	
 release(Name,Session) -> 
-	Self = ?POOLOBJ,
 	ClassName = object:getClass(Name),
-
 	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
-	{Counter,Queue} = ?VALUE(ResourceType),
-	Len = queue:len(Queue) ,
-	if Len == 0 ->
-%% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Queue=~w,running=~w,waiting=~w,wait for res=~w~n", 
-%% 					[?MODULE,?LINE,Name,Counter,ResourceType,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),
-		  		   
-		  ?SETVALUE(ResourceType,{Counter-1,Queue});
+	eresye:retract_match(?POOLNAME,{ResourceType,Name,Session,'_'}),
+	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
+
+	if QueueLen == 0 ->
+		  nil;
 	   true -> %get the next item to run and drop it from the queue
-		  NextName = queue:get(Queue),
-%% 		  io:format("[~w:~w] ~w-4 Counter=~w,Class=~w,Next=~w,Queue=~w,running=~w,waiting=~w,wait for res~w~n", 
-%% 					[?MODULE,?LINE,Name,Counter,ResourceType,NextName,queue:len(Queue),object:get_num_of_state(running),object:get_num_of_state(waiting),object:get_num_of_state(waiting_for_resource)]),		   
-		  ?SETVALUE(ResourceType,{Counter,queue:drop(Queue)}),
-		  object:add_fact(NextName,{Session,resource_allocated})
-		  %%TODO: is run time out, should still release the resource
+		   {NextName,NextSession} = get_next(ResourceType),
+		   eresye:assert(NextName,{NextSession,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
+	       eresye:assert(?POOLNAME,{ResourceType,NextName,NextSession,now()}),
+		   eresye:assert(?LOGNAME, {NextName,NextSession,now(),allocate_resource})
+		  %%TODO: if run time out, should still release the resource
 	end.
 
-%% register the object's resource type, the same type only once.
+release(Name) -> %%for object:delete()  
+	ClassName = object:getClass(Name),
+	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
+	eresye:retract_match(?POOLNAME,{ResourceType,Name,'_','_'}),  %%delete in pool
+	eresye:retract_match(?POOLNAME,{ResourceType,Name,'_','_','_','_'}). %%delete in queue
+
+%%@doc get the next from the queue based on the following priority
+%% 1. refresh_request and earliest
+%% 2. if no refresh_request, earliest
+-spec(get_next/1::(atom) -> atom). 
+get_next(ResourceType) ->
+	RefreshQueue = lists:keysort(4,eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,refresh_request})),
+	if erlang:length(RefreshQueue) == 0 ->
+			[Next|_] = lists:keysort(4,eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,frequency_request}));
+	   true ->
+			[Next|_] = RefreshQueue		    
+	end,
+	{_,NextName,NextSession,_,waiting_for_resource,_} = Next,
+	eresye:retract(?POOLNAME,Next),
+	{NextName,NextSession}.
+	
+	
+%% 	eresye:assert(?POOLNAME, {ResourceType,Name,Session,Now,waiting_for_resource,RequestType}),
+%%@doc register the object's resource type, the same type only once.
 %% called in object:new
 register(ResourceType) -> 	
 	Self = ?POOLOBJ, 
@@ -109,26 +136,19 @@ register(ResourceType) ->
 get_counter(Name) -> 
 	IsValidName = object:isValidName(Name) ,
 	if IsValidName->
-			IsAttribute = object:isAttribute(?POOLOBJ,object:getClass(Name)),
-			if IsAttribute -> {Counter,_} = object:get(?POOLOBJ,object:getClass(Name)), Counter;
-		   		true -> 0
-			end;
+		ClassName = object:getClass(Name),
+		ResourceType = erlang:apply(ClassName, get_resource_type,[]),
+		Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
+		Counter;
 	   true -> 0
 	end.
-	
-
-set_counter(Name,Value) -> 
-	ResourceType = object:getClass(Name),
-	{_,Queue} = object:get(?POOLOBJ,ResourceType),	
-	object:set(?POOLOBJ,ResourceType,{Value,Queue}).
 
 get_queue_length(Name) -> 
 	IsValidName = object:isValidName(Name) ,
 	if IsValidName->
-			IsAttribute = object:isAttribute(?POOLOBJ,object:getClass(Name)),
-			if IsAttribute -> {_,Queue} = object:get(?POOLOBJ,object:getClass(Name)), queue:len(Queue);
-		   		true -> 0
-			end;
+		   	ClassName = object:getClass(Name),
+			ResourceType = erlang:apply(ClassName, get_resource_type,[]),
+			erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'}));
 	   true -> 0
 	end.
 

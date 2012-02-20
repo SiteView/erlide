@@ -34,7 +34,7 @@ get_resource_type() -> ?MODULE.
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
 	{Session,_} = Pattern,  %%resource_allocated
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),object:stateof(Self),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
 %% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
   	Start = erlang:now(),
@@ -54,15 +54,16 @@ update_action(Self,EventType,Pattern,State) ->
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
 %%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
-%% 	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
-%% 	object:super(Self, post_run,[]),	
-%% 	eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),object:stateof(Self)}),
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),object:stateof(Self),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
- 	io:format("[~w:~w] ~w-3 Counter=~w, finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
-	resource_pool:release(?VALUE(name),Session), 	
+%% 	object:super(Self, post_run,[]),
+%% TODO: run classifier	
+%% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
+ 	io:format("[~w:~w] ~w Counter=~w, Queue=~w,finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+%% 	resource_pool:release(?VALUE(name),Session), 	
 	eresye:assert(?VALUE(name), {Session,logging}),
 %% 	object:do(Self,waiting).
 	object:do(Self,logging).
+
 
 %%@doc startup, the name must be unique
 start(Name) ->

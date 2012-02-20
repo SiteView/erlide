@@ -138,7 +138,8 @@ execute_input(Input, DeltaTime, StateMachine, CurrentState) ->
 execute_input_list([], [], _StateMachine, {Status, State, _LastTime, Result}) ->
     {Status, State, Result};
 execute_input_list([I|Is], [T|Ts], StateMachine, {CurrentStatus, CurrentState, LastTime, Acc}) ->
-    {NextStatus, NextState, TransitionResult} =
+%%     io:format("[~w:~w]:~w,~w~n",[?MODULE,?LINE,T,LastTime]),
+	{NextStatus, NextState, TransitionResult} =
 	execute_input(I, exago_util:delta_time(T, LastTime), StateMachine, CurrentState),
     case NextState of
 	eof ->
@@ -273,7 +274,7 @@ process_event_source(EventSource, StateMachine) ->
 postprocess_event_source(EventSource, StateMachine) ->
     %% generate_visualization(StateMachine, ...)
     ExecutionInstances = process_event_source(EventSource, StateMachine),
-    write_event_source(EventSource#event_source.name, ExecutionInstances),
+%%     write_event_source(EventSource#event_source.name, ExecutionInstances),
     NInstances         = length(ExecutionInstances),
     {execution_analysis,
      {n_instances, NInstances},

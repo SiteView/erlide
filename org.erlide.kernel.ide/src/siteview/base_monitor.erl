@@ -6,13 +6,18 @@
 
 %
 % monitor life cycle management:
-%% start, waiting, waiting-for-resource, updating, logging,waiting
+%% 0. ping_monitor:start: initializing
+%% 1. base_monitor:action(Self,waiting): triggerred by frequency base_monitor:request_resource_action()
+%% 2. waiting-for-resource:
+%% 3. running:
+%% 4. base_monitor:logging
+%% 5. waiting
 %% waiting, disable, waiting
 %% waiting, disable
 %
 extends () -> nil .
 
-?PATTERN(resource_allocated_pattern)-> {?VALUE(name), get, {'_',resource_allocated}}; 
+?PATTERN(resource_allocated_pattern)-> {?VALUE(name), get, {'_',resource_allocated}}; %%triggerred in resource_pool:do_request
 ?PATTERN(wakeup_pattern)-> {?VALUE(name), get, {wakeup}};
 ?PATTERN(logging_pattern)-> {?VALUE(name), get, {'_',logging}};
 ?PATTERN(refresh_pattern)-> {?VALUE(name), get, {refresh}};
@@ -52,7 +57,7 @@ update_action(Self,EventType,Pattern,State) ->
 %%@doc the constructor
 base_monitor (Self,Name) ->
 	?SETVALUE(?NAME,monitor),
-	?SETVALUE(?FREQUENCY,3),
+	?SETVALUE(?FREQUENCY,5),
 	?SETVALUE(?LASTUPDATE,0),
 	?SETVALUE(disable_time,0),
 	?SETVALUE(?MEASUREMENTTIME,0),
@@ -62,7 +67,7 @@ base_monitor (Self,Name) ->
 	?SETVALUE(?DEPENDS_ON,none),
 	?SETVALUE(?DEPENDS_CONDITION,error),	
 	?SETVALUE(name,Name),	
-	eresye:start(Name).
+	eresye:start(Name). %%TODO: need evaluate whether start a rule engine for each monitor or one rule engine for all monitor ?
 
 %%@doc the destructor
 base_monitor_(Self)-> 
@@ -76,21 +81,14 @@ disable_action(Self,EventType,Pattern,State) ->
 %%    or put the resource request into a queue
 request_resource_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w:~w] ~w-1 Counter=~w, Action: request_resource_action, State=~w, Event type=~w, Pattern=~w '\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
-%% 	resource_pool:request(?VALUE(name), frequency),
 	{Mega,Sec,MilliSec} = erlang:now(),
 %% 	TODO: using PID as session, can be used to communicate with the update action
 	Session = Mega+Sec+MilliSec,
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),State,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
-	spawn(resource_pool,request,[?VALUE(name), Session,frequency]),
-%% 	object:do(Self,waiting).
+	resource_pool:request(?VALUE(name), Session,frequency_request),
 	object:do(Self,waiting_for_resource).
 
 request_refresh_resource_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "Action: request_refresh_resource, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[State,EventType,Pattern]),
-%% 	{_,_,Ms} = erlang:now(),
-%% 	Session = ?VALUE(name) ++ integer_to_list(Ms),
-%% 	eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),State}),
-%% 	eresye:assert(resource_pool,{?VALUE(name),request_refresh_resource}), %%trigging the request_refresh_resource_pattern in resource_pool module
 	resource_pool:request(?VALUE(name), refresh),
 	object:do(Self,waiting_for_resource).
 
@@ -107,16 +105,16 @@ post_run(Self) ->
 
 %%@doc logging the measurement into database
 logging_action(Self,EventType,Pattern,State) -> 
-	%TODO: logging data to database
 	{Session,_} = Pattern,
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),State,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
+	resource_pool:release(?VALUE(name), Session),
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),log}),	
+	%TODO: logging data to database
 	timer:sleep(random:uniform(2)*1000),  % simulate the logging time
-	io:format ( "[~w:~w] Action: logging, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),finished,resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),	
+%% 	io:format ( "[~w:~w] Action: logging, [State]:~w, [Event type]:~w, [Pattern]: ~w '\n",	[?MODULE,?LINE,State,EventType,Pattern]),
 	object:do(Self,waiting).
 
 allocate_resource(Self) ->
-	object:add_fact(Self,{resource_allocated}).
+	eresye:assert(?VALUE(name),{resource_allocated}).
 
 %%@doc get the measurement now, not by frequency
 refresh(Self) ->
