@@ -10,8 +10,11 @@
 %% if exeed the limit, put it into a queue.  Once finishing monitoring, the resource counter decrease by one or taking a queue
 %% item  
 %% 
-%% 
-%% 
+%% TODO: handle the counter/max and queue, need an algorithm, goal, constraint ?
+%% 		rule1: if queue length keep on increasing, need increase the max
+%% 		rule2: set the max based on system resource: mem, cpu and io 
+%% 		rule3: set the max based on needs
+%% 		rule4: set the max based on resource type mix of the monitors
 %% @end
 
 -module(resource_pool).

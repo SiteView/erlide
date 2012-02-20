@@ -162,20 +162,21 @@ public final class ErlObjectStore
     
     public static void main(String args[]) throws Exception
     {
-    	ErlObjectStore store = new ErlObjectStore();
-    	List<String> list = new ArrayList<String>();
-    	List<ErlObject> objlist = new ArrayList<ErlObject>();
-    	store.create("point","point99");
+        ErlObjectStore store = new ErlObjectStore();
+        List<String> list = new ArrayList<String>();
+        List<ErlObject> objlist = new ArrayList<ErlObject>();
+//      store.create("point","point99");
+        store.create("ping_monitor","point99");
         ErlObject pointTest = store.get_by_name("point99");
 
         final String actual = pointTest.getName();
-    	list  = store.get_all_name();
-    	objlist  = store.get_all();
-    	store.delete_all();
+        list  = store.get_all_name();
+        objlist  = store.get_all();
+        store.delete_all();
 
-    	objlist = store.get_all();
-    	System.out.println(list.toString());
-    	System.out.println(objlist.toString());
+        objlist = store.get_all();
+        System.out.println(list.toString());
+        System.out.println(objlist.toString());
     }
     
     

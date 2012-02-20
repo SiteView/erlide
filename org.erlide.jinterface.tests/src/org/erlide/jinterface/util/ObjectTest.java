@@ -2,6 +2,7 @@ package org.erlide.jinterface.util;
 
 import java.util.Map;
 
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -86,4 +87,41 @@ public class ObjectTest {
         Assert.assertEquals(className, attrs.get("class").toString());
         Assert.assertEquals(objName, attrs.get("name").toString());
     }
+
+    @Test
+    public void ping_monitor_test() throws Throwable {
+    	ErlObjectStore.delete("pingTest"); 
+    	String className = "ping_monitor";
+    	String objName = "0.1.12";
+       	ErlObject pingTest = ErlObjectStore.create(className,objName);
+       	
+       	Map<String,Object> params = FastMap.newInstance();
+//       	params.put("frequency", 10);
+       	pingTest.set("error_frequency",0);
+       	pingTest.set("frequency",600);       	
+       	pingTest.set("svobjId","10181");
+       	pingTest.set("_proxy", "default");
+       	pingTest.set("id","0.1.12");
+       	pingTest.set("m_class","ping_monitor");
+       	pingTest.set("m_name","asd");
+       	pingTest.set("disabled",false);
+       	pingTest.set("verfiy_error",false);
+       	pingTest.set("depends_condition","good");
+       	pingTest.set("depends_on","none");
+       	pingTest.set("schedule","all");
+       	pingTest.set("activate_baseline",false);        
+       	pingTest.set("parent","0.1");
+       	pingTest.set("svobjId","10181");
+       	pingTest.set("hostname","www.sina.com.cn");
+       	pingTest.set("timeout",3000);
+       	pingTest.set("size",32);
+    	Map<String,Object> attrs = pingTest.get_system_attrs();
+    	   	
+        //ErlObjectStore.delete(objName); 
+        
+        Assert.assertEquals(className, attrs.get("class").toString());
+        Assert.assertEquals(objName, attrs.get("name").toString());
+    }
+
+    
 }
