@@ -57,8 +57,8 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	object:super(Self, post_run,[]),
 %% TODO: run classifier	
 %% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
- 	io:format("[~w:~w] ~w Counter=~w, Queue=~w,finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", 
-			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
+ 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?VALUE(round_trip_time),?VALUE(packetsgood)]),
 %% 	resource_pool:release(?VALUE(name),Session), 	
 	eresye:assert(?VALUE(name), {Session,logging}),
 %% 	object:do(Self,waiting).

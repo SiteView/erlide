@@ -42,13 +42,11 @@ finished_action(Self,EventType,Pattern,State) ->
 	%% TODO: check for counter and queue
 	
 	RowFormat = monitor_row_format(),
-	MonitorStateTest = [{ping1,1111,"2010-10-12 16:50:20:0868702",frequency,0,0},{ping1,1111,"2010-10-12 16:50:25:0868702",resource_allocated,0,0},
-						{ping1,1111,"2010-10-12 16:50:30:0868702",update,0,0},{ping1,1111,"2010-10-12 16:50:35:0868702",log,0,0}],
-	MonitorStateTest1 = [
-						 {ping_monitor,ping1,1111,{1329,408188,548251},frequency,0,0},
-						 {ping_monitor,ping1,1111,{1329,408188,610250},resource_allocated,0,0},
-						 {ping_monitor,ping1,1111,{1329,408193,618252},update,0,0},
-						 {ping_monitor,ping1,1111,{1329,408195,692250},log,0,0}
+	MonitorStateTest = [
+						 {ping1,1111,{1329,408188,548251},frequency},
+						 {ping1,1111,{1329,408188,610250},allocate_resource},
+						 {ping1,1111,{1329,408193,618252},update},
+						 {ping1,1111,{1329,408195,692250},log}
 						],
 	
     EventSource  = exago_event:new_source("monitor_state_log", MonitorStateList, RowFormat),
@@ -104,7 +102,7 @@ monitor_state_machine() ->
 	   #state{number=4, name=logging},
 	   #state{number=5, name=finished}],
       transitions= %%pattern
-	  [#transition{from=0, to=2, input=frequency},
+	  [#transition{from=0, to=2, input=frequency_request},
 	   #transition{from=0, to=1, input=disable},
 	   #transition{from=1, to=0, input=enable},
 	   #transition{from=2, to=3, input=allocate_resource},

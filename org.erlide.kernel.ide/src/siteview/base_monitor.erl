@@ -61,6 +61,7 @@ base_monitor (Self,Name) ->
 	?SETVALUE(?LASTUPDATE,0),
 	?SETVALUE(disable_time,0),
 	?SETVALUE(?MEASUREMENTTIME,0),
+	?SETVALUE(wait_time,0),
 	?SETVALUE(?DISABLED,false),
 	?SETVALUE(?VERFIY_ERROR,true),
 	?SETVALUE(?ERROR_FREQUENCY,60),

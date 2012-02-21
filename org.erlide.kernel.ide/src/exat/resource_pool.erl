@@ -10,11 +10,15 @@
 %% if exeed the limit, put it into a queue.  Once finishing monitoring, the resource counter decrease by one or taking a queue
 %% item  
 %% 
-%% TODO: handle the counter/max and queue, need an algorithm, goal, constraint ?
+%% TODO: if the load is very loarge, need this resource allocation alogorithm, for smaller one, we do not need it.
+%% 		handle the counter/max and queue, need an algorithm, goal, constraint ?
 %% 		rule1: if queue length keep on increasing, need increase the max
 %% 		rule2: set the max based on system resource: mem, cpu and io 
 %% 		rule3: set the max based on needs
 %% 		rule4: set the max based on resource type mix of the monitors
+%%  constraints: cpu, mem, io, monitor waiting length
+%%  goal: max the per minute execution, minimize waiting time
+%%  steps: 1. gather all variables, 2. formula to inter-relate the variables
 %% @end
 
 -module(resource_pool).
@@ -71,20 +75,20 @@ request(Name,Session,RequestType) ->
 	Max = get_max(ResourceType),
 	Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
 	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
-	eresye:assert(?LOGNAME, {Name,Session,now(),frequency}),
+	eresye:assert(?LOGNAME, {Name,Session,now(),RequestType}),
 	if Counter < Max -> 
 		   eresye:assert(Name,{Session,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
 	       eresye:assert(?POOLNAME,{ResourceType,Name,Session,now()}),
 		   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource});
 	   true -> %%add into queue
-		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType}),
-		   eresye:assert(?LOGNAME, {Name,Session,now(),waiting_for_resource})
+		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType})
+%% 		   eresye:assert(?LOGNAME, {Name,Session,now(),waiting_for_resource})
 	end.
 
 %%@doc get the max parallel number for each resource type
 %%TODO: need a table to map the resource to max, first static, then dynamically allocate resource
 -spec(get_max/1 :: (atom) -> int).
-get_max(ResourceType) -> 10.
+get_max(ResourceType) -> 5.
 
 
 	
@@ -100,6 +104,9 @@ release(Name,Session) ->
 		   {NextName,NextSession} = get_next(ResourceType),
 		   eresye:assert(NextName,{NextSession,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
 	       eresye:assert(?POOLNAME,{ResourceType,NextName,NextSession,now()}),
+%% 		   io:format('~w~n', [eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',frequency})]),
+		   [{_,_,StartWait,frequency_request}|_] = eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',fun(X)-> (X == frequency_request) or (X == refresh_request) end}),
+		   object:set(NextName,wait_time,timer:now_diff(now(), StartWait)/1000000),
 		   eresye:assert(?LOGNAME, {NextName,NextSession,now(),allocate_resource})
 		  %%TODO: if run time out, should still release the resource
 	end.
@@ -121,8 +128,8 @@ get_next(ResourceType) ->
 	   true ->
 			[Next|_] = RefreshQueue		    
 	end,
-	{_,NextName,NextSession,_,waiting_for_resource,_} = Next,
-	eresye:retract(?POOLNAME,Next),
+	{_,NextName,NextSession,StartWait,waiting_for_resource,_} = Next,
+	eresye:retract(?POOLNAME,Next), %%remove the item in queue
 	{NextName,NextSession}.
 	
 	
