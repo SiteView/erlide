@@ -127,6 +127,8 @@ on_starting(Self) ->
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
 
+run_classifier(Self,Classifier) ->
+	io:format("[~w:~w] name=~w, Classifier=~w~n", [?MODULE,?LINE,?VALUE(name),Classifier]).
 
 start(Name) ->
 	case object:get_by_name(Name) of

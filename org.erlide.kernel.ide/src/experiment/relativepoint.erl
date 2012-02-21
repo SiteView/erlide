@@ -40,11 +40,16 @@ init1(Self,EventType,Pattern,State) ->
 	io:format ( "[~w:~w]:Action=init,State=~w,Event=~w,Pattern=~w,State=~w\n",	[?MODULE,?VALUE(name),State,EventType,Pattern,State]),
 	object:do(Self,start).
 
-
-test(Name) -> 
-	X = object:new(?MODULE,[Name,10,10]),
-	object:start(X),
-	eresye:assert(Name,{wakeup}),
-	X.
+%%@doc startup, the name must be unique
+start(Name) ->
+	case object:get_by_name(Name) of
+		[] -> 
+				X = object:new(?MODULE,[Name]),
+				object:start(X),
+				resource_pool:register(object:getClass(Name)),
+				eresye:assert(Name,{wakeup}),
+				Name;
+		_ -> atom_to_list(Name) ++ " already existed, choose a new name"
+	end.
 
 

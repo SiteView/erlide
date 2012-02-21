@@ -197,7 +197,9 @@ super(Object, Method)  ->
     super_class(Object, Parent, Method).
 
 %% calls the method of the ancestor class with the given arguments
-super(Object, Method, Arguments)  ->
+super(Object, Method, Arguments)   when is_atom(Object) -> 
+	super(get_by_name(Object), Method, Arguments);
+super(Object, Method, Arguments)  when is_record(Object,object) ->
     Parent = getParent(Object#object.context),
     super_class(Object, Parent, Method, Arguments).
 

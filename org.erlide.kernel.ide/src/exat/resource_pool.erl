@@ -88,7 +88,7 @@ request(Name,Session,RequestType) ->
 %%@doc get the max parallel number for each resource type
 %%TODO: need a table to map the resource to max, first static, then dynamically allocate resource
 -spec(get_max/1 :: (atom) -> int).
-get_max(ResourceType) -> 5.
+get_max(ResourceType) -> 20.
 
 
 	
