@@ -82,7 +82,6 @@ request(Name,Session,RequestType) ->
 		   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource});
 	   true -> %%add into queue
 		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType})
-%% 		   eresye:assert(?LOGNAME, {Name,Session,now(),waiting_for_resource})
 	end.
 
 %%@doc get the max parallel number for each resource type

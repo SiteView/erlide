@@ -24,8 +24,8 @@ atomic_monitor (Self,Name) ->
 atomic_monitor_ (Self)-> 
 	eresye:stop(?VALUE(name)).
 
-on_starting(Self) ->
-	io:format("This [~w] ~w object is starting \n",[?VALUE(name),?MODULE]).
+on_starting(Self) -> ok.
+%% 	io:format("This [~w] ~w object is starting \n",[?VALUE(name),?MODULE]).
 
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).

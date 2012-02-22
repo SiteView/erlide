@@ -48,7 +48,7 @@ update_action(Self,EventType,Pattern,State) ->
 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
 	?SETVALUE(packetsgood,random:uniform(4)),
 %% 	timer:sleep(random:uniform(10)*1000),
-	timer:sleep(500*1000),
+	timer:sleep(5*1000),
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),

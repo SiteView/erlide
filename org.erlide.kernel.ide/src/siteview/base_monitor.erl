@@ -15,6 +15,8 @@
 %% waiting, disable, waiting
 %% waiting, disable
 %
+%% TODO: add period based frequency
+ 
 extends () -> nil .
 
 ?PATTERN(resource_allocated_pattern)-> {?VALUE(name), get, {'_',resource_allocated}}; %%triggerred in resource_pool:do_request
@@ -81,6 +83,8 @@ disable_action(Self,EventType,Pattern,State) ->
 %%@doc request resource from the resource pool, once got the resource, then run
 %%    or put the resource request into a queue
 request_resource_action(Self,EventType,Pattern,State) ->
+	%%TODO: insert schedule processing here.
+	
 %% 	io:format ( "[~w:~w] ~w-1 Counter=~w, Action: request_resource_action, State=~w, Event type=~w, Pattern=~w '\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
 	{Mega,Sec,MilliSec} = erlang:now(),
 %% 	TODO: using PID as session, can be used to communicate with the update action

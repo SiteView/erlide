@@ -36,7 +36,7 @@ finished_action(Self,EventType,Pattern,State) ->
 	Pattern1 = {Name,Session,'_','_'},
 	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),
 %% 	io:format("[~w:~w] MonitorStateList=~w~n",[?MODULE,?LINE,MonitorStateList]),
-	eresye:retract(?LOGNAME, MonitorStateList),
+	eresye:retract_match(?LOGNAME, MonitorStateList),
 	%% TODO: check for completeness: feed the MonitorStateList into exago
 	%% convert MonitorState to event format
 	%% TODO: check for counter and queue
