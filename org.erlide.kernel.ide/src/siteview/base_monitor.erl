@@ -17,6 +17,7 @@
 %% waiting, disable
 %
 %% TODO: add period based frequency
+%% classifier: when meet a pattern, set the category value, the classifier condition should be a pattern within the object
  
 extends () -> nil .
 
@@ -135,15 +136,6 @@ on_starting(Self) ->
 
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
-
-<<<<<<< HEAD
-run_classifier(Self,Classifier) ->
-	io:format("[~w:~w] name=~w, Classifier=~w~n", [?MODULE,?LINE,?VALUE(name),Classifier]).
-=======
-%% runClassifiers(Self, This) ->
-%% 	io:format("runClassifiers [~w] ~w ~w  \n",[?VALUE(name),?MODULE, This]).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% @spec get_classifier(_)->list()
 %% @doc get classifier information
@@ -671,6 +663,7 @@ classifier_by_statestring(Self)->
 %% 	object:call(Self, setParentCategory(Self,C);
 
 runClassifiers(_,_,_)->{error,object_state_wrong}.
+%%test
 
 %% %% @spec setParentCategory(Self,Category)->({ok,Result}|{error,Reason})
 %% %% @doc set parent's category
@@ -727,9 +720,6 @@ runClassifiers(_,_,_)->{error,object_state_wrong}.
 %%
 get_counter_attribute()->[].
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
->>>>>>> ed2d9b5a0e1477386168cb7202f39a18d06ce262
 
 start(Name) ->
 	case object:get_by_name(Name) of

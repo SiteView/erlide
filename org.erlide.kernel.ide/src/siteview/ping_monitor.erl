@@ -8,6 +8,8 @@ extends () -> atomic_monitor .
 %%@doc the action, event and pattern are specificed in base_monitor
 ?SUPERCLAUSE(action).
 ?SUPERCLAUSE(event).
+
+?PATTERN(error_pattern)-> {?VALUE(name), get, {round_trip_time,fun(X) -> X > ?VALUE(round_trip_time_threshhold) end}}; %%triggerred in resource_pool:do_request
 ?SUPERCLAUSE(pattern).
 
 %%@doc the constructor, specific the input parameters into the monitor
@@ -64,8 +66,6 @@ update_action(Self,EventType,Pattern,State) ->
  	io:format("[~w:~w] ~w-3 Counter=~w, finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
 	io:format("ping monitor : error_classifier:~p, good_classifier:~p,warning_classifier:~p ~n", [?VALUE(error_classifier),?VALUE(good_classifier),?VALUE(warning_classifier)]),
 
-%% 	object:call(Self, runClassifiers, [Self, Self]),
-%% 	object:super(Self, runClassifiers),
  	object:super(Self, runClassifiers, [Self]),
 	
 %% 	object:call(Object, Method)
