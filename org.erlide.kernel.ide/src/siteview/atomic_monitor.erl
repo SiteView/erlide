@@ -15,6 +15,7 @@ init(Self,EventType,Pattern,State) ->
 	object:do(Self,start).
 
 update(Self,EventType,Pattern,State) ->
+%% 	super:runClassifiers(Self, Classifiers),	
 	io:format ( "[~w]:Type=~w,Action=update,State=~w,Event=~w,Pattern=~w\n",	[?VALUE(name),?MODULE,State,EventType,Pattern]),
 	object:do(Self,start).
 
@@ -30,6 +31,9 @@ on_starting(Self) ->
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
 
+%% runClassifiers(Self, This) ->
+%% 	object:super(Self, runClassifiers, [Self, This]).
+  
 test(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 
