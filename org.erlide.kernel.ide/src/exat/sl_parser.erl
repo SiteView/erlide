@@ -2194,10 +2194,3 @@ yeccpars2_136_(__Stack0) ->
   end | __Stack].
 
 
-yeccpars2_136_(__Stack0) ->
- [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
- [begin
-   __3
-  end | __Stack].
-
-

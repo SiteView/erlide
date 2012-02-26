@@ -34,7 +34,7 @@
 %%%-------------------------------------------------------------------
 -module(exago_printer).
 
--export([print_result/1]).
+-compile ([export_all]).
 
 -spec(count_acceptant_executions/2 :: (list(), Acc::integer()) -> integer()).
 count_acceptant_executions([], N) ->

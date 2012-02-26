@@ -10,7 +10,7 @@
 %%  get the exago recognize exat's facts
 %% logic to verify the counter: in running state, finished
 %% 
-%% 
+%% TODO: checking for long running monitors
 %% 
 %% 
 
@@ -34,11 +34,10 @@ extends () -> nil .
 finished_action(Self,EventType,Pattern,State) -> 
 	{Name,Session,_,_} = Pattern,
 	Pattern1 = {Name,Session,'_','_'},
-	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),
+	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),  %%must be sorted to be right
 %% 	io:format("[~w:~w] MonitorStateList=~w~n",[?MODULE,?LINE,MonitorStateList]),
-	eresye:retract_match(?LOGNAME, MonitorStateList),
-	%% TODO: check for completeness: feed the MonitorStateList into exago
-	%% convert MonitorState to event format
+	eresye:retract(?LOGNAME, MonitorStateList),
+%% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1))]),
 	%% TODO: check for counter and queue
 	
 	RowFormat = monitor_row_format(),
@@ -50,7 +49,6 @@ finished_action(Self,EventType,Pattern,State) ->
 						],
 	
     EventSource  = exago_event:new_source("monitor_state_log", MonitorStateList, RowFormat),
-%% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
 %% 	io:format("[~w:~w] EventSource = ~w~n", [?MODULE,?LINE,EventSource]),
 %%     EventSource = 
 %% 	exago_event:new_source("monitor_state_log", MonitorStateList, RowFormat, 
@@ -65,23 +63,24 @@ finished_action(Self,EventType,Pattern,State) ->
 	%% error alert based on the Result
 	{result, SMResult, ExecutionAnalysis} = Result,
 	{execution_analysis, {n_instances, N}, {history_analysis, HistoryAnalysis}} = ExecutionAnalysis,
-%% 	NofOk = exago_printer:count_acceptant_executions(HistoryAnalysis, 0) , 
-%% 	io:format("[~w:~w] Success = ~w~n", [?MODULE,?LINE,NofOk]),
-%% 	if NofOk < N 
-%% 		 -> io:format("!!! failing monitor execution:~w~n", [exago_printer:list_failing_executions(HistoryAnalysis, 0)]);
-%% 	   true -> 
+	NofOk = exago_printer:count_acceptant_executions(HistoryAnalysis, 0) , 
+%% 	io:format("[~w:~w] Success = ~w~n", [?MODULE,?LINE,HistoryAnalysis]),
+	if NofOk < N 
+		 -> io:format("[~w:~w]!!! monitor [~w] execution:~w~n", [?MODULE,?LINE,Name,exago_printer:list_failing_executions(HistoryAnalysis, 0)]);
+%% 			exago_printer:print_result(Result);
+	   true -> 
 %% 		   io:format("success monitor execution:~w~n", [exago_printer:list_acceptant_executions(HistoryAnalysis, 0)]),
-%% 		   ok
-%% 	end,
+		   ok
+	end,
 	
 %% 	exago_printer:print_result(Result),
 
 	Len = length(MonitorStateList),
 	lists:foreach(
 	  fun(MonitorState) -> 
-			  {Name1,Session1,Timestamp,State1} = MonitorState
-%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
-%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
+			  {Name1,Session1,Timestamp,State1} = MonitorState,
+			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
+						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
 	  end, MonitorStateList),
 ok.
 
