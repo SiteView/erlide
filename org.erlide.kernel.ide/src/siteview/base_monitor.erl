@@ -69,7 +69,8 @@ base_monitor (Self,Name) ->
 	?SETVALUE(?ERROR_FREQUENCY,60),
 	?SETVALUE(?DEPENDS_ON,none),
 	?SETVALUE(?DEPENDS_CONDITION,error),	
-	?SETVALUE(name,Name),	
+	?SETVALUE(name,Name),
+	?SETVALUE(data_logger,"localhost"),  %%the data logger used in log_action
 	eresye:start(Name). %%TODO: need evaluate whether start a rule engine for each monitor or one rule engine for all monitor ?
 
 %%@doc the destructor
@@ -108,7 +109,7 @@ post_run(Self) ->
 	object:do(?VALUE(name),waiting).
 %% 	object:do(?VALUE(name),logging).
 
-%%@doc logging the measurement into database
+%%@doc logging the measurement into database by inform the data_logger to pull the data from monitor object
 logging_action(Self,EventType,Pattern,State) -> 
 	{Session,_} = Pattern,
 	resource_pool:release(?VALUE(name), Session),

@@ -52,6 +52,19 @@ public class ObjectTest {
         final int  expected = 10;
         final int actual = Integer.parseInt(pingTest.get("X").toString());
 
+        
+        ErlObjectStore.delete("ping_monitor1"); 
+        Assert.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void timedValueTest() throws Throwable {
+       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping_monitor1");
+    	pingTest.set("X", 10);
+    	   	
+        final int  expected = 10;
+        final int actual = Integer.parseInt(pingTest.get("X").toString());
+
         ErlObjectStore.delete("ping_monitor1"); 
         Assert.assertEquals(expected, actual);
     }
@@ -95,7 +108,7 @@ public class ObjectTest {
     	String objName = "0.1.12";
        	ErlObject pingTest = ErlObjectStore.create(className,objName);
        	
-       	Map<String,Object> params = FastMap.newInstance();
+//       	Map<String,Object> params = FastMap.newInstance();
 //       	params.put("frequency", 10);
        	pingTest.set("error_frequency",0);
        	pingTest.set("frequency",600);       	

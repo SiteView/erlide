@@ -19,6 +19,7 @@
 %%  constraints: cpu, mem, io, monitor waiting length
 %%  goal: max the per minute execution, minimize waiting time
 %%  steps: 1. gather all variables, 2. formula to inter-relate the variables
+%%  formula: Max x Wait = Num x Update + Max * Frequency, the optimal is Wait = 0.
 %% @end
 
 -module(resource_pool).

@@ -40,6 +40,8 @@
 %% MACROS for simplifying the object 
 -define(VALUE(X), object:get(Self,X)).
 -define(SETVALUE(Key,Value),object:set(Self,Key,Value)).
+-define(QUEVALUE(X), object:getQueuedValue(Self,X)).
+-define(SETQUEVALUE(Key,Value),object:setQueuedValue(Self,Key,Value)).
 
 % call super class's function if no clause matched.
 -define(SUPERCLAUSE(X),X(Self,Other) -> object:super(Self, X, [Other]))  .
@@ -48,3 +50,4 @@
 -define(POOLOBJ,'resource_pool_object').
 -define(LOGOBJ,'log_analyzer_object').
 -define(LOGNAME,'logger').
+-define(PROGRESSNAME,'report_progress').

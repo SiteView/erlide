@@ -1,7 +1,9 @@
 package com.siteview.object;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +59,35 @@ public class ErlObject
 		list.add(new OtpErlangAtom(Name));
 		list.add(new OtpErlangAtom(AttributeName));
     	return OtpGateway.getOtpInterface().call("object", "get", list);
+    }
+    
+    public Map getTimedValue(String AttributeName) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        Object[] timedValue = (Object[])  OtpGateway.getOtpInterface().call("object", "getTimedValue", list);
+        Map <String,Object> map = new HashMap();
+        map.put("value", timedValue[0]);
+        map.put("timestamp", (Timestamp)timedValue[1]);
+        return map;        
+    }
+    
+    public List<Object> getHistory(String AttributeName) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        List<Object> rtnList = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        List<Object> historyValue = (List)  OtpGateway.getOtpInterface().call("object", "getHistory", list);
+        for(Object obj : historyValue) {
+            Map <String,Object> map = new HashMap();
+            Object[] timedValue = (Object[]) obj;
+            map.put("value", timedValue[0]);
+            map.put("timestamp", timedValue[1]);
+            rtnList.add(map);            
+        }
+        return rtnList;        
     }
     
     public Object call(String Method, List<Object> params) throws Exception {

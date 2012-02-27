@@ -135,11 +135,29 @@ set(Object, AttributeName, AttributeValue) ->
                 {self(), set, AttributeName, AttributeValue}),
     AttributeValue.
 
+setQueuedValue(Name,AttributeName, AttributeValue) when is_atom(Name) -> setQueuedValue(get_by_name(Name),AttributeName, AttributeValue);
+setQueuedValue(Object, AttributeName, AttributeValue) ->
+    server_call(Object#object.property_server,
+                {self(), setQueuedValue, AttributeName, AttributeValue}),
+    AttributeValue.
+
 get(Name,AttributeName) when is_atom(Name) -> get(get_by_name(Name),AttributeName);
 get(Object, AttributeName) when is_record(Object,object)->
 %% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),
     V = server_call(Object#object.property_server,
                     {self(), get, AttributeName}),
+    case V of
+        {value, Value} -> Value;
+        _ -> exit({undef, [attribute, Object, AttributeName]})
+    end.
+
+%% @doc get the attribute value, with time stamp
+-spec(getQueuedValue/2 :: (atom(), atom()) -> queue()).
+getQueuedValue(Name,AttributeName) when is_atom(Name) -> getQueuedValue(get_by_name(Name),AttributeName);
+getQueuedValue(Object, AttributeName) when is_record(Object,object)->
+%% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),
+    V = server_call(Object#object.property_server,
+                    {self(), getQueuedValue, AttributeName}),
     case V of
         {value, Value} -> Value;
         _ -> exit({undef, [attribute, Object, AttributeName]})
@@ -419,7 +437,7 @@ deep_call(Object, Method, Class, Parent, Params, NameFun) ->
     end.
 
 call_a_method(Object, Method, Class, Params, NameFun) ->
-%% 	io:format("----- 7. call_a_method/5 ~w,~w,~w,~w,~w\n", [Object, Method, Class, Params, NameFun]),
+%% 	io:format("[~w:~w] 7. call_a_method/5 ~w,~w,~w,~w,~w\n", [?MODULE,?LINE,Object, Method, Class, Params, NameFun]),
     MethodName = NameFun(Method, Class),  % switch between a regular method or constructor 
 
 	%%test if MethodName is a function of the Class module
@@ -657,6 +675,7 @@ server_call(Server, Data) ->
                  exit({badtransaction, Other})
     end.
 
+%%@doc  the attribute value are save into a fixed length queue, for storing the change history, the max length setting at 5 for now
 property_server(Dict) ->
     receive
         {From, get, AttributeName} ->
@@ -670,16 +689,32 @@ property_server(Dict) ->
 			property_server(dict:store(pid, ExecutorPid, Dict));
 		{From, set, AttributeName, AttributeValue} ->
             From ! {ack, ok},
-%% 			case dict:is_key(AttributeName, Dict)  of
-%% 				true -> nil;
-%% 				false -> % store the attribute definition into object store when set for the forst time 
-%% 					case dict:is_key(pid, Dict) andalso dict:fetch(class, Dict) =/= 'sync' of						
-%% 						true -> 
-%% 								eresye:assert(object_store, {object,get_by_executor(dict:fetch(pid, Dict)),AttributeName,AttributeValue});
-%% 					   	false -> nil 
-%% 					end
-%% 			end,
             property_server(dict:store(AttributeName, AttributeValue, Dict));
+		{From, getQueuedValue, AttributeName} ->
+            case catch(dict:fetch(AttributeName, Dict)) of
+                {'EXIT', _} -> From ! {ack, undef};
+                Other ->  {value,{AttributeValue,_Timestamp}} = queue:peek(Other),
+					From ! {ack, {value,AttributeValue}}
+            end,
+            property_server(Dict);
+		{From, getAllQueuedValue, AttributeName} ->
+            case catch(dict:fetch(AttributeName, Dict)) of
+                {'EXIT', _} -> From ! {ack, undef};
+                Other ->  From ! {ack, {value,queue:peek(Other)}}
+            end,
+            property_server(Dict);
+		{From, setQueuedValue, AttributeName, AttributeValue} ->
+            From ! {ack, ok},
+			IsKey = dict:is_key(AttributeName, Dict) , 
+%% 			io:format("[~w:~w] AttributeName:~w,IsKey:~w,Dict:~w~n", [?MODULE,?LINE,AttributeName,IsKey,Dict]),
+			if IsKey ->	NewValue = queue:in({AttributeValue,calendar:local_time()}, dict:fetch(AttributeName, Dict));%%insert at the front
+				true -> NewValue = queue:in({AttributeValue,calendar:local_time()}, queue:new())
+			end,
+			QueueLen = queue:len(NewValue),
+%% 			io:format("[~w:~w] AttributeName:~w,IsKey:~w,QueueLen:~w~n", [?MODULE,?LINE,AttributeName,IsKey,QueueLen]),
+			if QueueLen < 21 -> property_server(dict:store(AttributeName, NewValue, Dict));%% TODO: make the queue length configurable
+			   true -> property_server(dict:store(AttributeName, queue:drop_r(NewValue), Dict)) %% remove the rear value if exceed the length
+			end;		
         {From, list} ->
             X = dict:fetch_keys(Dict),
             From ! {ack, X},

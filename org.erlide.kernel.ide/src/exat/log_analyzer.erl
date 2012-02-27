@@ -78,9 +78,9 @@ finished_action(Self,EventType,Pattern,State) ->
 	Len = length(MonitorStateList),
 	lists:foreach(
 	  fun(MonitorState) -> 
-			  {Name1,Session1,Timestamp,State1} = MonitorState,
-			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
-						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
+			  {Name1,Session1,Timestamp,State1} = MonitorState
+%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
+%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
 	  end, MonitorStateList),
 ok.
 
