@@ -135,10 +135,10 @@ set(Object, AttributeName, AttributeValue) ->
                 {self(), set, AttributeName, AttributeValue}),
     AttributeValue.
 
-setQueuedValue(Name,AttributeName, AttributeValue) when is_atom(Name) -> setQueuedValue(get_by_name(Name),AttributeName, AttributeValue);
-setQueuedValue(Object, AttributeName, AttributeValue) ->
+setTimedValue(Name,AttributeName, AttributeValue) when is_atom(Name) -> setTimedValue(get_by_name(Name),AttributeName, AttributeValue);
+setTimedValue(Object, AttributeName, AttributeValue) ->
     server_call(Object#object.property_server,
-                {self(), setQueuedValue, AttributeName, AttributeValue}),
+                {self(), setTimedValue, AttributeName, AttributeValue}),
     AttributeValue.
 
 get(Name,AttributeName) when is_atom(Name) -> get(get_by_name(Name),AttributeName);
@@ -151,13 +151,35 @@ get(Object, AttributeName) when is_record(Object,object)->
         _ -> exit({undef, [attribute, Object, AttributeName]})
     end.
 
-%% @doc get the attribute value, with time stamp
--spec(getQueuedValue/2 :: (atom(), atom()) -> queue()).
-getQueuedValue(Name,AttributeName) when is_atom(Name) -> getQueuedValue(get_by_name(Name),AttributeName);
-getQueuedValue(Object, AttributeName) when is_record(Object,object)->
+%% @doc get the attribute value, without time stamp
+-spec(getTimedValue/2 :: (atom(), atom()) -> queue()).
+getTimedValue(Name,AttributeName) when is_atom(Name) -> getTimedValue(get_by_name(Name),AttributeName);
+getTimedValue(Object, AttributeName) when is_record(Object,object)->
 %% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),
     V = server_call(Object#object.property_server,
-                    {self(), getQueuedValue, AttributeName}),
+                    {self(), getTimedValue, AttributeName}),
+    case V of
+        {value, Value} -> Value;
+        _ -> exit({undef, [attribute, Object, AttributeName]})
+    end.
+
+%% @doc get the attribute value, will all history
+-spec(getValueWithTime/2 :: (atom(), atom()) -> list()).
+getValueWithTime(Name,AttributeName) when is_atom(Name) -> getValueWithTime(get_by_name(Name),AttributeName);
+getValueWithTime(Object, AttributeName) when is_record(Object,object)->
+    V = server_call(Object#object.property_server,
+                    {self(), getValueWithTime, AttributeName}),
+    case V of
+        {value, Value} -> Value;
+        _ -> exit({undef, [attribute, Object, AttributeName]})
+    end.
+
+%% @doc get the attribute value, will all history
+-spec(getValueHistory/2 :: (atom(), atom()) -> list()).
+getValueHistory(Name,AttributeName) when is_atom(Name) -> getValueHistory(get_by_name(Name),AttributeName);
+getValueHistory(Object, AttributeName) when is_record(Object,object)->
+    V = server_call(Object#object.property_server,
+                    {self(), getValueHistory, AttributeName}),
     case V of
         {value, Value} -> Value;
         _ -> exit({undef, [attribute, Object, AttributeName]})
@@ -690,20 +712,26 @@ property_server(Dict) ->
 		{From, set, AttributeName, AttributeValue} ->
             From ! {ack, ok},
             property_server(dict:store(AttributeName, AttributeValue, Dict));
-		{From, getQueuedValue, AttributeName} ->
+		{From, getTimedValue, AttributeName} ->
             case catch(dict:fetch(AttributeName, Dict)) of
                 {'EXIT', _} -> From ! {ack, undef};
-                Other ->  {value,{AttributeValue,_Timestamp}} = queue:peek(Other),
+                Other ->  {value,{AttributeValue,_Timestamp}} = queue:peek_r(Other),
 					From ! {ack, {value,AttributeValue}}
             end,
             property_server(Dict);
-		{From, getAllQueuedValue, AttributeName} ->
+		{From, getValueWithTime, AttributeName} ->
             case catch(dict:fetch(AttributeName, Dict)) of
                 {'EXIT', _} -> From ! {ack, undef};
-                Other ->  From ! {ack, {value,queue:peek(Other)}}
+                Other ->  From ! {ack, {value,queue:peek_r(Other)}}
             end,
             property_server(Dict);
-		{From, setQueuedValue, AttributeName, AttributeValue} ->
+		{From, getValueHistory, AttributeName} ->
+            case catch(dict:fetch(AttributeName, Dict)) of
+                {'EXIT', _} -> From ! {ack, undef};
+                Other ->  From ! {ack, {value,Other}}
+            end,
+            property_server(Dict);
+		{From, setTimedValue, AttributeName, AttributeValue} ->
             From ! {ack, ok},
 			IsKey = dict:is_key(AttributeName, Dict) , 
 %% 			io:format("[~w:~w] AttributeName:~w,IsKey:~w,Dict:~w~n", [?MODULE,?LINE,AttributeName,IsKey,Dict]),
@@ -712,8 +740,8 @@ property_server(Dict) ->
 			end,
 			QueueLen = queue:len(NewValue),
 %% 			io:format("[~w:~w] AttributeName:~w,IsKey:~w,QueueLen:~w~n", [?MODULE,?LINE,AttributeName,IsKey,QueueLen]),
-			if QueueLen < 21 -> property_server(dict:store(AttributeName, NewValue, Dict));%% TODO: make the queue length configurable
-			   true -> property_server(dict:store(AttributeName, queue:drop_r(NewValue), Dict)) %% remove the rear value if exceed the length
+			if QueueLen < 10 -> property_server(dict:store(AttributeName, NewValue, Dict));%% TODO: make the queue length configurable
+			   true -> property_server(dict:store(AttributeName, queue:drop(NewValue), Dict)) %% remove the rear value if exceed the length
 			end;		
         {From, list} ->
             X = dict:fetch_keys(Dict),

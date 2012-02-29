@@ -60,13 +60,18 @@ public class ObjectTest {
     @Test
     public void timedValueTest() throws Throwable {
        	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping_monitor1");
-    	pingTest.set("X", 10);
-    	   	
-        final int  expected = 10;
-        final int actual = Integer.parseInt(pingTest.get("X").toString());
+    	pingTest.setTimedValue("X", 1);
+        Assert.assertEquals(1, Integer.parseInt(pingTest.getLatestValue("X").toString()));
+    	pingTest.setTimedValue("X", 2);
+    	Assert.assertEquals(2, Integer.parseInt(pingTest.getLatestValue("X").toString()));
+    	pingTest.setTimedValue("X", 3);
+    	Assert.assertEquals(3, Integer.parseInt(pingTest.getLatestValue("X").toString()));
+
+    	Assert.assertEquals(3, Integer.parseInt(pingTest.getValueWithTime("X").get("value").toString()));
+    	
+    	Assert.assertEquals(3, pingTest.getValueHistory("X").size());
 
         ErlObjectStore.delete("ping_monitor1"); 
-        Assert.assertEquals(expected, actual);
     }
     
     @Test
@@ -130,7 +135,7 @@ public class ObjectTest {
        	pingTest.set("size",32);
     	Map<String,Object> attrs = pingTest.get_system_attrs();
     	   	
-        //ErlObjectStore.delete(objName); 
+        ErlObjectStore.delete(objName); 
         
         Assert.assertEquals(className, attrs.get("class").toString());
         Assert.assertEquals(objName, attrs.get("name").toString());
