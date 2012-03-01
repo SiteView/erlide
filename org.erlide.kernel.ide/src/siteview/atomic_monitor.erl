@@ -30,6 +30,9 @@ on_starting(Self) -> ok.
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
 
+%% runClassifiers(Self, This) ->
+%% 	object:super(Self, runClassifiers, [Self, This]).
+
 test(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 
