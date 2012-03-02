@@ -16,6 +16,8 @@
 %% waiting, disable
 %
 %% TODO: add period based frequency
+%% classifer design:  a js, 
+
  
 extends () -> nil .
 
@@ -609,12 +611,48 @@ classifier_all(Self,[C|T])->
 			object:call(Self, classifier_all,[T]) 
 	end.
 
+%%@doc called by java to set the classifier
+set_classifier(Self,[]) -> ok;
+set_classifier(Self,[{Type,Classifier}|T]) -> 
+%% 	?SETVALUE(?VALUE(Type),  (#erlv8_fun_invocation{}, []) ->  ?QUEVALUE(round_trip_time) > 100 end}])),
+	?SETVALUE(?VALUE(Type),  Classifier),
+	set_classifier(Self,T).
+	
+
+%%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
+%% 		
+%% 
+%%  fun (#erlv8_fun_invocation{}, [String]) -> lists:reverse(String) end}])
+%% 
+runClassifier2(Self) ->
+	{ok, VM} = erlv8_vm:start(),
+	Global = erlv8_vm:global(VM),
+	Global:set_value("classifier",erlv8_object:new([{"error",?VALUE(error_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"major",?VALUE(major_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"warning",?VALUE(warning_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"minor",?VALUE(minor_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"ok",?VALUE(ok_classifier)}] )),
+	{ok,Error} = erlv8_vm:run(VM,"classifier.error()"),
+	{ok,Major} = erlv8_vm:run(VM,"classifier.major()"),
+	{ok,Warning} = erlv8_vm:run(VM,"classifier.warning()"),
+	{ok,Minor} = erlv8_vm:run(VM,"classifier.minor()"),
+	{ok,OK} = erlv8_vm:run(VM,"classifier.ok()"),
+	if Error -> ?SETQUEVALUE(?CATEGORY,error);
+	   Major -> ?SETQUEVALUE(?CATEGORY,major);
+	   Warning -> ?SETQUEVALUE(?CATEGORY,warning);
+	   Minor -> ?SETQUEVALUE(?CATEGORY,minor);
+	   OK -> ?SETQUEVALUE(?CATEGORY,ok);
+	   true -> un_classified
+	end,
+	ok.
+
 %% @spec runClassifiers(This)->({ok,Result}|{error,Reason})
 %% @doc run monitor's classifiers
 %% 
 runClassifiers(Self, This)->	
 %% 	io:format("runClassifiers111111: [~w] ~w \n",[?VALUE(name),?MODULE]),
-	object:call(Self, classifier_all, [[error,warning,good]]),
+%% 	object:call(Self, classifier_all, [[error,warning,good]]),
+	classifier_all(Self, [[error,warning,good]]),
 %% 	io:format("runClassifiers2222: [~w] ~w \n",[?VALUE(name),?MODULE]),
 	% object:call(Self, classifier_by_statestring(This),
 	object:call(Self, runClassifiers, [?VALUE(?CATEGORY),?VALUE(?LAST_CATEGORY)]).

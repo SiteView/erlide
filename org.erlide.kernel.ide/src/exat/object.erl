@@ -722,7 +722,7 @@ property_server(Dict) ->
 		{From, getValueWithTime, AttributeName} ->
             case catch(dict:fetch(AttributeName, Dict)) of
                 {'EXIT', _} -> From ! {ack, undef};
-                Other ->  From ! {ack, {value,queue:peek_r(Other)}}
+                Other ->  From ! {ack, {queue:peek_r(Other)}}
             end,
             property_server(Dict);
 		{From, getValueHistory, AttributeName} ->

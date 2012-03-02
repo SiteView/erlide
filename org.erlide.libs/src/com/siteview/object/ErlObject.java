@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javolution.util.FastMap;
+
 import com.ericsson.otp.erlang.OtpConverter;
 import com.ericsson.otp.erlang.OtpErlangAtom;
 import com.ericsson.otp.erlang.OtpErlangExit;
@@ -75,10 +77,10 @@ public class ErlObject
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
-        Object[] timedValue = (Object[])  OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
+        FastMap timedValue =(FastMap) OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
         Map <String,Object> map = new HashMap();
-        map.put("value", timedValue[0]);
-        map.put("timestamp", (Timestamp)timedValue[1]);
+//        map.put("value", timedValue[0]);
+//        map.put("timestamp", (Timestamp)timedValue[1]);
         return map;        
     }
     
