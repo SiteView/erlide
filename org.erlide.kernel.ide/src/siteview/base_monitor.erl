@@ -612,7 +612,7 @@ classifier_all(Self,[C|T])->
 %% @spec runClassifiers(This)->({ok,Result}|{error,Reason})
 %% @doc run monitor's classifiers
 %% 
-runClassifiers(Self, This)->	
+runClassifiersold(Self, This)->	
 %% 	io:format("runClassifiers111111: [~w] ~w \n",[?VALUE(name),?MODULE]),
 	object:call(Self, classifier_all, [[error,warning,good]]),
 %% 	io:format("runClassifiers2222: [~w] ~w \n",[?VALUE(name),?MODULE]),
@@ -716,6 +716,37 @@ runClassifiers(_,_,_)->{error,object_state_wrong}.
 %% 		_->
 %% 			{error,not_found_parent}
 %% 	end.
+
+set_classifier([{Type,Classifier}|T]) -> ok.
+	
+
+%%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
+%% 		
+%% 
+%% 
+%% 
+runClassifiers(Self, This)->
+	{ok, VM} = erlv8_vm:start(),
+	io:format("---------------runClassifiers VM------:~p~n", [VM]),
+	Global = erlv8_vm:global(VM),
+	Global:set_value("classifier",erlv8_object:new([{"error",?VALUE(error_classifier)}] )),
+%% 	Global:set_value("classifier",erlv8_object:new([{"major",?VALUE(major_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"warning",?VALUE(warning_classifier)}] )),
+%% 	Global:set_value("classifier",erlv8_object:new([{"minor",?VALUE(minor_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"ok",?VALUE(ok_classifier)}] )),
+	{ok,Error} = erlv8_vm:run(VM,"classifier.error()"),
+%% 	{ok,Major} = erlv8_vm:run(VM,"classifier.major()"),
+	{ok,Warning} = erlv8_vm:run(VM,"classifier.warning()"),
+%% 	{ok,Minor} = erlv8_vm:run(VM,"classifier.minor()"),
+	{ok,OK} = erlv8_vm:run(VM,"classifier.ok()"),
+	if Error -> ?SETVALUE(?CATEGORY,error);
+%% 	   Major -> ?SETVALUE(?CATEGORY,major);
+	   Warning -> ?SETVALUE(?CATEGORY,warning);
+%% 	   Minor -> ?SETVALUE(?CATEGORY,minor);
+	   OK -> ?SETVALUE(?CATEGORY,ok);
+	   true -> un_classified
+	end,
+	ok.
 
 start(Name) ->
 	case object:get_by_name(Name) of

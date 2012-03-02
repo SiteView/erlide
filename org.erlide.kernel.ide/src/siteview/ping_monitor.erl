@@ -63,8 +63,7 @@ update_action(Self,EventType,Pattern,State) ->
 			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 %% 	resource_pool:release(?VALUE(name),Session), 	
 %% 	object:call(Self, runClassifiers, [Self, Self]),
-%% 	object:super(Self, runClassifiers),
- 	object:super(Self, runClassifiers, [Self]),
+ 	object:call(Self, runClassifiers, [Self]),
 	eresye:assert(?VALUE(name), {Session,logging}),
 %% 	object:do(Self,waiting).
 	object:do(Self,logging).
