@@ -77,10 +77,10 @@ public class ErlObject
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
-        FastMap timedValue =(FastMap) OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
+        Object[] timedValue =(Object[]) OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
         Map <String,Object> map = new HashMap();
-//        map.put("value", timedValue[0]);
-//        map.put("timestamp", (Timestamp)timedValue[1]);
+        map.put("value", timedValue[0]);
+        map.put("timestamp", (Timestamp)timedValue[1]);
         return map;        
     }
     

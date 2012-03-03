@@ -46,32 +46,39 @@ public class ObjectTest {
     
     @Test
     public void attrTest() throws Throwable {
-       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping_monitor1");
+       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping1");
     	pingTest.set("X", 10);
     	   	
         final int  expected = 10;
         final int actual = Integer.parseInt(pingTest.get("X").toString());
 
         
-        ErlObjectStore.delete("ping_monitor1"); 
+        ErlObjectStore.delete("ping1"); 
         Assert.assertEquals(expected, actual);
     }
     
     @Test
     public void timedValueTest() throws Throwable {
-       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping_monitor1");
+    	int expected, actual;
+        ErlObjectStore.delete("ping1"); 
+       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping1");
     	pingTest.setTimedValue("X", 1);
-        Assert.assertEquals(1, Integer.parseInt(pingTest.getLatestValue("X").toString()));
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+        Assert.assertEquals(1, actual);
     	pingTest.setTimedValue("X", 2);
-    	Assert.assertEquals(2, Integer.parseInt(pingTest.getLatestValue("X").toString()));
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+    	Assert.assertEquals(2, actual);
     	pingTest.setTimedValue("X", 3);
-    	Assert.assertEquals(3, Integer.parseInt(pingTest.getLatestValue("X").toString()));
-
-    	Assert.assertEquals(3, Integer.parseInt(pingTest.getValueWithTime("X").get("value").toString()));
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+    	Assert.assertEquals(3, actual);
     	
-    	Assert.assertEquals(3, pingTest.getValueHistory("X").size());
+    	actual = Integer.parseInt(pingTest.getValueWithTime("X").get("value").toString());
+    	Assert.assertEquals(3, actual);
+    	
+    	actual =  pingTest.getValueHistory("X").size();
+    	Assert.assertEquals(3, actual);
 
-        ErlObjectStore.delete("ping_monitor1"); 
+        ErlObjectStore.delete("ping1"); 
     }
     
     @Test

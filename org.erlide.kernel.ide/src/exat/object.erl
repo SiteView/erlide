@@ -180,6 +180,7 @@ getValueHistory(Name,AttributeName) when is_atom(Name) -> getValueHistory(get_by
 getValueHistory(Object, AttributeName) when is_record(Object,object)->
     V = server_call(Object#object.property_server,
                     {self(), getValueHistory, AttributeName}),
+	io:format("[~w:~w]:~w~n",[?MODULE,?LINE,V]),
     case V of
         {value, Value} -> Value;
         _ -> exit({undef, [attribute, Object, AttributeName]})
@@ -722,13 +723,13 @@ property_server(Dict) ->
 		{From, getValueWithTime, AttributeName} ->
             case catch(dict:fetch(AttributeName, Dict)) of
                 {'EXIT', _} -> From ! {ack, undef};
-                Other ->  From ! {ack, {queue:peek_r(Other)}}
+                Other ->  From ! {ack, queue:peek_r(Other)}
             end,
             property_server(Dict);
 		{From, getValueHistory, AttributeName} ->
             case catch(dict:fetch(AttributeName, Dict)) of
                 {'EXIT', _} -> From ! {ack, undef};
-                Other ->  From ! {ack, {value,Other}}
+                Other ->  From ! {ack, {value,queue:to_list(Other)}}
             end,
             property_server(Dict);
 		{From, setTimedValue, AttributeName, AttributeValue} ->
