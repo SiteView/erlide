@@ -1,5 +1,6 @@
 package org.erlide.jinterface.util;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 
@@ -7,6 +8,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.ericsson.otp.erlang.OtpErlangPid;
 import com.siteview.object.ErlObject;
 import com.siteview.object.ErlObjectStore;
 
@@ -74,6 +76,9 @@ public class ObjectTest {
     	
     	actual = Integer.parseInt(pingTest.getValueWithTime("X").get("value").toString());
     	Assert.assertEquals(3, actual);
+
+//    	Timestamp ts =  (Timestamp) pingTest.getValueWithTime("X").get("timestamp");
+    	Assert.assertTrue(pingTest.getValueWithTime("X").get("timestamp") instanceof Timestamp);
     	
     	actual =  pingTest.getValueHistory("X").size();
     	Assert.assertEquals(3, actual);

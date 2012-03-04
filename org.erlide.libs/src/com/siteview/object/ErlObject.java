@@ -71,7 +71,8 @@ public class ErlObject
 		list.add(new OtpErlangAtom(AttributeName));
     	return OtpGateway.getOtpInterface().call("object", "get", list);
     }
-    
+
+//  @doc get the latest value with timestamp map: {value=Value,timestamp=Time}    
     public Map getValueWithTime(String AttributeName) throws Exception
     {
         List<Object> list = new ArrayList<Object>();
@@ -84,6 +85,7 @@ public class ErlObject
         return map;        
     }
     
+//  @doc get the latest value without timestamp
     public Object getLatestValue(String AttributeName) throws Exception
     {
         List<Object> list = new ArrayList<Object>();
@@ -92,6 +94,7 @@ public class ErlObject
         return OtpGateway.getOtpInterface().call("object", "getTimedValue", list);
     }
     
+//    @doc get a list of value [{value,timestamp}, ...]
     public List<Object> getValueHistory(String AttributeName) throws Exception
     {
         List<Object> list = new ArrayList<Object>();

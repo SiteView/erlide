@@ -12,7 +12,7 @@
 %% 
 %% TODO: checking for long running monitors
 %% 
-%% 
+%% the name of new measurement will be save here until picked up and removed by the data base logger.
 
 -module (log_analyzer).
 -compile ([export_all]).
