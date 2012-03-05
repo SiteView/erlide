@@ -51,16 +51,13 @@ public class PasswordConnect {
             if (username == null || username.trim().equals(""))
                 username = System.getProperty("user.name");
 
-            
-
-            
             /**
              * Create an SshConnector instance
              */
             SshConnector con = SshConnector.getInstance();
 
             // Verify server host keys using the users known_hosts file
-            con.setKnownHosts(new ConsoleKnownHostsKeyVerification());
+//            con.setKnownHosts(new ConsoleKnownHostsKeyVerification());
 
             /**
              * Connect to the host

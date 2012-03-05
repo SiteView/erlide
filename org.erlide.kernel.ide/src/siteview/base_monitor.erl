@@ -16,8 +16,9 @@
 %% waiting, disable
 %
 %% TODO: add period based frequency
-%% classifer design:  a js, 
-
+%% TODO: schedule optimization: grouping and seperating
+%% 		grouping: using the same resource e.g. SSH coonection can be grouped togather to re-use the connection before close the connection 
+%% 		seperating: seperating the monitors to reduce the parallel execution
  
 extends () -> nil .
 
