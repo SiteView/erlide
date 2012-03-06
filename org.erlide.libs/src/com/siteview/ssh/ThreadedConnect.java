@@ -16,9 +16,7 @@ import com.maverick.ssh1.Ssh1Client;
 import com.maverick.ssh2.Ssh2Context;
 import com.sshtools.net.SocketTransport;
 /**
- * This example demonstrates using multiple threads to access the API.
- *
- * @author Lee David Painter
+    a ssh connection manager: one timedout connection for multiple data collections
  */
 public class ThreadedConnect {
 
@@ -115,8 +113,6 @@ public class ThreadedConnect {
 
                    if(!ssh.isConnected())
                      break;
-
-
 
                    final int num = i;
 

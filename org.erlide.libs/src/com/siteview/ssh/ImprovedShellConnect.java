@@ -98,34 +98,42 @@ public class ImprovedShellConnect {
 				 * Switch to another user, this creates a new Shell object which can be used to execute
 				 * commands under that user
 				 */
-				Shell rootShell = shell.su("sudo su root", "xxxxxxxxx");
-				
-				
-				/**
-				 * Execute a command under the new shell
-				 */
-				ShellProcess process = rootShell.executeCommand("ls");
-				
-				
-				int r;
-				while((r = process.getInputStream().read()) > -1) {
-					System.out.write((char)r);
-					System.out.flush();
-				}
-
-				/**
-				 * Leave the shell
-				 */
-				rootShell.exit();
+//				Shell rootShell = shell.su("sudo su root", "siteview");
+//				
+//				
+//				/**
+//				 * Execute a command under the new shell
+//				 */
+////				ShellProcess process = rootShell.executeCommand("ls");
+//                ShellProcess process = shell.executeCommand("ls");
+//				
+//				
+//				int r;
+//				while((r = process.getInputStream().read()) > -1) {
+//					System.out.write((char)r);
+//					System.out.flush();
+//				}
+//
+//				/**
+//				 * Leave the shell
+//				 */
+//				rootShell.exit();
 				
 				/**
 				 * Demonstrate a timeout, we will sleep for 10 seconds but timeout after 5 
 				 */
-				process = shell.executeCommand("sleep 10");
+				ShellProcess process = shell.executeCommand("ls");
+				
+				int r;
+				while((r = process.getInputStream().read()) > -1) {
+                  System.out.write((char)r);
+                  System.out.flush();
+				}				
+				process = shell.executeCommand("top");
 				ShellController contr = new ShellProcessController(process);
 				String line;
 				try {
-					while((line = contr.readLine(5000))!=null) {
+					while((line = contr.readLine(15000))!=null) {
 						System.out.println(line);
 					}
 				} catch (ShellTimeoutException e) {
