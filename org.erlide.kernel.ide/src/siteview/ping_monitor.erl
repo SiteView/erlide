@@ -12,6 +12,7 @@ extends () -> atomic_monitor .
 
 %%@doc the constructor, specific the input parameters into the monitor
 ping_monitor(Self, Name)->
+	?SETVALUE(hostname,"localhost"),
 	?SETVALUE(timeout,1000),
 	?SETVALUE(size,4),
 	?SETVALUE(name,Name),	
@@ -40,9 +41,24 @@ update_action(Self,EventType,Pattern,State) ->
   	Start = erlang:now(),
 	object:do(Self,running),
 	
-%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
-%% 	Cmd = "ping -n 4 -l " ++ object:get(Size,'value') ++ " -w " ++ object:get(Timeout,'value') ++ "  " ++ object:get(Hostname,'value'),
+    {Osfamily, Osname} = os:type(),
 
+	
+%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
+	Cmd = "ping -n 4 -l " ++ ?VALUE(size) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
+
+	%cycle: connecting -> connected -> retriving data -> data received -> processing -> done
+	case Osfamily of 
+		win32 -> 
+			    Cmd = "ping -n 4 -l " ++ integer_to_list(?VALUE(size)) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
+                Data = os:cmd(Cmd);
+		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
+        unix ->
+			    Cmd = "ping -c 4 -s " ++ integer_to_list(?VALUE(size))  ++ "  "  ++ ?VALUE(hostname),
+                Data =  os:cmd(Cmd)
+		%@TODO: using erlv8 to processing the Data
+        end,
+	
 %% 	simulated random data
 
 %% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
