@@ -97,34 +97,3 @@ start(Name) ->
 				Name;
 		_ -> atom_to_list(Name) ++ " already existed, choose a new name"
 	end.
-
-%% @spec get_classifier(Param) -> List
-%% Param = atom()
-%% List = [Tuple]
-%% Tuple = {Status, Logic, Value}
-%% Status = 'error'|'warning'| 'good' 
-%% Logic = '!=' | '==' | '>' | '<' | 'contain'
-%% Value = term()
-%% @doc get_classifier is run function called by schedule to decide the condition of good, warning and error
-get_classifier(Self, error)->  
-	Cls = case ?VALUE(error_classifier) of
-				{ok,{error_classifier,Classifier}}->
-					Classifier;
-				_->
-					[{packetsgood,'>=',0}]
-			end;
-get_classifier(Self, warning)->
-	Cls =case ?VALUE(warning_classifier) of
-		{ok,{warning_classifier,Classifier}}->
-			Classifier;
-		_->
-			[{packetsgood,'<=',75}]
-	end;
-	
-get_classifier(Self, good)->
-	Cls = case ?VALUE(good_classifier) of
-		{ok,{good_classifier,Classifier}}->
-			Classifier;
-		_->
-			[{packetsgood,'>',75}]
-	end.
