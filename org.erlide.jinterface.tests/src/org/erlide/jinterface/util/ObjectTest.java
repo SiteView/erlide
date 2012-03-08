@@ -1,5 +1,6 @@
 package org.erlide.jinterface.util;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 
@@ -7,6 +8,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.ericsson.otp.erlang.OtpErlangPid;
 import com.siteview.object.ErlObject;
 import com.siteview.object.ErlObjectStore;
 
@@ -46,14 +48,42 @@ public class ObjectTest {
     
     @Test
     public void attrTest() throws Throwable {
-       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping_monitor1");
+       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping1");
     	pingTest.set("X", 10);
     	   	
         final int  expected = 10;
         final int actual = Integer.parseInt(pingTest.get("X").toString());
 
-        ErlObjectStore.delete("ping_monitor1"); 
+        
+        ErlObjectStore.delete("ping1"); 
         Assert.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void timedValueTest() throws Throwable {
+    	int expected, actual;
+        ErlObjectStore.delete("ping1"); 
+       	ErlObject pingTest = ErlObjectStore.create("ping_monitor","ping1");
+    	pingTest.setTimedValue("X", 1);
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+        Assert.assertEquals(1, actual);
+    	pingTest.setTimedValue("X", 2);
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+    	Assert.assertEquals(2, actual);
+    	pingTest.setTimedValue("X", 3);
+    	actual = Integer.parseInt(pingTest.getLatestValue("X").toString());
+    	Assert.assertEquals(3, actual);
+    	
+    	actual = Integer.parseInt(pingTest.getValueWithTime("X").get("value").toString());
+    	Assert.assertEquals(3, actual);
+
+//    	Timestamp ts =  (Timestamp) pingTest.getValueWithTime("X").get("timestamp");
+    	Assert.assertTrue(pingTest.getValueWithTime("X").get("timestamp") instanceof Timestamp);
+    	
+    	actual =  pingTest.getValueHistory("X").size();
+    	Assert.assertEquals(3, actual);
+
+        ErlObjectStore.delete("ping1"); 
     }
     
     @Test
@@ -95,7 +125,7 @@ public class ObjectTest {
     	String objName = "0.1.12";
        	ErlObject pingTest = ErlObjectStore.create(className,objName);
        	
-       	Map<String,Object> params = FastMap.newInstance();
+//       	Map<String,Object> params = FastMap.newInstance();
 //       	params.put("frequency", 10);
        	pingTest.set("error_frequency",0);
        	pingTest.set("frequency",600);       	
@@ -117,7 +147,7 @@ public class ObjectTest {
        	pingTest.set("size",32);
     	Map<String,Object> attrs = pingTest.get_system_attrs();
     	   	
-        //ErlObjectStore.delete(objName); 
+        ErlObjectStore.delete(objName); 
         
         Assert.assertEquals(className, attrs.get("class").toString());
         Assert.assertEquals(objName, attrs.get("name").toString());

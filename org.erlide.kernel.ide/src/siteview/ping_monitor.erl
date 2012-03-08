@@ -14,6 +14,7 @@ extends () -> atomic_monitor .
 
 %%@doc the constructor, specific the input parameters into the monitor
 ping_monitor(Self, Name)->
+	?SETVALUE(hostname,"localhost"),
 	?SETVALUE(timeout,1000),
 	?SETVALUE(size,4),
 	?SETVALUE(name,Name),	
@@ -45,19 +46,44 @@ update_action(Self,EventType,Pattern,State) ->
   	Start = erlang:now(),
 	object:do(Self,running),
 	
-%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
-%% 	Cmd = "ping -n 4 -l " ++ object:get(Size,'value') ++ " -w " ++ object:get(Timeout,'value') ++ "  " ++ object:get(Hostname,'value'),
+    {Osfamily, Osname} = os:type(),
 
+	
+%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
+%% 	Cmd = "ping -n 4 -l " ++ ?VALUE(size) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
+
+	%cycle: connecting -> connected -> retriving data -> data received -> processing -> done
+	case Osfamily of 
+		win32 -> 
+			    Cmd = "ping -n 4 -l " ++ integer_to_list(?VALUE(size)) ++ " -w " ++ integer_to_list(?VALUE(timeout)) ++ "  " ++ ?VALUE(hostname),
+                Data = os:cmd(Cmd);
+		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
+        unix ->
+			    Cmd = "ping -c 4 -s " ++ integer_to_list(?VALUE(size))  ++ "  "  ++ ?VALUE(hostname),
+                Data =  os:cmd(Cmd)
+		%@TODO: using erlv8 to processing the Data
+        end,
+	
 %% 	simulated random data
 
+<<<<<<< HEAD
 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
 	?SETVALUE(packetsgood,random:uniform(100)),
 %% 	timer:sleep(random:uniform(10)*1000),
 	timer:sleep(4*1000),
+=======
+%% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
+%% 	?SETVALUE(packetsgood,random:uniform(4)),
+	?SETQUEVALUE(round_trip_time,100 * random:uniform(10)),
+	?SETQUEVALUE(packetsgood,random:uniform(4)),
+%% 	timer:sleep(random:uniform(10)*1000),
+	timer:sleep(1*1000),
+>>>>>>> pre_classifier_version
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
+<<<<<<< HEAD
  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
 %% 	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
 %% 	object:super(Self, post_run,[]),	
@@ -70,6 +96,17 @@ update_action(Self,EventType,Pattern,State) ->
 	
 %% 	object:call(Object, Method)
 	resource_pool:release(?VALUE(name),Session), 	
+=======
+%%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
+%% 	object:super(Self, post_run,[]),
+%% TODO: run classifier	
+%% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
+ 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
+%% 	resource_pool:release(?VALUE(name),Session), 	
+
+%%  object:call(Self, runClassifiers, [Self]),
+>>>>>>> pre_classifier_version
 	eresye:assert(?VALUE(name), {Session,logging}),
 %% 	object:do(Self,waiting).	
 	object:do(Self,logging).
@@ -116,4 +153,8 @@ get_classifier(Self, good)->
 			Classifier;
 		_->
 			[{packetsgood,'>',75}]
+<<<<<<< HEAD
 	end.
+=======
+	end.
+>>>>>>> pre_classifier_version

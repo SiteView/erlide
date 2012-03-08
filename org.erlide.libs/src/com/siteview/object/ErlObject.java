@@ -1,9 +1,13 @@
 package com.siteview.object;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javolution.util.FastMap;
 
 import com.ericsson.otp.erlang.OtpConverter;
 import com.ericsson.otp.erlang.OtpErlangAtom;
@@ -50,6 +54,15 @@ public class ErlObject
 		list.add(OtpConverter.Object2OtpErlangObject(AttributeValue));
     	OtpGateway.getOtpInterface().call("object", "set", list);
     }
+    
+    public void setTimedValue(String  AttributeName,Object AttributeValue) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        list.add(OtpConverter.Object2OtpErlangObject(AttributeValue));
+        OtpGateway.getOtpInterface().call("object", "setTimedValue", list);
+    }
 
     public Object get(String AttributeName) throws Exception
     {
@@ -57,6 +70,46 @@ public class ErlObject
 		list.add(new OtpErlangAtom(Name));
 		list.add(new OtpErlangAtom(AttributeName));
     	return OtpGateway.getOtpInterface().call("object", "get", list);
+    }
+
+//  @doc get the latest value with timestamp map: {value=Value,timestamp=Time}    
+    public Map getValueWithTime(String AttributeName) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        Object[] timedValue =(Object[]) OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
+        Map <String,Object> map = new HashMap();
+        map.put("value", timedValue[0]);
+        map.put("timestamp", (Timestamp)timedValue[1]);
+        return map;        
+    }
+    
+//  @doc get the latest value without timestamp
+    public Object getLatestValue(String AttributeName) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        return OtpGateway.getOtpInterface().call("object", "getTimedValue", list);
+    }
+    
+//    @doc get a list of value [{value,timestamp}, ...]
+    public List<Object> getValueHistory(String AttributeName) throws Exception
+    {
+        List<Object> list = new ArrayList<Object>();
+        List<Object> rtnList = new ArrayList<Object>();
+        list.add(new OtpErlangAtom(Name));
+        list.add(new OtpErlangAtom(AttributeName));
+        List<Object> historyValue = (List)  OtpGateway.getOtpInterface().call("object", "getValueHistory", list);
+        for(Object obj : historyValue) {
+            Map <String,Object> map = new HashMap();
+            Object[] timedValue = (Object[]) obj;
+            map.put("value", timedValue[0]);
+            map.put("timestamp", timedValue[1]);
+            rtnList.add(map);            
+        }
+        return rtnList;        
     }
     
     public Object call(String Method, List<Object> params) throws Exception {

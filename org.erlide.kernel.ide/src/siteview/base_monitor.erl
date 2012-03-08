@@ -2,9 +2,14 @@
 -compile(export_all).
 -include("../../include/object.hrl").
 -include("../../include/monitor.hrl").
+<<<<<<< HEAD
 %% -include("../../include/log.hrl").
 -include("../../include/classifierstring.hrl").
 
+=======
+-include("../../include/monitor_template.hrl").
+-include("../../include/classifierstring.hrl").
+>>>>>>> pre_classifier_version
 %
 % monitor life cycle management:
 %% 0. ping_monitor:start: initializing
@@ -17,7 +22,13 @@
 %% waiting, disable
 %
 %% TODO: add period based frequency
+<<<<<<< HEAD
 %% classifier: when meet a pattern, set the category value, the classifier condition should be a pattern within the object
+=======
+%% TODO: schedule optimization: grouping and seperating
+%% 		grouping: using the same resource e.g. SSH coonection can be grouped togather to re-use the connection before close the connection 
+%% 		seperating: seperating the monitors to reduce the parallel execution
+>>>>>>> pre_classifier_version
  
 extends () -> nil .
 
@@ -71,11 +82,20 @@ base_monitor (Self,Name) ->
 	?SETVALUE(?ERROR_FREQUENCY,60),
 	?SETVALUE(?DEPENDS_ON,none),
 	?SETVALUE(?DEPENDS_CONDITION,error),
+<<<<<<< HEAD
 	?SETVALUE(?LAST_CATEGORY,nodata),
 	?SETVALUE(?CATEGORY,nodata),
 	?SETVALUE(?STATE_STRING,""),
 	?SETVALUE(?RULES,[]),	
 	?SETVALUE(name,Name),	
+=======
+    ?SETVALUE(?LAST_CATEGORY,nodata),
+	?SETVALUE(?CATEGORY,nodata),
+	?SETVALUE(?STATE_STRING,""),
+	?SETVALUE(?RULES,[]),	
+	?SETVALUE(name,Name),
+	?SETVALUE(data_logger,"localhost"),  %%the data logger used in log_action
+>>>>>>> pre_classifier_version
 	eresye:start(Name). %%TODO: need evaluate whether start a rule engine for each monitor or one rule engine for all monitor ?
 
 %%@doc the destructor
@@ -114,7 +134,7 @@ post_run(Self) ->
 	object:do(?VALUE(name),waiting).
 %% 	object:do(?VALUE(name),logging).
 
-%%@doc logging the measurement into database
+%%@doc logging the measurement into database by inform the data_logger to pull the data from monitor object
 logging_action(Self,EventType,Pattern,State) -> 
 	{Session,_} = Pattern,
 	resource_pool:release(?VALUE(name), Session),
@@ -137,6 +157,13 @@ on_starting(Self) ->
 on_stopping(Self) ->
 	io:format("This [~w] ~w object is stopping \n",[?VALUE(name),?MODULE]).
 
+<<<<<<< HEAD
+=======
+run_classifier(Self,Classifier) ->
+	io:format("[~w:~w] name=~w, Classifier=~w~n", [?MODULE,?LINE,?VALUE(name),Classifier]).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+>>>>>>> pre_classifier_version
 %% @spec get_classifier(_)->list()
 %% @doc get classifier information
 %%
@@ -606,12 +633,57 @@ classifier_all(Self,[C|T])->
 			object:call(Self, classifier_all,[T]) 
 	end.
 
+<<<<<<< HEAD
 %% @spec runClassifiers(This)->({ok,Result}|{error,Reason})
 %% @doc run monitor's classifiers
 %% 
 runClassifiers(Self, This)->	
 %% 	io:format("runClassifiers111111: [~w] ~w \n",[?VALUE(name),?MODULE]),
 	object:call(Self, classifier_all, [[error,warning,good]]),
+=======
+%%@doc called by java to set the classifier
+set_classifier(Self,[]) -> ok;
+set_classifier(Self,[{Type,Classifier}|T]) -> 
+%% 	?SETVALUE(?VALUE(Type),  (#erlv8_fun_invocation{}, []) ->  ?QUEVALUE(round_trip_time) > 100 end}])),
+	?SETVALUE(?VALUE(Type),  Classifier),
+	set_classifier(Self,T).
+	
+
+%%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
+%% 		
+%% 
+%%  fun (#erlv8_fun_invocation{}, [String]) -> lists:reverse(String) end}])
+%% 
+runClassifier2(Self) ->
+	{ok, VM} = erlv8_vm:start(),
+	Global = erlv8_vm:global(VM),
+	Global:set_value("classifier",erlv8_object:new([{"error",?VALUE(error_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"major",?VALUE(major_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"warning",?VALUE(warning_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"minor",?VALUE(minor_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"ok",?VALUE(ok_classifier)}] )),
+	{ok,Error} = erlv8_vm:run(VM,"classifier.error()"),
+	{ok,Major} = erlv8_vm:run(VM,"classifier.major()"),
+	{ok,Warning} = erlv8_vm:run(VM,"classifier.warning()"),
+	{ok,Minor} = erlv8_vm:run(VM,"classifier.minor()"),
+	{ok,OK} = erlv8_vm:run(VM,"classifier.ok()"),
+	if Error -> ?SETQUEVALUE(?CATEGORY,error);
+	   Major -> ?SETQUEVALUE(?CATEGORY,major);
+	   Warning -> ?SETQUEVALUE(?CATEGORY,warning);
+	   Minor -> ?SETQUEVALUE(?CATEGORY,minor);
+	   OK -> ?SETQUEVALUE(?CATEGORY,ok);
+	   true -> un_classified
+	end,
+	ok.
+
+%% @spec runClassifiers(This)->({ok,Result}|{error,Reason})
+%% @doc run monitor's classifiers
+%% 
+runClassifiersold(Self, This)->	
+%% 	io:format("runClassifiers111111: [~w] ~w \n",[?VALUE(name),?MODULE]),
+%% 	object:call(Self, classifier_all, [[error,warning,good]]),
+	classifier_all(Self, [[error,warning,good]]),
+>>>>>>> pre_classifier_version
 %% 	io:format("runClassifiers2222: [~w] ~w \n",[?VALUE(name),?MODULE]),
 	% object:call(Self, classifier_by_statestring(This),
 	object:call(Self, runClassifiers, [?VALUE(?CATEGORY),?VALUE(?LAST_CATEGORY)]).
@@ -663,7 +735,10 @@ classifier_by_statestring(Self)->
 %% 	object:call(Self, setParentCategory(Self,C);
 
 runClassifiers(_,_,_)->{error,object_state_wrong}.
+<<<<<<< HEAD
 %%test
+=======
+>>>>>>> pre_classifier_version
 
 %% %% @spec setParentCategory(Self,Category)->({ok,Result}|{error,Reason})
 %% %% @doc set parent's category
@@ -714,12 +789,46 @@ runClassifiers(_,_,_)->{error,object_state_wrong}.
 %% 		_->
 %% 			{error,not_found_parent}
 %% 	end.
+<<<<<<< HEAD
 		
 %% @spec get_counter_attribute()->[]
 %% @doc get counter attribute
 %%
 get_counter_attribute()->[].
 
+=======
+
+set_classifier([{Type,Classifier}|T]) -> ok.
+	
+
+%%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
+%% 		
+%% 
+%% 
+%% 
+runClassifiers(Self, This)->
+	{ok, VM} = erlv8_vm:start(),
+	io:format("---------------runClassifiers VM------:~p~n", [VM]),
+	Global = erlv8_vm:global(VM),
+	Global:set_value("classifier",erlv8_object:new([{"error",?VALUE(error_classifier)}] )),
+%% 	Global:set_value("classifier",erlv8_object:new([{"major",?VALUE(major_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"warning",?VALUE(warning_classifier)}] )),
+%% 	Global:set_value("classifier",erlv8_object:new([{"minor",?VALUE(minor_classifier)}] )),
+	Global:set_value("classifier",erlv8_object:new([{"ok",?VALUE(ok_classifier)}] )),
+	{ok,Error} = erlv8_vm:run(VM,"classifier.error()"),
+%% 	{ok,Major} = erlv8_vm:run(VM,"classifier.major()"),
+	{ok,Warning} = erlv8_vm:run(VM,"classifier.warning()"),
+%% 	{ok,Minor} = erlv8_vm:run(VM,"classifier.minor()"),
+	{ok,OK} = erlv8_vm:run(VM,"classifier.ok()"),
+	if Error -> ?SETVALUE(?CATEGORY,error);
+%% 	   Major -> ?SETVALUE(?CATEGORY,major);
+	   Warning -> ?SETVALUE(?CATEGORY,warning);
+%% 	   Minor -> ?SETVALUE(?CATEGORY,minor);
+	   OK -> ?SETVALUE(?CATEGORY,ok);
+	   true -> un_classified
+	end,
+	ok.
+>>>>>>> pre_classifier_version
 
 start(Name) ->
 	case object:get_by_name(Name) of

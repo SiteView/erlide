@@ -33,7 +33,11 @@ on_stopping(Self) ->
 
 %% runClassifiers(Self, This) ->
 %% 	object:super(Self, runClassifiers, [Self, This]).
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> pre_classifier_version
 test(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 

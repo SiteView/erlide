@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="sshserver.jar"/>
+	<classpathentry exported="true" kind="lib" path="sshclient.jar"/>
 	<classpathentry exported="true" kind="lib" path="guava-11.0.1.jar" sourcepath="guava-11.0.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="commons-io-1.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="org.eclipse.xtend2.lib-2.2.0.jar"/>

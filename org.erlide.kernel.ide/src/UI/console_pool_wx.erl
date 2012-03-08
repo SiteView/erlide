@@ -518,10 +518,10 @@ change_accum(false, S0=#holder{info=#etop_info{procinfo=Info}}) ->
 
 handle_update(PoolList,
 	      S0=#holder{parent=Parent, sort=Sort=#sort{sort_key=KeyField}}) ->
-%%     {Name1, S1} = accum(Name0, S0),
+    {Name1, S1} = accum(Name0, S0),
 %%     {_SO, PoolInfo} = sort(KeyField, Sort#sort{sort_key=undefined}, Name1),
     Parent ! {holder_updated, length(PoolList)},
-    S1#holder{info=PoolInfo}}.
+    S1#holder{info=PoolInfo}.
 
 accum(PoolInfo, State=#holder{accum=true}) ->
     {PoolInfo, State};

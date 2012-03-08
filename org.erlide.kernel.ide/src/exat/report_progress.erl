@@ -12,9 +12,9 @@
 %% 
 %% TODO: checking for long running monitors
 %% 
-%% the name of new measurement will be save here until picked up and removed by the data base logger.
+%% 
 
--module (log_analyzer).
+-module (report_progress).
 -compile ([export_all]).
 
 -include("object.hrl").
@@ -23,16 +23,33 @@
 extends () -> nil .
 
 %% ?PATTERN(monitor_timeout_pattern) -> {?LOGNAME,read,{'_', '_', fun(X)-> Diff = timer:now_diff(erlang:now(), X)/1000000, Diff > 100 end, running,'_','_'}};
-?PATTERN(finished_pattern) -> {?LOGNAME, read, {'_','_','_',log}}. %% name, session, timestamp, state
+?PATTERN(progress_pattern) -> {?PROGRESSNAME, get, {'_','_','_',update,"start"}};
+?PATTERN(progress_pattern) -> {?PROGRESSNAME, get, {'_','_','_',update,"finished"}};
+?PATTERN(progress_pattern) -> {?PROGRESSNAME, get, {'_','_','_',update,fun(X)-> not lists:member(X, ["start","finished"]) end }}. %% name, session, timestamp, state, message
 
-?EVENT(finished_event)-> {eresye,finished_pattern}.
+?EVENT(start_event)-> {eresye,start_pattern};
+?EVENT(finished_event)-> {eresye,finished_pattern};
+?EVENT(progress_event)-> {eresye,progress_pattern}.
 
-?ACTION(start) -> {finished_event,finished_action}.
+?ACTION(start) -> [{start_event,start_action},{progress_event,progress_action},{finished_event,finished_action}].
 %%TODO: check for the long running monitor
 
-%% @doc check the completeness of monitoring sequence
+
+%% @doc process the start action
+start_action(Self,EventType,Pattern,State) -> 
+	{Name,Session,Timestamp,_,Message} = Pattern,
+	ok.
+
+%% @doc process the finished action
 finished_action(Self,EventType,Pattern,State) -> 
-	{Name,Session,_,_} = Pattern,
+	{Name,Session,Timestamp,_,finished} = Pattern,
+	Pattern1 = {Name,Session,'_','_','_'},
+	MonitorStateList = lists:keysort(3,eresye:query_kb(?PROGRESSNAME, Pattern1)),  %%must be sorted to be right
+ok.
+
+%% @doc report progress message during running
+progress_action(Self,EventType,Pattern,State) -> 
+	{Name,Session,Timestamp,_,Message} = Pattern,
 	Pattern1 = {Name,Session,'_','_'},
 	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),  %%must be sorted to be right
 %% 	io:format("[~w:~w] MonitorStateList=~w~n",[?MODULE,?LINE,MonitorStateList]),
@@ -78,9 +95,9 @@ finished_action(Self,EventType,Pattern,State) ->
 	Len = length(MonitorStateList),
 	lists:foreach(
 	  fun(MonitorState) -> 
-			  {Name1,Session1,Timestamp,State1} = MonitorState
-%% 			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
-%% 						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
+			  {Name1,Session1,Timestamp,State1} = MonitorState,
+			  io:format("[~w:~w] Name=~w,Session=~w,Timestamp=~w,Input=~w~n",
+						[?MODULE,?LINE, Name1,Session1,Timestamp,State1])
 	  end, MonitorStateList),
 ok.
 
