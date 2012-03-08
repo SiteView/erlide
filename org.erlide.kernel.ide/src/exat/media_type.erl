@@ -185,7 +185,7 @@ yecctoken2string(Other) ->
 
 
 
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.erl", 188).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.erl", 188).
 
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(S, Cat, Ss, Stack, T, Ts, Tzr);
@@ -1696,7 +1696,7 @@ yeccgoto_wsp(78, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(79, Cat, Ss, Stack, T, Ts, Tzr).
 
 -compile({inline,yeccpars2_2_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 59).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 59).
 yeccpars2_2_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1704,7 +1704,7 @@ yeccpars2_2_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_3_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 61).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 61).
 yeccpars2_3_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1712,7 +1712,7 @@ yeccpars2_3_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_73_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 42).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 42).
 yeccpars2_73_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1720,7 +1720,7 @@ yeccpars2_73_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_75_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 43).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 43).
 yeccpars2_75_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1728,7 +1728,7 @@ yeccpars2_75_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_76_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 46).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 46).
 yeccpars2_76_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1736,7 +1736,7 @@ yeccpars2_76_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_77_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 0).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 0).
 yeccpars2_77_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1744,7 +1744,7 @@ yeccpars2_77_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_86_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 71).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 71).
 yeccpars2_86_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1752,7 +1752,7 @@ yeccpars2_86_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_87_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 49).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 49).
 yeccpars2_87_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1760,7 +1760,7 @@ yeccpars2_87_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_88_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 73).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 73).
 yeccpars2_88_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -1768,7 +1768,7 @@ yeccpars2_88_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_119_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 51).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 51).
 yeccpars2_119_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1776,7 +1776,7 @@ yeccpars2_119_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_120_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 72).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 72).
 yeccpars2_120_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1784,7 +1784,7 @@ yeccpars2_120_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_123_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 50).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 50).
 yeccpars2_123_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1792,7 +1792,7 @@ yeccpars2_123_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_126_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 53).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 53).
 yeccpars2_126_(__Stack0) ->
  [__7,__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1800,7 +1800,7 @@ yeccpars2_126_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_127_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 0).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 0).
 yeccpars2_127_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1808,7 +1808,7 @@ yeccpars2_127_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_128_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 47).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 47).
 yeccpars2_128_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1816,7 +1816,7 @@ yeccpars2_128_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_129_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 44).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 44).
 yeccpars2_129_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -1824,7 +1824,7 @@ yeccpars2_129_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_130_/1}).
--file("C:/Users/John/git/siteviewerlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 60).
+-file("C:/Users/cxy/git/erlide/org.erlide.kernel.ide/src/exat/media_type.yrl", 60).
 yeccpars2_130_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
