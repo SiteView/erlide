@@ -1,3 +1,4 @@
+
 -module (ping_monitor).
 -compile(export_all).
 -include("../../include/object.hrl").
@@ -8,8 +9,6 @@ extends () -> atomic_monitor .
 %%@doc the action, event and pattern are specificed in base_monitor
 ?SUPERCLAUSE(action).
 ?SUPERCLAUSE(event).
-
-?PATTERN(error_pattern)-> {?VALUE(name), get, {round_trip_time,fun(X) -> X > ?VALUE(round_trip_time_threshhold) end}}; %%triggerred in resource_pool:do_request
 ?SUPERCLAUSE(pattern).
 
 %%@doc the constructor, specific the input parameters into the monitor
@@ -33,9 +32,6 @@ get_max() -> 10.
 
 %%@doc the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
 get_resource_type() -> ?MODULE.
-
-%% runClassifiers(Self, Self)->
-%%   object:super(Self, runClassifiers, [Self, Self]).
 
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
@@ -66,37 +62,16 @@ update_action(Self,EventType,Pattern,State) ->
 	
 %% 	simulated random data
 
-<<<<<<< HEAD
-	?SETVALUE(round_trip_time,100 * random:uniform(10)),
-	?SETVALUE(packetsgood,random:uniform(100)),
-%% 	timer:sleep(random:uniform(10)*1000),
-	timer:sleep(4*1000),
-=======
 %% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
 %% 	?SETVALUE(packetsgood,random:uniform(4)),
 	?SETQUEVALUE(round_trip_time,100 * random:uniform(10)),
 	?SETQUEVALUE(packetsgood,random:uniform(4)),
 %% 	timer:sleep(random:uniform(10)*1000),
 	timer:sleep(1*1000),
->>>>>>> pre_classifier_version
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
-<<<<<<< HEAD
- 	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
-%% 	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
-%% 	object:super(Self, post_run,[]),	
-%% 	eresye:assert(log_analyzer, {?VALUE(name),Session,erlang:now(),object:stateof(Self)}),
-	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),object:stateof(Self),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name))}),
- 	io:format("[~w:~w] ~w-3 Counter=~w, finish in ~w s, return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),Diff,?VALUE(round_trip_time),?VALUE(packetsgood)]),
-	io:format("ping monitor : error_classifier:~p, good_classifier:~p,warning_classifier:~p ~n", [?VALUE(error_classifier),?VALUE(good_classifier),?VALUE(warning_classifier)]),
-
- 	object:super(Self, runClassifiers, [Self]),
-	
-%% 	object:call(Object, Method)
-	resource_pool:release(?VALUE(name),Session), 	
-=======
 %%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
 %% 	object:super(Self, post_run,[]),
 %% TODO: run classifier	
@@ -106,9 +81,8 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	resource_pool:release(?VALUE(name),Session), 	
 
 %%  object:call(Self, runClassifiers, [Self]),
->>>>>>> pre_classifier_version
 	eresye:assert(?VALUE(name), {Session,logging}),
-%% 	object:do(Self,waiting).	
+%% 	object:do(Self,waiting).
 	object:do(Self,logging).
 
 
@@ -153,8 +127,4 @@ get_classifier(Self, good)->
 			Classifier;
 		_->
 			[{packetsgood,'>',75}]
-<<<<<<< HEAD
 	end.
-=======
-	end.
->>>>>>> pre_classifier_version

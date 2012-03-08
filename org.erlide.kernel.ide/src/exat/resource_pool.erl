@@ -19,14 +19,12 @@
 %%  constraints: cpu, mem, io, monitor waiting length
 %%  goal: max the per minute execution, minimize waiting time
 %%  steps: 1. gather all variables, 2. formula to inter-relate the variables
-<<<<<<< HEAD
+
 %%  formula: QueueLen = Number - Fequency/Update * Max, if nagative, set to zero
 %% 			 Wait = Number/Max * Update - Frequency
 %%			 when need Wait = 0, can set the Max = Number * Update / Frequency
 %%			 Max is constraint by system resource 			
-=======
 %%  formula: Max x Wait = Num x Update + Max * Frequency, the optimal is Wait = 0.
->>>>>>> pre_classifier_version
 %% @end
 
 -module(resource_pool).
