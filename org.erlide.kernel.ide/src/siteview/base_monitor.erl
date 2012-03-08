@@ -4,6 +4,7 @@
 -include("../../include/monitor.hrl").
 -include("../../include/monitor_template.hrl").
 -include("../../include/classifierstring.hrl").
+-include_lib("../include/erlv8.hrl"). 
 %
 % monitor life cycle management:
 %% 0. ping_monitor:start: initializing
@@ -612,12 +613,12 @@ classifier_all(Self,[C|T])->
 			object:call(Self, classifier_all,[T]) 
 	end.
 
-%%@doc called by java to set the classifier
-set_classifier(Self,[]) -> ok;
-set_classifier(Self,[{Type,Classifier}|T]) -> 
-%% 	?SETVALUE(?VALUE(Type),  (#erlv8_fun_invocation{}, []) ->  ?QUEVALUE(round_trip_time) > 100 end}])),
-	?SETVALUE(?VALUE(Type),  Classifier),
-	set_classifier(Self,T).
+%% %%@doc called by java to set the classifier
+%% set_classifier(Self,[]) -> ok;
+%% set_classifier(Self,[{Type,Classifier}|T]) -> 
+%% %% 	?SETVALUE(?VALUE(Type),  (#erlv8_fun_invocation{}, []) ->  ?QUEVALUE(round_trip_time) > 100 end}])),
+%% 	?SETVALUE(?VALUE(Type),  Classifier),
+%% 	set_classifier(Self,T).
 	
 
 %%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
@@ -756,7 +757,7 @@ runClassifiers(_,_,_)->{error,object_state_wrong}.
 %% 			{error,not_found_parent}
 %% 	end.
 
-set_classifier([{Type,Classifier}|T]) -> ok.
+
 	
 
 %%@doc execute the js, set the ?CATEGORY value based on the result of executing the js
@@ -764,7 +765,7 @@ set_classifier([{Type,Classifier}|T]) -> ok.
 %% 
 %% 
 %% 
-runClassifiers(Self, This)->
+runClassifiersjohn(Self, This)->
 	{ok, VM} = erlv8_vm:start(),
 	io:format("---------------runClassifiers VM------:~p~n", [VM]),
 	Global = erlv8_vm:global(VM),
@@ -785,6 +786,44 @@ runClassifiers(Self, This)->
 	   OK -> ?SETVALUE(?CATEGORY,ok);
 	   true -> un_classified
 	end,
+	ok.
+
+set_classifier(Self, []) ->
+	ok;
+set_classifier(Self, [{Type,Classifier}|T]) -> 
+	?SETVALUE(Type,Classifier),
+	set_classifier(Self, T).
+
+runClassifiersJs(Self, This)->
+	{ok, VM} = erlv8_vm:start(),
+	Global = erlv8_vm:global(VM),
+	io:format("---------------runClassifiers erlv8_vm------:~p~n", [VM]),
+	
+%% 	Global:set_value("classifier", erlv8_object:new([{"obj_value", 
+%% 	  fun (#erlv8_fun_invocation{}, [String]) -> ?VALUE(erlang:binary_to_list(String)) end}])),
+%% 	{ok,Percent} = erlv8_vm:run(VM,"classifier.obj_value('percent')"),
+	
+	Global:set_value("Value", 
+		 fun (#erlv8_fun_invocation{}, [String]) -> ?VALUE(erlang:binary_to_list(String)) end),
+	{ok,Percent} = erlv8_vm:run(VM,"Value('percent')"),
+
+	io:format("---------------runClassifiers Percent------:~p~n", [Percent]),
+	
+%% 	io:format("---------------runClassifiers error_classifier------:~p~n", [?VALUE("error_classifier")]),
+%% 	Global:set_value("classifier",erlv8_object:new([{"error",?VALUE("error_classifier")}] )),	
+%% 	Global:set_value("classifier",erlv8_object:new([{"warning",?VALUE("warning_classifier")}])),	
+%% 	Global:set_value("classifier",erlv8_object:new([{"ok",?VALUE("ok_classifier")}] )),	
+%% 	io:format("---------------runClassifiers classifier------:~p~n", [Global:proplist()]),
+		
+%% 	{ok,Error} = erlv8_vm:run(VM,"classifier.error"),
+%% 	{ok,Warning} = erlv8_vm:run(VM,"classifier.warning"),
+%% 	{ok,Ok} = erlv8_vm:run(VM,"classifier.ok"),
+
+	{ok,Error} = erlv8_vm:run(VM,?VALUE(error_classifier)),
+	{ok,Warning} = erlv8_vm:run(VM,?VALUE(warning_classifier)),
+	{ok,Ok} = erlv8_vm:run(VM,?VALUE(ok_classifier)),
+
+	io:format("---------------runClassifiers Ok: ~p , Warning ~p,  Error: ~p~n", [Ok, Warning, Error]),
 	ok.
 
 start(Name) ->
