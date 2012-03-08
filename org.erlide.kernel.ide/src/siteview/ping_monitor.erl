@@ -45,12 +45,12 @@ update_action(Self,EventType,Pattern,State) ->
 
 	
 %% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
-	Cmd = "ping -n 4 -l " ++ ?VALUE(size) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
+%% 	Cmd = "ping -n 4 -l " ++ ?VALUE(size) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
 
 	%cycle: connecting -> connected -> retriving data -> data received -> processing -> done
 	case Osfamily of 
 		win32 -> 
-			    Cmd = "ping -n 4 -l " ++ integer_to_list(?VALUE(size)) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
+			    Cmd = "ping -n 4 -l " ++ integer_to_list(?VALUE(size)) ++ " -w " ++ integer_to_list(?VALUE(timeout)) ++ "  " ++ ?VALUE(hostname),
                 Data = os:cmd(Cmd);
 		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
         unix ->
