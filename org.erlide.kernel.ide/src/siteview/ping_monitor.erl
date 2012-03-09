@@ -65,7 +65,6 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
 %% 	?SETVALUE(packetsgood,random:uniform(4)),
 	?SETQUEVALUE(round_trip_time,10 * random:uniform(10)),
->>>>>>> b3d1e5a5b102281cba637efbf7b554d9d7a79732
 
 	?SETQUEVALUE(round_trip_time,10 * random:uniform(10)),
 	?SETQUEVALUE(packetsgood,random:uniform(4)),
