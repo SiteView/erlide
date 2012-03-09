@@ -62,27 +62,21 @@ update_action(Self,EventType,Pattern,State) ->
 	
 %% 	simulated random data
 
-%% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
-%% 	?SETVALUE(packetsgood,random:uniform(4)),
 	?SETQUEVALUE(round_trip_time,100 * random:uniform(10)),
 	?SETQUEVALUE(packetsgood,random:uniform(4)),
-%% 	timer:sleep(random:uniform(10)*1000),
 	timer:sleep(1*1000),
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),
 	?SETVALUE(?LASTUPDATE,erlang:now()),	
 %%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
-%% 	object:super(Self, post_run,[]),
 %% TODO: run classifier	
 %% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
  	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
 			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 %% 	resource_pool:release(?VALUE(name),Session), 	
 
-%%  object:call(Self, runClassifiers, [Self]),
 	eresye:assert(?VALUE(name), {Session,logging}),
-%% 	object:do(Self,waiting).
 	object:do(Self,logging).
 
 
