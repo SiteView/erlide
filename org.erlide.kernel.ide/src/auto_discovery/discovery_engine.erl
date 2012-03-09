@@ -8,8 +8,36 @@
 %% 		Active nodes discovery: fastping, SNMPPing, 
 %% 		NMap: NMap host, NMap ports, 
 %% 		SNMP:
+%% [SWITCH]
+%% 	AftInfo
+%% 	InterfaceInfo
+%% [ROUTE]
+%% 	InterfaceInfo
+%% 	RouteInfo
+%% 	ArpInfo
+%% 	OspfInfo
+%% 	BgpInfo
+%% 	DirectInfo
+%% [ROUTE_SWITCH]
+%% 	InterfaceInfo
+%% 	RouteInfo
+%% 	ArpInfo
+%% 	OspfInfo
+%% 	BgpInfo
+%% 	DirectInfo
+%% 	AftInfo
+%% [gpon]
+%% 	InterfaceInfo
+%% 	GponOltInfo
+%% [FIREWALL]
+%% 	InterfaceInfo
+%% 	RouteInfo
+%% 	ArpInfo
+%% 	OspfInfo
+%% 	BgpInfo
+%% 	DirectInfo
 %% 
-%% 
+%% %% 
 %% 
 %% 
 %% 
