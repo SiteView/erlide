@@ -125,6 +125,6 @@ start(Mind) ->
 	X = object:new(ping_agent,[Mind]),
 	object:start(X),
 %% 	eresye:add_rule(Mind,{?MODULE,check}),
-	%%aaa
+	
 	eresye:assert(Mind,{wakeup}),
 	X.
