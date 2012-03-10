@@ -49,11 +49,11 @@
 
 extends () -> nil .
 
-?PATTERN(finished_pattern) -> {?LOGNAME, read, {'_','_','_',log}}. %% name, session, timestamp, state
+?PATTERN(newnode_pattern) -> {discover_rule_engine, get, {newnode,'_','_','_'}}. %% ip, discovered_by, timestamp
 
-?EVENT(finished_event)-> {eresye,finished_pattern}.
+?EVENT(newnode_event)-> {eresye,newnode_pattern}.
 
-?ACTION(start) -> {finished_event,finished_action}.
+?ACTION(start) -> {newnode_event,newnode_action}.
 
 start()->
 	Discover = object:new(?MODULE),
@@ -67,3 +67,11 @@ discovery_engine(Self)->
 
 discovery_engine_(Self)->eresye:stop(?VALUE(name)).
 
+newnode_action(Self,EventType,Pattern,State) -> 
+	{newnode,Node,By,Timestamp} = Pattern.
+%% SNMPPing: if yes, get sysoid, if not using nmap
+%% id the type:sysoid and nmap
+%% sysoid: if known create the model, if not try nmap: if yes create the generic model, if not create the generic model and put in for-manual-input
+%% nmap: certain: create the model
+%% 		possibility: prompt for-manual-input
+%% create and start the typed object

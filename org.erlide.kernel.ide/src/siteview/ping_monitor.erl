@@ -33,6 +33,28 @@ get_max() -> 10.
 %%@doc the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
 get_resource_type() -> ?MODULE.
 
+%% @doc run the monitor
+run(Hostname,Size,Timeout) ->
+	{Osfamily, Osname} = os:type(),
+	case Osfamily of 
+		win32 -> 
+			    Cmd = "ping -n 4 -l " ++ integer_to_list(Size) ++ " -w " ++ integer_to_list(Timeout) ++ "  " ++ Hostname,
+                Data = os:cmd(Cmd);
+		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
+        unix ->
+			    Cmd = "ping -c 4 -s " ++ integer_to_list(Size)  ++ "  "  ++ Hostname,
+                Data =  os:cmd(Cmd)
+		%@TODO: using erlv8 to processing the Data
+        end,
+	
+%% 	simulated random data
+
+	Round_trip_time = 10 * random:uniform(10),
+	Packetsgood = random:uniform(4),
+	timer:sleep(1*1000),
+	{Round_trip_time, Packetsgood}.
+
+	
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
 	{Session,_} = Pattern,  %%resource_allocated
@@ -42,34 +64,12 @@ update_action(Self,EventType,Pattern,State) ->
   	Start = erlang:now(),
 	object:do(Self,running),
 	
-    {Osfamily, Osname} = os:type(),
-
+    {Round_trip_time, Packetsgood} = run(?VALUE(hostname),?VALUE(size),?VALUE(timeout)),
+	?SETQUEVALUE(round_trip_time,Round_trip_time),
+	?SETQUEVALUE(packetsgood,Packetsgood),
 	
-%% 	io:format("[~w:~w] Running: Hostname:~w, Timeout:~w, Size:~w\n", [?MODULE,?LINE,?VALUE(name),?VALUE(timeout),?VALUE(size)]),
-%% 	Cmd = "ping -n 4 -l " ++ ?VALUE(size) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
 %% 
 %% 	%cycle: connecting -> connected -> retriving data -> data received -> processing -> done
-%% 	case Osfamily of 
-%% 		win32 -> 
-%% 			    Cmd = "ping -n 4 -l " ++ integer_to_list(?VALUE(size)) ++ " -w " ++ ?VALUE(timeout) ++ "  " ++ ?VALUE(hostname),
-%%                 Data = os:cmd(Cmd);
-%% 		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
-%%         unix ->
-%% 			    Cmd = "ping -c 4 -s " ++ integer_to_list(?VALUE(size))  ++ "  "  ++ ?VALUE(hostname),
-%%                 Data =  os:cmd(Cmd)
-%% 		%@TODO: using erlv8 to processing the Data
-%%         end,
-	
-%% 	simulated random data
-
-%% 	?SETVALUE(round_trip_time,100 * random:uniform(10)),
-%% 	?SETVALUE(packetsgood,random:uniform(4)),
-	?SETQUEVALUE(round_trip_time,10 * random:uniform(10)),
->>>>>>> b3d1e5a5b102281cba637efbf7b554d9d7a79732
-
-	?SETQUEVALUE(round_trip_time,10 * random:uniform(10)),
-	?SETQUEVALUE(packetsgood,random:uniform(4)),
-	timer:sleep(1*1000),
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),
@@ -77,23 +77,23 @@ update_action(Self,EventType,Pattern,State) ->
 %%  	io:format("[~w:~w] ~w finish in ~w s, Counter=~w,return: RoundTripTime:~w, PacketsGood:~w\n", [?MODULE,?LINE,?VALUE(name),Diff,resource_pool:get_counter(?VALUE(name)),?VALUE(round_trip_time),?VALUE(packetsgood)]),
 %% TODO: run classifier	
 %% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
- 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
-			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
 	set_classifier(Self),
-	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
-			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
-	runClassifiersJs(Self),
+%% 	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
+%% 			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
+%% 	runClassifiersJs(Self),
 	
 %% 	resource_pool:release(?VALUE(name),Session), 	
+ 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
 	eresye:assert(?VALUE(name), {Session,logging}),
 	object:do(Self,logging).
 
 set_classifier(Self) ->
-	Error_classifier = "Value('round_trip_time') > 80 || Value('packetsgood') < 3",
-	Warning_classifier = "Value('round_trip_time') < 80 && Value('packetsgood') > 30",
-	Ok_classifier = "Value('packetsgood') > 1",
+	Error_classifier = "?QUEVALUE('round_trip_time') > 80 || ?QUEVALUE('packetsgood') < 3",
+	Warning_classifier = "?QUEVALUE('round_trip_time') < 80 && ?QUEVALUE('packetsgood') > 30",
+	Ok_classifier = "?QUEVALUE('packetsgood') > 1",
 %% 	io:format("---------------set_classifier------:~p~n", [[{error_classifier, Error_classifier},
 %% 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]]),
 	set_classifier(Self, [{error_classifier, Error_classifier},
