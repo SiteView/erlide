@@ -33,7 +33,7 @@ get_max() -> 10.
 %%@doc the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
 get_resource_type() -> ?MODULE.
 
-%% @doc run the monitor
+%% @doc run the monitor without logging and classifier, for run standalone and testing
 run(Hostname,Size,Timeout) ->
 	{Osfamily, Osname} = os:type(),
 	case Osfamily of 
@@ -58,6 +58,7 @@ run(Hostname,Size,Timeout) ->
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
 	{Session,_} = Pattern,  %%resource_allocated
+	eresye:wait(?LOGNAME, {?VALUE(name),Session,'_',allocate_resource}),
 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
 %% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
@@ -84,8 +85,10 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	runClassifiersJs(Self),
 	
 %% 	resource_pool:release(?VALUE(name),Session), 	
- 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
-			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
+ 	io:format("[~w:~w] ~w ~w,Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),calendar:local_time(),
+										resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),
+			   							Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
 	eresye:assert(?VALUE(name), {Session,logging}),
 	object:do(Self,logging).

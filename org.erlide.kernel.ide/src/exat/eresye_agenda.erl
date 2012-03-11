@@ -471,14 +471,15 @@ fifoOrder (Act1, Act2) ->
 executor (EngineName) ->
   receive
     {exec, From, R} ->
-      %%io:format ("Executing rule ~p~n", [R]),
+%% 		io:format ("[~w:~w]:Executing rule ~p~n", [?MODULE,?LINE,R]),
       {Mod, Fun} =
         case R of
           {{M, F}, _, _, _} -> {M, F};
           _ -> {'_', '_'}
         end,
+%% 	  io:format ("[~w:~w]:Mod=~w,Fun=~w~n", [?MODULE,?LINE,Mod,Fun]),
       case catch (execute_rule (EngineName, R)) of
-        {'EXIT', {function_clause, [{Mod, Fun, _} | _]}} ->
+        {'EXIT', {function_clause, [{Mod, Fun, _,_} | _]}} ->
             ok;
         {'EXIT', Reason} ->
           io:format("** Warning! ERES engine ~p rule execution error\n"
@@ -497,4 +498,5 @@ executor (EngineName) ->
 %% Fun = {Module, Function} or
 %% Fun = fun (...)
 execute_rule (EngineName ,{Fun, [_, Args], _, _}) ->
+%%   io:format ("[~w:~w]:EngineName=~w, Fun=~w,Args=~w~n", [?MODULE,?LINE,EngineName,Fun,Args]),
   apply (Fun, [EngineName | Args]).

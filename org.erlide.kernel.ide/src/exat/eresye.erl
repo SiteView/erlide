@@ -439,7 +439,8 @@ prepare_match_alpha_fun (Cond) ->
 get_conds ({Module, Func}, Ontology, ClauseID) ->
     File = lists:concat([Module, '.erl']),
     {File2, _} = filename:find_src(Module),
-    case epp:parse_file(File2 ++ ".erl", [".", "src", "include"], []) of
+%% 	io:format("[~w:~w]:Files=~w,Module=~w~n", [?MODULE,?LINE,File2,Module]),
+    case epp:parse_file(File2 ++ ".erl", [".", "src", "include","siteview","exat","experiment","network_device"], []) of
         {error, OpenError} ->
             io:format(">> parse_file error!!!~n~w:~w~n", [{Module, Func}, OpenError]),
             error;

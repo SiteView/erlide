@@ -49,7 +49,7 @@
 
 extends () -> nil .
 
-?PATTERN(newnode_pattern) -> {discover_rule_engine, get, {newnode,'_','_','_'}}. %% ip, discovered_by, timestamp
+?PATTERN(newnode_pattern) -> {discover_rule_engine, get, {newnode,'_','_','_','_'}}. %% node,port, discovered_by, timestamp
 
 ?EVENT(newnode_event)-> {eresye,newnode_pattern}.
 
@@ -67,11 +67,22 @@ discovery_engine(Self)->
 
 discovery_engine_(Self)->eresye:stop(?VALUE(name)).
 
+%%@doc whenever a new node added, discover the node type and then create it and hand over the further discover processing to the object 
 newnode_action(Self,EventType,Pattern,State) -> 
-	{newnode,Node,By,Timestamp} = Pattern.
+	{newnode,Node,Port,By,Timestamp} = Pattern,
+	AccessMethods = accessmethod_monitor:run(Node) ,  %snmp,nmap,telnet,ssh,wmi,jdbc,tr069,packet,manual_input
+	%%create one object, and assign these DiscoverTypes to this object
+	NodeType = discover_type(AccessMethods,Node),
+	ok.
+
+%%@doc discover the node type with the Access Methods, in a sequence, if discoverred, then exit
+%% rules: is  
+discover_type(AccessMethods,Node) ->
+	ok.
 %% SNMPPing: if yes, get sysoid, if not using nmap
 %% id the type:sysoid and nmap
 %% sysoid: if known create the model, if not try nmap: if yes create the generic model, if not create the generic model and put in for-manual-input
 %% nmap: certain: create the model
 %% 		possibility: prompt for-manual-input
 %% create and start the typed object
+

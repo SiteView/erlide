@@ -34,7 +34,7 @@ extends () -> nil .
 finished_action(Self,EventType,Pattern,State) -> 
 	{Name,Session,_,_} = Pattern,
 	Pattern1 = {Name,Session,'_','_'},
-	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),  %%must be sorted to be right
+	MonitorStateList = lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1)),  %%must be sorted based on timestamp to be right
 %% 	io:format("[~w:~w] MonitorStateList=~w~n",[?MODULE,?LINE,MonitorStateList]),
 	eresye:retract(?LOGNAME, MonitorStateList),
 %% 	io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,lists:keysort(3,eresye:query_kb(?LOGNAME, Pattern1))]),
@@ -66,8 +66,9 @@ finished_action(Self,EventType,Pattern,State) ->
 	NofOk = exago_printer:count_acceptant_executions(HistoryAnalysis, 0) , 
 %% 	io:format("[~w:~w] Success = ~w~n", [?MODULE,?LINE,HistoryAnalysis]),
 	if NofOk < N 
-		 -> io:format("[~w:~w]!!! monitor [~w] execution:~w~n", [?MODULE,?LINE,Name,exago_printer:list_failing_executions(HistoryAnalysis, 0)]);
-%% 			exago_printer:print_result(Result);
+		 -> io:format("[~w:~w]!!! monitor [~w] NofOk/N=~w/~w,execution:~w~n", [?MODULE,?LINE,Name,NofOk,N,exago_printer:list_failing_executions(HistoryAnalysis, 0)]),
+			io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
+			exago_printer:print_result(Result);
 	   true -> 
 %% 		   io:format("success monitor execution:~w~n", [exago_printer:list_acceptant_executions(HistoryAnalysis, 0)]),
 		   ok
