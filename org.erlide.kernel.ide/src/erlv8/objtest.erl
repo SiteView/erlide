@@ -10,7 +10,7 @@
 %%
 %% Exported Functions
 %%
--export([]).
+-export([test/0, test1/0, test_classifier/0, test_jsfun/0, test_jsfun1/0, test_jsfun2/0]).
 
 %%
 %% API Functions
@@ -28,7 +28,7 @@ test()->
 %% 	erlv8_vm:run(VM,"greeting.English").
 %%  erlv8_vm:stop(VM).
 
-test2()->
+test1()->
 	{ok, VM} = erlv8_vm:start(),
 	Global = erlv8_vm:global(VM),
 	Global:set_value("greeting", erlv8_object:new([{"English", 
@@ -36,6 +36,7 @@ test2()->
 							    case Invocation:is_construct_call() of  
 								    true ->
 									 This = Invocation:this(),
+									 io:format("Arg:~p~n", [Arg]),
 									 This:set_value("greeting",Arg);
 									% VM1 = Invocation:vm(),
 									 %erlv8_vm:run(VM1,Arg);
@@ -90,6 +91,16 @@ test_jsfun1()->
 	Global:set_value("classifier",erlv8_object:new([{"getvalue", fun (#erlv8_fun_invocation{}, [String]) -> io:format("Format:~p~n", [String]), String + 3 end}])),
 	erlv8_vm:run(VM,"classifier.getvalue('percent')"),
 	erlv8_vm:run(VM,"classifier.getvalue(22) > 10 && classifier.getvalue(2) > 6").
+
+test_jsfun2()->
+	{ok, VM} = erlv8_vm:start(),
+	Global = erlv8_vm:global(VM),
+	erlv8_vm:run(VM, "include 'testjs.js'"),
+	erlv8_vm:run(VM, "f(30)").
+%% 	Global:set_value("classifier",erlv8_object:new([{"getvalue", fun (#erlv8_fun_invocation{}, [String]) -> io:format("Format:~p~n", [String]), String + 3 end}])),
+%% 	erlv8_vm:run(VM,"classifier.getvalue('percent')"),
+%% 	erlv8_vm:run(VM,"classifier.getvalue(22) > 10 && classifier.getvalue(2) > 6").
+
 
 test_beamjs()->
 	{ok, VM} = erlv8_vm:start(),
