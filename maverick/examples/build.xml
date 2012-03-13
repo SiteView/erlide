@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="j2ssh-maverick-examples" default="build" basedir=".">
+    <!-- Set global properties for this build -->
+   <property name="examples.src" value="."/>
+   <property name="build.output" value="./classes"/>
+
+   <target name="clean">
+      <delete dir="${build.output}"/>
+      <delete file="examples.jar"/>
+   </target>
+
+   <target name="build" depends="clean">
+
+    <mkdir dir="${build.output}"/>
+
+    <javac srcdir="${examples.src}"
+         destdir="${build.output}">
+     <classpath>
+       <fileset dir="../dist">
+         <include name="maverick-all.jar"/>
+       </fileset>
+        <fileset dir="../lib">
+          <include name="*.jar"/>
+        </fileset>
+     </classpath>
+     <include name="**/*.java" />
+    </javac>
+
+    <jar jarfile="examples.jar" basedir="${build.output}">
+       <include name="*.class"/>
+    </jar>
+
+  </target>
+
+</project>

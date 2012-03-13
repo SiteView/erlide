@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="j2me-terminal" default="preverify" basedir=".">
+
+    <property name="maverick.lib" value="D:/Workspaces/maverick/release/j2me/dist"/>
+    <property name="build.tmp" value="./tmp"/>
+    <property name="build.preverify.classes" value="./preverified-classes"/>
+    <property name="build.preverify.lib" value="./preverified-lib"/>
+    <!--C:/WTK20-->
+    <property name="midp.home" value="C:/JBuilder9/j2mewtk1.0.4"/>
+
+
+   <target name="clean">
+     <delete dir="${build.tmp}"/>
+     <delete dir="${build.preverify}"/>
+   </target>
+
+   <target name="preverify" depends="clean">
+	<mkdir dir="${build.tmp}"/>
+	<unjar src="${maverick.lib}/maverick.jar" dest="${build.tmp}"/>
+	<unjar src="${maverick.lib}/maverick-ssh1.jar" dest="${build.tmp}"/>
+	<unjar src="${maverick.lib}/maverick-ssh2.jar" dest="${build.tmp}"/>
+
+	<!-- Preverify -->
+	<mkdir dir="${build.preverify.classes}"/>
+	<mkdir dir="${build.preverify.lib}"/>
+
+	<exec executable="${midp.home}/bin/preverify">
+		<arg line="-classpath ${midp.home}/lib/midpapi.zip"/>
+		<arg line="-d ${build.preverify.classes}"/>
+		<arg line="${build.tmp}"/>
+	</exec>
+
+	<jar jarfile="${build.preverify.lib}/maverick-pv.jar" basedir="${build.preverify.classes}">
+		<include name="com/maverick/ssh/**/*.class"/>
+	</jar>
+
+	<jar jarfile="${build.preverify.lib}/maverick-ssh1-pv.jar" basedir="${build.preverify.classes}">
+		<include name="com/maverick/ssh1/**/*.class"/>
+		<include name="com/maverick/scp/**/*.class"/>
+        </jar>
+
+	<jar jarfile="${build.preverify.lib}/maverick-ssh2-pv.jar" basedir="${build.preverify.classes}">
+		<include name="com/maverick/ssh2/**/*.class"/>
+	</jar>
+
+    </target>
+</project>

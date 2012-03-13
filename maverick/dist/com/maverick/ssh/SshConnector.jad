@@ -1,0 +1,426 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   SshConnector.java
+
+package com.maverick.ssh;
+
+import com.maverick.events.*;
+import java.io.*;
+import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Date;
+import java.util.StringTokenizer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+// Referenced classes of package com.maverick.ssh:
+//            c, SshContext, SshException, SshTransport, 
+//            SshClient, HostKeyVerification
+
+public final class SshConnector
+{
+
+    SshConnector()
+    {
+        e = "http://J2SSH_Maverick_1.5.17_rc_";
+        g = "http://J2SSH_Maverick_1.5.17_rc_";
+        c = 0;
+        h = "J2SSH";
+        try
+        {
+            b = (SshContext)Class.forName("com.maverick.ssh1.Ssh1Context").newInstance();
+            c |= 1;
+        }
+        catch(Throwable localThrowable1)
+        {
+            if(d.isInfoEnabled())
+                d.info("SSH1 is not supported", localThrowable1);
+        }
+        try
+        {
+            i = (SshContext)Class.forName("com.maverick.ssh2.Ssh2Context").newInstance();
+            c |= 2;
+        }
+        catch(Throwable localThrowable2)
+        {
+            if(d.isInfoEnabled())
+                d.info("SSH2 is not supported", localThrowable2);
+            initException = localThrowable2;
+        }
+        this;
+        e;
+        JVM INSTR new #94  <Class StringBuilder>;
+        JVM INSTR dup_x1 ;
+        JVM INSTR swap ;
+        String.valueOf();
+        StringBuilder();
+        f.c() != null ? (new StringBuilder()).append("_").append(f.c()).toString() : "";
+        append();
+        toString();
+        e;
+    }
+
+    public static SshConnector getInstance()
+        throws SshException
+    {
+        return new SshConnector();
+    }
+
+    public static void addEventListener(EventListener paramEventListener)
+    {
+        EventServiceImplementation.getInstance().addListener("", paramEventListener);
+    }
+
+    public static void addEventListener(String paramString, EventListener paramEventListener)
+    {
+        EventServiceImplementation.getInstance().addListener(paramString, paramEventListener);
+    }
+
+    public static void removeEventListener(String paramString)
+    {
+        EventServiceImplementation.getInstance().removeListener(paramString);
+    }
+
+    public final boolean isLicensed()
+    {
+        return (f.f() & 4) != 0;
+    }
+
+    static void b(String paramString)
+    {
+        f.b(paramString);
+    }
+
+    public SshContext getContext(int paramInt)
+        throws SshException
+    {
+        if((paramInt & 1) == 0 && (paramInt & 2) == 0)
+            throw new SshException("SshContext.getContext(int) requires value of either SSH1 or SSH2", 4);
+        if(paramInt == 1 && (c & 1) != 0)
+            return b;
+        if(paramInt == 2 && (c & 2) != 0)
+            return i;
+        else
+            throw new SshException((new StringBuilder(String.valueOf(paramInt != 1 ? "SSH2" : "SSH1"))).append(" context is not available because it is not supported by this configuration").toString(), 4);
+    }
+
+    public void setSupportedVersions(int paramInt)
+        throws SshException
+    {
+        if((paramInt & 1) != 0 && b == null)
+            throw new SshException("SSH1 protocol support is not installed!", 4);
+        if((paramInt & 2) != 0 && i == null)
+            throw new SshException((new StringBuilder("SSH2 protocol support is not installed!")).append(initException.getMessage()).append(initException.getClass()).toString(), 4);
+        if((paramInt & 1) == 0 && (paramInt & 2) == 0)
+        {
+            throw new SshException("You must specify at least one supported version of the SSH protocol!", 4);
+        } else
+        {
+            c = paramInt;
+            return;
+        }
+    }
+
+    public int getSupportedVersions()
+    {
+        return c;
+    }
+
+    public void setKnownHosts(HostKeyVerification paramHostKeyVerification)
+    {
+        if((c & 1) != 0 && b != null)
+            b.setHostKeyVerification(paramHostKeyVerification);
+        if((c & 2) != 0 && i != null)
+            i.setHostKeyVerification(paramHostKeyVerification);
+    }
+
+    public SshClient connect(SshTransport paramSshTransport, String paramString)
+        throws SshException
+    {
+        return connect(paramSshTransport, paramString, false, null);
+    }
+
+    public SshClient connect(SshTransport paramSshTransport, String paramString, boolean paramBoolean)
+        throws SshException
+    {
+        return connect(paramSshTransport, paramString, paramBoolean, null);
+    }
+
+    public SshClient connect(SshTransport paramSshTransport, String paramString, SshContext paramSshContext)
+        throws SshException
+    {
+        return connect(paramSshTransport, paramString, false, paramSshContext);
+    }
+
+    public void setSoftwareVersionComments(String paramString)
+    {
+        e = paramString;
+    }
+
+    public SshClient connect(SshTransport paramSshTransport, String paramString, boolean paramBoolean, SshContext paramSshContext)
+        throws SshException
+    {
+        StringTokenizer localObject2;
+        String str1;
+        Object localObject3;
+        if(d.isInfoEnabled())
+            d.info((new StringBuilder("Connecting ")).append(paramString).append("@").append(paramSshTransport.getHost()).append(":").append(paramSshTransport.getPort()).append(" [buffered=").append(paramBoolean).append("]").toString());
+        if(f.b() == 0x10000 && paramSshTransport.getHost() != "127.0.0.1" && paramSshTransport.getHost() != "0:0:0:0:0:0:0:1" && paramSshTransport.getHost() != "::1" && paramSshTransport.getHost() != "localhost")
+        {
+            String license = f.g();
+            localObject2 = new StringTokenizer(license, ",");
+            for(boolean bool = false; localObject2.hasMoreTokens() && !bool; bool = true)
+            {
+                String localObject3 = localObject2.nextToken().trim();
+                if(!localObject3.startsWith("*.") || !paramSshTransport.getHost().endsWith(localObject3.substring(2)))
+                    if(localObject3.equalsIgnoreCase(paramSshTransport.getHost()));
+            }
+
+        }
+        if(f.b() == 0x20000)
+        {
+            String license = f.g();
+            localObject2 = new StringTokenizer(license, ",");
+            boolean bool = false;
+            Socket localObject3 = null;
+            try
+            {
+                if(java/net/Socket.isAssignableFrom(paramSshTransport.getClass()))
+                    localObject3 = (Socket)paramSshTransport;
+                else
+                if(paramSshTransport.getClass().isAssignableFrom(Class.forName("com.sshtools.net.SocketWrapper")))
+                    try
+                    {
+                        Method localMethod = paramSshTransport.getClass().getMethod("getSocket", null);
+                        localObject3 = (Socket)localMethod.invoke(paramSshTransport, new Object[0]);
+                    }
+                    catch(Exception localException)
+                    {
+                        throw new SshException((new StringBuilder("Error attempting to determine localhost for licensing: ")).append(localException.getMessage()).toString(), 11);
+                    }
+            }
+            catch(ClassNotFoundException localClassNotFoundException)
+            {
+                throw new SshException((new StringBuilder("Error attempting to determine localhost for licensing: ")).append(localClassNotFoundException.getMessage()).toString(), 11);
+            }
+            if(localObject3.getLocalAddress().getHostAddress() != "127.0.0.1" && localObject3.getLocalAddress().getHostAddress() != "0:0:0:0:0:0:0:1" && localObject3.getLocalAddress().getHostAddress() != "::1")
+            {
+                String str2;
+                for(; localObject2.hasMoreTokens() && !bool; bool = localObject3.getLocalAddress().getHostAddress().equals(str2))
+                    str2 = localObject2.nextToken();
+
+            }
+        }
+        localObject2 = null;
+        str1 = null;
+        localObject3 = null;
+        if((c & 2) == 0 || i == null && (paramSshContext == null || !paramSshContext.getClass().getName().equals("com.maverick.ssh2.Ssh2Context")))
+            break MISSING_BLOCK_LABEL_1114;
+        str1 = (new StringBuilder("SSH-2.0-")).append(e.replace(' ', '_')).toString();
+        if(str1.length() > 253)
+            str1 = str1.substring(0, 253);
+        str1 = (new StringBuilder(String.valueOf(str1))).append("\r\n").toString();
+        try
+        {
+            paramSshTransport.getOutputStream().write(str1.getBytes());
+        }
+        catch(Throwable localThrowable1)
+        {
+            localObject2 = localThrowable1;
+        }
+        if(d.isDebugEnabled())
+            d.debug("Attempting to determine remote version");
+        localObject3 = b(paramSshTransport);
+        if((c((String)localObject3) & 2) == 0)
+            break MISSING_BLOCK_LABEL_1053;
+        SshClient sshclient1;
+        if(d.isDebugEnabled())
+            d.debug("Attempting SSH2 connection");
+        SshClient sshclient = (SshClient)Class.forName("com.maverick.ssh2.Ssh2Client").newInstance();
+        if(d.isDebugEnabled())
+            d.debug((new StringBuilder("Remote identification: ")).append((String)localObject3).toString());
+        if(d.isDebugEnabled())
+            d.debug((new StringBuilder("Local identification: ")).append(str1.trim()).append(" [").append(g).append("]").toString());
+        sshclient.connect(paramSshTransport, i != null ? i : paramSshContext, this, paramString, str1.trim(), (String)localObject3, paramBoolean);
+        Object localObject4 = sshclient;
+        sshclient1 = (SshClient)localObject4;
+        if(localObject2 != null)
+        {
+            if(localObject2 instanceof SshException)
+                throw (SshException)localObject2;
+            else
+                throw new SshException(((Throwable)localObject2).getMessage() == null ? localObject2.getClass().getName() : ((Throwable)localObject2).getMessage(), 10, (Throwable)localObject2);
+        } else
+        {
+            return sshclient1;
+        }
+        Throwable localThrowable2;
+        localThrowable2;
+        localObject2 = localThrowable2;
+        if(localObject2 != null)
+            if(localObject2 instanceof SshException)
+                throw (SshException)localObject2;
+            else
+                throw new SshException(((Throwable)localObject2).getMessage() == null ? localObject2.getClass().getName() : ((Throwable)localObject2).getMessage(), 10, (Throwable)localObject2);
+        break MISSING_BLOCK_LABEL_1114;
+        Exception exception;
+        exception;
+        if(localObject2 != null)
+        {
+            if(localObject2 instanceof SshException)
+                throw (SshException)localObject2;
+            else
+                throw new SshException(((Throwable)localObject2).getMessage() == null ? localObject2.getClass().getName() : ((Throwable)localObject2).getMessage(), 10, (Throwable)localObject2);
+        } else
+        {
+            throw exception;
+        }
+        try
+        {
+            paramSshTransport.close();
+        }
+        catch(IOException ioexception) { }
+        if(f.b() == 0x40000)
+            throw new SshException("Failed to negotiate a version with the server! SSH1 is not supported by your license", 10);
+        try
+        {
+            paramSshTransport = paramSshTransport.duplicate();
+        }
+        catch(IOException localIOException2)
+        {
+            throw new SshException("Failed to duplicate transport for SSH1 attempt", localIOException2);
+        }
+        if(f.b() == 0x40000)
+            throw new SshException("Failed to negotiate a version with the server! SSH1 is not supported by your license", 10);
+        try
+        {
+            str1 = (new StringBuilder("SSH-1.5-")).append(e.replace(' ', '_')).append("\n").toString();
+            paramSshTransport.getOutputStream().write(str1.getBytes());
+            localObject3 = b(paramSshTransport);
+            if((b != null || paramSshContext != null && paramSshContext.getClass().getName().equals("com.maverick.ssh1.Ssh1Context")) && (c & 1) != 0 && (c((String)localObject3) & 1) != 0)
+            {
+                SshClient sshclient = (SshClient)Class.forName("com.maverick.ssh1.Ssh1Client").newInstance();
+                if(e.length() > 40)
+                    e = e.substring(0, 40);
+                if(d.isDebugEnabled())
+                    d.debug((new StringBuilder("Remote identification: ")).append((String)localObject3).toString());
+                if(d.isDebugEnabled())
+                    d.debug((new StringBuilder("Local identification: ")).append(str1.trim()).append(" [").append(g).append("]").toString());
+                sshclient.connect(paramSshTransport, b != null ? b : paramSshContext, this, paramString, str1.trim(), ((String)localObject3).trim(), paramBoolean);
+                return sshclient;
+            }
+        }
+        catch(Throwable localThrowable3)
+        {
+            localObject2 = localThrowable3;
+        }
+        try
+        {
+            paramSshTransport.close();
+        }
+        catch(IOException localIOException3)
+        {
+            if(d.isDebugEnabled())
+                d.debug("IOException when closing transport");
+        }
+        if(localObject2 == null)
+            throw new SshException((new StringBuilder("Failed to negotiate a version with the server! supported=")).append(getSupportedVersions()).append(" id=").append(localObject3 != null ? (String)localObject3 : "").toString(), 10);
+        if(localObject2 instanceof SshException)
+            throw (SshException)localObject2;
+        else
+            throw new SshException(((Throwable)localObject2).getMessage() == null ? localObject2.getClass().getName() : ((Throwable)localObject2).getMessage(), 10);
+    }
+
+    public static String getVersion()
+    {
+        return "1.5.17_rc";
+    }
+
+    public static Date getReleaseDate()
+    {
+        return new Date(0x135b0951fdeL);
+    }
+
+    public int determineVersion(SshTransport paramSshTransport)
+        throws SshException
+    {
+        int j = c(b(paramSshTransport));
+        try
+        {
+            paramSshTransport.close();
+        }
+        catch(IOException ioexception) { }
+        return j;
+    }
+
+    String b(SshTransport paramSshTransport)
+        throws SshException
+    {
+        try
+        {
+            String str = "";
+            InputStream localInputStream = paramSshTransport.getInputStream();
+            int j = 255;
+            StringBuffer localStringBuffer;
+            for(; !str.startsWith("SSH-"); str = localStringBuffer.toString())
+            {
+                int k;
+                for(localStringBuffer = new StringBuffer(j); (k = localInputStream.read()) != 10 && localStringBuffer.length() < j && k > -1;)
+                    if(k != 13)
+                        localStringBuffer.append((char)k);
+
+                if(k == -1)
+                    throw new SshException((new StringBuilder("Failed to read remote identification ")).append(localStringBuffer.toString()).toString(), 10);
+            }
+
+            return str;
+        }
+        catch(Throwable localThrowable)
+        {
+            throw new SshException(localThrowable, 10);
+        }
+    }
+
+    int c(String paramString)
+        throws SshException
+    {
+        int j = paramString.indexOf("-");
+        int k = paramString.indexOf("-", j + 1);
+        String str = paramString.substring(j + 1, k);
+        if(str.equals("2.0"))
+            return 2;
+        if(str.equals("1.99"))
+            return 3;
+        if(str.equals("1.5"))
+            return 1;
+        if(str.equals("2.99"))
+            return 2;
+        else
+            throw new SshException((new StringBuilder("Unsupported version ")).append(str).append(" detected!").toString(), 10);
+    }
+
+    public String getProduct()
+    {
+        return h;
+    }
+
+    public void setProduct(String paramString)
+    {
+        h = paramString;
+    }
+
+    public static final int SSH1 = 1;
+    public static final int SSH2 = 2;
+    static c f = new c();
+    String e;
+    String g;
+    SshContext b;
+    SshContext i;
+    int c;
+    String h;
+    public static Throwable initException = null;
+    static Log d = LogFactory.getLog(com/maverick/ssh/SshConnector);
+
+}

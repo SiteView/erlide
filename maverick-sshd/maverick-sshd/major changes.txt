@@ -1,0 +1,63 @@
+major classes changed since 1.3.3:
+
+example files have been changed, the major changes are in ExampleSSHD
+
+TransportProtocol
+ForwardingChannel
+ConnectionProtocol
+Channel
+
+new files:
+
+com.maverick-nio
+	ByteBufferPool.java
+	ClientAcceptor.java
+	ClientConnector.java
+	Daemon.java
+	DaemonContext.java
+	ForwardingManager.java
+	IdleStateListener.java
+	IdleStateManager.java
+	LicenseManager.java
+	ProtocolContext.java
+	ProtocolEngine.java
+	SelectorRegistrationListener.java
+	SelectorThread.java
+	SelectorThreadImpl.java
+	SelectorThreadPool.java
+	SocketConnection.java
+	SocketHandler.java
+	WriteOperationRequest.java
+
+com.maverick.sshd
+	GlobalRequestHandler
+	RemoteForwardingFactory
+	RemoteForwardingFactoryImpl
+	RemoteForwardingManager
+	SocketForwardingChannel
+	SshContext
+	SshKeyExchange
+	TransportProtocolListener
+
+
+
+removed files:
+
+com.maverick.sshd
+	ByteBufferPool
+	ClientAcceptor
+	ConfigurationContext
+	ConnectionManager
+	IdleStateListener
+	IdleStateManager
+	LicenseManager
+	ProtocolHandler
+	SelectorRegistrationListener
+	SelectorThread
+	SelectorThreadImpl
+	SelectorThreadPool
+	ShutdownListener
+	SshDaemon
+	WriteOperationRequest
+
+

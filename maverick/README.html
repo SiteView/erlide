@@ -1,0 +1,626 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="README_files/filelist.xml">
+<link rel=Edit-Time-Data href="README_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>J2SSH Maverick - Readme</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PersonName" downloadurl="http://www.microsoft.com"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Richard Pernavas</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>lee</o:LastAuthor>
+  <o:Revision>23</o:Revision>
+  <o:TotalTime>39</o:TotalTime>
+  <o:Created>2004-03-02T13:26:00Z</o:Created>
+  <o:LastSaved>2006-11-13T09:43:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>885</o:Words>
+  <o:Characters>5047</o:Characters>
+  <o:Company>SSHTools Ltd</o:Company>
+  <o:Lines>42</o:Lines>
+  <o:Paragraphs>11</o:Paragraphs>
+  <o:CharactersWithSpaces>5921</o:CharactersWithSpaces>
+  <o:Version>11.6360</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+pre
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:172305972;
+	mso-list-template-ids:-2047726184;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:1850565092;
+	mso-list-template-ids:641629930;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="28674"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-GB link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<h1 align=center style='text-align:center'><span lang=EN-US style='mso-ansi-language:
+EN-US'>README<o:p></o:p></span></h1>
+
+<h3 align=center style='text-align:center'><span lang=EN-US style='mso-ansi-language:
+EN-US'>J2SSH Maverick<br><o:p></o:p></span></h3>
+
+<h2><a name=contents><span lang=EN-US style='mso-ansi-language:EN-US'>Contents<o:p></o:p></span></a></h2>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#important"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Important Notice</span></span><span
+     style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#introduction"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Introduction</span></span><span
+     style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#installation"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Installation Instructions</span></span><span
+     style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+     style='mso-ansi-language:EN-US'> <span lang=EN-US><o:p></o:p></span></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#docs"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>J2SSH Maverick Documentation</span></span><span
+     style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+     style='mso-ansi-language:EN-US'> <span lang=EN-US><o:p></o:p></span></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#relnotes"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Release Notes</span></span><span
+     style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+     style='mso-ansi-language:EN-US'> <span lang=EN-US><o:p></o:p></span></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#bugs"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Bug Reports, Support and
+     Feedback</span></span><span style='mso-bookmark:contents'></span></a><span
+     style='mso-bookmark:contents'><span style='mso-ansi-language:EN-US'> <span
+     lang=EN-US><o:p></o:p></span></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     contents'></span><a href="#contents"><span style='mso-bookmark:contents'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Contents of the J2SSH Maverick
+     API</span></span><span style='mso-bookmark:contents'></span></a><span
+     style='mso-bookmark:contents'><span style='mso-ansi-language:EN-US'> <span
+     lang=EN-US><o:p></o:p></span></span></span></li>
+</ul>
+
+<h2><span style='mso-bookmark:contents'><a name=important id=important><span
+lang=EN-US style='mso-ansi-language:EN-US'>Important Notice </span></a></span><span
+style='mso-bookmark:contents'><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></span></h2>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><a name=introduction><span
+lang=EN-US style='mso-ansi-language:EN-US'>The API requires activation through
+the installation of a license key. If you would like to evaluate the
+functionality of the software you can obtain a free 30-day evaluation license
+from SSHTools. You can do this by following the links from this URL: </span></a></span><a
+href="http://www.sshtools.com"><span style='mso-bookmark:contents'><span
+style='mso-bookmark:introduction'><span lang=EN-US style='mso-ansi-language:
+EN-US'>http://www.sshtools.com</span></span></span><span
+style='mso-bookmark:contents'><span style='mso-bookmark:introduction'></span></span></a><span
+style='mso-bookmark:contents'><span style='mso-bookmark:introduction'><span
+lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span style='mso-bookmark:
+introduction'><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span style='mso-bookmark:
+introduction'><span lang=EN-US style='mso-ansi-language:EN-US'>Once you have
+obtained your license key, please follow the instructions in the email for the
+correct procedure to include it within your source code.<o:p></o:p></span></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><span style='mso-bookmark:introduction'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Introduction<o:p></o:p></span></span></span></h2>
+
+<span style='mso-bookmark:introduction'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Thank you for downloading this release of the
+J2SSH Maverick API.<span style='mso-spacerun:yes'>&nbsp; </span>J2SSH Maverick
+is a development library for creating SSH enabled applications, applets, and
+components using the Java programming language.&nbsp; The API <st1:PersonName
+w:st="on">support</st1:PersonName>s both versions of the SSH protocol and where
+possible provides a common set of interfaces to both for protocol independent
+development.&nbsp; <o:p></o:p></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><a name=installation><span lang=EN-US
+style='mso-ansi-language:EN-US'>Installation Instructions<o:p></o:p></span></a></span></h2>
+
+<span style='mso-bookmark:installation'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>The API contains distributions for the following
+Java platforms.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &deg;&nbsp; Java Development Kit (JDK) and
+Java 2 SDK (J2SE) - All Versions<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &deg;&nbsp; Java 2 Platform Micro Edition (J2ME)
+- All Versions</i><br>
+&nbsp; <br>
+After extracting the release distribution, add the required JAR files to your
+classpath. For information relating to specific distribution files read the </span></span><a
+href="#Contents"><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Contents</span></span><span style='mso-bookmark:
+contents'></span></a><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'> section.<o:p></o:p></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><a name=docs><span lang=EN-US
+style='mso-ansi-language:EN-US'>J2SSH Maverick Documentation<o:p></o:p></span></a></span></h2>
+
+<span style='mso-bookmark:docs'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>The&nbsp;</span></span><a
+href="docs/overview-summary.html"><span style='mso-bookmark:contents'><span
+lang=EN-US style='mso-ansi-language:EN-US'>J2SSH Maverick Documentation</span></span><span
+style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+lang=EN-US style='mso-ansi-language:EN-US'> contains the API specifications
+with further articles and known issues located at </span></span><a
+href="http://www.sshtools.com/kb"><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>http://www.sshtools.com/kb</span></span><span
+style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+style='mso-ansi-language:EN-US'> <span lang=EN-US><o:p></o:p></span></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><a name=relnotes><span lang=EN-US
+style='mso-ansi-language:EN-US'>Release Notes<o:p></o:p></span></a></span></h2>
+
+<span style='mso-bookmark:relnotes'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>See the </span></span><a href="RELEASE.html"><span
+style='mso-bookmark:contents'><span lang=EN-US style='mso-ansi-language:EN-US'>Release
+Notes</span></span><span style='mso-bookmark:contents'></span></a><span
+style='mso-bookmark:contents'><span lang=EN-US style='mso-ansi-language:EN-US'>
+on the web site for additional information pertaining to this release. The on-line
+release notes file will be updated as needed; so you should check it
+occasionally for the la<st1:PersonName w:st="on">test</st1:PersonName>
+information. <o:p></o:p></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><a name=bugs></a><st1:PersonName w:st="on"><span
+ style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>Bug
+ Reports</span></span></st1:PersonName><span style='mso-bookmark:bugs'><span
+lang=EN-US style='mso-ansi-language:EN-US'>, Support and Feedback<o:p></o:p></span></span></span></h2>
+
+<span style='mso-bookmark:bugs'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Please submit bug reports, <st1:PersonName
+w:st="on">support</st1:PersonName> requests and feedback to </span></span><a
+href="mailto:support@sshtools.com"><span style='mso-bookmark:contents'><span
+lang=EN-US style='mso-ansi-language:EN-US'>support@sshtools.com</span></span><span
+style='mso-bookmark:contents'></span></a><span style='mso-bookmark:contents'><span
+lang=EN-US style='mso-ansi-language:EN-US'>.<span
+style='mso-spacerun:yes'>&nbsp; </span>Please note:<span
+style='mso-spacerun:yes'>&nbsp; </span>You must hold a current and valid <st1:PersonName
+w:st="on">support</st1:PersonName> contract or evaluation license in order to
+use the <st1:PersonName w:st="on">support</st1:PersonName> services.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:contents'><span lang=EN-US
+style='mso-ansi-language:EN-US'>When submitting your <st1:PersonName w:st="on">support</st1:PersonName>
+enquiry please be as detailed as possible, we need to know your version of
+Maverick, operating system, any relevant log files and the SSH server you are
+connecting to wherever appropriate.<span style='mso-spacerun:yes'>&nbsp;
+</span>The more information we receive from you, the sooner you are likely to
+obtain a resolution!<o:p></o:p></span></span></p>
+
+</blockquote>
+
+<h2><span style='mso-bookmark:contents'><span lang=EN-US style='mso-ansi-language:
+EN-US'>Contents of the J2SSH Maverick API<o:p></o:p></span></span></h2>
+
+<span style='mso-bookmark:contents'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>This
+section contains a general summary of the files and directories in the J2SSH
+Maverick API.&nbsp; <o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>Examples</span></b><span
+lang=EN-US style='mso-ansi-language:EN-US'> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>(In the </span><code><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>examples</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> subdirectory.) A number of simple
+examples to demonstrate the standard methods of SSH connectivity using the API.<br>
+&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>Java
+Distribution Files (JARs)</span></b><span lang=EN-US style='mso-ansi-language:
+EN-US'> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:36.0pt'><span lang=EN-US style='mso-ansi-language:EN-US'>(In the </span><code><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>dist/java</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> subdirectory.)&nbsp; JAR files
+containing the API for use with the Java Development Kit and Java 2 Standard
+Edition. <br>
+<br>
+<i>maverick-all.jar</i> &#8211; Contains all Maverick files, if you are unsure which jar to use, use this one.
+<br>
+<br>
+<i>maverick-debug-all.jar</i> &#8211; Contains all Maverick files but when used outputs extra logging information.
+<br>
+<br>
+<i>maverick-j2me.jar</i> &#8211; Contains a version of Maverick that is J2ME compatible.
+<br>
+<br>
+<i>maverick-jce.jar</i> &#8211; Contains a version of Maverick that relies on having a JCE installed.
+<br>
+<br>
+<i>maverick-standalone.jar</i> &#8211; Contains a version of Maverick that does not rely on having a JCE installed, but instead uses standalone cryptography.
+</span></p>
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>If you have purchased Enterprise or Global licenses then you will be able to run the release-build.xml script to generate:Java
+Distribution Files (JARs)</span></b><span lang=EN-US style='mso-ansi-language:
+EN-US'> <o:p></o:p></span></p>
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:36.0pt'><span lang=EN-US style='mso-ansi-language:EN-US'>(In the </span><code><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>dist/java</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> subdirectory.)&nbsp; JAR files
+containing the API for use with the Java Development Kit and Java 2 Standard
+Edition. <br>
+<br>
+<i>maverick-all.jar</i> &#8211; Contains all the jar files listed here for
+convenience.<br>
+<br>
+<i>maverick.jar</i> - The maverick cryptographic classes and general SSH
+interfaces. This is a REQUIRED file.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+<i>maverick-ssh1.jar</i> - This jar file contains the SSH1 implementation, this
+file can be removed if you do not require SSH1 <st1:PersonName w:st="on">support</st1:PersonName>.<br>
+<br>
+<i>maverick-ssh2.jar</i> - This jar file contains the SSH2 implementation, this
+file can be removed if you do not require SSH2 <st1:PersonName w:st="on">support</st1:PersonName>.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:36.0pt'><i><span lang=EN-US style='mso-ansi-language:EN-US'>maverick-sftp.jar</span></i><span
+lang=EN-US style='mso-ansi-language:EN-US'> - This jar file contains the core
+SFTP implementation.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:36.0pt'><i><span lang=EN-US style='mso-ansi-language:EN-US'>sshtools-net.jar</span></i><span
+lang=EN-US style='mso-ansi-language:EN-US'> - Utility classes for using
+java.net.Sockets with the Maverick API, HTTP and SOCKS proxy transports and a
+Port Forwarding class to manage forwarding connections and threads.<br>
+&nbsp; <br>
+<i>sshtools-publickey.jar</i> - Known_hosts key verification and utilities to
+generate and read public/private key files..<br>
+<br>
+<i>sshtools-sftp.jar</i> - A high level SFTP client implementation.<br>
+<br>
+<i>sshtools-scp.jar</i> - A high level SCP client implementation.<br>
+<br>
+<i>sshtools-util.jar</i> - General utility classes required by the above <i>sshtools-*
+</i>jar files.<br>
+<br>
+<i>sshtools-zlib.jar</i> - Provides ZLIB compression for SSH2 connections<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:12.0pt;
+margin-left:36.0pt'><i><span lang=EN-US style='mso-ansi-language:EN-US'>sshtools-cipher.jar</span></i><span
+lang=EN-US style='mso-ansi-language:EN-US'> &#8211; Optional cipher engines for
+SSH2 connections, AES, CAST and Twofish.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>J2ME
+Distribution Files (JARs)</span></b><span lang=EN-US style='mso-ansi-language:
+EN-US'><br>
+(In the </span><code><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>dist/j2me</span></code><span lang=EN-US style='mso-ansi-language:EN-US'>
+subdirectory.)&nbsp; JAR files containing the API for use with the Java 2
+Platform Micro Edition. These files are standard JAR archives and must be
+pre-verified through your J2ME toolkit before use. An example ANT build script
+that will perform the pre-verification process is provided in the </span><code><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>examples </span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'>subdirectory.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i style='mso-bidi-font-style:normal'>maverick.jar</i>
+- The maverick cryptographic classes and general SSH interfaces. This is a
+REQUIRED file. <i>&nbsp;&nbsp;&nbsp; </i><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><i><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+maverick-ssh1.jar</span></i><span lang=EN-US style='mso-ansi-language:EN-US'> -
+This jar file contains the SSH1 implementation, this file can be removed if you
+do not require SSH1 <st1:PersonName w:st="on">support</st1:PersonName>.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maverick-ssh2.jar</i> - This jar file
+contains the SSH2 implementation, this file can be removed if you do not
+require SSH2 <st1:PersonName w:st="on">support</st1:PersonName>. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'><i><span lang=EN-US
+style='mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>maverick-sftp.jar</span></i><span lang=EN-US style='mso-ansi-language:
+EN-US'> - This jar file contains the core SFTP implementation.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>Documentation</span></b><span
+lang=EN-US style='mso-ansi-language:EN-US'> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>(In the </span><code><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>docs</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> subdirectory.) Contains the API
+specifications.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='mso-ansi-language:EN-US'>Source
+Code (Requires an Enterprise License Purchase)</span></b><span lang=EN-US
+style='mso-ansi-language:EN-US'> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>(In the </span><code><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>src</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> subdirectory.) Java programming
+language source files for all classes that make up the J2SSH Maverick API (that
+is, sources files for the com.maverick.* and com.sshtools.* packages). This
+source code is provided for informational purposes only, and no <st1:PersonName
+w:st="on">support</st1:PersonName> is provided.&nbsp;<o:p></o:p></span></p>
+
+</blockquote>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>Copyright
+&copy; 2003-2008, SSHTools Ltd.<br>
+No. 13 Carlton Business Center, Station Road, Carlton, NG4 3AA.<br>
+All rights reserved. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>The Java 2 SDK, Standard
+Edition, is a product of Sun Microsystems</span><sup><span lang=EN-US
+style='font-size:7.5pt;mso-ansi-language:EN-US'>TM</span></sup><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>, Inc.</span><span
+lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

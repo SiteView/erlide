@@ -1,0 +1,791 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="RELEASE_files/filelist.xml">
+<link rel=Edit-Time-Data href="RELEASE_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>J2SSH Maverick - Release Notes</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PostalCode"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="Street"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="address"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="City" downloadurl="http://www.5iamas-microsoft-com:office:smarttags"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PersonName" downloadurl="http://www.microsoft.com"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Lee David Painter</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>lee</o:LastAuthor>
+  <o:Revision>16</o:Revision>
+  <o:TotalTime>23</o:TotalTime>
+  <o:Created>2004-10-29T09:24:00Z</o:Created>
+  <o:LastSaved>2007-06-11T12:33:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1460</o:Words>
+  <o:Characters>8326</o:Characters>
+  <o:Company>SSHTools LTD</o:Company>
+  <o:Lines>69</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>9767</o:CharactersWithSpaces>
+  <o:Version>11.6360</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+pre
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:321545181;
+	mso-list-template-ids:865347738;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1
+	{mso-list-id:1184704881;
+	mso-list-template-ids:75644296;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2
+	{mso-list-id:1426027863;
+	mso-list-template-ids:-1091152734;}
+@list l2:level1
+	{mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!-- saved from url=(0113)file://H:\Documents%20and%20Settings\richard\Local%20Settings\Temporary%20Internet%20Files\OLK2\RELNOTES.html --><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="15362"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-GB link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<h1 align=center style='text-align:center'><span lang=EN-US style='mso-ansi-language:
+EN-US'>J2SSH Maverick<br>
+Release Notes<br><o:p></o:p></span></h1>
+
+<h2><a name=Contents></a><span lang=EN-US style='mso-ansi-language:EN-US'>Contents<o:p></o:p></span></h2>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'><a href="#releasenotes">Release Notes</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'><a href="#whatsnew"><span class=SpellE>Whats</span>
+     New?</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'><a href="#systemreq">System Requirements</a>
+     <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'><a href="#knownissues">Known Issues</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'><a href="#faq">Frequently Asked Questions</a>
+     <o:p></o:p></span></li>
+</ul>
+
+<h2><a name=releasenotes><span lang=EN-US style='mso-ansi-language:EN-US'>Release
+Notes<o:p></o:p></span></a></h2>
+
+<span style='mso-bookmark:releasenotes'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>J2SSH
+Maverick is an SSH API for the Java programming language and comes from the
+same team that brought you the original open source J2SSH API. A complete
+redesign has resulted in a single threaded, leaner API, with <st1:PersonName
+w:st="on">support</st1:PersonName> for both SSH1 and SSH2 protocols. This
+library provides dramatic performance improvements to any Maverick-based SSH
+application compared to the original J2SSH.<o:p></o:p></span></p>
+
+</blockquote>
+
+<h2><a name=whatsnew></a><span class=SpellE><span style='mso-bookmark:whatsnew'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Whats</span></span></span><span
+style='mso-bookmark:whatsnew'><span lang=EN-US style='mso-ansi-language:EN-US'>
+New?<o:p></o:p></span></span></h2>
+
+<span style='mso-bookmark:whatsnew'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>The current
+release provides the following features:<o:p></o:p></span></p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Log4j logging has been replaced with a new event logging system<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Cross platform, 100% <span class=SpellE>Java<sup>tm</sup></span>
+     based API <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Support for both SSH protocols, SSH1 and
+     SSH2 <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=PT-BR
+     style='mso-ansi-language:PT-BR'>No external dependencies, no JCE required!
+     <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Small JAR sizes (148k minimum to <st1:PersonName
+     w:st="on">support</st1:PersonName> both protocols, 325k for complete
+     feature set) <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Compatible with JDK1.1+ and J2ME (Java 2
+     Platform, Micro Edition) <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Password, Public key, <span class=SpellE>Hostbased</span>,
+     and Keyboard Interactive authentication <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>3DES, DES &amp; Blowfish ciphers <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Optional <span class=SpellE>Twofish</span>,
+     AES &amp; CAST ciphers <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span class=SpellE><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Stateful</span></span><span
+     lang=EN-US style='mso-ansi-language:EN-US'> decryption counter (SDCTR)
+     mode cipher for AES <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>SHA1, MD5 Message Authentication Codes
+     (MACS) <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>SFTP, SCP File Transfer protocols <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>RSA, DSA public/private key file
+     generation, in <span class=SpellE>SSHTools</span>, <span class=SpellE>OpenSSH</span>
+     and SSH1 formats <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Supports reading of <span class=SpellE>PuTTY</span>
+     and SSH.com public/private keys <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Port forwarding <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Public key subsystem <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>X Forwarding <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>ZLIB compression <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>SSH2 custom channels <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>HTTP, SOCKS 4 and SOCKS 5 proxy <st1:PersonName
+     w:st="on">support</st1:PersonName> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>diffie-hellman-group-exchange-sha1 Key
+     Exchange <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Optional use of JCE<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Event based model for receiving data<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>Text mode <st1:PersonName w:st="on">support</st1:PersonName>
+     for SFTP operations<o:p></o:p></span></li>
+</ul>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;margin-right:36.0pt;
+     mso-margin-bottom-alt:auto;mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span
+     lang=EN-US style='mso-ansi-language:EN-US'>Shell class provides capture of
+     individual command output from the users shell.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;margin-right:36.0pt;
+     mso-margin-bottom-alt:auto;mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span
+     class=SpellE><span lang=EN-US style='mso-ansi-language:EN-US'>ShellEnvironment</span></span><span
+     lang=EN-US style='mso-ansi-language:EN-US'> class provides information
+     about the remote operating system and shell environment.<o:p></o:p></span></li>
+</ul>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span class=SpellE><span
+     lang=EN-US style='mso-ansi-language:EN-US'>ShellProcess</span></span><span
+     lang=EN-US style='mso-ansi-language:EN-US'> provides expect type
+     functionality for enhanced shell automation.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>SSH1 Challenge Response authentication.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span class=GramE><span
+     lang=EN-US style='mso-ansi-language:EN-US'>diffie-hellman-group-exchange-sha1</span></span><span
+     lang=EN-US style='mso-ansi-language:EN-US'> Key Exchange.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-ansi-language:EN-US'>**NEW** Wildcard support for transferring files
+     over SFTP/SCP<o:p></o:p></span></li>
+</ul>
+
+</blockquote>
+
+<h2><a name=systemreq><span lang=EN-US style='mso-ansi-language:EN-US'>System
+Requirements<o:p></o:p></span></a></h2>
+
+<span style='mso-bookmark:systemreq'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>The J2SSH
+Maverick API requires that a compatible Java Development Kit (JDK) is installed
+prior to starting development. Maverick supports the most recent and all
+previous versions of the JDK which can be downloaded from Sun Microsystems <a
+href="http://java.sun.com/downloads/index.html">download</a> area.<br><o:p></o:p></span></p>
+
+</blockquote>
+
+<h2><a name=knownissues><span lang=EN-US style='mso-ansi-language:EN-US'>Known
+Issues<o:p></o:p></span></a></h2>
+
+<span style='mso-bookmark:knownissues'></span>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p><span lang=EN-US style='mso-ansi-language:EN-US'>This list covers some of
+the known problems with J2SSH Maverick. Please read this before reporting any
+new bugs, for an up-to-date listing of known issues visit the SSHTools knowledge
+base <a href="http://www.sshtools.com/kb">http://www.sshtools.com/kb</a>.<br>
+<span style='mso-spacerun:yes'> </span><br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; Compiling from source for
+J2ME with a JDK before 1.4.1 causes failure of the pre-verification process.</i><o:p></o:p></span></p>
+
+<p><span lang=EN-US style='mso-ansi-language:EN-US'>The J2ME version should
+always be built using a JDK compatible with your J2ME WTK.&nbsp; Whilst the
+code compiles under previous versions of the API,, the pre-<span class=SpellE>verificiation</span>
+process that is required to build jar files for the J2ME platform will fail if
+the compiler is not compatible.<br>
+&nbsp; <i><br>
+&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp;&nbsp; <span class=SpellE>IllegalMonitorStateException</span>
+is thrown when using JDK1.1, JDK1.2 and the JIT compiler.&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+</i>To workaround this problem, <span class=SpellE>diable</span> the JIT using
+the -<span class=SpellE>nojit</span> switch on the JDK1.1 command line, this
+option is not provided for JDK1.2 and requires that the&nbsp;
+JAVA_HOME/jre/bin/smycjit.dll file is removed, or renamed. The compiler will
+then fall back to <span class=SpellE>intepreting</span> mode.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; <span class=SpellE>OpenSSH</span>
+Private keys encrypted using <span class=SpellE>SshKeyPairGenerator</span> fail
+to be <span class=SpellE>recognised</span> by <span class=SpellE>OpenSSH</span>
+<span class=SpellE>ssh-keygen</span> utility.</i><o:p></o:p></span></p>
+
+<p><span lang=EN-US style='mso-ansi-language:EN-US'>We are working on this
+problem, the API can read keys generated by <span class=SpellE><i>ssh-keygen</i></span>
+utility and can read files generated by <span class=SpellE>SshKeyPairGenerator</span>.
+The problem occurs only when keys generated within the API are used from the <span
+class=SpellE>OpenSSH</span> command line clients.<i><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; SSH connections within J2ME
+seem to hang.</i><o:p></o:p></span></p>
+
+<p><span lang=EN-US style='mso-ansi-language:EN-US'>This is a result of
+expensive cryptographic routines and low VM speeds on J2ME devices. We have
+traced the problem to a specific set of classes and are currently working to
+improve their efficiency. The problem is less severe with SSH1 connections
+since fewer cryptographic functions are required.<o:p></o:p></span></p>
+
+<p><i><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+°&nbsp;&nbsp;&nbsp; Compression of some files causes server to <span
+class=SpellE>abruptley</span> terminate the connection</span></i><span
+lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+<p><span lang=EN-US style='mso-ansi-language:EN-US'>When using the <span
+class=SpellE>SftpConnect.java</span> example with compression, the server may <span
+class=SpellE>abruptley</span> terminal the connection. The example generates a
+random file and uploads to an SFTP server, however since the file contains
+random bytes it is not suitable for compression and is therefore causing the
+maximum packet size to be exceeded with additional compression headers added to
+the data. This should not happen in normal operation as most files do have some
+traits that are suitable for compression. <o:p></o:p></span></p>
+
+<p><i><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+°&nbsp;&nbsp;&nbsp; Exceptions occur when trying to open <span class=SpellE>multple</span>
+session channels</span></i><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>Some old
+SSH servers, most notably the version shipped with Solaris 9 do not operate as
+excepted when opening multiple session channels over the SSH2 protocol.
+Although the SSH2 protocol <st1:PersonName w:st="on">support</st1:PersonName>s
+concurrent <span class=SpellE>multple</span> sessions, when <span class=SpellE>connecing</span>
+to these 'broken' servers the first session will be opened correctly but after
+the first session has been closed the server silently disconnects the
+connection. The next call to open a session, or perform any form of socket
+operation will result in an exception. In order to workaround this server
+problem we advise that you open the first session channel and initialize it by
+starting the users shell, leaving it open for the duration of the connection.
+This enables multiple sessions to operate in the correct manner since the first
+session never gets closed allowing the server to operate as expected.<br>
+<br>
+<i>&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; When using Maverick with an <span
+class=SpellE>iPlanet</span> Web Server I get connection errors with the message
+&quot;current thread not owner&quot;<br>
+</i>This is related to a problem with the 1.2.2 Java Runtime and can easily be
+resolved by disabling the JIT compiler in the Web Servers JVM settings.<o:p></o:p></span></p>
+
+</blockquote>
+
+<h2><a name=faq><span lang=EN-US style='mso-ansi-language:EN-US'>Frequently
+Asked Questions</span></a><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></h2>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-bottom:12.0pt'><a
+name=bugs><i><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+°&nbsp;&nbsp;&nbsp; Where do I start?<br>
+<br>
+</span></i></a><span style='mso-bookmark:bugs'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Take a look at the </span></span><a
+href="docs/overview-summary.html"><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>API
+specifications</span></span><span style='mso-bookmark:bugs'></span></a><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>,
+most notably the </span></span><a
+href="docs/com/maverick/ssh/SshConnector.html"><span
+style='mso-bookmark:bugs'><span class=SpellE><span lang=EN-US style='mso-ansi-language:
+EN-US'>SshConnector</span></span></span><span style='mso-bookmark:bugs'></span></a><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>
+class as this provides the entry point for making SSH connections. There are
+also a number of examples provided in the </span></span><span style='mso-bookmark:
+bugs'><span lang=EN-US style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-ansi-language:EN-US'>examples </span></span><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>subdirectory
+of the distribution file. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>To
+execute an example client: <o:p></o:p></span></span></p>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>Execute the ant
+     script “<span class=SpellE>build.xml</span>” this will create a jar called
+     <span class=SpellE><i style='mso-bidi-font-style:normal'>examples.jar</i></span><o:p></o:p></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>Alternatively run “<span
+     class=SpellE>javac</span> –<span class=SpellE><span class=GramE>classpath</span></span><span
+     class=GramE> <span style='font-size:10.0pt;font-family:"Courier New"'>..</span></span></span></span><span
+     style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;
+     font-family:"Courier New";mso-ansi-language:EN-US'>\dist\java\maverick-<span
+     class=SpellE>all.jar</span> *.java” </span></span><span style='mso-bookmark:
+     bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>from</span></span><span
+     style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;
+     font-family:"Courier New";mso-ansi-language:EN-US'> </span></span><span
+     style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>the
+     examples folder to compile the classes and then “jar –<span class=SpellE>cvf</span>
+     <span class=SpellE>examples.jar</span> *.class” to build the jar file<o:p></o:p></span></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo3;tab-stops:list 36.0pt'><span style='mso-bookmark:
+     bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>Run one of the jarred
+     examples as the following Windows command line example printout shows
+     (your inputs are bolded, and values specific to your situation are
+     italicized): <o:p></o:p></span></span></li>
+</ol>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>C:\maverick\examples&gt;java -<span
+class=SpellE><span class=GramE>classpath</span></span><span class=GramE> ..</span>\dist\java\maverick-<span
+class=SpellE>all.jar;examples.jar</span> <span class=SpellE>PasswordConnect</span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Hostname: <b><i>your-<span class=SpellE>ssh-host-dn</span></i></b><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Username [Enter for <span class=SpellE><i>curr</i></span><i>-windows-user</i>]:
+<b><i>root</i></b><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Connecting to your-<span class=SpellE>ssh-host-dn</span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>The host your-<span class=SpellE>ssh-host-dn</span>
+is currently unknown to the system<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>The host key (<span class=SpellE>ssh-dss</span>)
+fingerprint is: 6a:b7:66:c1:98:85:f1:26:51:5e<span class=GramE>:bd:e1:62:a9:8d:a1:df:8d:b2:e2</span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Do you want to allow this host key? [<span
+class=SpellE>Yes|No|Always</span>]: <b>yes</b><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span class=GramE><i><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>your-<span
+class=SpellE>ssh-host-dn</span></span></i></span></span><span style='mso-bookmark:
+bugs'><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:EN-US'> is an SSH2 server<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Password: <span class=SpellE><b><i>xxxxxxxx</i></b></span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>Last login: Sat Apr 16 16:44:33 2005
+from <i>your-windows-workstation</i><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'>[<span class=SpellE>root@local</span>
+root]#<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='mso-bookmark:bugs'><span lang=EN-US style='mso-ansi-language:EN-US'>At
+this point, your <span class=SpellE><span class=GramE>ssh</span></span> session
+is in progress and you can enter any <span class=SpellE>unix/linux</span>
+commands you want<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'><span style='mso-bookmark:bugs'><span
+lang=EN-US style='mso-ansi-language:EN-US'><br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; Is J2SSH Maverick
+available on an open source license?<br>
+<br>
+</i>No. J2SSH Maverick is proprietary software. We still provide the original
+open source version of J2SSH through our website however due to time
+constraints we no longer <st1:PersonName w:st="on">support</st1:PersonName> the
+open source API. We recommend that commercial users use Maverick as the license
+fee is great value and provides a year's worth of upgrades and unlimited <st1:PersonName
+w:st="on">support</st1:PersonName>.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; What version of SSH does
+J2SSH Maverick Support?<br>
+<br>
+</i>Maverick <st1:PersonName w:st="on">support</st1:PersonName>s both versions
+of the SSH protocol, SSH1 and SSH2.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; What version of SFTP does
+J2SSH Maverick Support?<br>
+<br>
+</i>Maverick currently <st1:PersonName w:st="on">support</st1:PersonName>s up
+to version 3 of the SFTP protocol. We will be releasing updates in the near
+future that will provide <st1:PersonName w:st="on">support</st1:PersonName> for
+versions 4 and 5.<br>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °&nbsp;&nbsp;&nbsp; The available() method on
+the Maverick <span class=SpellE>InputStreams</span> always return zero before I
+attempt to block, why? <br>
+<br>
+</i>The Maverick API is single threaded, which means there are no background
+threads to load data into local buffers. When a thread calls the read method it
+actually blocks on the underlying transport mechanism (usually a Socket) and
+processes data until it finds some data of its own. Because channels are
+multiplexed into a single connection, data for multiple channels could be
+arriving at the same time so using the transports available method is not <span
+class=SpellE>appropraite</span>. The only way to determine if data is available
+is to actually block so our available method simply returns the number of bytes
+available in the local buffer.<br>
+<br>
+You can get around this limitation by using the <span class=SpellE>com.sshtools.util.BufferedSession</span>
+class. This class implements the <span class=SpellE>com.maverick.ssh.SshSession</span>
+interface so can be used in place of an ordinary session. It spawns a couple of
+threads to load all the channels data into local buffers so that the available
+method will return the correct number of bytes available at any time.<br>
+<br>
+</span></span><i><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+°&nbsp;&nbsp;&nbsp; Is Maverick thread-safe?<br>
+<br>
+</span></i><span lang=EN-US style='mso-ansi-language:EN-US'>Yes, each session
+or connection can be used from multiple threads.<o:p></o:p></span></p>
+
+</blockquote>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>Copyright
+© 2003-2008, SSHTools Ltd.<br>
+No. 13 Carlton Business Center, Station Road, Carlton, NG4 3AA.<br>
+All rights reserved.</span><span lang=EN-US style='mso-ansi-language:EN-US'> <o:p></o:p></span></p>
+
+<p><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>The Java 2
+SDK, Standard Edition, is a product of Sun <span class=SpellE>Microsystems<sup><span
+style='font-size:7.5pt'>TM</span></sup></span>, Inc.</span><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

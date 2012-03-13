@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="examples"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug-jce-only-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug-jce-only.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug-standalone-only-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug-standalone-only.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-debug.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-jce-only-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-jce-only.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-standalone-only-no-j2ssh.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd-standalone-only.jar"/>
+	<classpathentry kind="lib" path="dist/maverick-sshd.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-java1.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-java1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

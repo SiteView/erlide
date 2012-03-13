@@ -1,0 +1,88 @@
+05 三月 2012 22:13:49,485 [main] INFO  SshConnector  - SSH2 is not supported
+com.maverick.ssh.SshException: Unresolved compilation problems: 
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved
+ [Unknown cause]
+	at com.maverick.ssh2.Ssh2Context.<init>(Ssh2Context.java:114)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.maverick.ssh.SshConnector.<init>(SshConnector.java:47)
+	at com.maverick.ssh.SshConnector.getInstance(SshConnector.java:68)
+	at DynamicForwarding.main(DynamicForwarding.java:54)
+05 三月 2012 22:14:21,239 [main] INFO  SshConnector  - SSH2 is not supported
+com.maverick.ssh.SshException: Unresolved compilation problems: 
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved
+ [Unknown cause]
+	at com.maverick.ssh2.Ssh2Context.<init>(Ssh2Context.java:114)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.maverick.ssh.SshConnector.<init>(SshConnector.java:47)
+	at com.maverick.ssh.SshConnector.getInstance(SshConnector.java:68)
+	at DynamicForwarding.main(DynamicForwarding.java:54)
+05 三月 2012 22:15:15,191 [main] INFO  SshConnector  - SSH2 is not supported
+com.maverick.ssh.SshException: Unresolved compilation problems: 
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved
+ [Unknown cause]
+	at com.maverick.ssh2.Ssh2Context.<init>(Ssh2Context.java:114)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.maverick.ssh.SshConnector.<init>(SshConnector.java:47)
+	at com.maverick.ssh.SshConnector.getInstance(SshConnector.java:68)
+	at DynamicForwarding.main(DynamicForwarding.java:55)
+05 三月 2012 22:15:15,200 [main] INFO  SshConnector  - Connecting lee@192.168.1.8:22 [buffered=true]
+05 三月 2012 22:15:15,200 [main] INFO  SshConnector  - license code: 0, license: null
+05 三月 2012 22:15:15,200 [main] INFO  SshConnector  - this.SshVersion=1
+05 三月 2012 22:15:15,211 [main] INFO  SshConnector  - paramString is: SSH-2.0-OpenSSH_4.3 version is 2.0
+05 三月 2012 22:18:33,381 [main] INFO  SshConnector  - SSH2 is not supported
+com.maverick.ssh.SshException: Unresolved compilation problems: 
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved
+ [Unknown cause]
+	at com.maverick.ssh2.Ssh2Context.<init>(Ssh2Context.java:114)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.maverick.ssh.SshConnector.<init>(SshConnector.java:47)
+	at com.maverick.ssh.SshConnector.getInstance(SshConnector.java:68)
+	at DynamicForwarding.main(DynamicForwarding.java:55)
+05 三月 2012 22:18:33,389 [main] INFO  SshConnector  - Connecting lee@192.168.1.8:22 [buffered=true]
+05 三月 2012 22:18:33,390 [main] INFO  SshConnector  - license code: 0, license: null
+05 三月 2012 22:18:33,390 [main] INFO  SshConnector  - this.SshVersion=1
+05 三月 2012 22:18:33,400 [main] INFO  SshConnector  - paramString is: SSH-2.0-OpenSSH_4.3 version is 2.0
+05 三月 2012 22:32:01,803 [main] INFO  SshConnector  - SSH2 is not supported
+com.maverick.ssh.SshException: Unresolved compilation problems: 
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved to a variable
+	localClass cannot be resolved
+ [Unknown cause]
+	at com.maverick.ssh2.Ssh2Context.<init>(Ssh2Context.java:114)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance0(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.maverick.ssh.SshConnector.<init>(SshConnector.java:47)
+	at com.maverick.ssh.SshConnector.getInstance(SshConnector.java:68)
+	at ThreadedConnect.main(ThreadedConnect.java:53)

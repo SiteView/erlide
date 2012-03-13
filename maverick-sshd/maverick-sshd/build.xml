@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="maverick-sshd" default="run" basedir=".">
+
+   <target name="run">
+
+     <mkdir dir="classes"/>
+
+     <!-- Compile the examples -->
+          <javac srcdir="." destdir="classes" includes="**/*.java">
+	    <classpath>
+             <fileset dir="../lib">
+               <include name="*.jar"/>
+             </fileset>
+             <fileset dir="../dist">
+               <include name="maverick-sshd-debug.jar"/>
+             </fileset>
+           </classpath>
+          </javac>
+
+     <!-- Execute the server -->
+       <java classname="ExampleSSHD" fork="true">
+         <classpath>
+             <fileset dir="../lib">
+               <include name="*.jar"/>
+             </fileset>
+             <fileset dir="../dist">
+               <include name="maverick-sshd-debug.jar"/>
+             </fileset>
+           <pathelement path="classes"/>
+         </classpath>
+       </java>
+   </target>
+
+</project>
