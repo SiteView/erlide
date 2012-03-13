@@ -152,7 +152,7 @@ get(Object, AttributeName) when is_record(Object,object)->
     end.
 
 %% @doc get the attribute value, without time stamp
--spec(getTimedValue/2 :: (atom(), atom()) -> queue()).
+-spec(getTimedValue/2 :: (atom(), atom()) -> term()).
 getTimedValue(Name,AttributeName) when is_atom(Name) -> getTimedValue(get_by_name(Name),AttributeName);
 getTimedValue(Object, AttributeName) when is_record(Object,object)->
 %% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),

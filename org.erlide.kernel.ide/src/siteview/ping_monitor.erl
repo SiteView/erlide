@@ -94,9 +94,9 @@ update_action(Self,EventType,Pattern,State) ->
 	object:do(Self,logging).
 
 set_classifier(Self) ->
-	Error_classifier = "?QUEVALUE('round_trip_time') > 80 || ?QUEVALUE('packetsgood') < 3",
-	Warning_classifier = "?QUEVALUE('round_trip_time') < 80 && ?QUEVALUE('packetsgood') > 30",
-	Ok_classifier = "?QUEVALUE('packetsgood') > 1",
+	Error_classifier = "Value('round_trip_time') > 80 || Value('packetsgood') < 3",
+	Warning_classifier = "Value('round_trip_time') < 80 && Value('packetsgood') > 30",
+	Ok_classifier = "Value('packetsgood') > 1",
 %% 	io:format("---------------set_classifier------:~p~n", [[{error_classifier, Error_classifier},
 %% 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]]),
 	set_classifier(Self, [{error_classifier, Error_classifier},
@@ -140,7 +140,6 @@ start(Name) ->
 				object:start(X),				
 				resource_pool:register(object:getClass(Name)),
 				eresye:assert(Name,{wakeup}),
-%% 				object:call(X, set_classifier, []),
 				Name;
 		_ -> atom_to_list(Name) ++ " already existed, choose a new name"
 	end.
