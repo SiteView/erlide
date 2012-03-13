@@ -152,7 +152,7 @@ get(Object, AttributeName) when is_record(Object,object)->
     end.
 
 %% @doc get the attribute value, without time stamp
--spec(getTimedValue/2 :: (atom(), atom()) -> queue()).
+-spec(getTimedValue/2 :: (atom(), atom()) -> term()).
 getTimedValue(Name,AttributeName) when is_atom(Name) -> getTimedValue(get_by_name(Name),AttributeName);
 getTimedValue(Object, AttributeName) when is_record(Object,object)->
 %% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),
@@ -163,8 +163,8 @@ getTimedValue(Object, AttributeName) when is_record(Object,object)->
         _ -> exit({undef, [attribute, Object, AttributeName]})
     end.
 
-%% @doc get the attribute value, will all history
--spec(getValueWithTime/2 :: (atom(), atom()) -> list()).
+%% @doc get the attribute value with time tuple
+-spec(getValueWithTime/2 :: (atom(), atom()) -> {term(),tuple()}).
 getValueWithTime(Name,AttributeName) when is_atom(Name) -> getValueWithTime(get_by_name(Name),AttributeName);
 getValueWithTime(Object, AttributeName) when is_record(Object,object)->
     V = server_call(Object#object.property_server,
@@ -175,7 +175,7 @@ getValueWithTime(Object, AttributeName) when is_record(Object,object)->
     end.
 
 %% @doc get the attribute value, will all history
--spec(getValueHistory/2 :: (atom(), atom()) -> list()).
+-spec(getValueHistory/2 :: (atom(), atom()) -> list({term(),tuple()})).
 getValueHistory(Name,AttributeName) when is_atom(Name) -> getValueHistory(get_by_name(Name),AttributeName);
 getValueHistory(Object, AttributeName) when is_record(Object,object)->
     V = server_call(Object#object.property_server,

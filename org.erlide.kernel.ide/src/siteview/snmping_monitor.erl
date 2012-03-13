@@ -1,4 +1,4 @@
--module (ping_monitor).
+-module (snmping_monitor).
 -compile(export_all).
 -include("../../include/object.hrl").
 -include("../../include/monitor.hrl").
@@ -12,14 +12,16 @@ extends () -> atomic_monitor .
 ?SUPERCLAUSE(pattern).
 
 %%@doc the constructor, specific the input parameters into the monitor
-ping_monitor(Self, Name)->
-	?SETVALUE(hostname,"localhost"),
-	?SETVALUE(timeout,1000),
-	?SETVALUE(size,4),
-	?SETVALUE(name,Name),	
+snmping_monitor(Self, Name)->
+	?SETVALUE(oid,"1.3.6.1.2.1.1.1"),
+	?SETVALUE(host,"192.168.0.248"),
+	?SETVALUE(community,"dragon"),
+	?SETVALUE(timeout,5),
+
+	?SETVALUE(name,Name),
 	object:super(Self, [Name]).
 
-ping_monitor_(Self)->eresye:stop(?VALUE(name)).
+snmping_monitor_(Self)->eresye:stop(?VALUE(name)).
 
 %%@doc called as start up
 init_action(Self,EventType,Pattern,State) ->
@@ -58,7 +60,6 @@ run(Hostname,Size,Timeout) ->
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
 	{Session,_} = Pattern,  %%resource_allocated
-	eresye:wait(?LOGNAME, {?VALUE(name),Session,'_',allocate_resource}),
 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
 %% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
@@ -84,19 +85,16 @@ update_action(Self,EventType,Pattern,State) ->
 %% 			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 %% 	runClassifiersJs(Self),
 	
-%% 	resource_pool:release(?VALUE(name),Session), 	
- 	io:format("[~w:~w] ~w ~w,Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
-			  [?MODULE,?LINE,?VALUE(name),calendar:local_time(),
-										resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),
-			   							Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
+ 	io:format("[~w:~w] ~w Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
+			  [?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),resource_pool:get_queue_length(?VALUE(name)),Diff,?VALUE(wait_time),?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
 	eresye:assert(?VALUE(name), {Session,logging}),
 	object:do(Self,logging).
 
 set_classifier(Self) ->
-	Error_classifier = "Value('round_trip_time') > 80 || Value('packetsgood') < 3",
-	Warning_classifier = "Value('round_trip_time') < 80 && Value('packetsgood') > 30",
-	Ok_classifier = "Value('packetsgood') > 1",
+	Error_classifier = "?QUEVALUE('round_trip_time') > 80 || ?QUEVALUE('packetsgood') < 3",
+	Warning_classifier = "?QUEVALUE('round_trip_time') < 80 && ?QUEVALUE('packetsgood') > 30",
+	Ok_classifier = "?QUEVALUE('packetsgood') > 1",
 %% 	io:format("---------------set_classifier------:~p~n", [[{error_classifier, Error_classifier},
 %% 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]]),
 	set_classifier(Self, [{error_classifier, Error_classifier},

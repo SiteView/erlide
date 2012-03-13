@@ -18,7 +18,7 @@ loadtest_(Self)->
 do_action(Self, _, _, _) ->
  	C = object:get(Self,counter),
 	ping_monitor:start(list_to_atom("monitor" ++ integer_to_list(C))),
-	timer:sleep(1000),
+	timer:sleep(100),
 %% 	atomic_monitor:test(list_to_atom("monitor" ++ integer_to_list(C))),
 %% 	base_monitor:test(list_to_atom("monitor" ++ integer_to_list(C))),
 %% 	P = point:test(list_to_atom("point" ++ integer_to_list(C))),

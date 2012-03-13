@@ -83,9 +83,14 @@ request(Name,Session,RequestType) ->
 	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
 	eresye:assert(?LOGNAME, {Name,Session,now(),RequestType}),
 	if Counter < Max -> 
-		   eresye:assert(Name,{Session,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
-	       eresye:assert(?POOLNAME,{ResourceType,Name,Session,now()}),
-		   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource});
+		   if  QueueLen == 0 ->
+				   eresye:assert(Name,{Session,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
+				   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource}),
+	       		   eresye:assert(?POOLNAME,{ResourceType,Name,Session,now()});
+			   true ->
+				   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType}),
+		   		   allocate_next(ResourceType) 		   
+		   	   end;
 	   true -> %%add into queue
 		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType})
 	end.
@@ -95,8 +100,6 @@ request(Name,Session,RequestType) ->
 -spec(get_max/1 :: (atom) -> int).
 get_max(ResourceType) -> 20.
 
-
-	
 release(Name,Session) -> 
 	ClassName = object:getClass(Name),
 	ResourceType = erlang:apply(ClassName, get_resource_type,[]),
@@ -106,15 +109,23 @@ release(Name,Session) ->
 	if QueueLen == 0 ->
 		  nil;
 	   true -> %get the next item to run and drop it from the queue
-		   {NextName,NextSession} = get_next(ResourceType),
-		   eresye:assert(NextName,{NextSession,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
-	       eresye:assert(?POOLNAME,{ResourceType,NextName,NextSession,now()}),
-%% 		   io:format('~w~n', [eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',frequency})]),
-		   [{_,_,StartWait,frequency_request}|_] = eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',fun(X)-> (X == frequency_request) or (X == refresh_request) end}),
-		   object:set(NextName,wait_time,timer:now_diff(now(), StartWait)/1000000),
-		   eresye:assert(?LOGNAME, {NextName,NextSession,now(),allocate_resource})
+		   allocate_next(ResourceType) ,
+		   
+	   	   Max = get_max(ResourceType),
+		   Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
+		   if(Counter<Max) -> allocate_next(ResourceType) ; true->nil end
 		  %%TODO: if run time out, should still release the resource
 	end.
+
+allocate_next(ResourceType) ->
+	{NextName,NextSession} = get_next(ResourceType),
+	eresye:assert(NextName,{NextSession,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
+	eresye:assert(?POOLNAME,{ResourceType,NextName,NextSession,now()}),
+%% 		   io:format('~w~n', [eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',frequency})]),
+	[{_,_,StartWait,frequency_request}|_] = eresye:query_kb(?LOGNAME, {NextName,NextSession,'_',fun(X)-> (X == frequency_request) or (X == refresh_request) end}),
+	object:set(NextName,wait_time,timer:now_diff(now(), StartWait)/1000000),
+	eresye:assert(?LOGNAME, {NextName,NextSession,now(),allocate_resource}).
+	
 
 release(Name) -> %%for object:delete()  
 	ClassName = object:getClass(Name),
