@@ -59,7 +59,7 @@
          code_change/3, terminate/2]).
 
 -include_lib("snmp/include/snmp_types.hrl").
--include("snmp_ecc.hrl").
+-include("../include/snmp_ecc.hrl").
 
 -define(SERVER,   'elecc_snmp_manager').
 -define(USER_MOD, ?MODULE).

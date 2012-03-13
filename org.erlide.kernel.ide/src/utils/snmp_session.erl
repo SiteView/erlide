@@ -6,7 +6,7 @@
 -compile(export_all).
 -include_lib("snmp/include/snmp_types.hrl").
 -include_lib("snmp/src/manager/snmpm_usm.hrl").
--include("snmp_ecc.hrl").
+-include("../include/snmp_ecc.hrl").
 
 new(Server,Port,Ver,Community,AuthType,User,Passwd,PrivPasswd,ContextID,ContextName,Timeout)-> 
 	Obj = instance(Server,Port,Ver,Community,AuthType,User,Passwd,PrivPasswd,ContextID,ContextName,Timeout, []),
