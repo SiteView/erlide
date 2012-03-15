@@ -97,6 +97,7 @@ request_resource_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w:~w] ~w-1 Counter=~w, Action: request_resource_action, State=~w, Event type=~w, Pattern=~w '\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
 	{Mega,Sec,MilliSec} = erlang:now(),
 %% 	TODO: using PID as session, can be used to communicate with the update action
+%% 	Session = self(),
 	Session = Mega+Sec+MilliSec,
 	resource_pool:request(?VALUE(name), Session,frequency_request),
 	object:do(Self,waiting_for_resource).

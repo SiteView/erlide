@@ -13,7 +13,7 @@
 %% TODO: 
 %% 	1. checking for long running monitors,
 %% 	2. failed monitor restarting
-%% 
+%%  3. check for the value update time with frequency
 %% the name of new measurement will be save here until picked up and removed by the data base logger.
 
 -module (log_analyzer).

@@ -36,17 +36,6 @@ get_resource_type() -> ?MODULE.
 %% beamjs init
 init(_VM) ->
 	ok.
-%% beamjs exports
-exports(_VM) ->
-	?V8Obj([{"js_getTimedValue", fun js_getTimedValue/2}]).
-
-%% js call erlang's js_getTimedValue
-js_getTimedValue(#erlv8_fun_invocation{ vm = VM} = _Invocation, [MonitorName, AttrNames]) ->	
-	io:format("+++++++++++++++++++erlang+++++++++++++ping_monitor js_getTimedValuee :+++++++++++++++++ ~p   ~p ~n",[MonitorName, AttrNames:list()]),	
-    Obj = object:get_by_name(erlang:list_to_atom(erlang:binary_to_list(MonitorName))),
-%% 	io:format(".....................ping_monitor js_getTimedValuee Obj :......................    ~p ~n",[object:getTimedValue(Obj, 'round_trip_time')]),
-	Value = [object:getTimedValue(Obj,erlang:list_to_atom(erlang:binary_to_list(X)))||X<-AttrNames:list()],
-	Value.
 
 %% @doc run the monitor without logging and classifier, for run standalone and testing
 run(MonitorName, Hostname,Size,Timeout) ->
@@ -67,8 +56,8 @@ run(MonitorName, Hostname,Size,Timeout) ->
 %% 	io:format("ping data : ~p~n", [Data]),
 	
 	%%erlang call js_fun to AnalysisData
-	AnalysisData = beamjs:run_jsfun(["testjs.js"], [{"testjs.js", analysis_ping_Data, [MonitorName, ?V8Arr([round_trip_time, packetsgood]), Data]}]),
-	io:format("---------------------ping AnalysisData Return : ~p~n", [AnalysisData]),	
+%% 	AnalysisData = beamjs:run_jsfun(["testjs.js"], [{"testjs.js", analysis_ping_Data, [MonitorName, ?V8Arr([round_trip_time, packetsgood]), Data]}]),
+%% 	io:format("---------------------ping AnalysisData Return : ~p~n", [AnalysisData]),	
 	
 	
 	Round_trip_time = 10 * random:uniform(10),
@@ -101,10 +90,10 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
 	set_classifier(Self),
-	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
-			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
+%% 	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
+%% 			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
-	runClassifiersJs(Self),
+%% 	runClassifiersJs(Self),
 	
 %% 	resource_pool:release(?VALUE(name),Session), 	
  	io:format("[~w:~w] ~w ~w,Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
