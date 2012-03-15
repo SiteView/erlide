@@ -10,7 +10,9 @@
 %%  get the exago recognize exat's facts
 %% logic to verify the counter: in running state, finished
 %% 
-%% TODO: checking for long running monitors
+%% TODO: 
+%% 	1. checking for long running monitors,
+%% 	2. failed monitor restarting
 %% 
 %% the name of new measurement will be save here until picked up and removed by the data base logger.
 
@@ -66,7 +68,11 @@ finished_action(Self,EventType,Pattern,State) ->
 	NofOk = exago_printer:count_acceptant_executions(HistoryAnalysis, 0) , 
 %% 	io:format("[~w:~w] Success = ~w~n", [?MODULE,?LINE,HistoryAnalysis]),
 	if NofOk < N 
-		 -> io:format("[~w:~w]!!! monitor [~w] NofOk/N=~w/~w,execution:~w~n", [?MODULE,?LINE,Name,NofOk,N,exago_printer:list_failing_executions(HistoryAnalysis, 0)]),
+		 -> 
+		   	ResourceType = erlang:apply( object:getClass(Name), get_resource_type,[]),	
+			Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
+			io:format("[~w:~w]!!! monitor [~w] NofOk/N=~w/~w,execution:~w, counter=~w~n", 
+					  [?MODULE,?LINE,Name,NofOk,N,exago_printer:list_failing_executions(HistoryAnalysis, 0),Counter]),
 			io:format("[~w:~w] MonitorStateList = ~w~n", [?MODULE,?LINE,MonitorStateList]),
 			exago_printer:print_result(Result);
 	   true -> 
@@ -135,6 +141,7 @@ monitor_row_format() ->
 	 exago_field:parser(timestamp,noparse), %%time 
 %% 	 exago_field:parser(timestamp, "yyyy-MM-dd hh:mm:ss:fffffff"), %%time 
      exago_field:parser(transition_input) %%state
+%%      exago_field:parser(annotation, "Counter")
 	].
 %% name, session, timestamp, state,counter,queueLen
 

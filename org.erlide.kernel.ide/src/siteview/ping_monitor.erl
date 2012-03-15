@@ -82,7 +82,7 @@ update_action(Self,EventType,Pattern,State) ->
 	set_classifier(Self),
 %% 	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
 %% 			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
-%% 	runClassifiersJs(Self),
+	runClassifiersJs(Self),
 	
 %% 	resource_pool:release(?VALUE(name),Session), 	
  	io:format("[~w:~w] ~w ~w,Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 

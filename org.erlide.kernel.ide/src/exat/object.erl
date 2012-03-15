@@ -589,7 +589,7 @@ executor_loop(Object) ->
         T  ->
             case catch(executor_do(Object, V)) of
                 {'EXIT', Reason} ->
-                    io:format("\n=ERROR REPORT====\nError in object behaviour ~w, state ~w, error value: ~w\n", [Object, V, Reason]),
+                    io:format("\n=ERROR REPORT====\nError in object behaviour ~w, state ~w, error value: ~s\n", [Object, V, Reason]),
                     set(Object, ?TERMINATING, true);
                 Other -> nil
             end,

@@ -89,7 +89,7 @@ request(Name,Session,RequestType) ->
 	       		   eresye:assert(?POOLNAME,{ResourceType,Name,Session,now()});
 			   true ->
 				   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType}),
-		   		   allocate_next(ResourceType) 		   
+		   		   allocate_next(ResourceType,Counter) 		   
 		   	   end;
 	   true -> %%add into queue
 		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType})
@@ -109,15 +109,16 @@ release(Name,Session) ->
 	if QueueLen == 0 ->
 		  nil;
 	   true -> %get the next item to run and drop it from the queue
-		   allocate_next(ResourceType) ,
+		   Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
+		   allocate_next(ResourceType,Counter) ,
 		   
 	   	   Max = get_max(ResourceType),
-		   Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
-		   if(Counter<Max) -> allocate_next(ResourceType) ; true->nil end
+		   
+		   if(Counter<Max) -> allocate_next(ResourceType,Counter) ; true->nil end
 		  %%TODO: if run time out, should still release the resource
 	end.
 
-allocate_next(ResourceType) ->
+allocate_next(ResourceType,Counter) ->
 	{NextName,NextSession} = get_next(ResourceType),
 	eresye:assert(NextName,{NextSession,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
 	eresye:assert(?POOLNAME,{ResourceType,NextName,NextSession,now()}),
