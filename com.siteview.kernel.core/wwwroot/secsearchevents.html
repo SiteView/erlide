@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+	    <link rel="stylesheet" href="/nitrogen/jquery-ui/jquery-ui.css" type="text/css" media="screen" charset="utf-8">
+
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+
+	</head>
+	<body>
+			<div class=topmenu1>
+				[[[topmenu:render(Group)]]]
+			</div>
+			<div class=topmenu2>
+				[[[topmenu:eventsrender(Group)]]]
+				<div class=clear></div>
+			</div>
+			
+			<!-- BEGIN: content -->
+			<table width="80%" align="center">
+				<tr>
+					<td>
+							<br>
+							<h2 align="left">日志查询:</h2>
+							<hr>
+					</td>	
+					<td>[[[page:id()]]]</td>
+				</tr>
+				<tr>
+					<td align="left">
+					  <br>
+					  <table>
+							<tbody>
+									<tr>
+										<td>开始时间:</td>
+										<td>[[[page:from()]]]</td>
+										<td>终止时间:</td>
+										<td>[[[page:to()]]]</td>
+									</tr>
+								<tr>
+									<td align="left">日志级别:</td>
+									<td align="left">[[[page:level()]]]</td>
+									<td align="left">日志来源:</td>
+									<td align="left">[[[page:src_ip()]]]</td>
+								</tr>
+								<tr>
+									<td align="left">规则分组:</td>
+									<td align="left">[[[page:rule_group()]]]</td>
+									<td align="left">规则ID: </td>
+									<td align="left">[[[page:rule_id()]]]</td>
+								</tr>
+								<tr>
+									<td align="left">每页条数:</td>
+									<td align="left">[[[page:page_count()]]]</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				
+			</table>
+			<table width="80%" align="center">
+				<tr>
+					<td>
+						<div style="float:left;width:80px;">[[[page:search()]]]</div>
+						<div style="float:left;"> [[[page:save()]]] </div>       
+						<div style="float:left;">[[[page:edit()]]]</div>
+					</td>
+				</tr>
+				<tr>
+					<td>[[[page:result()]]]</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<div align=center>
+				[[[footer:render()]]]
+			</div>
+			<script>
+			[[[script]]]
+			</script>
+	</body>
+</html>

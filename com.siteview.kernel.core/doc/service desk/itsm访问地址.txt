@@ -1,0 +1,4 @@
+192.168.9.65  administrator test
+
+
+NEWITSM		admin	manage

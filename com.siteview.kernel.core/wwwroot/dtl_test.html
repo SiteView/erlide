@@ -1,0 +1,150 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>{{title}}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+	
+	</head>
+	<body>
+ 	      <div align=left>
+		  <h2>sample:{{name}}<h2>
+		  </div>
+		  <div>
+		  <h3>For 标签:</h3>
+		  </div>
+		  <div align=left>
+		  web have {{primes|length}} primes:
+		  <br>
+		  {% for i in primes %} 
+		  {{forloop.counter}}:
+		  {{i}} <br>
+		  {% endfor %}
+		  </div>
+		  
+		  <div>
+		  <h3>if 标签:</h3>
+		  </div>
+		  <div align=left>
+			{% if primes %}
+				Number of primes: {{ primes|length }}
+			{% else %}
+				No primes.
+			{% endif %}
+		  </div>
+		  
+		  <div>
+		  <h3>ifequal 标签:</h3>
+		  </div>
+		  <div align=left>
+			{% for i in primes %} 
+			{% ifequal i 5 %}
+			{{forloop.counter}}:
+			{{i}} <br>
+			{% endifequal %}
+			{% endfor %}
+		  </div>		  
+		  
+		  <div>
+		  <h3>ifnotequal 标签:</h3>
+		  </div>
+		  <div align=left>
+			{% for i in primes %} 
+			{% ifnotequal i 5 %}
+			{{forloop.counter}}:
+			{{i}} <br>
+			{% endifnotequal %}
+			{% endfor %}
+		  </div>
+		  
+		  <div>
+		  <h3>tuple list:</h3>
+		  </div>
+		  <div align=left>
+			{% for x,y in tuplelist %} 
+			{{x}} {{y}}
+			<br>
+			{% endfor %}
+		  </div>
+		  
+		  <div>
+		  <h3>group list:</h3>
+		  </div>
+		  <div align=left>
+			<h4>we have {{groups|length}} groups:</h4>
+			{% for g in groups %}
+				<table border=1px>
+				{% for n,v in g %}
+					<tr>
+					<td><b>{{n}}</b></td><td>{{v}}</td>
+					<tr>
+				{% endfor %}
+				</table>
+				<br>
+			{% endfor %}
+		  </div>
+
+		  <div>
+		  <h3>monitor list:</h3>
+		  </div>
+		  <div align=left>
+			<h3>we have {{monitors|length}} monitors:</h3>
+			{% for m in monitors %}
+				<table border=1px>
+				{% for n,v in m %}
+					{% ifequal n  "id" %}
+					<tr>
+					<td><b>{{n}}</b></td>
+					<td>
+						{{v}}
+					</td>
+					<tr>
+					{% endifequal %}
+					{% ifequal n  "name" %}
+					<tr>
+					<td><b>{{n}}</b></td>
+					<td>
+						{{v}}
+					</td>
+					<tr>
+					{% endifequal %}
+					{% ifequal n  "class" %}
+					<tr>
+					<td><b>{{n}}</b></td>
+					<td>
+						{{v}}
+					</td>
+					<tr>
+					{% endifequal %}
+					
+					{% ifequal n  "frequency" %}
+					<tr>
+					<td><b>{{n}}</b></td>
+					<td>
+						{{v}}
+					</td>
+					<tr>
+					{% endifequal %}
+					
+					{% ifequal n  "parent" %}
+					<tr>
+					<td><b>{{n}}</b></td>
+					<td>
+						{{v}}
+					</td>
+					<tr>
+					{% endifequal %}
+				{% endfor %}
+				</table>
+				<br>
+			{% endfor %}
+		  </div>		  
+	<script>
+	[[[script]]]
+	</script>	
+	</body>
+</html>

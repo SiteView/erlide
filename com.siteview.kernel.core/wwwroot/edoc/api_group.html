@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_group</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_group</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of group operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of group operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#childs-1">childs/1</a></td><td>get the childs of a group.</td></tr>
+<tr><td valign="top"><a href="#create-2">create/2</a></td><td>create a group.</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete a group by groupid.</td></tr>
+<tr><td valign="top"><a href="#disable-2">disable/2</a></td><td>disable a group.</td></tr>
+<tr><td valign="top"><a href="#disable-4">disable/4</a></td><td>disable a group within a periodic time
+  DisableDesc is the descripition of disable,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}}).</td></tr>
+<tr><td valign="top"><a href="#disable_monitors-2">disable_monitors/2</a></td><td>disable group's monitors
+  DisableDesc is the descripition of disable.</td></tr>
+<tr><td valign="top"><a href="#disable_monitors-4">disable_monitors/4</a></td><td>disable group's monitors within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}}).</td></tr>
+<tr><td valign="top"><a href="#enable-1">enable/1</a></td><td>enable a group.</td></tr>
+<tr><td valign="top"><a href="#enable-2">enable/2</a></td><td>enable a group when Flag is true only enable items that are temporarily disabled.</td></tr>
+<tr><td valign="top"><a href="#enable_monitors-1">enable_monitors/1</a></td><td>enable monitors in a group.</td></tr>
+<tr><td valign="top"><a href="#enable_monitors-2">enable_monitors/2</a></td><td>enable monitors in a group.</td></tr>
+<tr><td valign="top"><a href="#find_group-1">find_group/1</a></td><td>find a group by group id,return data is key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#get_run_info-1">get_run_info/1</a></td><td>get group's runtime information.</td></tr>
+<tr><td valign="top"><a href="#health_add_default_monitors-1">health_add_default_monitors/1</a></td><td>add default monitors to health group.</td></tr>
+<tr><td valign="top"><a href="#health_childs-0">health_childs/0</a></td><td>get childs of health group,return monitor data list,each item is a key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#health_group_id-0">health_group_id/0</a></td><td>get health group id.</td></tr>
+<tr><td valign="top"><a href="#info-1">info/1</a></td><td>get group's information.</td></tr>
+<tr><td valign="top"><a href="#moveGroup-2">moveGroup/2</a></td><td>move a group to another group.</td></tr>
+<tr><td valign="top"><a href="#refresh-2">refresh/2</a></td><td>refresh a group.</td></tr>
+<tr><td valign="top"><a href="#update-1">update/1</a></td><td>update a group,GroupData is a key-value tuple list.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="childs-1">childs/1</a></h3>
+<div class="spec">
+<p><tt>childs(GId) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GId = atom()</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get the childs of a group
+ </p>
+
+<h3 class="function"><a name="create-2">create/2</a></h3>
+<div class="spec">
+<p><tt>create(ParentId, GroupData) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>ParentId = atom()</tt></li>
+<li><tt>GroupData = [{key, value}]</tt></li>
+</ul></p>
+</div><p>create a group
+ </p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(GroupId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>delete a group by groupid
+ </p>
+
+<h3 class="function"><a name="disable-2">disable/2</a></h3>
+<div class="spec">
+<p><tt>disable(GroupId, DisableDesc) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+</ul></p>
+</div><p>disable a group</p>
+
+<h3 class="function"><a name="disable-4">disable/4</a></h3>
+<div class="spec">
+<p><tt>disable(GroupId, DisableDesc, X3::StartTime, X4::EndTime) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>StartTime = tuple()</tt></li>
+<li><tt>EndTime = tuple()</tt></li>
+</ul></p>
+</div><p>disable a group within a periodic time
+  DisableDesc is the descripition of disable,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}})</p>
+
+<h3 class="function"><a name="disable_monitors-2">disable_monitors/2</a></h3>
+<div class="spec">
+<p><tt>disable_monitors(GroupId, DisableDesc) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>disable group's monitors
+  DisableDesc is the descripition of disable</p>
+
+<h3 class="function"><a name="disable_monitors-4">disable_monitors/4</a></h3>
+<div class="spec">
+<p><tt>disable_monitors(GroupId, DisableDesc, X3::StartTime, X4::EndTime) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>StartTime = tuple()</tt></li>
+<li><tt>EndTime = tuple()</tt></li>
+</ul></p>
+</div><p>disable group's monitors within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}})</p>
+
+<h3 class="function"><a name="enable-1">enable/1</a></h3>
+<div class="spec">
+<p><tt>enable(GroupId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>enable a group
+ </p>
+
+<h3 class="function"><a name="enable-2">enable/2</a></h3>
+<div class="spec">
+<p><tt>enable(GroupId::MonitorId, Flag) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Flag = ture | false</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>enable a group when Flag is true only enable items that are temporarily disabled
+ 	</p>
+
+<h3 class="function"><a name="enable_monitors-1">enable_monitors/1</a></h3>
+<div class="spec">
+<p><tt>enable_monitors(GroupId) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>enable monitors in a group</p>
+
+<h3 class="function"><a name="enable_monitors-2">enable_monitors/2</a></h3>
+<div class="spec">
+<p><tt>enable_monitors(GroupId, Flag) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GroupId = atom()</tt></li>
+<li><tt>Flag = bool()</tt></li>
+</ul></p>
+</div><p>enable monitors in a group</p>
+
+<h3 class="function"><a name="find_group-1">find_group/1</a></h3>
+<div class="spec">
+<p><tt>find_group(GID) -&gt; [{Key, Value}]</tt>
+<ul class="definitions"><li><tt>GID = atom()</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>find a group by group id,return data is key-value tuple list
+ </p>
+
+<h3 class="function"><a name="get_run_info-1">get_run_info/1</a></h3>
+<div class="spec">
+<p><tt>get_run_info(GId) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GId = atom()</tt></li>
+<li><tt>Result = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get group's runtime information
+ </p>
+
+<h3 class="function"><a name="health_add_default_monitors-1">health_add_default_monitors/1</a></h3>
+<div class="spec">
+<p><tt>health_add_default_monitors(Params) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Params = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>add default monitors to health group
+ </p>
+
+<h3 class="function"><a name="health_childs-0">health_childs/0</a></h3>
+<div class="spec">
+<p><tt>health_childs() -&gt; [Monitor]</tt>
+<ul class="definitions"><li><tt>Monitor = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get childs of health group,return monitor data list,each item is a key-value tuple list
+ </p>
+
+<h3 class="function"><a name="health_group_id-0">health_group_id/0</a></h3>
+<div class="spec">
+<p><tt>health_group_id() -&gt; atom()</tt></p>
+</div><p>get health group id
+ </p>
+
+<h3 class="function"><a name="info-1">info/1</a></h3>
+<div class="spec">
+<p><tt>info(GId) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GId = atom()</tt></li>
+<li><tt>Result = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get group's information
+ </p>
+
+<h3 class="function"><a name="moveGroup-2">moveGroup/2</a></h3>
+<div class="spec">
+<p><tt>moveGroup(GId, ParentId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GId = atom()</tt></li>
+<li><tt>ParentId = atom()</tt></li>
+<li><tt>Result = {ok, tuple()} | {error, atom()}</tt></li>
+</ul></p>
+</div><p>move a group to another group
+ </p>
+
+<h3 class="function"><a name="refresh-2">refresh/2</a></h3>
+<div class="spec">
+<p><tt>refresh(GId, Flag) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>Gid = atom()</tt></li>
+<li><tt>Flag = true | false</tt></li>
+</ul></p>
+</div><p>refresh a group
+ </p>
+
+<h3 class="function"><a name="update-1">update/1</a></h3>
+<div class="spec">
+<p><tt>update(GroupData) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>GroupData = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>update a group,GroupData is a key-value tuple list
+ </p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 9 2009, 15:13:16.</i></p>
+</body>
+</html>

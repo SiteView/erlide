@@ -31,6 +31,7 @@ exports(_VM) ->
 	?V8Obj([{"getTimedValue", fun getTimedValue/2}]).
 
 start_link() ->	
+	application:start(erlv8),
 	eresye:start(object_store),
 	log_analyzer:start(),
 	resource_pool:start().

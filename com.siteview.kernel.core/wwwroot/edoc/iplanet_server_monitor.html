@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module iplanet_server_monitor []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module iplanet_server_monitor []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Netscope Server Monitor.
+<p>Copyright © 2009 dragonflow, Inc.</p>
+
+<p><b>Version:</b> 1.0</p>
+<p><b>Authors:</b> Cheng kaiyang (<a href="mailto:kaiyang.cheng@dragonflow.com"><tt>kaiyang.cheng@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>Netscope Server Monitor.</p>
+ 
+  Description: For Netscope server version 4.1,6.0
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#getDefaultCounters-0">getDefaultCounters/0</a></td><td>Get default counters.</td></tr>
+<tr><td valign="top"><a href="#getTemplateFile-0">getTemplateFile/0</a></td><td>Appoint template file path.</td></tr>
+<tr><td valign="top"><a href="#get_classifier-1">get_classifier/1</a></td><td>Set default threshold value.</td></tr>
+<tr><td valign="top"><a href="#get_counter_name-1">get_counter_name/1</a></td><td>Return counters name list.</td></tr>
+<tr><td valign="top"><a href="#get_template_property-0">get_template_property/0</a></td><td>Add properties to template property list.</td></tr>
+<tr><td valign="top"><a href="#new-0">new/0</a></td><td>Start the monitor instance.</td></tr>
+<tr><td valign="top"><a href="#process_body-1">process_body/1</a></td><td>Get counters value from response,using regular expression.</td></tr>
+<tr><td valign="top"><a href="#update-0">update/0</a></td><td>Run the monitor.</td></tr>
+<tr><td valign="top"><a href="#verify-1">verify/1</a></td><td>page check.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="getDefaultCounters-0">getDefaultCounters/0</a></h3>
+<div class="spec">
+<p><tt>getDefaultCounters() -&gt; Counters</tt>
+<ul class="definitions"><li><tt>Counters = [{Counternumber, Countername}]</tt></li>
+<li><tt>Counternumber = integer()</tt></li>
+<li><tt>Countername = string()</tt></li>
+</ul></p>
+</div><p>Get default counters.</p>
+
+<h3 class="function"><a name="getTemplateFile-0">getTemplateFile/0</a></h3>
+<div class="spec">
+<p><tt>getTemplateFile() -&gt; File</tt>
+<ul class="definitions"><li><tt>File = string()</tt></li>
+</ul></p>
+</div><p>Appoint template file path.</p>
+
+<h3 class="function"><a name="get_classifier-1">get_classifier/1</a></h3>
+<div class="spec">
+<p><tt>get_classifier(X1::Flag) -&gt; Threshold</tt>
+<ul class="definitions"><li><tt>Flag = error | warning | good</tt></li>
+<li><tt>Threshold = [{Attribute, Opera, Value}]</tt></li>
+<li><tt>Attribute = atom()</tt></li>
+<li><tt>Opera = atom()</tt></li>
+<li><tt>Value = integer() | atom() | string()</tt></li>
+</ul></p>
+</div><p>Set default threshold value.</p>
+
+<h3 class="function"><a name="get_counter_name-1">get_counter_name/1</a></h3>
+<div class="spec">
+<p><tt>get_counter_name(R::Counters) -&gt; [Countersname]</tt>
+<ul class="definitions"><li><tt>Counters = [{Counternumber, Countername}]</tt></li>
+<li><tt>Counternumber = integer()</tt></li>
+<li><tt>Countername = string()</tt></li>
+</ul></p>
+</div><p>Return counters name list.</p>
+
+<h3 class="function"><a name="get_template_property-0">get_template_property/0</a></h3>
+<div class="spec">
+<p><tt>get_template_property() -&gt; PropertyList</tt>
+<ul class="definitions"><li><tt>PropertyList = [PropertyRecord]</tt></li>
+<li><tt>PropertyRecord = <a href="#type-record">record()</a></tt></li>
+</ul></p>
+</div><p>Add properties to template property list.</p>
+
+<h3 class="function"><a name="new-0">new/0</a></h3>
+<div class="spec">
+<p><tt>new() -&gt; ok</tt></p>
+</div><p>Start the monitor instance.</p>
+
+<h3 class="function"><a name="process_body-1">process_body/1</a></h3>
+<div class="spec">
+<p><tt>process_body(R::Response) -&gt; [Result]</tt>
+<ul class="definitions"><li><tt>Response = string()</tt></li>
+<li><tt>Result = {value, {Countername, Countervalue}}</tt></li>
+<li><tt>Countername = string()</tt></li>
+<li><tt>Countervalue = string()</tt></li>
+</ul></p>
+</div><p>Get counters value from response,using regular expression.</p>
+
+<h3 class="function"><a name="update-0">update/0</a></h3>
+<div class="spec">
+<p><tt>update() -&gt; ok</tt></p>
+</div><p><p>Run the monitor.</p>
+ 
+ Description:before get counters value,check whether url is fit with counters name
+ Get counters value with url</p>
+
+<h3 class="function"><a name="verify-1">verify/1</a></h3>
+<div class="spec">
+<p><tt>verify(Params) -&gt; ErrorList</tt>
+<ul class="definitions"><li><tt>Params = [{atom(), integer() | string()}]</tt></li>
+<li><tt>ErrorList = [string()]</tt></li>
+</ul></p>
+</div><p><p>page check.</p>
+ 
+  Description:check url,counters,timeout</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 24 2009, 14:15:38.</i></p>
+</body>
+</html>

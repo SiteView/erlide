@@ -1,0 +1,1500 @@
+aix √¸¡ÓºØ∫œ
+
+AIX Version 5
+Copyright IBM Corporation, 1982, 2008.
+login:
+
+
+1
+/usr/bin/df -k
+
+$ /usr/bin/df -k
+Filesystem    1024-blocks      Free %Used    Iused %Iused Mounted on
+/dev/hd4         11796480  11439004    4%     5617     1% /
+/dev/hd2          5242880   3472012   34%    39467     5% /usr
+/dev/hd9var       2097152   1806560   14%      936     1% /var
+/dev/hd3         10485760   9980748    5%     1663     1% /tmp
+/dev/hd1          2097152   2096452    1%        8     1% /home
+/proc                   -         -    -         -     -  /proc
+/dev/hd10opt      2097152   1985264    6%     3230     1% /opt
+/dev/fslv02      52428800  43874360   17%    29566     1% /oracle
+
+2
+/usr/bin/df -k /proc;
+
+
+$ /usr/bin/df -k /proc;
+Filesystem    1024-blocks      Free %Used    Iused %Iused Mounted on
+/proc                   -         -    -         -     -  /proc
+
+3./usr/sbin/lsps -s
+
+$ /usr/sbin/lsps -s
+Total Paging Space   Percent Used
+      24576MB               1%
+
+4./usr/bin/vmstat -s
+
+$ /usr/bin/vmstat -s
+           1455500008 total address trans. faults
+               676037 page ins
+              5066906 page outs
+                  632 paging space page ins
+                 2065 paging space page outs
+                    0 total reclaims
+            389129577 zero filled pages faults
+              8676351 executable filled pages faults
+               374239 pages examined by clock
+                    0 revolutions of the clock hand
+               143098 pages freed by the clock
+             15626721 backtracks
+                    0 free frame waits
+                    0 extend XPT waits
+               642402 pending I/O waits
+              5742898 start I/Os
+              1138417 iodones
+           3983886169 cpu context switches
+             78556431 device interrupts
+            110031348 software interrupts
+           2184759375 decrementer interrupts
+             35975889 mpc-sent interrupts
+             35975887 mpc-receive interrupts
+              1750335 phantom interrupts
+                    0 traps
+          16846334566 syscalls
+
+5./usr/bin/vmstat 3 2
+
+$ /usr/bin/vmstat 3 2
+
+System configuration: lcpu=8 mem=15744MB
+
+kthr    memory              page              faults        cpu
+----- ----------- ------------------------ ------------ -----------
+ r  b   avm   fre  re  pi  po  fr   sr  cy  in   sy  cs us sy id wa
+ 1  0 1866848 39189   0   0   0   0    0   0  68 3749 3204  1  1 99  0
+ 2  0 1866838 39199   0   0   0   0    0   0  66 72333 3403  2  2 96  0
+
+6.export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o \"%a\""
+
+$ /usr/bin/vmstat 3 2
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o \"%a\""
+
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/rpc.statd -d 0 -t 50                                                                    "
+"haemd HACMP 2 rac SECNOSUPPORT                                                                    "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "haemd HACMP 2 rac SECNOSUPPORT                                                                    "
+"/usr/sbin/gsclvmd                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/gsclvmd                                                                                 "
+"harmad -t HACMP -n rac                                                                            "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "harmad -t HACMP -n rac                                                                            "
+"run_rcovcmd                                                                                       "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "run_rcovcmd                                                                                       "
+"ora_mman_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_mman_sm72                                                                                     "
+"sendmail: accepting connections                                                                   "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "sendmail: accepting connections                                                                   "
+"/usr/sbin/qdaemon                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/qdaemon                                                                                 "
+"/bin/sh /etc/init.crsd run                                                                        "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/bin/sh /etc/init.crsd run                                                                        "
+"ora_lms0_soc2                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lms0_soc2                                                                                     "
+"/usr/sbin/sddsrv                                                                                  "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/sddsrv                                                                                  "
+"/usr/sbin/snmpmibd                                                                                "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/snmpmibd                                                                                "
+"/usr/sbin/gsclvmd -r 30 -i 300 -t 300 -c 00c0ccb500004c000000012625c6a8bd -v 0                    "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/usr/sbin/gsclvmd -r 30 -i 300 -t 300 -c 00c0ccb500004c000000012625c6a8bd -v 0                    "
+"ora_smon_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_smon_sm72                                                                                     "
+"oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+"oraclesm72 (LOCAL=NO)                                                                             "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (LOCAL=NO)                                                                             "
+"oracleimscmdb2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                  "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oracleimscmdb2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                  "
+"oraclesm72 (LOCAL=NO)                                                                             "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (LOCAL=NO)                                                                             "
+"ora_lmon_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lmon_sm72                                                                                     "
+"ora_reco_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_reco_imscmdb2                                                                                 "
+"ora_smon_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_smon_imscmdb2                                                                                 "
+"ora_lck0_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lck0_sm72                                                                                     "
+"ora_pmon_soc2                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_pmon_soc2                                                                                     "
+"oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+"ora_diag_soc2                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_diag_soc2                                                                                     "
+"ora_q000_soc2                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_q000_soc2                                                                                     "
+"ora_mmon_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_mmon_imscmdb2                                                                                 "
+"oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+"ora_qmnc_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_qmnc_sm72                                                                                     "
+"ora_cjq0_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_cjq0_imscmdb2                                                                                 "
+"ora_lms1_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lms1_imscmdb2                                                                                 "
+"oracleimscmdb2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                  "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oracleimscmdb2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                  "
+"ora_lmd0_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lmd0_imscmdb2                                                                                 "
+"oraclesm72 (LOCAL=NO)                                                                             "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (LOCAL=NO)                                                                             "
+"ora_psp0_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_psp0_imscmdb2                                                                                 "
+"oraclesm72 (LOCAL=NO)                                                                             "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (LOCAL=NO)                                                                             "
+"ora_diag_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_diag_imscmdb2                                                                                 "
+"ora_pmon_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_pmon_imscmdb2                                                                                 "
+"/oracle/product/10.2.0/crs/bin/evmlogger.bin -o /oracle/product/10.2.0/crs/evm/log/evmlogger.info "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "/oracle/product/10.2.0/crs/bin/evmlogger.bin -o /oracle/product/10.2.0/crs/evm/log/evmlogger.info "
+"ora_pmon_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_pmon_sm72                                                                                     "
+"ora_ckpt_imscmdb2                                                                                 "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_ckpt_imscmdb2                                                                                 "
+"oraclesoc2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesoc2 (DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))                                      "
+"ora_q001_soc2                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_q001_soc2                                                                                     "
+"<defunct>                                                                                         "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "<defunct>                                                                                         "
+"ora_lms0_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_lms0_sm72                                                                                     "
+"oraclesm72 (LOCAL=NO)                                                                             "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "oraclesm72 (LOCAL=NO)                                                                             "
+"telnetd -a                                                                                        "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "telnetd -a                                                                                        "
+"ora_j000_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_j000_sm72                                                                                     "
+"ora_q000_sm72                                                                                     "
+export COLUMNS=200; setenv COLUMNS 200;
+
+export COLUMNS=200; setenv COLUMNS 200; /usr/bin/ps -e -o "ora_q000_sm72                                                                                     "
+
+7. /usr/bin/ps -el
+
+$ /usr/bin/ps -el
+       F S UID    PID   PPID   C PRI NI ADDR    SZ    WCHAN    TTY  TIME CMD
+  200003 A   0      1      0   0  60 20 1480   656               -  0:13 init
+  240001 A   0  69740      1   0  60 20 c026d480   480 f10001001076eec0      -  6:34 getty
+  240001 A   0  73802      1   0  60 20 36f42480   708               -  0:00 sh
+  240401 A   0  77950      1   0  60 20 1f01fe480    84  155fc60      -  0:00 uprintfd
+  240001 A   0  86098      1   0  60 20 1601b7590   428  117ce88      -  0:09 shlap64
+   40001 A   0  90340      1   0  60 20 30182480   928               -  0:00 dtlogin
+  240001 A   0  98442      1   0  60 20 1401b5480   508 f10001003a39fbb8      -  0:02 cron
+  240001 A   0 106666      1   0  60 20 e016f480   504        *      - 16:43 syncd
+  240001 A 500 118856      1   0  60 20 c708d590 96620               -  0:56 oracle
+  240001 A 500 127072      1   0  60 20 c726d590 92808               -  5:12 oracle
+  240001 A   0 139512  82184   0  60 20 1e053f480   284 f100060001e64a08      -  0:00 writesrv
+  240001 A 500 143524      1   0  60 20 87009590 94472 f1000600006a48c8      -  6:11 oracle
+  240001 A 500 147630      1   0  60 20 157214590 92472               -  0:38 oracle
+  340401 A   0 151706  82184   0  60 20 c032d480  2056        *      -  3:22 clcomd
+  240001 A 500 163954      1   0  60 20 1275b3590 99808 f1000100397733b8      -  0:38 oracle
+  242001 A 500 168080      1   0  60 20 46f05480 29028        *      -  4:36 java
+  240001 A 500 172278      1   0  60 20 1b755a590 40592        *      -  5:54 racgimon
+10240103 A   0 180342 258526   0  38 -- 190438480  2092        *      -  3:22 hats_nim
+  240001 A   0 184350  82184   0  60 20 120533480   288 f10001003a23cbe0      -  0:00 rpc.lockd
+  240001 A 500 188496      1   0  60 20 7121590 103928               -  1:59 oracle
+  240001 A   0 192690  82184   0  60 20 20523480   156               -  0:00 biod
+10240103 A   0 196654 258526   0  38 -- 70446480  2092        *      -  2:58 hats_nim
+  240103 A 500 200818      1   0  39 -- 1a691b590 107400               - 18:53 oracle
+  240001 A 500 205036 221494   0  40  0 1b1e3a590  3972               -  2:34 oclsomon.bin
+  240001 A 500 213148      1   0  60 20 137252590 102832               -  3:36 oracle
+  240001 A 500 217250      1   0  60 20 1f6ffe590 92752               -  0:00 oracle
+  240001 A 500 221232      1   0  60 20 141cd5590 94736               -  1:46 oracle
+  200001 A   0 225468 201078   0  60 20 1d41480  1364               -  0:00 rpc.ttdbserver
+  240001 A   0 233644  82184   0  60 20 b04ca590  1524               -  0:03 aixmibd64
+  240001 A 500 237606      1   0  60 20 1a743b590 94712 f1000600044d50c8      -  0:43 oracle
+  240001 A   0 241754  82184   0  60 20 b04ea590  1108               -  0:00 hostmibd64
+  240001 A   0 245764  74026   0  60 20 1a76db480   152 f10001003a23bd30      -  0:00 sleep
+  240001 A 500 258218      1   0  60 20 137412590 107068               - 13:32 oracle
+  240001 A 500 262160      1   0  60 20 21d03590 107068               - 13:26 oracle
+  240001 A 205 266336 217398   0  60 20 167737480   712           pts/1  0:00 ksh
+  240001 A 500 274668      1   0  60 20 107251590 107468               -  7:53 oracle
+  240001 A 500 282794 348288   0  40  0 51c64480   688               -  0:00 sh
+  240001 A 500 286730      1   0  60 20 1572b4590 92472               -  0:36 oracle
+  240001 A 500 295100      1   0  60 20 e71ef590 96620               -  1:11 oracle
+  240001 A 500 299012      1   0  60 20 77546590 92876 f10001100ff2fca0      -  1:45 oracle
+  240001 A 500 303244      1   0  60 20 37202590 93760 f10001100ff2fda8      -  0:15 oracle
+   40801 A 500 307240      1   0  60 20 1a701b590  1272               -  0:00 ons
+  240001 A 500 311366      1   0  60 20 36942590 94528               -  1:07 oracle
+  240001 A 500 323778      1   0  60 20 1872b9590 96620               -  0:57 oracle
+  240001 A   0 327784 299386   0  60 20 17080590 58244        *      - 220:34 crsd.bin
+  240001 A 500 331912      1   0  60 20 1a74bb590 29760        *      -  0:17 tnslsnr
+  240001 A 500 339978      1   0  60 20 c6f8d590 92876 f10006000449b8c8      -  0:00 oracle
+  240001 A 500 344070      1   0  60 20 127433590 108072               -  1:11 oracle
+  240001 A   0 348288  74026   0  40  0 1268d3480   808               -  0:00 sh
+  240001 A 500 352256      1   0  60 20 1a70bb590 102348               -  0:23 oracle
+  240001 A 500 356482      1   0  60 20 136992590 102348               -  0:23 oracle
+  240001 A 500 364678      1   0  60 20 c6f2d590 104208               -  2:53 oracle
+  240001 A 500 368862      1   0  60 20 e75af590 99808 f10001003a39f258      -  0:37 oracle
+  240001 A 500 372798      1   0  60 20 1177b0590 93876               -  0:00 oracle
+  240001 A 500 381108      1   0  60 20 1570d4590 104304               -  2:53 oracle
+  240001 A 500 385198      1   0  60 20 157114590 108072               -  0:43 oracle
+  240001 A 500 389294      1   0  60 20 a75eb590 99728               -  3:06 oracle
+  240001 A 500 393344      1   0  60 20 870e9590 103928               -  2:02 oracle
+  240001 A 500 397470      1   0  60 20 87469590 94884               -  1:45 oracle
+  240103 A 500 405650      1   0  39 -- 374a2590 107460               - 18:43 oracle
+  240001 A 500 417928      1   0  60 20 172c0590 94324               -  2:35 oracle
+  240001 A 500 430294      1   0  60 20 127233590 107476               -  8:14 oracle
+  240001 A 500 434328      1   0  60 20 57564590 92876 f10001003a39f8a0      -  1:39 oracle
+  240001 A 500 442370      1   0  60 20 f744e590 99892 f10001003a02afb8      -  0:49 oracle
+  240001 A 500 450782  73802   0  60 20 1f6f5e590 22140        *      -  2:47 evmd.bin
+  240001 A 500 491598      1   0  60 20 137292590 92480               -  0:15 oracle
+  240001 A 500 495814      1   0  60 20 1277b3590 92532               -  0:00 oracle
+  200001 A 205 499852 266336   0  60 20 1176b0480   852           pts/1  0:00 ps
+  240401 A   0  45508  82184   0  60 20 301480  1620        *      -  0:00 IBM.ServiceRMd
+  240001 A 500  61756      1   0  60 20 27043590 94704 f10006000082d0c8      -  0:42 oracle
+  240001 A   0  74026      1   0  60 20 125cf3480   800               - 49:46 sh
+   40401 A   0  78256      1   0  60 20 c018d480   836  1123ce0      -  0:00 errdemon
+  240001 A   0  82184      1   0  60 20 1b01ba480   856               -  0:00 srcmstr
+  240001 A   0 102838  82184   0  60 20 60207480   936               -  0:00 portmap
+  240001 A   0 119188  82184   0  60 20 1701f6480   348               -  0:03 syslogd
+  240001 A   0 123296  82184   0  60 20 30322480  1180               -  0:00 snmpdv3ne
+  240001 A 500 127442      1   0  60 20 1971d8590 92808               -  5:21 oracle
+  240001 A   0 131458      1   0  60 20 110230480  4600 f100011010e5b7b0      -  1:34 xmwlm
+  240001 A 500 135588      1   0  60 20 270e3590 99756               -  3:04 oracle
+  240c01 A   0 139678  82184   0  39 20 a034b480  6704        *      -  6:56 clstrmgr
+  340001 A   0 143760  82184   0  39 20 190258480  2336 f100070f10803c40      -  4:40 rmcd
+  240001 A   0 147896  82184   0  60 20 1702f6480  3024        *      -  0:09 IBM.CSMAgentRMd
+  240001 A 500 151972      1   0  60 20 187279590 92752               -  0:00 oracle
+  240001 A 500 160192      1   0  60 20 1b753a590 92480               -  0:15 oracle
+  240001 A 500 164130      1   0  60 20 470e5590 92808               -  5:12 oracle
+  240001 A 205 172516 491960   0  60 20 67807480   716 f100060005c0c078  pts/0  0:00 ksh
+  240001 A 500 176520      1   0  60 20 1c761d590 94700 f1000600044430c8      -  0:35 oracle
+   40001 A 500 180568 307240   0  60 20 1c737d590  4660        *      -  0:33 ons
+  240001 A 500 188792      1   0  60 20 97508590 40280        *      -  5:38 racgimon
+  240001 A 500 192880      1   0  60 20 37682590 92540               -  0:00 oracle
+  240001 A 500 196964      1   0  60 20 1775b6590 38568        *      -  5:36 racgimon
+  240001 A   0 201078  82184   0  60 20 10440480   456               -  0:04 inetd
+  240001 A 500 205072      1   0  60 20 27283590 94116               -  1:53 oracle
+  240001 A 500 209186      1   0  60 20 d72ac590 94560               -  1:22 oracle
+  200001 A 500 213416 282794   0  40  0 41d25590 14128        *      - 26:40 ocssd.bin
+  200001 A   0 217398 201078   0  60 20 c76cd480   716               -  0:00 telnetd
+  240001 A 500 221494 246184   0  40  0 d698c480   688               -  0:00 sh
+  240001 A   0 229636  82184   0  60 20 d04cc480  2648        *      - 17:05 IBM.HostRMd
+  240001 A 500 233922      1   0  60 20 c704d590 94324               -  2:36 oracle
+  240001 A   0 238054  82184   0  60 20 30522480   656               -  0:00 muxatmd
+  240103 A 500 241926      1   0  39 -- e718f590 107408               - 21:55 oracle
+  240001 A   0 246184  74026   0  40  0 147455480   800               -  0:00 sh
+  240001 A 500 250264      1   0  60 20 127093590 94472               -  0:42 oracle
+  240001 A 500 254364      1   0  60 20 d728c590 108072               -  0:44 oracle
+10240103 A   0 258526  82184   0  31 -- 110410480  8672        *      -  2:15 hatsd
+10340103 A   0 262652  82184   0  39 -- 1d045c480 21004               -  0:39 hagsd
+  240001 A   1 266566  82184   0  60 20 4e1480  1368               -  0:00 rpc.statd
+  340001 A   0 270706  82184   0  60 20 190478480  6364               -  0:00 haemd
+  240001 A   0 274770  82184   0  60 20 1104b0480   676        *      -  0:08 gsclvmd
+  240001 A   0 278946  82184   0  60 20 190498480  5832               -  2:22 harmad
+  240801 A   0 283054 139678   0  60 20 403c5480   612               -  0:00 hacmprd_run_rcovcmd
+  240001 A 500 287014      1   0  60 20 97568590 92480               -  0:16 oracle
+  240001 A   0 291082  82184   0  60 20 501480  1996               -  0:14 sendmail
+  240001 A   0 295286  82184   0  60 20 90528480   268 f1000004d0108200      -  0:00 qdaemon
+  240001 A   0 299386      1   0  60 20 70ba6480   720               -  0:00 sh
+  240103 A 500 303446      1   0  39 -- 1972b8590 107400               - 18:50 oracle
+  340001 A   0 307692  82184   0  60 20 1e04ff480  3172        *      - 12:23 sddsrv
+  240001 A   0 311662  82184   0  60 20 1d04dc590  1288               -  0:00 snmpmibd64
+  240001 A   0 315686 274770   0  60 20 1c04dd480 10376        *      -  0:14 gsclvmd
+  240001 A 500 319780      1   0  60 20 67267590 94524               -  0:49 oracle
+  240001 A 500 327990      1   0  60 20 1b743a590 99888 f10001100ff2ff60      -  0:39 oracle
+  240001 A 500 332058      1   0  60 20 107651590 94708 f1000600005e58c8      -  0:01 oracle
+  240001 A 500 336222      1   0  60 20 e744f590 99888 f10001003a39ff60      -  0:52 oracle
+  240001 A 500 340336      1   0  60 20 47005590 94656 f100060003b448c8      -  0:02 oracle
+  240001 A 500 344450      1   0  60 20 972a8590 107068               - 13:52 oracle
+  240001 A 500 348660      1   0  60 20 c1e2d590 92752               -  0:00 oracle
+  240001 A 500 356794      1   0  60 20 1f72de590 94468               -  0:43 oracle
+  240001 A 500 360762      1   0  60 20 1f70be590 104952               -  2:05 oracle
+  240001 A 500 364928      1   0  60 20 e72ef590 97748               -  2:31 oracle
+  240001 A 500 368920      1   0  60 20 187079590 99824 f10001100ff2f448      -  0:39 oracle
+  240001 A 500 373230      1   0  60 20 1d723c590 102832               -  3:42 oracle
+  240001 A 500 377168      1   0  60 20 187319590 94504               -  1:23 oracle
+  240001 A 500 381316      1   0  60 20 166f57590 104204               -  2:49 oracle
+  240001 A 500 385472      1   0  60 20 187619590 93760 f10001003a02aeb0      -  0:15 oracle
+  240001 A 500 389486      1   0  60 20 17200590 102344               -  0:24 oracle
+  240001 A 500 393630      1   0  60 20 772e6590 99724               -  3:07 oracle
+  240103 A 500 397698      1   0  39 -- 1e74df590 107460               - 18:47 oracle
+  240001 A 500 401666      1   0  60 20 d74ac590 93760 f10001003a02acf8      -  0:15 oracle
+  240001 A 500 405932      1   0  60 20 1b741a590 107468               -  7:52 oracle
+  240001 A 500 410078      1   0  60 20 1a755b590 94952 f1000600005fe8c8      -  0:00 oracle
+  240001 A 500 418206      1   0  60 20 f750e590 92472               -  0:41 oracle
+  240001 A 500 422272      1   0  60 20 46ee5590 94688 f10006000082d8c8      -  2:04 oracle
+  240001 A 500 426490      1   0  60 20 c750d590 102832               -  3:36 oracle
+  240001 A 500 430516      1   0  60 20 b74aa590 97748               -  2:29 oracle
+  240001 A 500 434602 450782   0  60 20 61d27590  7848               -  0:07 evmlogger.bin
+  240001 A 500 438766      1   0  60 20 1f74fe590 97748               -  2:31 oracle
+  240001 A 500 442764      1   0  60 20 97528590 94328               -  2:40 oracle
+  240001 A 500 451044      1   0  60 20 c70cd590 92876 f10001100ff2f760      -  1:36 oracle
+  240001 A 500 459020      1   0  60 20 17680590 92572               -  0:00 oracle
+  250005 Z 500 463324 168080   1  60 20                             0:00 <defunct>
+  240103 A 500 475514      1   0  39 -- 1871f9590 107416               - 21:54 oracle
+  240001 A 500 483690      1   0  60 20 1d761c590 94680 f1000600006a40c8      -  3:08 oracle
+  240001 A 500 487742      1   0  60 20 37782590 92452               -  0:00 oracle
+  200001 A   0 491960 201078   0  60 20 117110480   716               -  0:00 telnetd
+  240001 A 500 496010      1   0  60 20 67087590 93864               -  0:00 oracle
+  240001 A 500 500134      1   0  60 20 197618590 92540               -  0:00 oracle
+
+
+
+
+8
+
+$ /usr/bin/ps
+    PID    TTY  TIME CMD
+ 266336  pts/1  0:00 -ksh
+ 413996  pts/1  0:00 /usr/bin/ps
+
+9
+
+$ /usr/bin/ps -fp
+/usr/bin/ps: A flag requires a parameter: p
+Usage: ps [-ANPaedfklmMZ] [-n namelist] [-F Format] [-o specifier[=header],...]
+                [-p proclist][-G|-g grouplist] [-t termlist] [-U|-u userlist] [-c classlist] [ -T pid] [ -L pidlist]
+10
+
+$ /usr/bin/ps -fp 266366
+     UID    PID   PPID   C    STIME    TTY  TIME CMD
+
+11
+
+$/bin/ps -e -o vsz=MEMSIZE$
+MEMSIZE
+    624
+    432
+    512
+     84
+    396
+    824
+    472
+    504
+   7936
+   4124
+    512
+    276
+   5788
+   3788
+   1848
+  11124
+  28992
+  40096
+   1944
+    288
+  15244
+    156
+   1944
+  18716
+   3964
+  14148
+   4068
+   6052
+   1128
+   1188
+   6028
+    980
+  18384
+  18384
+    516
+  18784
+    492
+   3788
+   7936
+   4192
+   5076
+    472
+   5844
+   7936
+  44648
+  14908
+   4192
+  19388
+    612
+  13664
+  13664
+  15524
+  11124
+  15620
+  19388
+  11044
+  15244
+   6200
+  18776
+    152
+   5640
+  18792
+   4192
+  11208
+  18860
+   3796
+   3856
+   5184
+   1352
+   6020
+    604
+    780
+    820
+    904
+   5344
+    328
+   1068
+   4124
+   4564
+  11072
+   4800
+   1804
+   2212
+   4068
+   3796
+   4124
+    520
+   6016
+   3860
+  39784
+  38072
+    432
+   5432
+   5876
+  13772
+    660
+    492
+   2348
+   5640
+    616
+  18724
+    604
+   5788
+  19388
+   7864
+  16636
+   1320
+   6140
+    580
+   5652
+    460
+   3796
+   1000
+    212
+    524
+  18716
+   3020
+    980
+  10280
+   5840
+  11204
+   6024
+  11204
+   5972
+  18384
+   4068
+   5784
+  16268
+   9064
+  11140
+  14148
+   5820
+  15520
+   5076
+  13660
+  11040
+  18776
+   5076
+  18784
+   6268
+   3768
+   3788
+   6004
+  14148
+   9064
+   6200
+   9064
+   5644
+   4192
+
+  18732
+   3856
+   5996
+   3856
+    660
+
+
+12
+/bin/ps -e -o user
+
+$ /bin/ps -e -o user
+    USER
+    root
+    root
+    root
+    root
+    root
+    root
+    root
+    root
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+  oracle
+    root
+    root
+  oracle
+    root
+    root
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+    root
+  oracle
+    root
+  oracle
+  oracle
+ youlong
+ youlong
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+    root
+    root
+    root
+    root
+  oracle
+    root
+    root
+  oracle
+    root
+  oracle
+    root
+    root
+    root
+  oracle
+  oracle
+  oracle
+ youlong
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+  oracle
+  oracle
+    root
+  oracle
+    root
+  oracle
+    root
+  oracle
+    root
+  oracle
+  oracle
+    root
+    root
+  daemon
+    root
+    root
+    root
+    root
+  oracle
+    root
+    root
+    root
+  oracle
+    root
+    root
+    root
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+  oracle
+
+  oracle
+  oracle
+  oracle
+  oracle
+    root
+
+13
+/usr/bin/vmstat 2 2
+
+$ /usr/bin/vmstat 2 2
+
+System configuration: lcpu=8 mem=15744MB
+
+kthr    memory              page              faults        cpu
+----- ----------- ------------------------ ------------ -----------
+ r  b   avm   fre  re  pi  po  fr   sr  cy  in   sy  cs us sy id wa
+ 2  0 1867884 38023   0   0   0   0    0   0  30 3030 2930  0  1 99  0
+ 2  0 1867848 38059   0   0   0   0    0   0  47 4315 3032  1  1 98  0
+
+14 
+
+/bin/uname -m
+$ /bin/uname -m
+00C0CCD54C00
+
+15 
+/bin/uname -a
+
+$ /bin/uname -a
+AIX ora2 3 5 00C0CCD54C00
+
+16 
+
+/usr/sbin/ifconfig -a
+$ /usr/sbin/ifconfig -a
+en0: flags=5e080863,c0<UP,BROADCAST,NOTRAILERS,RUNNING,SIMPLEX,MULTICAST,GROUPRT,64BIT,CHECKSUM_OFFLOAD(ACTIVE),PSEG,LARGESEND,CHAIN>
+        inet 10.228.11.8 netmask 0xffffffe0 broadcast 10.228.11.31
+        inet 10.228.11.18 netmask 0xffffffe0 broadcast 10.228.11.31
+         tcp_sendspace 131072 tcp_recvspace 65536 rfc1323 1
+en1: flags=5e080863,c0<UP,BROADCAST,NOTRAILERS,RUNNING,SIMPLEX,MULTICAST,GROUPRT,64BIT,CHECKSUM_OFFLOAD(ACTIVE),PSEG,LARGESEND,CHAIN>
+        inet 192.168.0.2 netmask 0xffffff00 broadcast 192.168.0.255
+         tcp_sendspace 131072 tcp_recvspace 65536 rfc1323 0
+lo0: flags=e08084b<UP,BROADCAST,LOOPBACK,RUNNING,SIMPLEX,MULTICAST,GROUPRT,64BIT>
+        inet 127.0.0.1 netmask 0xff000000 broadcast 127.255.255.255
+        inet6 ::1/0
+         tcp_sendspace 131072 tcp_recvspace 131072 rfc1323 1
+
+17
+
+/bin/cat /proc/meminfo
+
+$ /bin/cat /proc/meminfo
+cat: 0652-050 Cannot open /proc/meminfo.
+
+18
+
+/usr/sbin/prtconf -v
+$ /usr/sbin/prtconf -v
+
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk90          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400600000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV0813106
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk91          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400700000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV0813107
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk92          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400800000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV0813108
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk93          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400900000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV0813109
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk94          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400A00000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV081310A
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk95          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400B00000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV081310B
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk96          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400C00000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV081310C
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  hdisk97          U78A0.001.DNWH8VT-P1-C2-T1-W5005076309088199-L4031400D00000000  IBM FC 2107
+
+        Manufacturer................IBM
+        Machine Type and Model......2107900
+        Serial Number...............75NV081310D
+        EC Level.....................213
+        Device Specific.(Z0)........10
+        Device Specific.(Z1)........0102
+        Device Specific.(Z2)........075
+        Device Specific.(Z3)........22709
+        Device Specific.(Z4)........10
+        Device Specific.(Z5)........00
+
+  pci4             U78A0.001.DNWH8VT-P1                                            PCI Express Bus
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  ent0             U78A0.001.DNWH8VT-P1-C1-T1                                      2-Port 10/100/1000 Base-TX PCI-Express Adapter (14104003)
+
+      2-P NIC-TX PCI-e:
+        EC Level....................D76567
+        Part Number.................46K6601
+        Manufacture ID..............YL1026
+        FRU Number..................46K6601
+        Network Address.............00145E7665A8
+        ROM Level.(alterable).......EP0170
+        Hardware Location Code......U78A0.001.DNWH8VT-P1-C1-T1
+
+  ent1             U78A0.001.DNWH8VT-P1-C1-T2                                      2-Port 10/100/1000 Base-TX PCI-Express Adapter (14104003)
+
+      2-P NIC-TX PCI-e:
+        EC Level....................D76567
+        Part Number.................46K6601
+        Manufacture ID..............YL1026
+        FRU Number..................46K6601
+        Network Address.............00145E7665A9
+        ROM Level.(alterable).......EP0170
+        Hardware Location Code......U78A0.001.DNWH8VT-P1-C1-T2
+
+  pci3             U78A0.001.DNWH8VT-P1                                            PCI Bus
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  pci2             U78A0.001.DNWH8VT-P1                                            PCI Bus
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  pci1             U78A0.001.DNWH8VT-P1                                            PCI Bus
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  usbhc0           U78A0.001.DNWH8VT-P1                                            USB Host Controller (33103500)
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  usbhc1           U78A0.001.DNWH8VT-P1                                            USB Host Controller (33103500)
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  pci0             U78A0.001.DNWH8VT-P1                                            PCI Bus
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  sissas0          U78A0.001.DNWH8VT-P1-T9                                         PCI-X266 Planar 3Gb SAS Adapter
+
+        ROM Level.(alterable).......03200060
+        Customer Card ID Number.....572C
+        Hardware Location Code......U78A0.001.DNWH8VT-P1-T9
+
+  sas0             U78A0.001.DNWH8VT-P1-T9                                         Controller SAS Protocol
+  ses0             U78A0.001.DNWH8VT-P2-Y1                                         SAS Enclosure Services Device
+
+        ROM Level.(alterable).......  04
+        Hardware Location Code......U78A0.001.DNWH8VT-P2-Y1
+
+  hdisk0           U78A0.001.DNWH8VT-P2-D3                                         SAS Disk Drive (146800 MB)
+
+        Manufacturer................IBM
+        Machine Type and Model......HUS153014VLS300
+        FRU Number..................10N7232
+        ROS Level and ID............41343238
+        Serial Number...............JFYS35SC
+        EC Level....................H17923Y
+        Part Number.................42R4234
+        Device Specific.(Z0)........000005329F001002
+        Device Specific.(Z1)........VBIPA428
+        Device Specific.(Z2)........0068
+        Device Specific.(Z3)........09237
+        Device Specific.(Z4)........
+        Device Specific.(Z5)........22
+        Device Specific.(Z6)........H17923Y
+        Hardware Location Code......U78A0.001.DNWH8VT-P2-D3
+
+  hdisk1           U78A0.001.DNWH8VT-P2-D6                                         SAS Disk Drive (146800 MB)
+
+        Manufacturer................IBM
+        Machine Type and Model......HUS153014VLS300
+        FRU Number..................10N7232
+        ROS Level and ID............41343238
+        Serial Number...............JFYV2B9C
+        EC Level....................H17923Y
+        Part Number.................42R4234
+        Device Specific.(Z0)........000005329F001002
+        Device Specific.(Z1)........VBIPA428
+        Device Specific.(Z2)........0068
+        Device Specific.(Z3)........09242
+        Device Specific.(Z4)........
+        Device Specific.(Z5)........22
+        Device Specific.(Z6)........H17923Y
+        Hardware Location Code......U78A0.001.DNWH8VT-P2-D6
+
+  sata0            U78A0.001.DNWH8VT-P1-T9                                         Controller SATA Protocol
+  cd0              U78A0.001.DNWH8VT-P2-D2                                         SATA DVD-ROM Drive
+
+        Manufacturer................IBM
+        Machine Type and Model......DROM0020581
+        ROS Level and ID............DA33
+        Device Specific.(Z0)........058002028F000010
+        Part Number.................42R5292
+        EC Level....................H87201
+        FRU Number..................42R5293
+        Hardware Location Code......U78A0.001.DNWH8VT-P2-D2
+
+  lhea0            U78A0.001.DNWH8VT-P1                                            Logical Host Ethernet Adapter (l-hea)
+
+        Hardware Location Code......U78A0.001.DNWH8VT-P1
+
+  ent3             U78A0.001.DNWH8VT-P1-C6-T2                                      Logical Host Ethernet Port (lp-hea)
+
+      IBM Host Ethernet Adapter:
+        Network Address.............00215EB1A921
+
+  ent2             U78A0.001.DNWH8VT-P1-C6-T1                                      Logical Host Ethernet Port (lp-hea)
+
+      IBM Host Ethernet Adapter:
+        Network Address.............00215EB1A920
+
+  L2cache0                                                                         L2 Cache
+  mem0                                                                             Memory
+  proc0                                                                            Processor
+  proc2                                                                            Processor
+  proc4                                                                            Processor
+  proc6                                                                            Processor
+
+19 /bin/rpm
+
+$ /bin/rpm
+RPM version 3.0.5
+Copyright (C) 1998 - Red Hat Software
+This may be freely redistributed under the terms of the GNU GPL
+
+usage: rpm {--help}
+       rpm {--version}
+       rpm {--initdb}   [--dbpath <dir>]
+       rpm {--install -i} [-v] [--hash -h] [--percent] [--force] [--test]
+                        [--replacepkgs] [--replacefiles] [--root <dir>]
+                        [--excludedocs] [--includedocs] [--noscripts]
+                        [--rcfile <file>] [--ignorearch] [--dbpath <dir>]
+                        [--prefix <dir>] [--ignoreos] [--nodeps] [--allfiles]
+                        [--ftpproxy <host>] [--ftpport <port>] [--justdb]
+                        [--httpproxy <host>] [--httpport <port>]
+                        [--noorder] [--relocate oldpath=newpath]
+                        [--badreloc] [--notriggers] [--excludepath <path>]
+                        [--ignoresize] file1.rpm ... fileN.rpm
+       rpm {--upgrade -U} [-v] [--hash -h] [--percent] [--force] [--test]
+                        [--oldpackage] [--root <dir>] [--noscripts]
+                        [--excludedocs] [--includedocs] [--rcfile <file>]
+                        [--ignorearch]  [--dbpath <dir>] [--prefix <dir>]
+                        [--ftpproxy <host>] [--ftpport <port>]
+                        [--httpproxy <host>] [--httpport <port>]
+                        [--ignoreos] [--nodeps] [--allfiles] [--justdb]
+                        [--noorder] [--relocate oldpath=newpath]
+                        [--badreloc] [--excludepath <path>] [--ignoresize]
+                        file1.rpm ... fileN.rpm
+       rpm {--query -q} [-afpg] [-i] [-l] [-s] [-d] [-c] [-v] [-R]
+                        [--scripts] [--root <dir>] [--rcfile <file>]
+                        [--whatprovides] [--whatrequires] [--requires]
+                        [--triggeredby] [--ftpport] [--ftpproxy <host>]
+                        [--httpproxy <host>] [--httpport <port>]
+                        [--ftpport <port>] [--provides] [--triggers] [--dump]
+                        [--changelog] [--dbpath <dir>] [targets]
+       rpm {--verify -V -y} [-afpg] [--root <dir>] [--rcfile <file>]
+                        [--dbpath <dir>] [--nodeps] [--nofiles] [--noscripts]
+                        [--nomd5] [targets]
+       rpm {--setperms} [-afpg] [target]
+       rpm {--setugids} [-afpg] [target]
+       rpm {--freshen -F} file1.rpm ... fileN.rpm
+       rpm {--erase -e} [--root <dir>] [--noscripts] [--rcfile <file>]
+                        [--dbpath <dir>] [--nodeps] [--allmatches]
+                        [--justdb] [--notriggers] rpackage1 ... packageN
+       rpm {-b|t}[plciba] [-v] [--short-circuit] [--clean] [--rcfile  <file>]
+                        [--sign] [--nobuild] [--timecheck <s>] ]
+                        [--target=platform1[,platform2...]]
+                        [--rmsource] [--rmspec] specfile
+       rpm {--rmsource} [--rcfile <file>] [-v] specfile
+       rpm {--rebuild} [--rcfile <file>] [-v] source1.rpm ... sourceN.rpm
+       rpm {--recompile} [--rcfile <file>] [-v] source1.rpm ... sourceN.rpm
+       rpm {--resign} [--rcfile <file>] package1 package2 ... packageN
+       rpm {--addsign} [--rcfile <file>] package1 package2 ... packageN
+       rpm {--checksig -K} [--nopgp] [--nogpg] [--nomd5] [--rcfile <file>]
+                           package1 ... packageN
+       rpm {--rebuilddb} [--rcfile <file>] [--dbpath <dir>]
+       rpm {--querytags}
+20 
+
+/usr/bin/showrev -p
+
+$ /usr/bin/showrev -p
+/bin/sh: /usr/bin/showrev:  not found.
+
+21
+
+/bin/netstat -i -n
+
+$ /bin/netstat -i -n
+Name  Mtu   Network     Address            Ipkts Ierrs    Opkts Oerrs  Coll
+en0   1500  link#2      0.14.5e.76.65.a8  22171805     0 14451967     3     0
+en0   1500  10.228.11   10.228.11.8       22171805     0 14451967     3     0
+en0   1500  10.228.11   10.228.11.18      22171805     0 14451967     3     0
+en1   1500  link#3      0.14.5e.76.65.a9  36614717     0 37533335     2     0
+en1   1500  192.168.0   192.168.0.2       36614717     0 37533335     2     0
+lo0   16896 link#1                         8182463     0  8185204     0     0
+lo0   16896 127         127.0.0.1          8182463     0  8185204     0     0
+lo0   16896 ::1                            8182463     0  8185204     0     0
+
+22
+
+/bin/netstat -i
+
+$ /bin/netstat -i
+Name  Mtu   Network     Address            Ipkts Ierrs    Opkts Oerrs  Coll
+en0   1500  link#2      0.14.5e.76.65.a8  22172100     0 14452187     3     0
+en0   1500  10.228.11   ora2              22172100     0 14452187     3     0
+en0   1500  10.228.11   ora2-vip          22172100     0 14452187     3     0
+en1   1500  link#3      0.14.5e.76.65.a9  36615665     0 37534364     2     0
+en1   1500  192.168.0   ora2-pri          36615665     0 37534364     2     0
+lo0   16896 link#1                         8182629     0  8185370     0     0
+lo0   16896 127         loopback           8182629     0  8185370     0     0
+lo0   16896 ::1                            8182629     0  8185370     0     0
+
+23
+/bin/ls -A -1 -p
+
+$ /bin/ls -A -1 -p
+.profile
+.sh_history
+
+24
+
+/bin/netstat -s
+
+$ /bin/netstat -s
+icmp:
+        698961 calls to icmp_error
+        0 errors not generated because old message was icmp
+        Output histogram:
+                echo reply: 26248
+                destination unreachable: 698961
+        0 messages with bad code fields
+        0 messages < minimum length
+        0 bad checksums
+        0 messages with bad length
+        Input histogram:
+                echo reply: 48755
+                destination unreachable: 690336
+                echo: 26251
+        26248 message responses generated
+igmp:
+        1 message received
+        0 messages received with too few bytes
+        0 messages received with bad checksum
+        0 membership queries received
+        0 membership queries received with invalid field(s)
+        1 membership report received
+        0 membership reports received with invalid field(s)
+        1 membership report received for groups to which we belong
+        3 membership reports sent
+tcp:
+        16062103 packets sent
+                10971920 data packets (1443507823 bytes)
+                0 data packets (0 bytes) retransmitted
+                1940550 ack-only packets (1814541 delayed)
+                0 URG only packets
+                4 window probe packets
+                3069761 window update packets
+                79868 control packets
+                804012 large sends
+                2434953402 bytes sent using largesend
+                65160 bytes is the biggest largesend
+        22728055 packets received
+                10801523 acks (for 1443577794 bytes)
+                191834 duplicate acks
+                0 acks for unsent data
+                19869513 packets (3214453614 bytes) received in-sequence
+                1071 completely duplicate packets (1258 bytes)
+                0 old duplicate packets
+                0 packets with some dup. data (0 bytes duped)
+                36258 out-of-order packets (73709 bytes)
+                1 packets (260 byte) of data after window
+                1 window probe
+                31950 window update packets
+                2512 packets received after close
+                0 packets with bad hardware assisted checksum
+                0 discarded for bad checksums
+                0 discarded for bad header offset fields
+                0 discarded because packet too short
+                1732 discarded by listeners
+                0 discarded due to listener's queue full
+                1675508 ack packet headers correctly predicted
+                11624971 data packet headers correctly predicted
+        26100 connection requests
+        38979 connection accepts
+        63756 connections established (including accepts)
+        65200 connections closed (including 784 drops)
+        0 connections with ECN capability
+        0 times responded to ECN
+        1318 embryonic connections dropped
+        10663346 segments updated rtt (of 10664033 attempts)
+        0 segments with congestion window reduced bit set
+        0 segments with congestion experienced bit set
+        0 resends due to path MTU discovery
+        22 path MTU discovery terminations due to retransmits
+        121 retransmit timeouts
+                0 connections dropped by rexmit timeout
+        0 fast retransmits
+                0 when congestion window less than 4 segments
+        0 newreno retransmits
+        0 times avoided false fast retransmits
+        0 persist timeouts
+                0 connections dropped due to persist timeout
+        1556 keepalive timeouts
+                1538 keepalive probes sent
+                18 connections dropped by keepalive
+        0 times SACK blocks array is extended
+        0 times SACK holes array is extended
+        0 packets dropped due to memory allocation failure
+        248 connections in timewait reused
+        0 delayed ACKs for SYN
+        0 delayed ACKs for FIN
+        0 send_and_disconnects
+        0 spliced connections
+        0 spliced connections closed
+        0 spliced connections reset
+        0 spliced connections timeout
+        0 spliced connections persist timeout
+        0 spliced connections keepalive timeout
+        0 TCP checksum offload disabled during retransmit
+        0 Connection dropped due to bad ACKs
+        0 Connection dropped due to duplicate SYN packets
+udp:
+        35029569 datagrams received
+        0 incomplete headers
+        0 bad data length fields
+        0 bad checksums
+        698961 dropped due to no socket
+        643900 broadcast/multicast datagrams dropped due to no socket
+        0 socket buffer overflows
+        33686708 delivered
+        34546052 datagrams output
+ip:
+        66034804 total packets received
+        0 bad header checksums
+        0 with size smaller than minimum
+        0 with data size < data length
+        0 with header length < data size
+        0 with data length < header length
+        0 with bad options
+        0 with incorrect version number
+        9205375 fragments received
+        0 fragments dropped (dup or out of space)
+        0 fragments dropped after timeout
+        1693560 packets reassembled ok
+        57832628 packets for this host
+        690323 packets for unknown/unsupported protocol
+        0 packets forwarded
+        22 packets not forwardable
+        0 redirects sent
+        51391471 packets sent from this host
+        0 packets sent with fabricated ip header
+        0 output packets dropped due to no bufs, etc.
+        0 output packets discarded due to no route
+        2107798 output datagrams fragmented
+        10658290 fragments created
+        0 datagrams that can't be fragmented
+        0 IP Multicast packets dropped due to no receiver
+        0 successful path MTU discovery cycles
+        0 path MTU rediscovery cycles attempted
+        0 path MTU discovery no-response estimates
+        0 path MTU discovery response timeouts
+        0 path MTU discovery decreases detected
+        0 path MTU discovery packets sent
+        0 path MTU discovery memory allocation failures
+        0 ipintrq overflows
+        0 with illegal source
+        0 packets processed by threads
+        0 packets dropped by threads
+        0 packets dropped due to the full socket receive buffer
+        0 dead gateway detection packets sent
+        0 dead gateway detection packet allocation failures
+        0 dead gateway detection gateway allocation failures
+
+ipv6:
+        16 total packets received
+        Input histogram:
+                TCP: 16
+        0 with size smaller than minimum
+        0 with data size < data length
+        0 with incorrect version number
+        0 with illegal source
+        0 input packets without enough memory
+        0 fragments received
+        0 fragments dropped (dup or out of space)
+        0 fragments dropped after timeout
+        0 packets reassembled ok
+        16 packets for this host
+        0 packets for unknown/unsupported protocol
+        0 packets forwarded
+        0 packets not forwardable
+        0 too big packets not forwarded
+        16 packets sent from this host
+        0 packets sent with fabricated ipv6 header
+        0 output packets dropped due to no bufs, etc.
+        0 output packets without enough memory
+        0 output packets discarded due to no route
+        0 output datagrams fragmented
+        0 fragments created
+        0 packets dropped due to the full socket receive buffer
+        0 packets not delivered due to bad raw IPv6 checksum
+icmpv6:
+        0 calls to icmp6_error
+        0 errors not generated because old message was icmpv6
+        Output histogram:
+                unreachable: 0
+                packets too big: 0
+                time exceeded: 0
+                parameter problems: 0
+                redirects: 0
+                echo requests: 0
+                echo replies: 0
+                group queries: 0
+                group reports: 0
+                group terminations: 0
+                router solicitations: 0
+                router advertisements: 0
+                neighbor solicitations: 0
+                neighbor advertisements: 0
+        0 messages with bad code fields
+        0 messages < minimum length
+        0 bad checksums
+        0 messages with bad length
+        Input histogram:
+                unreachable: 0
+                packets too big: 0
+                time exceeded: 0
+                parameter problems: 0
+                echo requests: 0
+                echo replies: 0
+                group queries: 0
+                        bad group queries: 0
+                group reports: 0
+                        bad group reports: 0
+                        our groups' reports: 0
+                group terminations: 0
+                bad group terminations: 0
+                router solicitations: 0
+                bad router solicitations: 0
+                router advertisements: 0
+                bad router advertisements: 0
+                neighbor solicitations: 0
+                bad neighbor solicitations: 0
+                neighbor advertisements: 0
+                bad neighbor advertisements: 0
+                redirects: 0
+                bad redirects: 0
+                mobility calls when not started: 0
+                home agent address discovery requests: 0
+                bad home agent address discovery requests: 0
+                home agent address discovery replies: 0
+                bad home agent address discovery replies: 0
+                prefix solicitations: 0
+                bad prefix solicitations: 0
+                prefix advertisements: 0
+                bad prefix advertisements: 0
+        0 message responses generated
+
+25
+
+/usr/sbin/swap -l
+
+$ /usr/sbin/swap -l
+/bin/sh: /usr/sbin/swap: 0403-006 Execute permission denied.
+
+26
+
+$ swap -l
+ksh: swap: 0403-006 Execute permission denied.
+
+27
+
+$ /usr/bin/ls -l
+total 0
+
+28
+
+$ /usr/bin/grep
+Usage: grep [-r] [-R] [-H] [-L] [-E|-F] [-c|-l|-q] [-insvxbhwy] [-p[parasep]] -e pattern_list...
+        [-f pattern_file...] [file...]
+Usage: grep [-r] [-R] [-H] [-L]  [-E|-F] [-c|-l|-q] [-insvxbhwy] [-p[parasep]] [-e pattern_list...]
+        -f pattern_file... [file...]
+Usage: grep [-r] [-R] [-H] [-L] [-E|-F] [-c|-l|-q] [-insvxbhwy] [-p[parasep]] pattern_list [file...]
+
+29
+
+
+$ /usr/bin/cut
+Usage: cut -b List [-n] [File...]
+   or: cut -c List [File...]
+   or: cut -f List [-d Character] [-s] [File...]
+
+
+30
+
+$ /usr/bin/date
+Thu May 13 14:08:57 BEIST 2010
+
+31
+
+$ /usr/bin/date -u
+Thu May 13 06:10:22 GMT 2010
+
+32
+
+/usr/bin/ls -l 
+
+$ /usr/bin/ls -l
+total 0
+
+33
+
+/usr/bin/ls -l -R
+
+$ /usr/bin/ls -l -R
+total 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

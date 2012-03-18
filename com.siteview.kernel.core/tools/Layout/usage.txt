@@ -1,0 +1,43 @@
+部署说明：
+	1、包括文件
+	Erlang.dll
+	Layout.exe
+	Layout.exe.config
+	log4net.dll
+	yWorks.yFilesNET.Algorithms.dll
+	2、启动方式
+	格式:Layout.exe 【节点短名称】 【cookie】
+	如：Layout.exe layout 3ren
+
+排版函数：
+	方法：
+		layout:do(DeviceList, EdgeList, LayoutType, NodeSize, Options)->LayoutResult
+	参数说明：
+		DeviceList:[Id1,Id2,Id3…]
+		DeviceList = ['1300:166480:547003','1300:166479:516007','1300:166478:250001',,,,]
+
+		EdgeList:[{LeftId1,RightId1},{LeftId2,RightId2},{LeftId3,RightId3},…]
+		EdgeList = [{'1300:166480:547003','1300:166479:516007'},{'1300:166478:250001','1300:166479:516007'},,,]
+		LeftId:线段起始端点Id，值为Device中的Id
+		RightId:线段终止端点Id，值为Device中的Id                                
+
+		LayoutType为:organic | circular | rectangular | vertical
+		       organic:普遍排版(默认)
+		       circular:环形
+		       rectangular:直角
+		       vertical:垂直
+
+		NodeSize ->{w,h}
+		w:设备的宽，默认值是32
+		h:设备的高，默认值是32
+
+		Options->[{key1, value1},{key2,value2}......]
+		为附加参数，所有为key:value的键值对，key为原子，而value为任意值，根据排版类型的不同而不同
+
+		LayoutResult->{ok, [{devices,[{Id1, {X1, Y1}},{ID2, {X2, Y2}}...]}, {edges, [{X1, Y1},{X2, Y2}]}]}
+			      {error, Reason}
+
+调用方式：
+	rpc:call(Node, layout, do, [DeviceList, EdgeList, LayoutType, NodeSize, Options]) -> LayoutResult.
+	Node->layout@Host
+

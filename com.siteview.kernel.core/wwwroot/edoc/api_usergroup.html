@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_usergroup</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_usergroup</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>interface of usergroup operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+
+<h2><a name="description">Description</a></h2>interface of usergroup operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#changePassword-2">changePassword/2</a></td><td>change a user's password.</td></tr>
+<tr><td valign="top"><a href="#create-4">create/4</a></td><td>create a user group with right on some groups or nodes,Nodes is a string contains of group id or  node id,at:"Id1,Id2,..."
+   GIDs is like["gid1","gid2"].</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete a user group.</td></tr>
+<tr><td valign="top"><a href="#delete_user-1">delete_user/1</a></td><td>delete user,UID is user's id.</td></tr>
+<tr><td valign="top"><a href="#update-3">update/3</a></td><td>modify usergroup's base information.</td></tr>
+<tr><td valign="top"><a href="#user_create-9">user_create/9</a></td><td>create a new user,return {ok,create_user_ok} is ok,else is error.</td></tr>
+<tr><td valign="top"><a href="#user_validate-2">user_validate/2</a></td><td>validate a user with name and password.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="changePassword-2">changePassword/2</a></h3>
+<div class="spec">
+<p><tt>changePassword(Id, NewPass) -&gt; {ok, change_password_ok} | {error, db_error} | {error, parameter_error}</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>NewPass = string()</tt></li>
+</ul></p>
+</div><p>change a user's password</p>
+
+<h3 class="function"><a name="create-4">create/4</a></h3>
+<div class="spec">
+<p><tt>create(Name, Nodes, RightStruct, AdminiRights) -&gt; {ok, [Id]} | {error, [Reason]}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Nodes = string()</tt></li>
+<li><tt>RightStruct = {GIDs, Rights} | [{GIDs, Rights}]</tt></li>
+<li><tt>GIDs = list()</tt></li>
+<li><tt>Rights = [Right]</tt></li>
+<li><tt>Right = atom()</tt></li>
+</ul></p>
+</div><p>create a user group with right on some groups or nodes,Nodes is a string contains of group id or  node id,at:"Id1,Id2,..."
+   GIDs is like["gid1","gid2"]</p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(Id) -&gt; {error, [Reason]} | {ok, [Result]}</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>delete a user group</p>
+
+<h3 class="function"><a name="delete_user-1">delete_user/1</a></h3>
+<div class="spec">
+<p><tt>delete_user(UId) -&gt; any()</tt></p>
+</div><p>delete user,UID is user's id.</p>
+
+<h3 class="function"><a name="update-3">update/3</a></h3>
+<div class="spec">
+<p><tt>update(Id, NewName, Nodes) -&gt; {error, [Reason]} | {ok, [Return]}</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>NewName = string()</tt></li>
+<li><tt>Nodes = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Return = string()</tt></li>
+</ul></p>
+</div><p>modify usergroup's base information</p>
+
+<h3 class="function"><a name="user_create-9">user_create/9</a></h3>
+<div class="spec">
+<p><tt>user_create(Name, Password, LdapServer, LdapSecurity, Desc, Title, Email, Disabled, Group) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+<li><tt>LdapServer = string()</tt></li>
+<li><tt>Desc = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+<li><tt>Email = string()</tt></li>
+<li><tt>Disabled = string()</tt></li>
+<li><tt>Group = string()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>create a new user,return {ok,create_user_ok} is ok,else is error
+ </p>
+
+<h3 class="function"><a name="user_validate-2">user_validate/2</a></h3>
+<div class="spec">
+<p><tt>user_validate(Name, Password) -&gt; {ok, Info, GroupName} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+<li><tt>Info = string()</tt></li>
+<li><tt>GroupName = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>validate a user with name and password</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 13 2009, 11:05:36.</i></p>
+</body>
+</html>

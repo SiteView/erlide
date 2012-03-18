@@ -1,0 +1,86 @@
+%%扫描：
+DefaultSnmpParam = [{snmpVer,"v2"},{port,161},{getCommunity,"public"},{setCommunity,"private"},{timeout,1000},
+										{authType,""},{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""}],
+DefineSnmpParam = [[{ip,"192.168.0.248"},{snmpVer,"v2"},{port,161},{getCommunity,"dragon"},{timeout,5000}],
+										[{ip,"192.168.0.251,192.168.0.252"},{snmpVer,"v2"},{port,161},{getCommunity,"public1"},{timeout,5000}]],
+ScanParam = [{scanSeed,""},{includeIp,"192.168.0.1-192.168.0.254"},{threads,10},{depth,1},{scanType,"snmpping"}],
+Name = "hexinwang",
+{ok,ConfigId} = api_nnm:scan_config_submit([{name,Name},{defaultSnmpParam,DefaultSnmpParam},{defineSnmpParam,DefineSnmpParam},{scanParam,ScanParam}]).
+
+{ok,ConfigId} = api_nnm:scan_config_submit([{id,'F0FBCCC51FF4E604098BA0A26C92B2D33DF4BA84'},{name,Name},{defaultSnmpParam,DefaultSnmpParam},{defineSnmpParam,DefineSnmpParam},{scanParam,ScanParam}]).
+api_nnm:scan_start([{configId,ConfigId},{incrScan,true}]).
+api_nnm:scan_info_get([{index,1}]).
+api_nnm:scan_stop([]).
+Param = [{name,"default"}].
+api_nnm:scan_config_get([]).
+
+%%snmp测试：
+SnmpParam=[{ip,"172.20.25.2"},{port,161},{snmpVer,"v2"},{getCommunity,"nn_mobile"},{setCommunity,"dragon"},{authType,""},{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""},{timeout,2500}].
+Oid = "1.3.6.1.2.1".
+api_nnm:snmp_get(SnmpParam,Oid).
+api_nnm:snmp_get_next(SnmpParam,Oid).
+api_nnm:snmp_get_tree(SnmpParam,Oid).
+snmp_get_bulk(SnmpParam,Oid,1,0).
+VarsAndVals = [Oid,i,2].
+snmp_set(SnmpParam, VarsAndVals).
+
+%%实时取数据：
+IdList = api_nnm:db_read("machine",[id,host],[],"").
+Id='1297:478811:812001'.
+api_nnm:realtime_target_get(Id, ipTable).
+api_nnm:realtime_target_get(Id, aftTable).
+api_nnm:realtime_target_get(Id, arpTable).
+api_nnm:realtime_target_get(Id, interfaceTable).
+api_nnm:realtime_target_get(Id, cpuTable).
+api_nnm:realtime_target_get(Id, memoryTable).
+api_nnm:realtime_target_get(Id, routeTable).
+api_nnm:realtime_target_get(Id, ospfTable).
+api_nnm:realtime_target_get(Id, bgpTable).
+api_nnm:realtime_target_get(Id, directTable).
+
+%%拓扑图：
+api_nnm:topochart_get([]).
+api_nnm:db_read("nnm_discovery_topo_chart",[id,topoSet],[],"").
+api_nnm:topochart_get('C0D32BE0B4F53C9DF21E0C69DA847D757A39B6C9').
+nnm_discovery_dal:reLayout('C0D32BE0B4F53C9DF21E0C69DA847D757A39B6C9',organic).
+
+%%IP管理
+api_nnm:ipDistribution("192.168.0.1", "192.168.0.254").
+
+%%monitor服务：
+nnm_monitor:start_monitor().
+nnm_monitor:stop_monitor().
+api_nnm:monitor_get_interval().
+api_nnm:monitor_get_device_data(arpTable,{id,[]}).
+api_nnm:monitor_get_device_data(aftTable,[{id,[]}]).
+api_nnm:monitor_get_device_data(cpuTable,[{id,[]}]).
+api_nnm:monitor_get_device_data(memoryTable,[{id,[]}]).
+api_nnm:monitor_get_device_data(linkchart,{id,['1291:268022:817000','1291:268022:786000']}).
+
+api_nnm:monitor_get_port_data(octets,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(ucastPkts,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(nUcastPkts,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(discards,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(errors,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(bandwidthRate,[{'1298:863752:296000',["10006","10005"]}]).
+api_nnm:monitor_get_port_data(operStatus,[{'1298:863752:437000',["1"]}]).
+
+%%数据库操作：
+D=api_nnm:db_read("nnm_discovery_pcList",[id,ip,discoverTime],[],"ip@A"),
+IdList = [proplists:get_value(id,X) || X <- D].
+api_nnm:db_read("nnm_discovery_pcList",[id,ip,mac,discoverTime,activeTime],["discoverTime>'2011-01-05 14:10:00'"],"ip@A").
+api_nnm:db_delete("machine",IdList).
+
+api_nnm:db_read("nnm_baseIpMac",[id,info],[],"").
+api_nnm:db_write("nnm_baseIpMac",[[{id,'456323764043A217A812C3220DCFEFFDC9361513'},{info,["192.168.0.2","aaaa.aaaa.aaaa"]}]]).
+
+Param = [{ip,"172.20.6.7"},{snmpVer,"v2"},{port,161},{getCommunity,"nn_mobile"},{setCommunity,"nn_mobile"},{timeout,2500},
+					{authType,""},{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""}].
+api_nnm:device_refresh(Param).
+
+Device = [{id,'1298:870382:468000'},{ip,"172.20.7.7"}].
+api_nnm:device_submit(Device).
+
+%%打印日志
+nnm_discovery_util:writeFile(D,"dd.log",write).
+

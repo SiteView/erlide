@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_schedule</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_schedule</h1>
+<ul class="index"><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#create-1">create/1</a></td><td>create a schedule,return schedule id.</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete a schedule.</td></tr>
+<tr><td valign="top"><a href="#get_info-1">get_info/1</a></td><td>get detail infomation of a schedule.</td></tr>
+<tr><td valign="top"><a href="#get_info_by_name-1">get_info_by_name/1</a></td><td>get schedule by name.</td></tr>
+<tr><td valign="top"><a href="#get_infos-0">get_infos/0</a></td><td>get all of schedule.</td></tr>
+<tr><td valign="top"><a href="#get_schedulename-1">get_schedulename/1</a></td><td>get name of schedule.</td></tr>
+<tr><td valign="top"><a href="#name_existed-1">name_existed/1</a></td><td>Test the existence of the name.</td></tr>
+<tr><td valign="top"><a href="#update-2">update/2</a></td><td>update a schedule.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="create-1">create/1</a></h3>
+<div class="spec">
+<p><tt>create(X1::{Name, Type, SunData, MonData, TueData, WedData, ThuData, FriData, SatData}) -&gt; {ok, Result} | {error, Resean}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Type = string()</tt></li>
+<li><tt>SunData = string() | {On, string(), string()}</tt></li>
+<li><tt>On = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>create a schedule,return schedule id.
+ 	<br>Type is "hours","range" or "absolute".
+ 	<br>On is "enabled" or "disabled".
+ 	<br>when Type is "range",SunData is like {"enabled","10:00","20:00"}
+ 	<br>when Type is "hours",SunData is like {"enabled","10:00,12:00","11:00,13:00"}
+ 	<br>when Type is "absolute",SunData is like "10:00"</p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(Id) -&gt; ok | error</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+</ul></p>
+</div><p>delete a schedule</p>
+
+<h3 class="function"><a name="get_info-1">get_info/1</a></h3>
+<div class="spec">
+<p><tt>get_info(Id) -&gt; [] | Data</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>Data = [{key, value}]</tt></li>
+</ul></p>
+</div><p>get detail infomation of a schedule
+  <br>when Type is "range",the example of Data is:
+  <br>[{id,'0E84F3C0B5B3CEB768E3A6906574C8475E4FA58D'},
+  {name,"aasa"},
+  {type,"range"},
+  {sunday,{"enabled","",""}},
+  {monday,{"enabled","",""}},
+  {tuesday,{"disabled","",""}},
+  {wednesday,{"enabled","",""}},
+  {thursday,{"enabled","10:10","17:30"}},
+  {friday,{"enabled","",""}},
+  {saturday,{"enabled","",""}}]
+ 	
+  <br>when Type is "absolute",the example of Data is:
+  <br>[{id,'812A6F4716FB54E52D347829FEFDC3832B8BDF73'},
+  {name,"test1"},
+  {type,"absolute"},
+  {sunday,[]},
+  {monday,"12:00"},
+  {tuesday,[]},
+  {wednesday,[]},
+  {thursday,[]},
+  {friday,"14:00"},
+  {saturday,[]}]</p>
+
+<h3 class="function"><a name="get_info_by_name-1">get_info_by_name/1</a></h3>
+<div class="spec">
+<p><tt>get_info_by_name(Name) -&gt; [] | [Data]</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Data = [{key, value}]</tt></li>
+</ul></p>
+</div><p>get schedule by name
+ 	<br>
+ 	<dl>
+ 	<dt>Data</dt><dd>See <a href="#get_info-1"><code>get_info/1</code></a></dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="get_infos-0">get_infos/0</a></h3>
+<div class="spec">
+<p><tt>get_infos() -&gt; [Data]</tt></p>
+</div><p>get all of schedule
+  <br>the structure of Data see <a href="#get_info-1"><code>get_info/1</code></a></p>
+
+<h3 class="function"><a name="get_schedulename-1">get_schedulename/1</a></h3>
+<div class="spec">
+<p><tt>get_schedulename(Id) -&gt; {ok, Name} | {error, Err}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Err = string()</tt></li>
+</ul></p>
+</div><p>get name of schedule</p>
+
+<h3 class="function"><a name="name_existed-1">name_existed/1</a></h3>
+<div class="spec">
+<p><tt>name_existed(Name) -&gt; ok | not_existed | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>Test the existence of the name</p>
+
+<h3 class="function"><a name="update-2">update/2</a></h3>
+<div class="spec">
+<p><tt>update(Id, X2::{Name, Type, SunData, MonData, TueData, WedData, ThuData, FriData, SatData}) -&gt; ok | error</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Type = string()</tt></li>
+<li><tt>SunData = string() | {On, string(), string()}</tt></li>
+<li><tt>On = string()</tt></li>
+</ul></p>
+</div><p>update a schedule
+ 	<br>Type is "range","hours" or "absolute".
+ 	<br>On is "enabled" or "disabled".
+ 	<br>see <a href="#create-1"><code>create/1</code></a></p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 21 2010, 15:19:06.</i></p>
+</body>
+</html>

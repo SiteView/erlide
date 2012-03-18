@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module action []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module action []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>base class of action.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Version:</b> {1.0}
+ </p>
+<p><b>Authors:</b> shixianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>base class of action
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#check_enabled-1">check_enabled/1</a></td><td>check a alert is enable or disabled,From is a time when this action is set,format is {{Y,M,D},{HH,MM,SS}},N is a counter for Unit,
+  when N is 1 and Unit is "minutes",it means 1 minute.Unit can be "minutes","Ft and Tt is time string as "12:30:59",Fd and Td is date string as "2009-11-12".</td></tr>
+<tr><td valign="top"><a href="#createMessage-2">createMessage/2</a></td><td>create message from template file,Dir is the directory contain template file,Tempalte is the file name of template.</td></tr>
+<tr><td valign="top"><a href="#execute-0">execute/0</a></td><td>base function.</td></tr>
+<tr><td valign="top"><a href="#logAlert-4">logAlert/4</a></td><td>record a alert  to log file,Type is alert type,Title is alert title,Content is the alert content,Result is "ok" or "fail".</td></tr>
+<tr><td valign="top"><a href="#new-0">new/0</a></td><td>create a new instance of action.</td></tr>
+<tr><td valign="top"><a href="#process_msg-2">process_msg/2</a></td><td>process the template content read from file ,Tmp is data read from template file,Monitor is the alert target.</td></tr>
+<tr><td valign="top"><a href="#trigger-1">trigger/1</a></td><td>trigger a action.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="check_enabled-1">check_enabled/1</a></h3>
+<div class="spec">
+<p><tt>check_enabled(Enabled) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>Enabled = true | {false, permanently} | {false, {next, From, N, Unit}} | {false, {schedule, Ft, Fd, Tt, Td}}</tt></li>
+<li><tt>From = string()</tt></li>
+<li><tt>N = integer()</tt></li>
+<li><tt>Unit = string()</tt></li>
+<li><tt>Ft = string()</tt></li>
+<li><tt>Fd = string()</tt></li>
+<li><tt>Tt = string()</tt></li>
+<li><tt>Td = string()</tt></li>
+</ul></p>
+</div><p>check a alert is enable or disabled,From is a time when this action is set,format is {{Y,M,D},{HH,MM,SS}},N is a counter for Unit,
+  when N is 1 and Unit is "minutes",it means 1 minute.Unit can be "minutes","Ft and Tt is time string as "12:30:59",Fd and Td is date string as "2009-11-12".
+ </p>
+
+<h3 class="function"><a name="createMessage-2">createMessage/2</a></h3>
+<div class="spec">
+<p><tt>createMessage(Dir, Template) -&gt; string()</tt>
+<ul class="definitions"><li><tt>Dir = string()</tt></li>
+<li><tt>Template = string()</tt></li>
+</ul></p>
+</div><p>create message from template file,Dir is the directory contain template file,Tempalte is the file name of template
+ </p>
+
+<h3 class="function"><a name="execute-0">execute/0</a></h3>
+<div class="spec">
+<p><tt>execute() -&gt; {ok, string()}</tt></p>
+</div><p>base function
+ </p>
+
+<h3 class="function"><a name="logAlert-4">logAlert/4</a></h3>
+<div class="spec">
+<p><tt>logAlert(Type, Title, Content, Result) -&gt; ok | error</tt>
+<ul class="definitions"><li><tt>Type = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+<li><tt>Content = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>record a alert  to log file,Type is alert type,Title is alert title,Content is the alert content,Result is "ok" or "fail"</p>
+
+<h3 class="function"><a name="new-0">new/0</a></h3>
+<div class="spec">
+<p><tt>new() -&gt; Object</tt>
+<ul class="definitions"><li><tt>Object = term()</tt></li>
+</ul></p>
+</div><p>create a new instance of action</p>
+
+<h3 class="function"><a name="process_msg-2">process_msg/2</a></h3>
+<div class="spec">
+<p><tt>process_msg(T::Tmp, Monitor) -&gt; string()</tt>
+<ul class="definitions"><li><tt>Temp = string()</tt></li>
+<li><tt>Monitor = term()</tt></li>
+</ul></p>
+</div><p>process the template content read from file ,Tmp is data read from template file,Monitor is the alert target.
+ </p>
+
+<h3 class="function"><a name="trigger-1">trigger/1</a></h3>
+<div class="spec">
+<p><tt>trigger(This) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>This = term()</tt></li>
+<li><tt>Result = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>trigger a action
+ </p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 25 2009, 11:43:48.</i></p>
+</body>
+</html>

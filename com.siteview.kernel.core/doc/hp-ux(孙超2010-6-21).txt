@@ -1,0 +1,341 @@
+
+# /usr/bin/df -kP
+Filesystem            1024-blocks  Used  Available Capacity Mounted on
+/dev/vg00/lvol4       4161704    20912  4140792     1%     /home
+/dev/vg00/lvol5       20846728  4989488 15857240    24%     /opt
+/dev/vg00/lvol6       20809456   226120 20583336     2%     /tmp
+/dev/vg00/lvol7       10427552  3025952  7401600    30%     /usr
+/dev/vg00/lvol8       20817376  1209144 19608232     6%     /var
+/dev/vg00/lvol1       4164232   334616  3829616     9%     /stand
+/dev/vg00/lvol3       20809928   275720 20534208     2%     /
+
+
+# /usr/bin/date -u
+Fri Jun 18 03:08:08 UTC 2010
+
+
+# /bin/ls  --full-time  -l /etc  | /bin/grep -v
+usage: grep [-E|-F] [-c|-l|-q] [-bhinsvwx] -e pattern_list...
+        [-f pattern_file...] [file...]
+usage: grep [-E|-F] [-c|-l|-q] [-bhinsvwx] [-e pattern_list...]
+        -f pattern_file... [file...]
+usage: grep [-E|-F] [-c|-l|-q] [-bhinsvwx] pattern [file...]
+/bin/ls: illegal option -- -
+/bin/ls: illegal option -- -
+usage: ls -1ARadeCxmnlogrtucpFHLbqisf [files]
+# /bin/ls  --full-time  -l /etc  | /bin/grep -v "^total" | /bin/grep -v "^d" | /bin/sed 's/  */!/g' | /bin/cut -d! -f5,6,7,8,9
+/bin/ls: illegal option -- -
+/bin/ls: illegal option -- -
+usage: ls -1ARadeCxmnlogrtucpFHLbqisf [files]
+
+
+# /usr/sbin/swapinfo -ta
+             Kb      Kb      Kb   PCT  START/      Kb
+TYPE      AVAIL    USED    FREE  USED   LIMIT RESERVE  PRI  NAME
+dev     32768000       0 32768000    0%       0       -    1  /dev/vg00/lvol2
+reserve       -  398520 -398520
+memory  31884572 2982380 28902192    9%
+total   64652572 3380900 61271672    5%       -       0    -
+# # /usr/sbin/swapinfo -ta
+#              Kb      Kb      Kb   PCT  START/      Kb
+sh: Kb:  not found.
+TYPE      AVAIL    USED    FREE  USED   LIMIT RESERVE  PRI  NAME
+# TYPE      AVAIL    USED    FREE  USED   LIMIT RESERVE  PRI  NAME
+dev     32768000       0 32768000    0%       0       -    1  /dev/vg00/lvol2
+reserve       -  398520 -398520
+sh: TYPE:  not found.
+# dev     32768000       0 32768000    0%       0       -    1  /dev/vg00/lvol2
+sh: dev:  not found.
+# reserve       -  398520 -398520
+sh: reserve:  not found.
+# memory  31884572 2982380 28902192    9%
+total   64652572 3380900 61271672    5%       -       0    -
+sh: memory:  not found.
+# total   64652572 3380900 61271672    5%       -       0    -
+sh: total:  not found.
+
+
+
+# /usr/bin/vmstat -s
+0 swap ins
+0 swap outs
+0 pages swapped in
+0 pages swapped out
+328716 total address trans. faults taken
+124108 page ins
+0 page outs
+51493 pages paged in
+0 pages paged out
+305547 reclaims from free list
+0 total page reclaims
+0 intransit blocking page faults
+25600028 zero fill pages created
+340590 zero fill page faults
+4452744 executable fill pages created
+29771 executable fill page faults
+0 swap text pages found in free list
+0 inode text pages found in free list
+0 revolutions of the clock hand
+97687 pages scanned for page out
+0 pages freed by the clock daemon
+261457 cpu context switches
+8906113 device interrupts
+411023 traps
+37295854 system calls
+29251 Page Select Size Successes for Page size 4K
+35742 Page Select Size Successes for Page size 8K
+169395 Page Select Size Successes for Page size 16K
+64 Page Select Size Successes for Page size 64K
+5 Page Select Size Successes for Page size 256K
+2 Page Select Size Successes for Page size 1M
+29251 Page Select Size Failures for Page size 8K
+54272 Page Select Size Failures for Page size 16K
+37 Page Select Size Failures for Page size 64K
+29 Page Select Size Failures for Page size 256K
+4 Page Select Size Failures for Page size 1M
+91021 Page Allocate Successes for Page size 4K
+35916 Page Allocate Successes for Page size 8K
+170134 Page Allocate Successes for Page size 16K
+5106 Page Allocate Successes for Page size 64K
+7 Page Allocate Successes for Page size 256K
+6 Page Allocate Successes for Page size 1M
+14 Page Allocate Successes for Page size 4M
+11 Page Allocate Successes for Page size 16M
+474 Page Allocate Successes for Page size 64M
+2 Page Allocate Successes for Page size 128M
+45808 Page Allocate Failures for Page size 4K
+9223 Page Allocate Failures for Page size 8K
+54174 Page Allocate Failures for Page size 16K
+1441 Page Allocate Failures for Page size 64K
+8 Page Allocate Failures for Page size 256K
+8 Page Allocate Failures for Page size 1M
+2 Page Allocate Failures for Page size 4M
+2 Page Allocate Failures for Page size 16M
+30 Page Allocate Failures for Page size 64M
+4 Page Allocate Failures for Page size 128M
+50 Page Demotions for Page size 8K
+127 Page Demotions for Page size 16K
+9 Page Demotions for Page size 64K
+
+
+# /usr/sbin/sar 3
+
+HP-UX RX6600_3 B.11.31 U ia64    06/18/10
+
+11:14:42    %usr    %sys    %wio   %idle
+
+11:14:45       0       0       0     100
+#
+# # /usr/sbin/sar 3
+#
+# HP-UX RX6600_3 B.11.31 U ia64    06/18/10
+sh: HP-UX:  not found.
+#
+# 11:14:42    %usr    %sys    %wio   %idle
+sh: 11:14:42:  not found.
+#
+# 11:14:45       0       0       0     100
+sh: 11:14:45:  not found.
+
+
+
+# /bin/ps -ef
+     UID   PID  PPID  C    STIME TTY       TIME COMMAND
+    root     0     0  0 10:07:01 ?         0:08 swapper
+    root     1     0  0 10:05:58 ?         0:00 init
+    root    13     0  0 10:05:58 ?         0:00 net_str_cached
+    root    12     0  0 10:05:58 ?         0:00 usbhubd
+    root    11     0  0 10:05:58 ?         0:00 escsid
+    root    10     0  0 10:05:58 ?         0:00 ttisr
+    root     9     0  0 10:05:58 ?         0:00 ksyncer_daemon
+    root     8     0  0 10:05:58 ?         0:00 ioconfigd
+    root     7     0  0 10:05:58 ?         0:00 kai_daemon
+    root     6     0  0 10:05:58 ?         0:00 kmemdaemon
+    root     5     0  0 10:05:58 ?         0:00 signald
+    root    14     0  0 10:05:58 ?         0:00 net_str_cached
+    root    23     0  0 10:05:58 ?         0:00 net_str_cached
+    root    22     0  0 10:05:58 ?         0:00 net_str_cached
+    root    21     0  0 10:05:58 ?         0:00 net_str_cached
+    root    20     0  0 10:05:58 ?         0:00 net_str_cached
+    root    19     0  0 10:05:58 ?         0:00 net_str_cached
+    root    18     0  0 10:05:58 ?         0:00 net_str_cached
+    root    17     0  0 10:05:58 ?         0:00 net_str_cached
+    root    16     0  0 10:05:58 ?         0:00 net_str_cached
+    root    15     0  0 10:05:58 ?         0:00 net_str_cached
+    root    24     0  0 10:05:58 ?         0:00 net_str_cached
+    root    33     0  0 10:05:58 ?         0:00 lvmkd
+    root    32     0  0 10:05:58 ?         0:00 lvmkd
+    root    31     0  0 10:05:58 ?         0:00 lvmkd
+    root    30     0  0 10:05:58 ?         0:00 lvmkd
+    root    29     0  0 10:05:58 ?         0:00 kevm
+    root    28     0  0 10:05:58 ?         0:00 net_str_cached
+    root    27     0  0 10:05:58 ?         0:00 net_str_cached
+    root    26     0  0 10:05:58 ?         0:00 net_str_cached
+    root    25     0  0 10:05:58 ?         0:00 net_str_cached
+    root    34     0  0 10:05:58 ?         0:00 lvmkd
+    root    43     0  0 10:05:58 ?         0:00 nfs_failover
+    root    42     0  0 10:05:58 ?         0:00 nfs_async_io
+    root    41     0  0 10:05:58 ?         0:00 krpckd
+    root    40     0  0 10:05:58 ?         0:00 nfs_reclaim
+    root    39     0  0 10:05:58 ?         0:00 sendfile_vn_rele_daemon
+    root    38     0  0 10:05:58 ?         0:00 side_daemon
+    root    37     0  0 10:05:58 ?         0:00 usbmsd
+    root    36     0  0 10:05:58 ?         0:00 lvmschedd
+    root    35     0  0 10:05:58 ?         0:00 lvmkd
+    root    44     0  0 10:05:58 ?         0:00 nfs4clntkd
+    root    53     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    52     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    51     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    50     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    49     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    48     0  0 10:05:58 ?         0:00 lvmp_kd
+    root    47     0  0 10:05:58 ?         0:00 cachefskd
+    root    46     0  0 10:05:58 ?         0:00 autofskd
+    root    45     0  0 10:05:58 ?         0:00 nfs4_async_io
+    root    54     0  0 10:05:58 ?         0:00 lvmp_schedd
+    root    63     0  0 10:07:00 ?         0:00 lvmdevd
+    root    62     0  0 10:07:00 ?         0:00 mdep_initiator_thread
+    root    61     0  0 10:07:00 ?         0:00 strfreebd
+    root    60     0  0 10:07:00 ?         0:00 strweld
+    root    59     0  0 10:07:00 ?         0:00 strmem
+    root    58     0  0 10:07:00 ?         0:00 smpsched
+    root    57     0  0 10:07:00 ?         0:00 inet_areset_daemon
+    root    56     0  0 10:07:00 ?         0:00 afinet_strout
+    root    55     0  0 10:05:58 ?         0:00 lvmp_wk_th_d
+    root    64     0  0 10:07:00 ?         0:00 lvmattachd
+    root    70     0  0 10:07:01 ?         0:00 progressdaemon
+    root    69     0  0 10:07:01 ?         0:00 awd
+    root     4     0  0 10:07:01 ?         0:00 unhashdaemon
+    root     3     0  0 10:07:01 ?         0:00 statdaemon
+    root     2     0  0 10:07:01 ?         0:00 vhand
+    root    68     0  0 10:07:01 ?         0:00 livedumpkd
+    root    67     0  0 10:07:01 ?         0:00 shutdowndaemon
+    root    66     0  0 10:07:01 ?         0:00 pagetable_init_daemon
+    root    65     0  0 10:07:00 ?         0:00 swapdaemon
+    root    71     0  0 10:07:01 ?         0:00 dcda_daemon
+    root    86     0  0 10:07:02 ?         1:01 pagezerod
+    root    85     0  0 10:07:02 ?         0:00 cmcd
+    root    84     0  0 10:07:02 ?         0:00 pm_schedcpu
+    root    83     0  0 10:07:02 ?         0:00 eventdaemon
+    root    82     0  0 10:07:02 ?         0:03 vxfsd
+    root    75     0  0 10:07:01 ?         0:00 ipmid
+    root    74     0  0 10:07:01 ?         0:00 evacd
+    root    73     0  0 10:07:01 ?         0:00 fb_daemon
+    root    72     0  0 10:07:01 ?         0:00 fcachedaemon
+    root    87     0  0 10:07:02 ?         0:00 sblksched
+    root    96     0  0 10:07:02 ?         0:00 str_mblk_flush_daemon
+    root    95     0  0 10:07:02 ?         0:00 smpsched
+    root    94     0  0 10:07:02 ?         0:00 smpsched
+    root    93     0  0 10:07:02 ?         0:00 smpsched
+    root    92     0  0 10:07:02 ?         0:00 smpsched
+    root    91     0  0 10:07:02 ?         0:00 smpsched
+    root    90     0  0 10:07:02 ?         0:00 smpsched
+    root    89     0  0 10:07:02 ?         0:00 smpsched
+    root    88     0  0 10:07:02 ?         0:00 sblksched
+    root    97     0  0 10:07:02 ?         0:00 kend
+    root  1749     1  0 10:09:23 ?         0:00 /usr/sbin/envd
+    root   586     1  0 10:08:04 ?         0:00 /usr/sbin/evmd
+    root   156     0  0 10:07:17 ?         0:00 rng
+    root   605   586  0 10:08:05 ?         0:00 /usr/sbin/evmlogger -o /var/run/evmlogger.info -l /var/evm/adm/logfiles/evmlogger.log
+    root  1971     1  0 10:09:27 console   0:00 /usr/sbin/getty console console
+    root  1358     1  0 10:08:44 ?         0:00 sendmail: accepting connections
+    root   219     1  0 10:07:36 ?         0:00 /sbin/fs/fsdaemon -f 0
+    root    99     0  0 10:07:02 ?         0:00 nfs4srvkd
+    root    98     0  0 10:07:02 ?         0:00 nfslogkd
+    root   543     1  0 10:07:52 ?         0:00 /usr/sbin/utmpd
+   sfmdb  1393  1392  0 10:08:45 ?         0:00 postgres: stats collector process
+    root   808   807  0 10:08:18 ?         0:00 /usr/sbin/netfmt -C -F -f /var/adm/nettl.LOG000 -c /var/adm/conslog.opts
+    root  1068     1  0 10:08:41 ?         0:00 /usr/sbin/inetd
+    root   758     1  0 10:08:15 ?         0:00 /usr/sbin/ptydaemon
+    root   807     1  0 10:08:18 ?         0:00 /usr/lbin/ntl_reader 0 1 1 1 1000 2 /var/adm/nettl /var/adm/conslog.opts
+    root   959     1  0 10:08:39 ?         0:00 /opt/ssh/sbin/sshd
+    root   606   586  0 10:08:05 ?         0:00 /usr/sbin/evmchmgr -l /var/evm/adm/logfiles/evmchmgr.log
+    root   753     1  0 10:08:13 ?         0:00 /usr/sbin/syslogd -D
+    root   539     1  0 10:07:52 ?         0:00 /usr/sbin/syncer
+    root   969     1  0 10:08:39 ?         0:00 /usr/sbin/rpcbind
+    root  1411     1  0 10:08:51 ?         0:00 /usr/sbin/hp_unixagt
+   sfmdb  1389     1  0 10:08:44 ?         0:00 /opt/psb/db/pgsql/bin/postmaster -i -D /var/opt/psb/db/pgsql
+    root  1663     1  0 10:09:23 ?         0:00 /usr/sbin/cron
+   sfmdb  1392  1389  0 10:08:45 ?         0:00 postgres: stats buffer process
+    root  1059     1  0 10:08:41 ?         0:00 /usr/sbin/automountd
+  daemon  1041     1  0 10:08:41 ?         0:00 /usr/sbin/rpc.statd
+    root  1047     1  0 10:08:41 ?         0:00 /usr/sbin/rpc.lockd
+    root   772     1  0 10:08:15 ?         0:00 /usr/sbin/hotplugd /var/adm/hotplugd.log trunc
+    root   787     1  0 10:08:16 ?         0:00 /usr/lbin/nktl_daemon 0 0 0 0 0 1 -2
+    root  1400     1  0 10:08:46 ?         0:00 /usr/sbin/snmpdm
+    root  1576  1573  0 10:09:01 ?         0:17 /opt/wbem/lbin/cimprovagt 0 4 9 root SFMProviderModule
+    root  1573     1  0 10:08:56 ?         0:00 /opt/wbem/lbin/cimserver
+    root  4595  1573  0 11:14:30 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXSASProviderModule
+ cimsrvr  1574  1573  0 10:08:56 ?         0:03 cimservermain --executor-socket 4
+    root  1471     1  0 10:08:51 ?         0:00 /opt/dce/sbin/rpcd
+   sfmdb  1625  1389  0 10:09:21 ?         0:03 postgres: sysadmin cer [local] idle
+    root  1437     1  0 10:08:51 ?         0:00 /usr/sbin/trapdestagt
+    root  1427     1  0 10:08:51 ?         0:00 /usr/sbin/mib2agt
+    root  1419     1  0 10:08:51 ?         0:00 /usr/sbin/ipv6agt
+    root  1575  1573  0 10:09:00 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root EMSHAProviderModule
+   sfmdb  1615  1389  0 10:09:19 ?         0:00 postgres: sfmdb LOGDB [local] idle
+    root  1813     1  0 10:09:24 ?         0:00 /usr/sbin/swagentd -r
+    root  1588  1573  0 10:09:13 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXStorageIndicationProviderModule
+    root  1587  1573  0 10:09:13 ?         0:31 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXIOTreeIndicationProviderModule
+    root  1586  1573  0 10:09:13 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXFCIndicationProviderModule
+   sfmdb  1585  1389  0 10:09:10 ?         0:00 postgres: sfmdb LOGDB [local] idle
+    root  1584  1573  0 10:09:10 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXSASIndicationProviderModule
+    root  1583  1573  0 10:09:10 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXRAIDSAIndicationProviderModule
+    root  1582  1573  0 10:09:10 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 9 root HPUXLANIndicationProviderModule
+    root  1652     1  0 10:09:22 ?         0:00 /usr/sbin/pwgrd
+    root  4593  1573  0 11:14:29 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root IOTreeModule
+    root  1709     1  0 10:09:23 ?         0:00 /usr/sbin/psb/bin/oserrlogd
+    root  1955     1  0 10:09:27 ?         0:00 /sbin/sh /usr/dt/bin/dtrc
+    root  1972     1  0 10:09:27 ?         0:00 /sbin/krsd -i
+    root  1970  1955  0 10:09:27 ?         0:00 /usr/dt/bin/dtlogin
+    root  1980     1  0 10:09:27 ?         0:04 /usr/lbin/utild
+   sfmdb  1616  1389  0 10:09:19 ?         0:00 postgres: sfmdb LOGDB [local] idle
+    root  1821     1  0 10:09:25 ?         0:00 /opt/hpsmh/lbin/smhstartd
+   sfmdb  1619  1389  0 10:09:19 ?         0:00 postgres: sfmdb LOGARCHDB [local] idle
+    root  1975     1  0 10:09:27 ?         0:00 /opt/wbem/lbin/cimserverd
+   sfmdb  2019  1389  0 10:09:33 ?         0:00 postgres: sfmdb evweb [local] idle
+    root  2008  1970  0 10:09:29 ?         0:00 /usr/dt/bin/dtlogin
+  daemon  1994  1970  0 10:09:28 ?         0:02 /usr/bin/X11/X :0 -auth /var/dt/RX660AAA001970
+    root  1992     1  0 10:09:27 ?         0:00 /usr/lbin/kcmond
+    root  1973     1  0 10:09:27 ?         0:00 /sbin/sfd
+    root  1842     1  0 10:09:25 ?         0:00 /etc/opt/resmon/lbin/emsagent
+    root  1979     1  0 10:09:27 ?         0:00 /etc/opt/resmon/lbin/p_client
+    root  1746     1  0 10:09:23 ?         0:00 /usr/sbin/stm/uut/bin/sys/diagmond
+    root  1974     1  0 10:09:27 ?         0:00 /usr/sbin/esmd
+   sfmdb  2020  1389  0 10:09:33 ?         0:02 postgres: sfmdb evweb_history [local] idle
+    root  3388     1  0 10:16:53 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/msamon
+    root  2163  1068  0 10:09:56 ?         0:00 /etc/opt/resmon/lbin/registrar
+    root  4574  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXRAIDSACSProviderModule
+    root  2156  1746  0 10:09:55 ?         0:00 psmctd
+    root  2155  1746  0 10:09:55 ?         0:00 diaglogd
+    root  2107  2008  0 10:09:44 ?         0:00 dtgreet -display RX6600_3:0
+   sfmdb  2072  1389  0 10:09:34 ?         0:00 postgres: sfmdb evweb [local] idle
+    root  4639  4093  1 11:15:49 pts/0     0:00 /bin/ps -ef
+    root  2254     1  0 10:10:45 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/dm_sas_adapter
+    root  4601  1573  0 11:14:31 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXFCProviderModule
+    root  4589  1573  0 11:14:29 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXSCSIProviderModule
+    root  2207     1  0 10:10:19 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/WbemWrapperMonitor
+    root  3397     1  0 10:16:55 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/msamon_sas
+    root  4569  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXIOTreeCSProviderModule
+    root  4090   959  0 10:55:01 ?         0:00 sshd: root@pts/0
+    root  4575  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root ComputerSystemModule
+    root  4568  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXStorageProviderModule
+    root  4599  1573  0 11:14:30 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXRAIDSAProviderModule
+    root  4600  1573  0 11:14:30 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXLANProviderModule
+    root  2529     1  0 10:12:09 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/sysstat_em
+    root  2318     1  0 10:10:50 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/dm_fclp_adapter
+    root  4573  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXSASCSProviderModule
+    root  4093  4090  0 10:55:15 pts/0     0:00 -sh
+    root  4572  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXSCSICSProviderModule
+    root  4571  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXLANCSProviderModule
+    root  3422     1  0 10:16:58 ?         0:00 /usr/sbin/stm/uut/bin/tools/monitor/dm_ql_adapter
+    root  4570  1573  0 11:14:28 ?         0:00 /opt/wbem/lbin/cimprovagt 0 4 8 root HPUXFCCSProviderModule
+
+
+
+
+# /bin/ps -e -o vsz=MEMSIZE -o args=COMMAND
+/bin/ps: illegal option -- o
+usage: /bin/ps [-edaxzflP] [-u ulist] [-g glist] [-p plist] [-t tlist] [-R prmgroup] [-Z psetidlist]
+
+

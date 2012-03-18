@@ -1,0 +1,595 @@
+﻿BODY {
+	FONT-SIZE: 12px; MARGIN: 0px ; WIDTH: 100%; TEXT-ALIGN: center; padding:0px; background:#E7F1F5
+}
+H1 {
+	COLOR: #003366;
+}
+H2 {
+	COLOR: #000000; font-size:14px;
+}
+H3 {
+	COLOR: #003366;
+}
+HR { 
+	
+}
+#center {
+	MARGIN-LEFT: auto; MARGIN-RIGHT: auto
+}
+#content {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; FONT-WEIGHT: bold; BACKGROUND: #e3e3e3; MARGIN: 14em 0px 2em; BORDER-LEFT: #000 1px solid; COLOR: #0a131b; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: left
+}
+#side UL {
+	PADDING-LEFT: 8px; MARGIN: 0px; WIDTH: 130px; LIST-STYLE-TYPE: none
+}
+#side UL LI A {
+	MARGIN-TOP: 5px; DISPLAY: block; PADDING-LEFT: 3px; VERTICAL-ALIGN: middle; COLOR: #2c55b1; PADDING-TOP: 3px; HEIGHT: 20px; TEXT-ALIGN: left
+}
+#side UL LI A.selected {
+	COLOR: #293d68
+}
+#side LI A:hover {
+	COLOR: #293d68; BACKGROUND-COLOR: #c8d7e3; TEXT-DECORATION: none
+}
+.topmenu1 {
+	MARGIN: 0px; OVERFLOW: hidden; WIDTH: 100%; height:30px; TEXT-ALIGN: center;background-image:url(/images/border_top_m.png);
+}
+.topmenu1 UL LI {
+	DISPLAY: block; FLOAT: left; HEIGHT: 26px; TEXT-DECORATION: none
+}
+.topmenu1 UL LI A {
+	PADDING-RIGHT: 12px; DISPLAY: block; PADDING-LEFT: 12px; FONT-SIZE: 1.2em; PADDING-BOTTOM: 2px; COLOR: #fff; PADDING-TOP: 2px; TEXT-DECORATION: none
+}
+.topmenu1 UL:hover LI A {
+	COLOR: #fff
+}
+.topmenu1 UL LI A:hover {
+	
+}
+.topmenu1 UL LI A.selected {
+	FONT-WEIGHT: bold; COLOR: #fff; 
+}
+.topmenu2 {
+	OVERFLOW: hidden; TEXT-ALIGN: center
+}
+.topmenu2 UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px; PADDING-TOP: 0px
+}
+.topmenu2 UL LI {
+	PADDING-RIGHT: 7px; DISPLAY: inline; PADDING-LEFT: 7px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; 
+}
+.topmenu2 UL LI A {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; font-weight:bold; COLOR: #000000;text-decoration:underline; 
+}
+.topmenu2 UL LI A.selected {
+	FONT-WEIGHT: bold; COLOR: #f00; TEXT-DECORATION: underline
+}
+.topmenu2 UL LI A:hover {
+	COLOR: #E7F1F5; TEXT-DECORATION: none;background:#000000;
+}
+.topmenu3 {
+	OVERFLOW: hidden; TEXT-ALIGN: center
+}
+.topmenu3 UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px; PADDING-TOP: 0px
+}
+.topmenu3 UL LI {
+	PADDING-RIGHT: 4px; DISPLAY: inline; PADDING-LEFT: 4px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; 
+}
+.topmenu3 UL LI A {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; font-weight:bold; COLOR: #000000;text-decoration:underline; 
+}
+.topmenu3 UL LI A.selected {
+	FONT-WEIGHT: bold; COLOR: #f00;  TEXT-DECORATION: underline; font-size:12px
+}
+.topmenu3 UL LI A:hover {
+	COLOR: #E7F1F5; TEXT-DECORATION: none;background:#000000;
+}
+.header {
+	MARGIN: 0px auto; TEXT-ALIGN: center
+}
+.forgetPassword {
+	MARGIN-LEFT: 15px; MARGIN-RIGHT: 20px; FONT-FAMILY: 'Arial','Helvetica',sans-serif
+}
+.bodytable {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.bodytable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.bodytable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 2px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+.historytable {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.historytable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.historytable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BORDER-LEFT: #ffffff 2px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+.historylisttable {
+	TABLE-LAYOUT: auto; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.historylisttable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.historylisttable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BORDER-LEFT: #ffffff 2px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+.monitortable {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.monitortable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.monitortable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 2px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+.porttable {
+	WIDTH: 100%
+}
+.porttable TD {
+	BORDER-RIGHT: #ffffff 2px solid; BORDER-TOP: #ffffff 2px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 2px solid; WIDTH: 10%; BORDER-BOTTOM: #ffffff 2px solid;
+}
+.optiontable {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; LINE-HEIGHT: 20px;
+}
+.optiontable TD {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 6px; MARGIN: 15px; PADDING-TOP: 10px
+}
+.optiontable A {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 6px; PADDING-TOP: 6px
+}
+
+.tag_table{
+WIDTH: 100%;
+}
+.tag_table td{
+	ALIGN:left;
+	VERTICAL-ALIGN:top;
+	border:1px;
+}
+
+A{
+	 COLOR: #2244FF;
+}
+A:hover {
+	 COLOR: #E7F1F5;background:#2244FF;TEXT-DECORATION: none;
+}
+
+td A:hover {
+	 COLOR: #E7F1F5;background:#2244FF;
+}
+
+.namestyle {
+	WIDTH: 30%
+}
+.ugnamestyle {
+	WIDTH: 30%
+}
+.urlstyle {
+	WIDTH: 30%
+}
+.editstyle {
+	WIDTH: 5%
+}
+.addLink {
+	MARGIN-RIGHT: 8px
+}
+.t_namestyle {
+	WIDTH: 35%
+}
+.t_ugnamestyle {
+	WIDTH: 30%
+}
+.t_urlstyle {
+	WIDTH: 35%
+}
+.usergroupLink {
+	MARGIN-LEFT: 8px
+}
+.usergroupLink A {
+	COLOR: #003366;
+}
+.userprofilestext {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; line-height:30px; COLOR: #000000; 
+}
+.optionaltext {
+	FONT-SIZE: 13px
+}
+.selectstyle {
+	MARGIN-TOP: 3px; MARGIN-BOTTOM: 3px; WIDTH: 25%
+}
+.leftmargin {
+	WIDTH: 45%; MARGIN-RIGHT: 20px
+}
+.leftmargin_1 {
+	WIDTH: 30%; MARGIN-RIGHT: 20px
+}
+.ewidth {
+	PADDING-RIGHT: 0.7em; PADDING-LEFT: 3em; FONT-SIZE: 14px
+}
+.logintable {
+	MARGIN-TOP: 2em; LINE-HEIGHT: 25px
+}
+.textboxwidth {
+	WIDTH: 200px; MARGIN-RIGHT: 20px
+}
+.addusertable {
+	MARGIN-TOP: 6px; FONT-SIZE: 15px; WIDTH: 80%; LINE-HEIGHT: 30px
+}
+.addremotetable {
+	MARGIN-TOP: 6px; FONT-SIZE: 15px; WIDTH: 95%
+}
+.groupnamestyle {
+	WIDTH: 40%
+}
+.groupeditstyle {
+	WIDTH: 30%
+}
+.groupdelstyle {
+	WIDTH: 15%
+}
+.grouprolestyle {
+	WIDTH: 15%
+}
+.groupnamestyle_1 {
+	WIDTH: 50%
+}
+.grouprolestyle_1 {
+	WIDTH: 50%
+}
+.deletePanel {
+	MARGIN-TOP: 26px; FONT-SIZE: 15px; MARGIN-LEFT: 16px
+}
+.usernametext {
+	FONT-WEIGHT: bold; FONT-SIZE: 17px
+}
+.textboxleft {
+	PADDING-RIGHT: 8px; VERTICAL-ALIGN: middle; TEXT-ALIGN: right
+}
+.textboxleft_1 {
+	PADDING-RIGHT: 8px; VERTICAL-ALIGN: top; TEXT-ALIGN: right
+}
+.textboxleft_2 {
+	PADDING-RIGHT: 8px; VERTICAL-ALIGN: top; WIDTH: 15%; TEXT-ALIGN: right
+}
+.textboxleft_3 {
+	PADDING-RIGHT: 8px; VERTICAL-ALIGN: top; WIDTH: 10px; TEXT-ALIGN: right
+}
+.tdleft {
+	VERTICAL-ALIGN: top; TEXT-ALIGN: left
+}
+.hintright {
+	MARGIN-TOP: 5px; FONT-SIZE: 13px; MARGIN-BOTTOM: 10px
+}
+.hide {
+	FONT-STYLE: italic
+}
+.permissionstext {
+	MARGIN-LEFT: 4%
+}
+.permissionstable {
+	MARGIN-LEFT: 4%; WIDTH: 90%; LINE-HEIGHT: 20px
+}
+.permissionscaption {
+	FONT-WEIGHT: bold
+}
+.thirdcolumn {
+	PADDING-LEFT: 8em
+}
+.addbutton {
+	MARGIN-LEFT: 5%; WIDTH: 75px; MARGIN-RIGHT: 4px
+}
+.movebutton {
+	MARGIN-TOP: 20px; MARGIN-LEFT: 7%; MARGIN-RIGHT: 700px
+}
+.copybutton {
+	MARGIN-TOP: 20px; MARGIN-LEFT: 10%; MARGIN-RIGHT: 700px
+}
+.userlisttable {
+	MARGIN-LEFT: 4%; LINE-HEIGHT: 30px
+}
+.returnugp {
+	FONT-SIZE: 12px; MARGIN-LEFT: 45em
+}
+.minitable {
+	WIDTH: 100%
+}
+.counters_class {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.counters_class TD {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.counters_desc {
+	FONT-WEIGHT: bold
+}
+.remoteunixedit {
+	WIDTH: 4%
+}
+.remoteunixtest {
+	WIDTH: 4%
+}
+.remoteunixdel {
+	WIDTH: 4%
+}
+.remoteunixmethod {
+	WIDTH: 4%
+}
+.remoteunixmethod {
+	WIDTH: 5%
+}
+.remoteunixos {
+	WIDTH: 15%
+}
+.remoteunixdetest {
+	WIDTH: 10%
+}
+.stronglinkstyle {
+	FONT-WEIGHT: bold
+}
+.textbox_schedulename {
+	MARGIN-LEFT: 6px; MARGIN-RIGHT: 18px
+}
+.simpletable_two {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px
+}
+.textbox_time {
+	MARGIN-LEFT: 6px; MARGIN-RIGHT: 6px
+}
+.saveconfirm {
+	WIDTH: 120px; MARGIN-RIGHT: 710px
+}
+.simpletable {
+	LINE-HEIGHT: 30px
+}
+.simpletext {
+	PADDING-RIGHT: 3px; WIDTH: 11%
+}
+.simpletextbox {
+	MARGIN: 4px; WIDTH: 18.4%
+}
+.managegrouptable_1 {
+	LINE-HEIGHT: 30px
+}
+.managegrouptable_2 {
+	MARGIN-TOP: 6px; WIDTH: 98%; LINE-HEIGHT: 16px
+}
+#page__movebutton {
+	WIDTH: 28%
+}
+#page__copybutton {
+	WIDTH: 28%
+}
+#page__duplicatebutton {
+	WIDTH: 44%
+}
+#page__deletebutton {
+	WIDTH: 36%
+}
+#page__disablebutton {
+	WIDTH: 36%
+}
+#page__enablebutton {
+	WIDTH: 36%
+}
+#page__refreshbutton {
+	WIDTH: 36%
+}
+#page__replacebutton {
+	WIDTH: 36%
+}
+#page__baselinebutton {
+	WIDTH: 40%
+}
+.openclass {
+	CURSOR: pointer; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.simplebordertable {
+	LINE-HEIGHT: 20px
+}
+.simplebordertable TH {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; COLOR: #003366; BORDER-BOTTOM: 1px solid
+}
+.simplebordertable TD {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.borderhearder {
+	WIDTH: 150px
+}
+#page__typeComBox {
+	WIDTH: 190px
+}
+.n_textboxwidth {
+	MARGIN: 1px; WIDTH: 290px
+}
+.itemswidth {
+	WIDTH: 100px
+}
+.copy_repalcetable {
+	LINE-HEIGHT: 26px
+}
+.onetime_textbox {
+	MARGIN-LEFT: 3px; WIDTH: 60px; MARGIN-RIGHT: 3px
+}
+.date_textbox {
+	WIDTH: 100px; MARGIN-RIGHT: 3px
+}
+.days_textbox {
+	WIDTH: 40px
+}
+.description_textbox {
+	WIDTH: 300px
+}
+.healthlink {
+	FONT-WEIGHT: bold
+}
+.CNLTreeMenu IMG.s {
+	VERTICAL-ALIGN: middle; CURSOR: pointer
+}
+.CNLTreeMenu UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 3px
+}
+.CNLTreeMenu LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; LIST-STYLE-TYPE: none
+}
+.Closed UL {
+	DISPLAY: none
+}
+.Child IMG.s {
+	BACKGROUND: none transparent scroll repeat 0% 0%; CURSOR: default
+}
+#page__dynamicpanel__CNLTreeMenu1 UL {
+	MARGIN: 0px 0px 0px 19px
+}
+#page__dynamicpanel__CNLTreeMenu1 IMG.s {
+	WIDTH: 20px; HEIGHT: 15px
+}
+#page__dynamicpanel__CNLTreeMenu1 .Opened IMG.s {
+	BACKGROUND: url(/images/Minus.gif) no-repeat 0px 0px
+}
+#page__dynamicpanel__CNLTreeMenu1 .Closed IMG.s {
+	BACKGROUND: url(/images/Plus.gif) no-repeat 0px 0px
+}
+#page__dynamicpanel__CNLTreeMenu1 .Child IMG.s {
+	BACKGROUND: url(/images/empty1111.gif) no-repeat 3px 5px
+}
+#page__dynamicpanel__CNLTreeMenu1 {
+	PADDING-LEFT: 0px
+}
+.groupheight {
+	LINE-HEIGHT: 20px
+}
+.ch {
+	MARGIN-LEFT: 0px
+}
+.LV_validation_message {
+	COLOR: #ff0000
+}
+.portstable_port {
+	WIDTH: 50px
+}
+.portstable_protocol {
+	WIDTH: 50px
+}
+.portstable_service {
+	WIDTH: 50px
+}
+.grouptext {
+	COLOR: #33aaff;
+}
+.grouptext:hover {
+	BACKGROUND: #33aaff; COLOR: #000000
+}
+.maintable {
+	WIDTH: 400px
+}
+#page__nav A {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; line-height:25px; FONT-WEIGHT: bold; FONT-SIZE: 1.2em; PADDING-BOTTOM: 10px; COLOR: #fff; PADDING-TOP: 10px;text-decoration:underline; 
+}
+#page__nav A.now {
+	color:#FFFF00;font-size:1.5em
+}
+#page__nav A:hover {
+	text-decoration:underline; color:#FFFF00;background:#000000;
+}
+#page__nav A:unknown {
+	FONT-WEIGHT: bold;  COLOR: #fff
+}
+#page__progress_panel H3 {
+	COLOR: #ff8000
+}
+#page__loginuser {
+	RIGHT: 10px; POSITION: absolute; TOP: 0px
+}
+#page__loginuser SPAN {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; font-size:12px; line-height:25PX; color:#FFFFff; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+#page__loginuser A {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; font-size:12px; color:#FFFFff
+}
+.hilight_text {
+	COLOR: #0033cc
+}
+.readtext {
+	COLOR: #ff8000
+}
+.greentext {
+	COLOR: #00aa00
+}
+.titletext {
+	FONT-WEIGHT: bold; FONT-SIZE: 1.2em
+}
+
+
+.box1{ background:#ffffff; border:1px solid #4E85BD; margin:10px 20px; width:95%; padding:10px}
+a.texta1{ color:#1E5B9A; font-size:12px; text-decoration:none}
+a.texta1:hover{ color:#1E5B9A; font-size:12px; text-decoration:underline}
+
+
+.view_table{
+	TABLE-LAYOUT: fixed;PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px;width:100%
+}
+
+.view_table td{
+	PADDING-RIGHT: 16px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+}
+
+.view_div{
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px;width:100%;
+	BACKGROUND: #ffffff;BORDER-RIGHT: 1px solid #e5e5e5; BORDER-left: 1px solid #e5e5e5; 
+	BORDER-top: 1px solid #e5e5e5; BORDER-bottom: 1px solid #e5e5e5; 
+}
+
+.viewtable2 {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 16px; 
+}
+.viewtable2 TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.viewtable2 TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 1px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+
+.view_title{
+	FONT-WEIGHT: bold; FONT-SIZE: 13px;float:left;
+}
+
+.view_button{
+	float:right;
+	FONT-SIZE: 13px;
+}
+
+.law {
+ime-mode:disabled;
+WIDTH: 30%; MARGIN-RIGHT: 20px;
+}
+
+.logdatatable {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px;  border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.logdatatable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(./images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.logdatatable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BORDER-LEFT: #ffffff 2px solid; WORD-BREAK: break-all; BORDER-BOTTOM: #ffffff 2px solid; WORD-WRAP: break-word
+}
+
+.radiocss input{
+	MARGIN-RIGHT: 0px;MARGIN-LEFT: 20px;
+}
+.stattext{
+	FONT-SIZE: 13px;FONT-WEIGHT: bold;text-align:center;
+	
+}
+
+.button{ 
+background:url(/images/anbj.png);
+border:1px solid #4998F0; 
+color:#ffffff;
+background-position: top left;
+padding: 9 5 5px 0px;
+}

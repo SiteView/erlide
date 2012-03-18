@@ -1,0 +1,28 @@
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\Erlang.dll
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\Erlang.pdb
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\lib\obj\Debug\ResolveAssemblyReference.cache
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\lib\obj\Debug\Erlang.dll
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\lib\obj\Debug\Erlang.pdb
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\bin\Erlang.dll
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\bin\Erlang.pdb
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\lib\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\lib\obj\Debug\Erlang.dll
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\lib\obj\Debug\Erlang.pdb
+E:\yFiles\Erlang.NET\bin\Erlang.dll
+E:\yFiles\Erlang.NET\bin\Erlang.pdb
+E:\yFiles\Erlang.NET\lib\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\Erlang.NET\lib\obj\Debug\Erlang.dll
+E:\yFiles\Erlang.NET\lib\obj\Debug\Erlang.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\lib\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\lib\obj\Debug\Erlang.dll
+E:\yFiles\TopologyLayout\Erlang.NET\lib\obj\Debug\Erlang.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\bin\Erlang.dll
+E:\yFiles\TopologyLayout\Erlang.NET\lib\obj\Release\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\lib\obj\Release\Erlang.dll
+C:\workspace\TopologyLayout\Erlang.NET\bin\Erlang.dll
+C:\workspace\TopologyLayout\Erlang.NET\lib\obj\Release\ResolveAssemblyReference.cache
+C:\workspace\TopologyLayout\Erlang.NET\lib\obj\Release\Erlang.dll
+C:\workspace\TopologyLayout\Erlang.NET\bin\Erlang.pdb
+C:\workspace\TopologyLayout\Erlang.NET\lib\obj\Debug\ResolveAssemblyReference.cache
+C:\workspace\TopologyLayout\Erlang.NET\lib\obj\Debug\Erlang.dll
+C:\workspace\TopologyLayout\Erlang.NET\lib\obj\Debug\Erlang.pdb

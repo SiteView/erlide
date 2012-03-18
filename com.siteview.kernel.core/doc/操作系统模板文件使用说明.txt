@@ -1,0 +1,36 @@
+以red hat cpu为例：
+
+模板文件中red hat 的cpu指令为
+{cpu,[{command,"/usr/bin/top n 1 d 2 b -p 1"},{startMatch,"^Cpu"},{idle,5},{wait,6},{cpuNamePrefix,"cpu"}]}.
+
+下面是在两种不同版本的red hat下运行/usr/bin/top n 1 d 2 b -p 1的结果
+
+top - 17:42:27 up 7 days, 15:18,  2 users,  load average: 0.03, 0.05, 0.00
+Tasks:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+Cpu(s):  1.7% us,  5.0% sy,  0.0% ni, 91.8% id,  0.1% wa,  0.1% hi,  1.2% si
+Mem:    256044k total,   254244k used,     1800k free,    34912k buffers
+Swap:   524280k total,     2468k used,   521812k free,    40948k cached
+ 
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                                                               
+    1 root      16   0  2020  560  480 S  0.0  0.2   0:35.30 init    
+
+
+
+top - 09:59:40 up 26 days, 3 min,  1 user,  load average: 0.05, 0.03, 0.00
+Tasks:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+Cpu(s):  0.2%us,  0.1%sy,  0.0%ni, 99.7%id,  0.1%wa,  0.0%hi,  0.0%si,  0.0%st
+Mem:   6217824k total,  2148300k used,  4069524k free,   357884k buffers
+Swap:  8193140k total,        0k used,  8193140k free,  1558140k cached
+ 
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                                                               
+    1 root      15   0  2040  668  576 S    0  0.0   0:03.53 init 
+
+
+根据{startMatch,"^Cpu"}
+会匹配到第三行
+
+一，Cpu(s):  1.7% us,  5.0% sy,  0.0% ni, 91.8% id,  0.1% wa,  0.1% hi,  1.2% si
+二，Cpu(s):  0.2%us,  0.1%sy,  0.0%ni, 99.7%id,  0.1%wa,  0.0%hi,  0.0%si,  0.0%st
+
+因为结果是以空格分隔的，所以根据{idle,5},{wait,6}，只能正确取到第二个red hat服务器的cpu信息，
+在服务器是第一类的情况下，需要修改为{idle,8},{wait,10}

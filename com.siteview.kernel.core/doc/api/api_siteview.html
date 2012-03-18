@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_siteview</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_siteview</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of main system.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of main system
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#getAllGroups-0">getAllGroups/0</a></td><td>get all groups in this siteview group.</td></tr>
+<tr><td valign="top"><a href="#getGroupInfoForTuopu-0">getGroupInfoForTuopu/0</a></td><td>get all groups 's runinfo in this siteview group.</td></tr>
+<tr><td valign="top"><a href="#get_childs-1">get_childs/1</a></td><td>obtain the server's children,return a list of Child,each Child is a key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#get_full_name-1">get_full_name/1</a></td><td>get full name of a object.</td></tr>
+<tr><td valign="top"><a href="#get_nodes-0">get_nodes/0</a></td><td>get ecc nodes,ServerName is the name of Node.</td></tr>
+<tr><td valign="top"><a href="#get_object_name-1">get_object_name/1</a></td><td>get a object's name,if not found this object will return "",
+  if this object not have name,will return id.object include group,monitor,rule etc.</td></tr>
+<tr><td valign="top"><a href="#get_object_path-1">get_object_path/1</a></td><td>get a object's full path.</td></tr>
+<tr><td valign="top"><a href="#get_parent_id-1">get_parent_id/1</a></td><td>get parent id of a object
+ 		if not found object or this object not have parent will return ''.</td></tr>
+<tr><td valign="top"><a href="#get_parent_name-1">get_parent_name/1</a></td><td>get parent name of a object
+ 		if not found object or this object not have parent will return "".</td></tr>
+<tr><td valign="top"><a href="#get_started_time-0">get_started_time/0</a></td><td>get siteview started time,unit is microsecond.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="getAllGroups-0">getAllGroups/0</a></h3>
+<div class="spec">
+<p><tt>getAllGroups() -&gt; [{Name, Id}]</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get all groups in this siteview group</p>
+
+<h3 class="function"><a name="getGroupInfoForTuopu-0">getGroupInfoForTuopu/0</a></h3>
+<div class="spec">
+<p><tt>getGroupInfoForTuopu() -&gt; [{Name, Id, run_info}]</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get all groups 's runinfo in this siteview group</p>
+
+<h3 class="function"><a name="get_childs-1">get_childs/1</a></h3>
+<div class="spec">
+<p><tt>get_childs(ServerId) -&gt; [Child]</tt>
+<ul class="definitions"><li><tt>ServerId = atom()</tt></li>
+<li><tt>Child = [{key, value}]</tt></li>
+</ul></p>
+</div><p>obtain the server's children,return a list of Child,each Child is a key-value tuple list</p>
+
+<h3 class="function"><a name="get_full_name-1">get_full_name/1</a></h3>
+<div class="spec">
+<p><tt>get_full_name(Id) -&gt; string()</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get full name of a object
+ </p>
+
+<h3 class="function"><a name="get_nodes-0">get_nodes/0</a></h3>
+<div class="spec">
+<p><tt>get_nodes() -&gt; [{ServerId, ServerName}]</tt>
+<ul class="definitions"><li><tt>ServerId = atom()</tt></li>
+<li><tt>ServerName = string()</tt></li>
+</ul></p>
+</div><p>get ecc nodes,ServerName is the name of Node</p>
+
+<h3 class="function"><a name="get_object_name-1">get_object_name/1</a></h3>
+<div class="spec">
+<p><tt>get_object_name(Id) -&gt; string()</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get a object's name,if not found this object will return "",
+  if this object not have name,will return id.object include group,monitor,rule etc.</p>
+
+<h3 class="function"><a name="get_object_path-1">get_object_path/1</a></h3>
+<div class="spec">
+<p><tt>get_object_path(Id) -&gt; [{Name, Id}]</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get a object's full path</p>
+
+<h3 class="function"><a name="get_parent_id-1">get_parent_id/1</a></h3>
+<div class="spec">
+<p><tt>get_parent_id(Id) -&gt; atom()</tt></p>
+</div><p>get parent id of a object
+ 		if not found object or this object not have parent will return ''</p>
+
+<h3 class="function"><a name="get_parent_name-1">get_parent_name/1</a></h3>
+<div class="spec">
+<p><tt>get_parent_name(Id) -&gt; atom()</tt></p>
+</div><p>get parent name of a object
+ 		if not found object or this object not have parent will return ""</p>
+
+<h3 class="function"><a name="get_started_time-0">get_started_time/0</a></h3>
+<div class="spec">
+<p><tt>get_started_time() -&gt; integer()</tt></p>
+</div><p>get siteview started time,unit is microsecond
+ </p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jun 25 2010, 16:37:30.</i></p>
+</body>
+</html>

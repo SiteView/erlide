@@ -1,0 +1,1 @@
+erl -pa ebin -sname sdh -setcookie 3ren -mnesia dir '"./sdh_db"' -eval "api_sdh_device:start()."

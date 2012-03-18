@@ -1,0 +1,10 @@
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\echo.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\echo.pdb
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\echo\obj\Debug\ResolveAssemblyReference.cache
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\echo\obj\Debug\echo.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\echo\obj\Debug\echo.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\bin\echo.exe
+E:\yFiles\TopologyLayout\Erlang.NET\bin\echo.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\echo\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\echo\obj\Debug\echo.exe
+E:\yFiles\TopologyLayout\Erlang.NET\echo\obj\Debug\echo.pdb

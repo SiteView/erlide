@@ -1,0 +1,15 @@
+Server.conf文件可配置的系统参数如下：
+
+serverID:监测器和组的根节点的ID
+release_date：发布日期
+javaNode:java节点的名字，（默认'server1@本机名'）
+dbNode:数据库节点的名字,（默认'db@本机名'）
+logNode:Log节点的名字,（默认'logger@本机名'）
+master_node:主节点的名字,(在代理节点上使用）
+proxy_sync：设置从主节点上进行同步的文件。(在代理节点上使用）
+proxy_app:代理节点的应用名设置。(在代理节点上使用，默认localhost）
+wmiNode：wmi节点的名字，（默认'wmi@本机名'）
+realdataAgent：实时数据节点的名字，（默认'agent@本机名'）
+sh_process：最大同时运行监测器数（默认：100）
+ofbiz_host:ofbiz服务的地址（不设置，默认为：localhost）。
+ofbiz_port:ofbiz服务的端口（不设置，默认为:9090）。

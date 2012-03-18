@@ -1,0 +1,20 @@
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\ping.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\ping.pdb
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\ping\obj\Debug\ResolveAssemblyReference.cache
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\ping\obj\Debug\ping.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\ping\obj\Debug\ping.pdb
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\ping\obj\Debug\ping.exe
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\ping\obj\Debug\ping.pdb
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\bin\ping.exe
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\bin\ping.pdb
+C:\Documents and Settings\Administrator\桌面\yFiles\Erlang.NET\ping\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\ping\obj\Debug\ping.exe
+E:\yFiles\TopologyLayout\Erlang.NET\ping\obj\Debug\ping.pdb
+E:\yFiles\Erlang.NET\ping\obj\Debug\ping.exe
+E:\yFiles\Erlang.NET\ping\obj\Debug\ping.pdb
+E:\yFiles\Erlang.NET\bin\ping.exe
+E:\yFiles\Erlang.NET\bin\ping.pdb
+E:\yFiles\Erlang.NET\ping\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\bin\ping.exe
+E:\yFiles\TopologyLayout\Erlang.NET\bin\ping.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\ping\obj\Debug\ResolveAssemblyReference.cache

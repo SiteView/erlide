@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<link rel="stylesheet" href="/nitrogen/jquery-ui/jquery-ui.css" type="text/css" media="screen" charset="utf-8">
+
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">
+	
+		</style>		
+	</head>
+	<body>		
+		<div class=header>
+
+		</div>
+		<div class=topmenu1>
+			[[[topmenu:render(Group)]]]
+		</div>
+		<div class=topmenu2>
+			[[[topmenu:render5(Group)]]]
+			<div class=clear></div>
+		</div>
+		<div align=left>
+			[[[page:print_title]]]
+			<b>Alert Name</b>
+			[[[page:print_alert_name(Rule)]]]
+			<hr>
+			<p><b>Alert Subject(s)</b></p>
+			[[[page:print_groups_monitors(Rule)]]]<br>
+			Select the Groups and Monitors handled by this Alert. To select several items, hold down the Control key (on most platforms) while clicking item names.
+		</div>
+		<hr>
+		<div align=left>
+			<b>Choose SMS Send Type</b><br>
+			[[[page:print_choosetype(Rule)]]]
+			<br>Choose sms send type,Including Web,DLL and GSM Modem.<br>
+            
+			<br><b>SMS Number</b><br>
+			[[[page:print_number(Rule)]]]
+			The phone number that will receive the sms alert. <br>    
+            
+			<br><b>Send SMS Url</b><br>
+			[[[page:print_url(Rule)]]]
+			SMS Url.<br>
+
+			<br><b>Username</b><br>
+			[[[page:print_username(Rule)]]]
+			Send SMS Username.<br>  
+            
+            <br><b>Password</b><br>
+			[[[page:print_password(Rule)]]]
+			Send SMS Password.<br>  
+            
+            <br><b>Template</b><br>
+			[[[page:print_template(Rule)]]]
+			<br>SMS Template.<br>  
+		</div>
+        <hr>
+         <div align=left>
+            <b>Setting DutyTable</b>(<a href="/web/dutytable_list">Edit DutyTable Preferences</a>)<br>
+            [[[page:print_dutytable(Rule)]]]
+            <br> choose which duty table to use for sending alert E-mail to the address you set.
+        </div>
+		<hr>
+		<div align=left>
+			<p><b>When</b></p>
+			[[[page:print_when(Rule)]]]
+		</div>
+		<hr>
+		<div align=left>
+			[[[page:print_add_button(Rule)]]] SMS Alert
+		</div>
+		<hr>
+		<div align=left>
+			<h3>Advanced Options</h3>
+			<table border=0 width=100%>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			<tr><td></td><td>Disable Alert</td><td></td></tr>
+			[[[page:print_advance_options(Rule)]]]
+			</table>
+		</div>
+		<hr>
+		<div align=left>
+			<p><b>Global and Group Alert Filtering</b></p>
+			<table border=0 width=100%>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			[[[page:print_alert_filtering(Rule)]]]
+			</table>
+		</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

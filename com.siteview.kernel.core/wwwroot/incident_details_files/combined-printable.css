@@ -1,0 +1,12 @@
+.operations,
+.workflowactions,
+#header,
+.footer
+{
+    display: none;
+}
+
+a
+{
+    text-decoration: none;
+}

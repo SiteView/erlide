@@ -1,0 +1,35 @@
+		SiteScopeFilter相关逻辑整理
+
+1、树数据由从ISSTreeObject派生的类对象构成， SSEntity --> SSGroup --> SSMonitorGroup等是树节点数据， 其中还包括SSEntityPermissionsObject、
+SSEntityMetaData等表示权限、显示图标等的小数据类; SSTreeObject相当于treenode，有父亲节点子节点等数据结构，节点的内容为实现ISSTreeObject接口的对象。
+
+2、SiteScopeTreeGenerator.generateTreeModel根据由SSTreeObject表示的树数据构成标准的TreeModel给JTree控件以显示树，TreeManager类没有具体研究。
+
+3、SiteScopeProxy.getSiteScopeTreeModel根据treeFilterID设置的过滤器过滤出正确的由SSTreeObject表示的树数据， 此treeFilterID为点击SiteScope过滤器菜单
+里枚举的过滤器应用时选中的过滤器， 关联的FilterBean可以不考虑（applet界面相关的）， 最后由我们自己的dbcs_filter可以读出用户设置的名称、监测器类型、
+Tag、目标服务器等过滤器的配置信息； 相应过滤器菜单的crud的类是在com.mercury.sitescope.ui.filter.jobs内UpdateFilterLabelJob等，UpdateFilterLabelJob的
+基础类RetrieveTreeJob里调用了SiteScopeTreeGenerator.generateTreeModel()。
+
+4、所有的配置数据都实现了IManagedObjectConfig接口， 包括组、监测器、用户配置等, ConfigManager及ConfigManagerSession等提供了操作配置数据（如原6.5版本
+的组配置文件*.mg等）的crud标准接口， api_monitor、api_group等均基于它去操作数据， ConfigManager调用FileObjectSerializationPersistenceManager对象去获取
+存在dcf、ssf文件及history目录等加密了的组、监测器等配置数据， 和现有的构架比较起来， 10.0等于在我们的dbcs_和api之间加了一个标准动作层。
+
+5、SiteScopeTreeFilter统一组织了TagFilter、NameFilter、TypeFilter、DisableFilter、TargetFilter等的实现， 其过滤数据均为ITreeNodeConfig的对象（因为最终
+对应的是一棵树）， 其派生类FilterByDescendants指明其有按级别过滤的方法， 所有Filter均派生自ITreeFilter， 一个SiteScopeTreeFilter对应一个treeFilterID,
+MonitorFilterGenerator.createFilter将filter的数据与具体实现的SiteScopeTreeFilter结合进行了结合，DefaultSiteScopeTreeFilter是所有节点都放行的默认树filter。
+
+6、SiteScopeProxy调用SiteScopeTreeManager.getSiteScopeTree根据SiteScopeTreeFilter组织出树数据， 类里调用SSMonitor、SSMonitorGroup等组织出数据，TemplateTree
+等也是类似的逻辑， SiteScopeProxy里尚有getMonitorDependencyTree等依赖树的逻辑可能我们也需要。
+
+7、从界面上来说， PingMonitorBean (AtomicMonitorBean) + PingMonitorForm(MonitorForm + tagsSettingsPanel ... --> TagBean) + PingMonitorSettingsPanel(MonitorSettingsPanel)
+是现有监测器编辑界面的主线， FilterOptionsTreeFilterPanel (TextButtonPanel --> TreeFilterOptionForm --> TreeFilterPanelFactory.MultiSelectionTreeFilterPanel(type target) 
+or TagsTreeFilterOptionPanel) 是过滤器编辑界面的主线， com.mercury.sitescope.ui.preferences.TagForm --> com.mercury.sitescope.ui.preferences.panel.TagMainSettingsPanel 
+--> com.mercury.sitescope.ui.tags.TagValueTableComponent是Tag编辑界面的主线, PreferenceProxy.createTag、getTagsTree --> APITag --> ConfigManager实现Tag数据的存储。
+界面逻辑流程。
+
+8、从代码分布来说，ss_api_impl.jar（APITag）、ss_ui_api_proxy.jar（NameTreeFilter ...）、ss_ui_common.jar(FilterBean、TagBean）、ss_swing_ui.jar（TreeFilterOptionForm）、
+ss_swing_infra.jar比较主要。
+
+9、我们现有程序因为没有bean的实现， 可能在sitviewobject里统一加上tag属性, tag的crud、 filter的crud及单个filter的实现等均可由单人实现， 不影响大逻辑， 但SiteScopeTreeManager等
+构成树的大构架等涉及整个系统， 需长沙统一考虑， sitescope反编译代码在 http://dev.siteview.com/svn/svIAD/trunk/Server/sitevew10 目录， http://dev.siteview.com/svn/svIAD/trunk/doc
+下也有此文档。

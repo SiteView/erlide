@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Siteview - [[[page:title()]]]</title>
+<script src='/nitrogen/jquery-1.2.6.js' type='text/javascript' charset='utf-8'></script>
+<script src='/nitrogen/jquery-ui-personalized-1.5.3.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+<script src='/css/calendar.js' type='text/javascript'></script>
+<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+
+<table  width="950" border="0" cellSpacing=0 
+      cellPadding=0 align="center">
+  <tr>
+    <td vAlign=top >
+	<table width="950"  cellSpacing=0 
+      cellPadding=0 align=left border=0>
+    <tr>
+    <TD width="748" align=left vAlign=top background="/images/headbg.gif" >
+	<IMG  src="/images/logo.png" border=0></TD>
+    <td width="202" background="/images/headbg.gif"><span class="mmm"> 免费咨询电话：800-810-5987</span><br /><a href="/web/quit"><span class="mmm"> 
+      退出</span></a></td>
+  </tr>
+  <tr>
+    <TD id="user"><span class=gendiv><strong>[[[topmenu1:welcome]]]</strong></span></td>
+    <td >&nbsp;</td>
+  </tr>
+  <tr>
+    <TD  align=left></td>
+    <td >&nbsp;</td>
+  </tr>
+</table>
+</td>
+  </tr>
+  <tr>
+    <td vAlign=top ><table id="maint" width="950" class="contenttable ">
+  <tr>
+    <td id="side" align=left vAlign=top width="150">[[[topmenu1:render(Group)]]]</td>
+    <td class="mainbody"  width="850">[[[element_flash:render()]]]
+		[[[page:body()]]]</td>
+  </tr>
+</table></td>
+  </tr>
+</table>
+ <SCRIPT language=javascript>
+/*    document.getElementById("page__rpcModule").style.visibility="hidden"; 
+	document.getElementById("page__rpcFun").style.visibility="hidden"; 
+	document.getElementById("page__rpcArg").style.visibility="hidden"; 
+	document.getElementById("page__rpcRun").style.visibility="hidden"; 
+	document.getElementById("page__rpcResult").style.visibility="hidden"; */
+	function RpcServer(Module, Fun, Arg)
+	{
+		document.getElementById("page__rpcModule").value=Module;
+		document.getElementById("page__rpcFun").value=Fun;
+		document.getElementById("page__rpcArg").value=Arg;		  
+		Nitrogen.$queue_event('page.rpcRun', 'UMFRNINQAAAAUnicy2DKY2VYmWp8lC-DLZuBpSAxPTWFga2oIDmoNC-FgTU5JzM5O5uBByQeHw8RRuOmMPCWpybFF5amFlUmZebkAAAeJhs-');
+	}
+	function Button1_onclick() {
+		RpcServer("historyreport_static", "test", "1");
+		alert(document.getElementById("page__rpcResult").value);
+	}
+ </SCRIPT>
+
+
+<table class=twidth border="0">
+  <tr>
+    <td>&nbsp;
+</td>
+  </tr>
+</table>
+<TABLE class=twidth id=navbar cellSpacing=0 cellPadding=0 align=center 
+  border=0><TBODY>
+  <TR>
+    <TD class=l></TD>
+    <TD class=m>Bigit 官方网站</TD>
+    <TD class=m width=160><A class=space_siteview>免费咨询电话：800-810-5987</A></TD>
+    <TD class=r></TD></TR></TBODY></TABLE>
+	<input id="RpcTest" type="button" value="button" onclick="return Button1_onclick()" />
+<script>
+[[[script]]]
+</script>
+</body>
+</html>

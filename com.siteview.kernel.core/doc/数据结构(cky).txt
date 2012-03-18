@@ -1,0 +1,155 @@
+
+--------------------------------------------------------------------------------------
+监测器结构(monitor)
+必须属性
+
+id			--监测器ID
+name			--监测器名字
+class			--类别标识
+description		--描述
+frequency		--监测频率
+parent			--父亲ID
+depends_condition	--依赖条件
+
+可选属性：
+state_string		--状态字符串
+schedule		--日程表
+verify_error		--错误校验
+error_frequency		--错误时的监测频率
+disable			--禁止标志
+disabled_description	--禁止描述
+depends_on		--依赖对象
+alertCondition		--警报条件
+classifier		--分类条件
+monitorDoneTime		--监测完成时间
+force_refresh		--强制更新
+alertDisabled
+...			--还有很多特殊监测器的自己的属性
+
+运行时属性：
+measurement 		--监测值
+sample			--监测次数
+errorCount		--错误次数
+warningCount		--警告次数
+goodCount		--正常次数
+lastUpdate		--最后更新
+category		--分类
+lastCategory		--最后分类		
+...
+
+--------------------------------------------------------------------------------------
+组结构(group)
+id			--组ID
+name			--组名字
+class			--类别标识(group)
+description		--组描述
+parent			--父亲ID
+可选
+frequency		--组监测频率
+depends_on		--依赖对象
+depends_condition	--依赖条件
+alertCondition		--警报条件
+
+--------------------------------------------------------------------------------------
+设备结构(device)
+id			--设备ID
+name			--设备名字
+class			--类别标识（device)
+description		--设备描述
+parent			--父亲ID
+可选
+frequency		--组监测频率
+depends_on		--依赖对象
+depends_condition	--依赖条件
+alertCondition		--警报条件
+
+--------------------------------------------------------------------------------------
+监测记录(monitorlog)
+id			--监测器id
+did			--设备ID
+category		--状态分类
+monitorDoneTime		--监测完成的时间
+measurement		--监测结果
+stateString		--状态字符串
+
+--------------------------------------------------------------------------------------
+报警记录(alertlog)
+@@@
+id                      --报警ID
+address                 --设备地址
+faultcode               --错误号
+faultstr                --错误描述
+@@@
+time			--报警时间
+class			--报警分类
+event			--报警事件
+target			--报警对象
+result			--结果
+dealuser		--处理人
+dealmemo		--处理描述
+
+--------------------------------------------------------------------------------------
+报警历史(alerthistory)
+id                      --报警id
+time			--报警时间
+class			--报警分类
+event			--报警事件
+target			--报警对象
+result			--结果
+dealuser		--处理人
+dealmemo		--处理描述
+
+--------------------------------------------------------------------------------------
+规则(rule)
+id			--规则的ID
+name			--名字
+class			--rule
+target			--规则的对象 string(),"<id1>,<id2>"
+action			--执行的动作 {action,mailto}
+action_param		--执行动作的参数,list(),[Item]
+category		--执行多做的状态条件
+condition		--执行动作的时间条件 {condition,{always,1}}、{condition,{once,2}}、{condition,{select,{1,3}}},{condition,{group,1}}
+
+
+--------------------------------------------------------------------------------------
+用户表(user)
+name			--用户名
+password		--密码
+desc			--描述
+email			--电子邮件
+group			--属于的组,string(),"<id1>,<id2>"
+
+--------------------------------------------------------------------------------------
+用户组(usergroup)
+id			--用户组ID
+name			--组的名字
+right			--组的权限[{1.1.1,[read,write]}]
+node			--该组可以看到的节点
+
+--------------------------------------------------------------------------------------
+设备版本库(deviceversion)
+filetype		--文件类型
+version			--版本
+filepath		--文件的路径
+ftpip			--ftp地址
+ftpuser			--ftp用户名
+ftppasswd		--ftp密码
+
+--------------------------------------------------------------------------------------
+设备升级向导(deviceupgrade)   
+id			--组ID
+filetype		--要升级的文件类型
+version			--要升级的版本号
+state			--当前状态（标识升级是否完成，start,upgrading,finished)
+
+
+--------------------------------------------------------------------------------------
+设备版本历史(deviceversion)
+deviceid		--设备ID
+devicename		--设备名称
+time			--升级的时间
+version1		--升级前版本
+version2		--升级后的版本
+result			--升级结果
+
+--------------------------------------------------------------------------------------

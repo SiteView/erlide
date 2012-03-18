@@ -1,0 +1,66 @@
+BODY{
+	font-family : Arial, Helvetica, sans-serif;	
+	font-size:10pt;
+}
+
+H1 {
+	color: #003366;
+	font-family : Arial, Helvetica, sans-serif;
+}
+H2 {
+	color: #003366;
+        font-family : Arial, Helvetica, sans-serif;
+}
+
+H3 {
+	color: #003366;
+	font-family : Arial, Helvetica, sans-serif;
+}
+
+p {
+	color: #000000;
+	font-family : Arial, Helvetica, sans-serif;
+        font-size : 10pt;
+}
+
+.bodytable {
+	FONT-SIZE: 12px; WIDTH: 100%; LINE-HEIGHT: 20px; FONT-FAMILY: Arial; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.bodytable TH {
+	PADDING-LEFT: 1px; FONT-SIZE: 13px; BACKGROUND: url(/images/tt_03.jpg); height:21px; color:#FFFFFF
+}
+.bodytable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 2px solid; BORDER-BOTTOM: #ffffff 2px solid
+}
+
+th {
+	color: #003366;
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11pt;
+}
+
+td {
+	color: #000000;
+	font-family : Arial, Helvetica, sans-serif;
+        font-size : 10pt;
+}
+
+a {
+	font-family : Arial, Helvetica, sans-serif;
+}
+
+b {
+	font-family : Arial, Helvetica, sans-serif;
+}
+
+input {
+	font-family : Arial, Helvetica, sans-serif;
+}
+
+.tabhead {background-color:#FFFFFF;}
+
+.subgroup {background-color:#F0F0F0;}
+
+.viewShown {
+	color : #003366;
+}

@@ -1,0 +1,2 @@
+{packages,[]}.
+{modules,[api_device_config_manage]}.

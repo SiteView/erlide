@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_monitor</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_monitor</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of monitor operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of monitor operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#copy-2">copy/2</a></td><td>copy monitor to a group.</td></tr>
+<tr><td valign="top"><a href="#create-2">create/2</a></td><td>create a monitor with parent id and list of data.</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete monitor by monitor id.</td></tr>
+<tr><td valign="top"><a href="#disable-2">disable/2</a></td><td>disable monitor.</td></tr>
+<tr><td valign="top"><a href="#disable-4">disable/4</a></td><td>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}}).</td></tr>
+<tr><td valign="top"><a href="#enable-1">enable/1</a></td><td>enable a monitor.</td></tr>
+<tr><td valign="top"><a href="#enable-2">enable/2</a></td><td>enable monitor.</td></tr>
+<tr><td valign="top"><a href="#getBrowseData-2">getBrowseData/2</a></td><td>get data of  browsable property ,Oper is the operation status when call this function,when add monitor Oper will be "add",edit monitor is "edit".</td></tr>
+<tr><td valign="top"><a href="#get_all_classifier-1">get_all_classifier/1</a></td><td>get classifier of a monitor.</td></tr>
+<tr><td valign="top"><a href="#get_all_monitors-0">get_all_monitors/0</a></td><td>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#get_classifier-2">get_classifier/2</a></td><td>get classifier of a monitor.</td></tr>
+<tr><td valign="top"><a href="#get_run_info-1">get_run_info/1</a></td><td>runtime information of a monitor.</td></tr>
+<tr><td valign="top"><a href="#info-1">info/1</a></td><td>information of a monitor.</td></tr>
+<tr><td valign="top"><a href="#move-2">move/2</a></td><td>move monitor to a group.</td></tr>
+<tr><td valign="top"><a href="#refresh-1">refresh/1</a></td><td>refresh a monitor.</td></tr>
+<tr><td valign="top"><a href="#update-1">update/1</a></td><td>update monitor, MonitorData is a key-value tuple list.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="copy-2">copy/2</a></h3>
+<div class="spec">
+<p><tt>copy(MonitorId, ParentId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>ParentId = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = create_monitor_error | not_found_parent | parameter_error</tt></li>
+</ul></p>
+</div><p>copy monitor to a group</p>
+
+<h3 class="function"><a name="create-2">create/2</a></h3>
+<div class="spec">
+<p><tt>create(ParentId, MonitorData) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>ParentId = atom()</tt></li>
+<li><tt>MonitorData = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = error_parameter | parent_not_exist | start_monitor_error | save_monitor_error | id_generate_error | {verify_error, Err}</tt></li>
+<li><tt>Err = [{FieldName, ErrDesc}]</tt></li>
+<li><tt>FieldName = atom()</tt></li>
+<li><tt>ErrDesc = string()</tt></li>
+</ul></p>
+</div><p>create a monitor with parent id and list of data</p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(MonitorId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>delete monitor by monitor id</p>
+
+<h3 class="function"><a name="disable-2">disable/2</a></h3>
+<div class="spec">
+<p><tt>disable(MonitorId, DisableDesc) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = not_found_monitor | save_monitor_error | parameter_error</tt></li>
+</ul></p>
+</div><p>disable monitor</p>
+
+<h3 class="function"><a name="disable-4">disable/4</a></h3>
+<div class="spec">
+<p><tt>disable(MonitorId, DisableDesc, X3::StartTime, X4::EndTime) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>StartTime = tuple()</tt></li>
+<li><tt>EndTime = tuple()</tt></li>
+</ul></p>
+</div><p>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}} (example:{{2009,11,9},{12,11,23}})</p>
+
+<h3 class="function"><a name="enable-1">enable/1</a></h3>
+<div class="spec">
+<p><tt>enable(MonitorId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Reason = parameter_error | not_found_monitor | save_monitor_error</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>enable a monitor</p>
+
+<h3 class="function"><a name="enable-2">enable/2</a></h3>
+<div class="spec">
+<p><tt>enable(MonitorId, Flag) -&gt; any()</tt></p>
+</div><p>enable monitor. if Flag is true,Only enable items that are temporarily disabled</p>
+
+<h3 class="function"><a name="getBrowseData-2">getBrowseData/2</a></h3>
+<div class="spec">
+<p><tt>getBrowseData(Oper, Params) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Oper = string()</tt></li>
+<li><tt>Params = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Result = [{Id, Title}]</tt></li>
+<li><tt>Id = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+</ul></p>
+</div><p>get data of  browsable property ,Oper is the operation status when call this function,when add monitor Oper will be "add",edit monitor is "edit"</p>
+
+<h3 class="function"><a name="get_all_classifier-1">get_all_classifier/1</a></h3>
+<div class="spec">
+<p><tt>get_all_classifier(Id) -&gt; [{Key, Classfier}] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Key = error | warning | good</tt></li>
+<li><tt>Classfier = [{Prop, Oper, Value}]</tt></li>
+<li><tt>Prop = atom()</tt></li>
+<li><tt>Oper = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get classifier of a monitor</p>
+
+<h3 class="function"><a name="get_all_monitors-0">get_all_monitors/0</a></h3>
+<div class="spec">
+<p><tt>get_all_monitors() -&gt; [Monitor]</tt>
+<ul class="definitions"><li><tt>Monitor = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list
+ </p>
+
+<h3 class="function"><a name="get_classifier-2">get_classifier/2</a></h3>
+<div class="spec">
+<p><tt>get_classifier(Id, Category) -&gt; [tuple()] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Category = error | warning | good</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get classifier of a monitor</p>
+
+<h3 class="function"><a name="get_run_info-1">get_run_info/1</a></h3>
+<div class="spec">
+<p><tt>get_run_info(MonitorId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+<li><tt>Reason = monitor_not_found | parameter_error</tt></li>
+</ul></p>
+</div><p>runtime information of a monitor</p>
+
+<h3 class="function"><a name="info-1">info/1</a></h3>
+<div class="spec">
+<p><tt>info(MonitorId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+<li><tt>Reason = monitor_not_found | parameter_error</tt></li>
+</ul></p>
+</div><p>information of a monitor</p>
+
+<h3 class="function"><a name="move-2">move/2</a></h3>
+<div class="spec">
+<p><tt>move(MonitorId, ParentId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>ParentId = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>move monitor to a group</p>
+
+<h3 class="function"><a name="refresh-1">refresh/1</a></h3>
+<div class="spec">
+<p><tt>refresh(Id) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>refresh a monitor</p>
+
+<h3 class="function"><a name="update-1">update/1</a></h3>
+<div class="spec">
+<p><tt>update(MonitorData) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorData = [{key, value}]</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = parameter_error | monitordata_error | not_found_parent | {verify_error, Err}</tt></li>
+<li><tt>Err = [{FieldName, ErrDesc}]</tt></li>
+<li><tt>FieldName = atom()</tt></li>
+<li><tt>ErrDesc = string()</tt></li>
+</ul></p>
+</div><p>update monitor, MonitorData is a key-value tuple list</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 11 2009, 11:02:38.</i></p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+.bodytable {
+	WIDTH: 100%; border-top:1px solid #4E85BD; border-bottom:1px solid #4E85BD; border-right:1px solid #4E85BD; border-left:1px solid #4E85BD;
+}
+.bodytable TH {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid;BORDER-LEFT: #ffffff 2px solid; BORDER-BOTTOM: #ffffff 2px solid;PADDING-LEFT: 1px; FONT-SIZE: 12px; BACKGROUND:#e0e8ff;height:21px; color:#000000
+}
+.bodytable TD {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 2px solid; BACKGROUND: #f0f8ff; BORDER-LEFT: #ffffff 2px solid; BORDER-BOTTOM: #ffffff 2px solid
+}
+
+h3{ font-size: 1.17em; margin: .83em 0 }
+
+.asset{
+	FONT-SIZE: 0.83em;
+	width: 100%;
+	align:left;
+}
+
+.image{
+	border:0px;
+}
