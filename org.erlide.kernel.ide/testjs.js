@@ -20,7 +20,7 @@ erlang_run = function (x)
 	return f(x) * f2(x) 
 };
 
-analysis_ping_Data= function (name, attrnames, data)
+analysis_ping_Data = function (name, attrnames, data)
 {
 	var strInfo = "......js.................analysis_ping_Data  debug Info...... input  is:name:";
 	exports.sys.print(strInfo + name + "....attrnames:" + attrnames + "....data:" + data +  "\n");
@@ -39,4 +39,23 @@ analysis_ping_Data= function (name, attrnames, data)
 	return values;
 };
 
+run_Calendar = function (x)
+{
+	icalParser.parseIcal(x);
 
+	//icalParser.ical is now set
+	icalParser.ical.version; 
+	icalParser.ical.prodid;
+
+	////Arrays
+	//All the vevent elements
+	icalParser.ical.events;
+	//All the vtodo elements
+	icalParser.ical.todos;
+	//All the journal elements
+	icalParser.ical.journals;
+	//All the freebusy elements
+	icalParser.ical.freebusy;
+	
+	return x;
+};

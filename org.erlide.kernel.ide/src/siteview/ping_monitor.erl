@@ -33,9 +33,6 @@ get_max() -> 10.
 %%@doc the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
 get_resource_type() -> ?MODULE.
 
-%% beamjs init
-init(_VM) ->
-	ok.
 
 %% @doc run the monitor without logging and classifier, for run standalone and testing
 run(MonitorName, Hostname,Size,Timeout) ->
@@ -51,13 +48,14 @@ run(MonitorName, Hostname,Size,Timeout) ->
 		%@TODO: using erlv8 to processing the Data
         end,
 	
+	
 %% 	simulated random data
 %% 	io:format("ping cmd : ~p~n", [Cmd]),
 %% 	io:format("ping data : ~p~n", [Data]),
 	
 	%%erlang call js_fun to AnalysisData
-%% 	AnalysisData = beamjs:run_jsfun(["testjs.js"], [{"testjs.js", analysis_ping_Data, [MonitorName, ?V8Arr([round_trip_time, packetsgood]), Data]}]),
-%% 	io:format("---------------------ping AnalysisData Return : ~p~n", [AnalysisData]),	
+	AnalysisData = beamjs:run_jsfun(["testjs.js"], [{"testjs.js", analysis_ping_Data, [MonitorName, ?V8Arr([round_trip_time, packetsgood]), Data]}]),
+	io:format("---------------------ping AnalysisData Return : ~p~n", [AnalysisData]),	
 	
 	
 	Round_trip_time = 10 * random:uniform(10),
@@ -74,7 +72,8 @@ update_action(Self,EventType,Pattern,State) ->
 
 %% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
   	Start = erlang:now(),
-	object:do(Self,running),	
+	object:do(Self,running),
+
     {Round_trip_time, Packetsgood} = run(?VALUE(name), ?VALUE(hostname),?VALUE(size),?VALUE(timeout)),
 	?SETQUEVALUE(round_trip_time,Round_trip_time),
 	?SETQUEVALUE(packetsgood,Packetsgood),

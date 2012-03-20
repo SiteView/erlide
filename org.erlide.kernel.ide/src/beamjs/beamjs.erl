@@ -14,7 +14,7 @@ load_jsfun(VM,Files) ->
 	Global:set_value("__dirname",filename:absname("")),
 	Global:set_value("module",?V8Obj([{"id","init"},{"exports", ?V8Obj([])}])),
 	lists:foreach(fun (File) ->
-%% 	  	  io:format("load_jsfun ~p,  ~p~n", [VM, File]),
+	  	  io:format("load_jsfun ~p,  ~p~n", [VM, File]),
 		  Require = Global:get_value("require"),
 		  Global:set_value("module",?V8Obj([])),
 		  Module = Global:get_value("module"),
