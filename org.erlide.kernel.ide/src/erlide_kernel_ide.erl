@@ -5,6 +5,7 @@
 		]).
 
 init() ->	
+	erlide_log:log("*******************erlide_kernel_ide OK*************************"),
 	spawn(fun()->
 				  erlide_scanner_listener:start(),
 				  object:start(),
