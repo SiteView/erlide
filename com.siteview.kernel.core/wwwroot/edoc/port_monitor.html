@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module port_monitor []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module port_monitor []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Port Monitor.
+<p>Copyright © 2009 dragonflow, Inc.</p>
+
+<p><b>Version:</b> 1.0</p>
+<p><b>Authors:</b> Cheng kaiyang (<a href="mailto:kaiyang.cheng@dragonflow.com"><tt>kaiyang.cheng@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>Port Monitor.</p>
+ 
+  Description: Using gen_tcp,gen_udp erlang module for sokect programming,
+  Verifies that a connection can be made to a network port and measures the length of
+  time it takes to make the connection. Optionally, it can look for a string of text to be returned or send a string of text
+  once the connection is made.
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#defaultTitle-1">defaultTitle/1</a></td><td>create a default title.</td></tr>
+<tr><td valign="top"><a href="#getPortInfo-1">getPortInfo/1</a></td><td>get the port information.</td></tr>
+<tr><td valign="top"><a href="#getScalarValues-2">getScalarValues/2</a></td><td>Set scalar properties value.</td></tr>
+<tr><td valign="top"><a href="#get_classifier-1">get_classifier/1</a></td><td>Set default threshold value.</td></tr>
+<tr><td valign="top"><a href="#get_template_property-0">get_template_property/0</a></td><td>Add properties to template property list.</td></tr>
+<tr><td valign="top"><a href="#new-0">new/0</a></td><td>Start the monitor instance.</td></tr>
+<tr><td valign="top"><a href="#port_tcp-5">port_tcp/5</a></td><td>Process tcp port.</td></tr>
+<tr><td valign="top"><a href="#port_udp-5">port_udp/5</a></td><td>Process udp port.</td></tr>
+<tr><td valign="top"><a href="#update-0">update/0</a></td><td>Run the monitor.</td></tr>
+<tr><td valign="top"><a href="#verify-1">verify/1</a></td><td>page check.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="defaultTitle-1">defaultTitle/1</a></h3>
+<div class="spec">
+<p><tt>defaultTitle(Params) -&gt; Title</tt>
+<ul class="definitions"><li><tt>Params = [PagePropertis]</tt></li>
+<li><tt>PagePropertis = {PropertyName, PropertyValue}</tt></li>
+<li><tt>PropertyName = atom()</tt></li>
+<li><tt>PropertyValue = integer() | string()</tt></li>
+<li><tt>Title = string()</tt></li>
+</ul></p>
+</div><p>create a default title.</p>
+
+<h3 class="function"><a name="getPortInfo-1">getPortInfo/1</a></h3>
+<div class="spec">
+<p><tt>getPortInfo(Port) -&gt; Flag</tt>
+<ul class="definitions"><li><tt>Flag = bool()</tt></li>
+<li><tt>Port = string()</tt></li>
+</ul></p>
+</div><p>get the port information.</p>
+
+<h3 class="function"><a name="getScalarValues-2">getScalarValues/2</a></h3>
+<div class="spec">
+<p><tt>getScalarValues(Prop::Property, Params) -&gt; ValueList</tt>
+<ul class="definitions"><li><tt>Property = atom()</tt></li>
+<li><tt>Params = [{PropertyName, PropertyValue}]</tt></li>
+<li><tt>PropertyName = atom()</tt></li>
+<li><tt>PropertyValue = string()</tt></li>
+<li><tt>ValueList = [{Scalarname, Scalarvalue}]</tt></li>
+<li><tt>Scalarname = string()</tt></li>
+<li><tt>Scalarvalue = string()</tt></li>
+</ul></p>
+</div><p>Set scalar properties value.</p>
+
+<h3 class="function"><a name="get_classifier-1">get_classifier/1</a></h3>
+<div class="spec">
+<p><tt>get_classifier(X1::Flag) -&gt; Threshold</tt>
+<ul class="definitions"><li><tt>Flag = error | warning | good</tt></li>
+<li><tt>Threshold = [{Attribute, Opera, Value}]</tt></li>
+<li><tt>Attribute = atom()</tt></li>
+<li><tt>Opera = atom()</tt></li>
+<li><tt>Value = integer() | atom() | string()</tt></li>
+</ul></p>
+</div><p>Set default threshold value.</p>
+
+<h3 class="function"><a name="get_template_property-0">get_template_property/0</a></h3>
+<div class="spec">
+<p><tt>get_template_property() -&gt; PropertyList</tt>
+<ul class="definitions"><li><tt>PropertyList = [PropertyRecord]</tt></li>
+<li><tt>PropertyRecord = <a href="#type-record">record()</a></tt></li>
+</ul></p>
+</div><p>Add properties to template property list.</p>
+
+<h3 class="function"><a name="new-0">new/0</a></h3>
+<div class="spec">
+<p><tt>new() -&gt; ok</tt></p>
+</div><p>Start the monitor instance.</p>
+
+<h3 class="function"><a name="port_tcp-5">port_tcp/5</a></h3>
+<div class="spec">
+<p><tt>port_tcp(Host, Port, T::Timeout, M::MessageSend, Mr::MessageMatch) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Port = string()</tt></li>
+<li><tt>Timeout = integer()</tt></li>
+<li><tt>MessageSend = string()</tt></li>
+<li><tt>MessageMatch = string()</tt></li>
+</ul></p>
+</div><p>Process tcp port.</p>
+
+<h3 class="function"><a name="port_udp-5">port_udp/5</a></h3>
+<div class="spec">
+<p><tt>port_udp(Host, Port, T::Timeout, M::MessageSend, Mr::MessageMatch) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Port = string()</tt></li>
+<li><tt>Timeout = integer()</tt></li>
+<li><tt>MessageSend = string()</tt></li>
+<li><tt>MessageMatch = string()</tt></li>
+</ul></p>
+</div><p>Process udp port.</p>
+
+<h3 class="function"><a name="update-0">update/0</a></h3>
+<div class="spec">
+<p><tt>update() -&gt; ok</tt></p>
+</div><p><p>Run the monitor.</p>
+ 
+  Description: read port information and decide how to process the port</p>
+
+<h3 class="function"><a name="verify-1">verify/1</a></h3>
+<div class="spec">
+<p><tt>verify(Params) -&gt; ErrorList</tt>
+<ul class="definitions"><li><tt>Params = [{atom(), integer() | string()}]</tt></li>
+<li><tt>ErrorList = [string()]</tt></li>
+</ul></p>
+</div><p>page check.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 24 2009, 14:16:36.</i></p>
+</body>
+</html>

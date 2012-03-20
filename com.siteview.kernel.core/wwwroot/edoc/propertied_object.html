@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module propertied_object [Tid]</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module propertied_object [Tid]</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>property object module.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>property object module
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#add_properties-1">add_properties/1</a></td><td>add properties to this object,Properties is a key-value list contains the properties.</td></tr>
+<tr><td valign="top"><a href="#delete-0">delete/0</a></td><td>delete object.</td></tr>
+<tr><td valign="top"><a href="#get_attribute-1">get_attribute/1</a></td><td>get a attribute's value.</td></tr>
+<tr><td valign="top"><a href="#get_attributes-0">get_attributes/0</a></td><td>get all attributes.</td></tr>
+<tr><td valign="top"><a href="#get_properties-0">get_properties/0</a></td><td>get all properties of this object.</td></tr>
+<tr><td valign="top"><a href="#get_property-1">get_property/1</a></td><td>get the object's property.</td></tr>
+<tr><td valign="top"><a href="#inc_attribute-1">inc_attribute/1</a></td><td>increase a attribute's value.</td></tr>
+<tr><td valign="top"><a href="#inc_property-1">inc_property/1</a></td><td>increase a property's value.</td></tr>
+<tr><td valign="top"><a href="#init-2">init/2</a></td><td>add Data to object's property.</td></tr>
+<tr><td valign="top"><a href="#remove_attribute_match-1">remove_attribute_match/1</a></td><td>return a attribute which name match the Reg string.</td></tr>
+<tr><td valign="top"><a href="#remove_attributes-0">remove_attributes/0</a></td><td>remove all attributes of this object.</td></tr>
+<tr><td valign="top"><a href="#remove_properties-0">remove_properties/0</a></td><td>remove all properties from the object.</td></tr>
+<tr><td valign="top"><a href="#remove_property-1">remove_property/1</a></td><td>remove a property.</td></tr>
+<tr><td valign="top"><a href="#remove_property_match-1">remove_property_match/1</a></td><td>remove a property which is match Reg string.</td></tr>
+<tr><td valign="top"><a href="#set_attribute-2">set_attribute/2</a></td><td>set a attribute'val to Val.</td></tr>
+<tr><td valign="top"><a href="#set_property-2">set_property/2</a></td><td>set property's value to Val.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="add_properties-1">add_properties/1</a></h3>
+<div class="spec">
+<p><tt>add_properties(Properties) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Properties = [{atom(), term()}]</tt></li>
+<li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>add properties to this object,Properties is a key-value list contains the properties.</p>
+
+<h3 class="function"><a name="delete-0">delete/0</a></h3>
+<div class="spec">
+<p><tt>delete() -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>delete object</p>
+
+<h3 class="function"><a name="get_attribute-1">get_attribute/1</a></h3>
+<div class="spec">
+<p><tt>get_attribute(Name) -&gt; {ok, {Name, Val}} | {error, Resean}</tt>
+<ul class="definitions"><li><tt>Name = atom()</tt></li>
+<li><tt>Val = term()</tt></li>
+<li><tt>Resean = atom()</tt></li>
+</ul></p>
+</div><p>get a attribute's value</p>
+
+<h3 class="function"><a name="get_attributes-0">get_attributes/0</a></h3>
+<div class="spec">
+<p><tt>get_attributes() -&gt; {ok, list()} | {error, Resean}</tt>
+<ul class="definitions"><li><tt>Resean = atom()</tt></li>
+</ul></p>
+</div><p>get all attributes</p>
+
+<h3 class="function"><a name="get_properties-0">get_properties/0</a></h3>
+<div class="spec">
+<p><tt>get_properties() -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Ret = [{atom(), term()}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get all properties of this object</p>
+
+<h3 class="function"><a name="get_property-1">get_property/1</a></h3>
+<div class="spec">
+<p><tt>get_property(Key) -&gt; {ok, [{Key, Value}]} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get the object's property</p>
+
+<h3 class="function"><a name="inc_attribute-1">inc_attribute/1</a></h3>
+<div class="spec">
+<p><tt>inc_attribute(Name) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>increase a attribute's value</p>
+
+<h3 class="function"><a name="inc_property-1">inc_property/1</a></h3>
+<div class="spec">
+<p><tt>inc_property(Key) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>increase a property's value</p>
+
+<h3 class="function"><a name="init-2">init/2</a></h3>
+<div class="spec">
+<p><tt>init(This, Data) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>This = <a href="#type-instance">instance()</a></tt></li>
+<li><tt>Data = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Ret = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>add Data to object's property</p>
+
+<h3 class="function"><a name="remove_attribute_match-1">remove_attribute_match/1</a></h3>
+<div class="spec">
+<p><tt>remove_attribute_match(Reg) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Reg = string()</tt></li>
+<li><tt>Ret = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>return a attribute which name match the Reg string</p>
+
+<h3 class="function"><a name="remove_attributes-0">remove_attributes/0</a></h3>
+<div class="spec">
+<p><tt>remove_attributes() -&gt; {ok, Ret} | {error, Resean}</tt>
+<ul class="definitions"><li><tt>Ret = atom()</tt></li>
+<li><tt>Resean = atom()</tt></li>
+</ul></p>
+</div><p>remove all attributes of this object</p>
+
+<h3 class="function"><a name="remove_properties-0">remove_properties/0</a></h3>
+<div class="spec">
+<p><tt>remove_properties() -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Ret = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>remove all properties from the object</p>
+
+<h3 class="function"><a name="remove_property-1">remove_property/1</a></h3>
+<div class="spec">
+<p><tt>remove_property(Key) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>remove a property</p>
+
+<h3 class="function"><a name="remove_property_match-1">remove_property_match/1</a></h3>
+<div class="spec">
+<p><tt>remove_property_match(Reg) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Reg = string</tt></li>
+<li><tt>Ret = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>remove a property which is match Reg string</p>
+
+<h3 class="function"><a name="set_attribute-2">set_attribute/2</a></h3>
+<div class="spec">
+<p><tt>set_attribute(Name, Val) -&gt; {ok, Ret} | {error, Resean}</tt>
+<ul class="definitions"><li><tt>Name = atom()</tt></li>
+<li><tt>Val = term()</tt></li>
+<li><tt>Ret = term()</tt></li>
+<li><tt>Resean = atom()</tt></li>
+</ul></p>
+</div><p>set a attribute'val to Val</p>
+
+<h3 class="function"><a name="set_property-2">set_property/2</a></h3>
+<div class="spec">
+<p><tt>set_property(Key, Val) -&gt; {ok, Ret} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Val = term()</tt></li>
+<li><tt>Ret = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>set property's value to Val</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Dec 21 2009, 10:33:05.</i></p>
+</body>
+</html>

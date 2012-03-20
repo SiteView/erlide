@@ -1,0 +1,190 @@
+
+Sitescope includes two baselining options. One is the Rolling Baseline discussed here which is currently only applicable to the URL and NT Performance Counter Monitors. The other option is the Static Performance Baseline available for most monitor types.
+In contrast to the Fixed Performance Baseline, which is calculated one time over an interval measured in days, the Rolling Baseline is calculated for an interval measured in monitor runs and the baseline value is updated after each monitor run. The URL Monitor and Windows Performance Counter Monitors are distinguished from other monitors by the addition the Baseline Interval configuration parameter and rolling baseline related criteria in the error, warning, and good threshold settings. 
+
+
+rooling baseline:
+ For example, suppose a baseline for a monitor's round-trip time is currently 2 seconds and the percentage deviation is set for 30%. The monitor will remain in a good condition as long as it is round-trip time does not exceed 2.6 seconds.
+每次监测完都计算状态，比如超了容忍范围则 error
+
+
+Fixed Performance Baseline:
+if(round-trip > (baseline + (multiplier * stddev)) then error = true
+if(4.5 > (3 + (1 * 1.5)) then error = true
+每天计算一次基线值，不同时段有不同的算子（权重），最终判断一天的值是否 error
+
+
+there are two types of thresholds: baseline thresholds and static thresholds. Baseline thresholds have a percentile value that is used to determine when a measurement is in error or warning status, while static thresholds have an actual fixed value. Baseline threshold measurements have a condition of either >= or <= depending on the direction of the measurement.
+
+
+
+1.Select the groups and/or monitors to include in the baseline calculation.选择一个或多个监测器
+2.Select the time range schedule for collecting baseline data.选择时段
+3.Select and fine-tune the adherence level to determine the extent that monitor measurement sample values have on the threshold values.调整依附性级别/设置边界
+
+
+计算中包含的最大天数
+Maximum number of days to include in calculation
+The number of days of historical data that are included in baseline calculations. The higher the number, the more precise the baseline result, but the calculation takes more time and uses more disk space. Data that is older than this value is not included in the calculation. For more details on the calculation model, see How SiteScope Calculates Thresholds.
+Default value: 30 days
+
+
+百分比范围的最大数  
+Maximum number of percentile ranges
+Limits the number of percentile ranges displayed in the Percentile Ranges Mapping Table.
+Default value: 8
+
+
+基线化所需的最小天数
+Minimum number of days required for baselining
+The minimum number of days that the monitors must have run for SiteScope to calculate the baseline.
+Default value: 14 days
+Minimum value: 1 (if you enter a value of less than 1, the default value is used instead).
+
+
+基线化所需的最小样本数
+Minimum number of samples required for baselining
+The minimum number of samples required for SiteScope to calculate the baseline.
+Default value: 2016 (the number of samples produced for a monitor running over a two week period, where the monitor runs every 10 minutes)
+Minimum value: 1 (if you enter a value of less than 1, the default value is used instead).
+
+
+用于计算错误边界的偏移
+Offset for calculating error boundary
+Specifies the offset value to use for calculating the error boundary. The baseline threshold is multiplied by this value when:
+The Automatically create Error Threshold Boundary if no error thresholds are defined option is selected (see below), or
+The current most extreme error threshold is less extreme than the calculated baseline threshold.
+Default value: 0.3
+
+
+解析块大小
+Parsing chunk size
+Specifies the number of monitors that are handled simultaneously by the log file parser. The higher the number, the faster the baselining calculation, but more file handlers are used.
+Default value: 100
+
+
+放弃的样本的百分比
+Percentile of discarded samples
+The percentile of the most extreme samples (considered "noise" measurement samples) that are not included in the baseline calculation.
+Default value: 2.0
+
+
+在计算中包含今天的数据
+Include today's data in calculation
+Specifies whether to include the current day's data in the baseline calculation.
+Default value: Selected
+
+
+将基线数据保存到磁盘的间隔
+Interval for saving accumulated baseline data to disk (minutes)
+The interval, in minutes, used by SiteScope to save baseline data accumulated in the memory to the disk. A shorter interval reduces the memory consumption, but increases the vulnerability to failures and reduces performance.
+Default value: 30 minutes
+
+
+
+
+The measurement can be used in the baseline calculation. To be used in the baseline calculation, a measurement must be numeric and it must have a direction. An example of a measurement that cannot be used in the baseline calculation is a URL 404 error code (it is numeric, but it has no direction).
+
+How SiteScope Calculates Thresholds 
+When SiteScope calculates the baseline, it creates a percentile value for each baselinable threshold measurement for each schedule. SiteScope makes an adjustment for extreme measurements by discarding, by default, 2% of the most extreme samples (considered "noise" measurements), and calculates the percentiles on the remaining measurements. For example, if most monitor run results on a server show CPU utilization of no more than 20% and one peak value of 50%, the peak value is not used to determine the baseline. You can change the percentage of discarded measurement samples in the Baseline Settings.
+
+The baseline engine uses a sliding-window approach to calculate thresholds. This means that newer data samples have more influence on the baseline calculation than older samples, and that after a period of time (by default 30 days), the historic data becomes obsolete. You can set the number of days to include in the calculation in the Baseline Settings.
+
+For information about configuring Baseline Settings, expand Baseline Settings in Infrastructure Preferences User Interface.
+
+How SiteScope Calculates the Error Boundary 
+SiteScope uses the percentile value to create an error boundary for each measurement. This is the value of a measurement that is considered to be in error status, even though according to existing baseline percentiles it should not report an error. For details, see Error Boundary.
+
+SiteScope calculates the error boundary in one of the following ways:
+
+If the measurement has a static error threshold for the specific schedule, the percentile value of the baseline threshold is calculated into an actual value and this value is then compared to the value of the static threshold as follows:
+If the static error threshold value is more extreme than the baseline threshold value, the static error threshold value is used as the error threshold boundary for that measurement.
+Example: If the static error threshold is 100% CPU utilization and the computed baseline threshold is 67% CPU utilization, the static error threshold value (100% CPU utilization) is used as the error boundary.
+
+If the baseline threshold value is more extreme than the static error threshold value, then the offset value is used. The offset is a percentage value that SiteScope adds to the baseline threshold value (or subtracts from, depending on the direction of the measurement), and the resulting value is used as the error boundary for that measurement. You can determine the offset value in the Baseline Settings area of Infrastructure Settings Preferences.
+Example: If the static error threshold for a schedule is 60% CPU utilization and the computed baseline threshold value is 65% CPU utilization, the error boundary is calculated as: 
+65% CPU utilization * 130% (using the default offset value of 0.3) = 84.5% CPU utilization.
+
+If there is no error threshold value for the measurement with the specific schedule prior to calculating the baseline (the measurement has a warning or good threshold value but no error threshold value), and the Automatically create an error boundary if no error thresholds are defined option is selected in the Baseline Settings, the percentile value of the baseline threshold is calculated into an actual value and the offset value is added to/subtracted from the baseline threshold value (depending on the direction of the measurement). The resulting value is used as the error boundary for the measurement.
+Note: An error boundary is not created if:
+There is no error threshold value for the measurement with the specific schedule prior to calculating the baseline (for example, the measurement has a warning or good threshold value but no error threshold value), and
+The Automatically create an error boundary if no error thresholds are defined option is not selected.
+For details on defining the offset value and automating error boundary creation, expand Baseline Settings in Infrastructure Preferences User Interface.
+
+
+api_monitor:get_log({2010,5,11},'0.1.12').
+api_monitor:get_all_monitors().
+api_monitor:info('0.3.4').
+api_monitor:get_run_info('0.3.4').
+api_monitor:get_stat().
+{0,0,2,1269504513390,4,1269504813281}
+{length(get(running)),get(?CUR_RUN_COUNT),get(?MAX_RUNNING_COUNT),get(?MAX_RUNNING_TIME),get(?MAX_PRE_RUN),get(?MAX_PRE_TIME)}},
+
+
+sitescope10: 
+1、setProperty(pCategory
+2、BaseliningDataHandler.runtimeSamplesQueue
+   MonitorModel.produceMonitorModelCalculationResult
+3、Running as HA failover server. No baseline related functionality will be supported
+
+class baselining.engine.ActivationThread
+class sitescope.entities.BaselineRule
+class platform.baselining.algorithm.PercentileMeasurementModel
+class UserPreferenceInferer.java
+class PercentileMeasurementModel.java  
+
+class platform.baselining.config.ThresholdModifier
+{
+  public static boolean applyBaselineThresholds
+  private static rulesToHashMapByMeasurementName(filteredCurrentMonitorRules)
+  private findExtremeValueOutOfNewRules(measurement,newRulesByMeasurement,monitor)
+
+
+class atomicmonitor.java
+{
+  public double getBaselineThresholdValueFromPercentile(
+
+
+class platform.baselining.data.MeasurementMappingRequest
+{
+     private int maxPercentileValue;
+
+
+class platform.baselining.algorithm.MeasurementHistogram
+{
+     public double getPercentile(int percentile)
+
+.tailMap
+
+
+
+search setDirection :
+    static {
+       pRoundTripTime.setDirection(StringProperty.Direction.UpIsBad);
+       pStatus.setDirection(StringProperty.Direction.NotBaselineable);  
+       ...
+    }
+ftp size without meanful direction 
+preference setting 6 Define-values, and other UI
+
+
+Are you stupid or something?
+Momma says stupid is as stupid does.
+
+
+dbcs_baseline:clear_historigram_for_all_monitor_not_activate_baseline().
+dbcs_baseline:reset_all_baseline_historigram().
+dbcs_baseline:clear_all_baseline_data().
+l(dbcs_baseline).
+l(monitor).
+dbcs_baseline:get_baseline('0.1.12').
+dbcs_baseline:get_dbcs_percentile('0.1.12').
+dbcs_baseline:remove_baseline('0.1.12').
+dbcs_baseline:get_baseline_historigram('0.1.12').
+dbcs_baseline:set_baseline_historigram('0.1.12').
+dbcs_baseline:showAll().
+
+fun(T)-> dbcs_baseline:get_property_classifier(T) end(lists:nth(1, api_monitor:find_object('0.1.51'))).
+fun(T)-> dbcs_baseline:filter_baseline_property(T) end(lists:nth(1, api_monitor:find_object('0.1.51'))).
+fun(T)-> dbcs_baseline:this_get_classifier(T,warning) end(lists:nth(1, api_monitor:find_object('0.1.51'))).
+

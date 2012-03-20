@@ -1,0 +1,61 @@
+Erlang ECC 系统安装步骤(Windows环境）
+
+1.安装Erlang环境(版本R14B以上)
+  安装后在系统的环境变量中加入path，（例如：D:\Program Files\erl5.8.2\bin）
+
+2.安装Win32 OpenSSL 在server\thirdparty 目录下
+  安装时选择将动态库安装到system32目录。
+
+3.安装VC2008的运行库（OpenSSL运行时需要）在server\thirdparty 目录下
+
+4.安装Sun java SDK 1.5版本以上
+
+5.编译代码
+  从SVN上下载代码，运行根目录下的compile.bat进行代码编译。
+
+6. 如果在本机运行Content Store数据库，delete contentstore\db下的全部文件，运行contentstore目录下的cs.bat
+YOUR_DB_HOST是安装Content Store数据库的主机名。
+
+7.配置JAVA节点（如果不运行java监测器，此步骤可以省略）
+   在Conf目录的Server.conf文件中配置数据库，例如{javaNode,'server1@YOUR_JAVA_HOST'}.
+YOUR_JAVA_HOST是运行java节点的主机名
+
+8.配置PostGress数据库节点
+   在Conf目录的Server.conf文件中配置数据库，例如{logNode,'logger@YOUR_JAVA_HOST'}.
+YOUR_JAVA_HOST是运行PostGress数据库节点的主机名
+
+10.启动PostGress数据库节点
+   运行根目录下的svecc_log.bat启动PostGress数据库节点。
+
+11.启动wmi节点
+   执行\tools\wmic目录下的start.bat文件，运行wmi节点
+
+12.启动Erlang Ecc服务
+  运行根目录下的svecc.bat启动Erlang Ecc服务，如果是首次启动运行，在erlang命令行siteview:reset(localhost).
+初始化localhost应用数据库。然后在浏览器中打开http://localhost:8000,用用户名admin，密码admin登录。
+
+13.启动report_proxy报告代理节点
+   运行根目录下的sveccreportproxy.bat启动报告代理节点。
+
+14.使用自动发现功能，需要安装winpcap（tools/nmap-5.X目录下有安装包）。
+
+15.若要添加tuxedo监测器，如果是自己搭建服务器环境测试， 则需要本目录下的Windows+install+Tuxedo8.x.doc及myapp.rar走完所有步骤；
+如果服务器环境已经有， 则需要做文档里提机的配置客户端步骤， 最后运行bin\disp_start.bat即可。
+
+16、配置并启动zk前台即可调试。
+
+17.安装和启动rabbitMQ
+
+设置环境变量：ERLANG_HOME=C:\SiteViewECC\9.1\erl
+【安装】
+>cd C:\SiteViewECC\9.1\rabbitmq_server-2.4.0\sbin
+>rabbitmq-service install
+【启动】
+>cd C:\SiteViewECC\9.1\rabbitmq_server-2.4.0\sbin
+>rabbitmq-service start 
+
+rabbitMQ client web配置：
+修改config.properties文件
+rabbitmq.remote.hostname=（rabbit服务端ip）
+rabbitmq.queue.name=siteview.ecc
+rabbitmq.support=（false：不用；true：使用）

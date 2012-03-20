@@ -1,0 +1,36 @@
+2 支持 Storage Management Initiative Specification 存储管理接口标准 (SMI-S)
+ 
+3 Protocol:(http 或 https )
+ 
+   默认端口分别为 http:5988  https:5989
+ 
+4 用户:是指定的SMI-S提供的用户名
+ 
+5 一些公司默认设置
+ 
+公司                  Namespace         端口 
+3PARData              root/tpd         5988/5989 
+Brocade               root/brocade1    5988/5989 
+Cisco                 root/cimv2       5988/5989 
+EMC                   root/emc         5988/5989 
+Emulex                root/emulex      5988/5989 
+Engenio               root/lsissi      5988/5989 
+Engenio               root/lsissi11    5988/5989 
+Fujitsu               root/eternus     5988/5989 
+HP                    root/eva, root/msa, root/xp 5988/5989 
+HP                    root/hptl        5988/5989 
+HP                    root/hpvls       5988/5989 
+HDS                   root/smis/current 5988/5989 
+IBM                   root/ibm         5988/5989 
+McData Corp.          root/mcdata      5988/5989 
+Network Appliance     root/ontap       5988/5989 
+Pillar Data Systems   root/pillar      5988/5989 
+vware esx             vmware/esxv2     5988/5989
+ 
+6 返回值说明：
+  status: online/offline
+  totalManagedSpace(GB):总空间
+  remainingManagedSpace(GB)：剩余空间
+  AllocatedCapacityRate：已分配率
+  FibreChannel子项:光纤通道wwpn(World Wide Name assigned to a port in a Fibre Channel fabric)的状态
+  Pools 子项：单个卷的大小和状态

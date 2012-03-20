@@ -1,0 +1,28 @@
+rabbitmq server：
+
+    1、Server\rabbitmq_server-2.4.0\sbin\rabbitmq-server.bat启动。
+
+    2、Server\rabbitmq_server-2.4.0\sbin\rabbitmqctl.bat的list_queues等可以看队列的消息数等。
+
+ rabbitmq client：
+
+    1、Server\rabbitmq-client\src\queue_client.erl、queue_server.erl、queue_test.erl。
+
+    2、queue_test:test()运行简单测试。
+
+    3、开了siteveiw_input_queue、siteveiw_output_queue1、siteveiw_output_queue2三个队列；
+    siteveiw_output_queue1是以消费者方式读消息， siteveiw_output_queue2则是自己主动读；
+    queue_test:asyncCall发消息（一个参数的到siteveiw_output_queue1，两个参数的到siteveiw_output_queue2）， 
+    queue_test:asyncCallResult接消息， queue_test:asyncCallResult_Server从siteveiw_output_queue1主动读消息。
+
+ 其他说明：
+
+    1、amqp_rpc_client、amqp_rpc_sever跟现有架构类似， 其用handle_info直接接受消息、gen_server:reply()实现
+    同步返回及在state里用dict均值得参考。
+
+    2、特别有参考价值的文档：
+
+	    http://www.cnblogs.com/daizhj/archive/2010/10/21/1857403.html
+
+	    http://sunjun041640.blog.163.com/blog/static/25626832201033021928166/
+    

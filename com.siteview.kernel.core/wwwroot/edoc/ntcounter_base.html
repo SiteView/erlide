@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module ntcounter_base []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module ntcounter_base []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>NTcounter Base.
+<p>Copyright © 2009 dragonflow, Inc.</p>
+
+<p><b>Version:</b> 1.0</p>
+<p><b>Authors:</b> Cheng kaiyang (<a href="mailto:kaiyang.cheng@dragonflow.com"><tt>kaiyang.cheng@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>NTcounter Base.</p>
+ 
+  Description: Provide basic function for ASP,IIS,SQL,ADserver monitor
+  using perfix.exe
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#calcPerfResult-1">calcPerfResult/1</a></td><td>parse content type for each counters' data,for different content type there are different arithmetic and required precision.</td></tr>
+<tr><td valign="top"><a href="#checkIdMap-2">checkIdMap/2</a></td><td>Get counters data.</td></tr>
+<tr><td valign="top"><a href="#getActiveCounters-1">getActiveCounters/1</a></td><td>Get active counters number.</td></tr>
+<tr><td valign="top"><a href="#getCounters-1">getCounters/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#getHostname-1">getHostname/1</a></td><td>Get Machine.</td></tr>
+<tr><td valign="top"><a href="#getIDCacheForCounters-2">getIDCacheForCounters/2</a></td><td>parse counters data and get the id for counters.</td></tr>
+<tr><td valign="top"><a href="#getMaxCounters-0">getMaxCounters/0</a></td><td>Get Max counters number.</td></tr>
+<tr><td valign="top"><a href="#getPerfCounters-3">getPerfCounters/3</a></td><td>Get specialized object's counters from machine.</td></tr>
+<tr><td valign="top"><a href="#getPerfData-4">getPerfData/4</a></td><td>filter counters data and get data for chosen counters.</td></tr>
+<tr><td valign="top"><a href="#getPerformanceData-2">getPerformanceData/2</a></td><td>parse counters data and set result.</td></tr>
+<tr><td valign="top"><a href="#getRowCounters-1">getRowCounters/1</a></td><td>Get specialized machine's counters,but result is different from getAvailableCounters().</td></tr>
+<tr><td valign="top"><a href="#increaseCounters-1">increaseCounters/1</a></td><td>Set Max counters number.</td></tr>
+<tr><td valign="top"><a href="#new-0">new/0</a></td><td>Start the monitor instance.</td></tr>
+<tr><td valign="top"><a href="#remoteCommandLineAllowed-0">remoteCommandLineAllowed/0</a></td><td>allow remote command line.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="calcPerfResult-1">calcPerfResult/1</a></h3>
+<div class="spec">
+<p><tt>calcPerfResult(PerfResult) -&gt; NewPerfResult</tt>
+<ul class="definitions"><li><tt>PerfResult = <a href="#type-record">record()</a></tt></li>
+<li><tt>NewPerfResult = <a href="#type-record">record()</a></tt></li>
+</ul></p>
+</div><p>parse content type for each counters' data,for different content type there are different arithmetic and required precision.</p>
+
+<h3 class="function"><a name="checkIdMap-2">checkIdMap/2</a></h3>
+<div class="spec">
+<p><tt>checkIdMap(S, L) -&gt; [tuple()]</tt>
+<ul class="definitions"><li><tt>S = string()</tt></li>
+<li><tt>L = list()</tt></li>
+</ul></p>
+</div><p>Get counters data.</p>
+
+<h3 class="function"><a name="getActiveCounters-1">getActiveCounters/1</a></h3>
+<div class="spec">
+<p><tt>getActiveCounters(This::Module) -&gt; integer()</tt>
+<ul class="definitions"><li><tt>Module = <a href="#type-instance">instance()</a></tt></li>
+</ul></p>
+</div><p>Get active counters number.</p>
+
+<h3 class="function"><a name="getCounters-1">getCounters/1</a></h3>
+<div class="spec">
+<p><tt>getCounters(This) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="getHostname-1">getHostname/1</a></h3>
+<div class="spec">
+<p><tt>getHostname(This) -&gt; string()</tt>
+<ul class="definitions"><li><tt>This = <a href="#type-instance">instance()</a></tt></li>
+</ul></p>
+</div><p>Get Machine.</p>
+
+<h3 class="function"><a name="getIDCacheForCounters-2">getIDCacheForCounters/2</a></h3>
+<div class="spec">
+<p><tt>getIDCacheForCounters(Host, PerfCounters) -&gt; list()</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>PerfCounters = [<a href="#type-record">record()</a>]</tt></li>
+</ul></p>
+</div><p>parse counters data and get the id for counters.</p>
+
+<h3 class="function"><a name="getMaxCounters-0">getMaxCounters/0</a></h3>
+<div class="spec">
+<p><tt>getMaxCounters() -&gt; integer()</tt></p>
+</div><p>Get Max counters number.</p>
+
+<h3 class="function"><a name="getPerfCounters-3">getPerfCounters/3</a></h3>
+<div class="spec">
+<p><tt>getPerfCounters(Machine, Object, S) -&gt; Counters</tt>
+<ul class="definitions"><li><tt>Machine = string()</tt></li>
+<li><tt>Object = string()</tt></li>
+<li><tt>Counters = <a href="#type-record">record()</a></tt></li>
+</ul></p>
+</div><p>Get specialized object's counters from machine.</p>
+
+<h3 class="function"><a name="getPerfData-4">getPerfData/4</a></h3>
+<div class="spec">
+<p><tt>getPerfData(Host, Counters, Monitor, Map) -&gt; term()</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>PerfCounters = [<a href="#type-record">record()</a>]</tt></li>
+<li><tt>Monitor = <a href="#type-instance">instance()</a></tt></li>
+</ul></p>
+</div><p>filter counters data and get data for chosen counters.</p>
+
+<h3 class="function"><a name="getPerformanceData-2">getPerformanceData/2</a></h3>
+<div class="spec">
+<p><tt>getPerformanceData(Machine, Counters) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Machine = string()</tt></li>
+<li><tt>Counters = [<a href="#type-record">record()</a>]</tt></li>
+</ul></p>
+</div><p>parse counters data and set result.</p>
+
+<h3 class="function"><a name="getRowCounters-1">getRowCounters/1</a></h3>
+<div class="spec">
+<p><tt>getRowCounters(This::Module) -&gt; Counters</tt>
+<ul class="definitions"><li><tt>Module = <a href="#type-instance">instance()</a></tt></li>
+<li><tt>Counters = [<a href="#type-record">record()</a>]</tt></li>
+<li><tt>Counternumber = string()</tt></li>
+<li><tt>Countername = string()</tt></li>
+</ul></p>
+</div><p>Get specialized machine's counters,but result is different from getAvailableCounters().
+  Description: For getDefaultCounters/1</p>
+
+<h3 class="function"><a name="increaseCounters-1">increaseCounters/1</a></h3>
+<div class="spec">
+<p><tt>increaseCounters(I::Number) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Number = integer()</tt></li>
+</ul></p>
+</div><p>Set Max counters number.</p>
+
+<h3 class="function"><a name="new-0">new/0</a></h3>
+<div class="spec">
+<p><tt>new() -&gt; ok</tt></p>
+</div><p>Start the monitor instance.</p>
+
+<h3 class="function"><a name="remoteCommandLineAllowed-0">remoteCommandLineAllowed/0</a></h3>
+<div class="spec">
+<p><tt>remoteCommandLineAllowed() -&gt; bool()</tt></p>
+</div><p>allow remote command line.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 24 2009, 14:16:21.</i></p>
+</body>
+</html>

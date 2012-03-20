@@ -1,0 +1,1084 @@
+{module_call,yaws_soap_lib}:
+    [code,erlsom,erlsom_compile,erlsom_lib,error_logger,file,filename,http,
+     httputils,ibrowse,inets,lists,string,yaws,yaws_soap_lib]
+{module_use,yaws_soap_lib}:
+    [web_service_monitor,yaws_soap_lib]
+{module_call,yaws_html}:
+    [file,io,io_lib,lists,yaws_html]
+{module_use,yaws_html}:
+    [yaws_html]
+{module_call,xml_monitor}:
+    ['$M_EXPR',browsable_base,calendar,file,lists,net_adm,proplists,siteview,
+     string,timer,xml_monitor]
+{module_use,xml_monitor}:
+    [xml_monitor]
+{module_call,xml2list}:
+    [xmerl_scan,xmerl_ucs,xml2list]
+{module_use,xml2list}:
+    [xml2list]
+{module_call,websphere_servlet_monitor}:
+    ['$M_EXPR',browsable_base,calendar,http_receive,io,io_lib,lists,
+     process_xml,proplists,string,timer,websphere_servlet_monitor]
+{module_use,websphere_servlet_monitor}:
+    [websphere_servlet_monitor]
+{module_call,weblogic6x_monitor}:
+    ['$M_EXPR',browsable_base,io_lib,ip_utils,java_node,lists,proplists,
+     weblogic6x_monitor]
+{module_use,weblogic6x_monitor}:
+    [weblogic6x_monitor]
+{module_call,weblogic5x_monitor}:
+    ['$M_EXPR',inet,io_lib,ip_utils,lists,proplists,snmp_base,snmp_session,
+     string,weblogic5x_monitor]
+{module_use,weblogic5x_monitor}:
+    [weblogic5x_monitor]
+{module_call,web_service_monitor}:
+    ['$M_EXPR',atomic_monitor,base64,filelib,inets,io,lists,string,
+     web_service_monitor,yaws_soap_lib]
+{module_use,web_service_monitor}:
+    [web_service_monitor]
+{module_call,web_server_monitor}:
+    ['$M_EXPR',command_line,file,httputils,io_lib,platform,proplists,
+     server_monitor,string,web_server_monitor]
+{module_use,web_server_monitor}:
+    [web_server_monitor]
+{module_call,vmwareperformance_monitor}:
+    ['$M_EXPR',browsable_base,io_lib,java_node,proplists,string,
+     vmwareperformance_monitor]
+{module_use,vmwareperformance_monitor}:
+    [vmwareperformance_monitor]
+{module_call,urlinfo}:
+    [lists,string,urlinfo]
+{module_use,urlinfo}:
+    [urlinfo]
+{module_call,urlcontent_base}:
+    ['$M_EXPR',application_base,string,urlcontent_base]
+{module_use,urlcontent_base}:
+    [apache_monitor,iplanet_server_monitor,oracle9i_monitor,urlcontent_base]
+{module_call,url_sequence_monitor}:
+    ['$M_EXPR',application,atomic_monitor,http,httprequestsettings,httputils,
+     io,io_lib,lists,platform,proplists,socketsession,string,url_monitor,
+     url_sequence_monitor,urlcontext]
+{module_use,url_sequence_monitor}:
+    [url_sequence_monitor]
+{module_call,url_monitor}:
+    ['$M_EXPR',application,atomic_monitor,base64,http,http_uri,httputils,
+     iconv,inets,io,io_lib,lists,proplists,string,url_monitor]
+{module_use,url_monitor}:
+    [apache_monitor,iplanet_server_monitor,oracle9i_monitor,url_monitor,
+     url_sequence_monitor]
+{module_call,url_list_monitor}:
+    ['$M_EXPR',atomic_monitor,base64,file,http,inets,io,proplists,string,
+     url_list_monitor]
+{module_use,url_list_monitor}:
+    [url_list_monitor]
+{module_call,url_content_monitor}:
+    ['$M_EXPR',atomic_monitor,base64,http,http_uri,inets,io,proplists,string,
+     url_content_monitor]
+{module_use,url_content_monitor}:
+    [url_content_monitor]
+{module_call,update_monitor}:
+    ['$M_EXPR',action,update_monitor]
+{module_use,update_monitor}:
+    [atomic_monitor,update_monitor]
+{module_call,update_group}:
+    ['$M_EXPR',action,api_group,update_group]
+{module_use,update_group}:
+    [monitor_group,update_group]
+{module_call,update_device}:
+    ['$M_EXPR',action,update_device]
+{module_use,update_device}:
+    [update_device]
+{module_call,tr069base}:
+    ['$M_EXPR',atomic_monitor,tr069base]
+{module_use,tr069base}:
+    [tr069_newrocksiprelaybase,tr069base]
+{module_call,tr069_packetlossrate_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,
+     tr069_packetlossrate_monitor]
+{module_use,tr069_packetlossrate_monitor}:
+    [tr069_packetlossrate_monitor]
+{module_call,tr069_outgoingcalls_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,
+     tr069_outgoingcalls_monitor]
+{module_use,tr069_outgoingcalls_monitor}:
+    [tr069_outgoingcalls_monitor]
+{module_call,tr069_newrocksiprelayver1base}:
+    ['$M_EXPR',io,tr069_newrocksiprelaybase,tr069_newrocksiprelayver1base]
+{module_use,tr069_newrocksiprelayver1base}:
+    [tr069_newrocksiprelayver1_0monitor,tr069_newrocksiprelayver1base]
+{module_call,tr069_newrocksiprelayver1_0monitor}:
+    ['$M_EXPR',io,lists,tr069_newrocksiprelayver1_0monitor,
+     tr069_newrocksiprelayver1base]
+{module_use,tr069_newrocksiprelayver1_0monitor}:
+    [tr069_newrocksiprelayver1_0monitor]
+{module_call,tr069_newrocksiprelaybase}:
+    ['$M_EXPR',tr069_newrocksiprelaybase,tr069base]
+{module_use,tr069_newrocksiprelaybase}:
+    [tr069_newrocksiprelaybase,tr069_newrocksiprelayver1base]
+{module_call,tr069_incomingcalls_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,
+     tr069_incomingcalls_monitor]
+{module_use,tr069_incomingcalls_monitor}:
+    [tr069_incomingcalls_monitor]
+{module_call,tr069_calltime_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,
+     tr069_calltime_monitor]
+{module_use,tr069_calltime_monitor}:
+    [tr069_calltime_monitor]
+{module_call,tr069_callsdrop_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,
+     tr069_callsdrop_monitor]
+{module_use,tr069_callsdrop_monitor}:
+    [tr069_callsdrop_monitor]
+{module_call,tr069_RTP_monitor}:
+    ['$M_EXPR',acs_helper,data_conversion,server_monitor,tr069_RTP_monitor]
+{module_use,tr069_RTP_monitor}:
+    [tr069_RTP_monitor]
+{module_call,textutils}:
+    [lists,regexp,string,textutils]
+{module_use,textutils}:
+    [directory_monitor,dns_monitor,osAdapter,platform,rawxmlwriter,
+     script_monitor,textutils]
+{module_call,telnet_monitor}:
+    ['$M_EXPR',atomic_monitor,gen_tcp,inet,lists,proplists,regexp,string,
+     sv_datetime,telnet_monitor,timer]
+{module_use,telnet_monitor}:
+    [telnet_monitor]
+{module_call,telnet_command}:
+    [gen_tcp,lists,regexp,string,telnet_command]
+{module_use,telnet_command}:
+    [telnet_command]
+{module_call,sybase_monitor}:
+    ['$M_EXPR',browsable_mdr_base,io_lib,ip_utils,java_node,lists,proplists,
+     sybase_monitor]
+{module_use,sybase_monitor}:
+    [sybase_monitor]
+{module_call,svecc_app}:
+    [iconv,masterconfig,monitor_manager]
+{module_use,svecc_app}:
+    []
+{module_call,sv_datetime}:
+    [calendar,io_lib,lists,string]
+{module_use,sv_datetime}:
+    [absolute_event,action,atomic_monitor,compound_event,daily_event,
+     dated_event,dialy_file_logger,dns_monitor,file_logger,ftp_monitor,
+     ldap_monitor,log_manager,mail_monitor,mailto,monitor,monitor_group,
+     monitor_logger,periodic_event,schedule_manager,schedule_property,
+     scheduler,siteview,siteview_group,snmp_monitor,snmp_trap_base,
+     telnet_monitor]
+{module_call,sub_group}:
+    ['$M_EXPR',monitor,siteview,string,sub_group]
+{module_use,sub_group}:
+    [sub_group]
+{module_call,str_utils}:
+    [io,str_utils,string]
+{module_use,str_utils}:
+    [browsable_exe_base,database_counter_monitor,db_monitor_base,
+     oracle_jdbc_monitor,str_utils]
+{module_call,sshcommandline}:
+    [io,os,platform,sshcommandline]
+{module_use,sshcommandline}:
+    [cpu_utilization_monitor,platform,remotefile,script_monitor,
+     sshcommandline]
+{module_call,ssh_command}:
+    [ssh,ssh_command,ssh_connection]
+{module_use,ssh_command}:
+    [ssh_command]
+{module_call,sqlserver_monitor}:
+    ['$M_EXPR',lists,ntcounter_base,proplists,sqlserver_monitor]
+{module_use,sqlserver_monitor}:
+    [sqlserver_monitor]
+{module_call,socketsession}:
+    [socketsession]
+{module_use,socketsession}:
+    [socketsession,url_sequence_monitor]
+{module_call,soaprpc}:
+    ['$M_EXPR',base64,http,inets,io,rawxmlwriter,soaprpc,string]
+{module_use,soaprpc}:
+    [soaprpc]
+{module_call,snmp_trap_monitor}:
+    ['$M_EXPR',snmp_ex2_manager,snmp_trap_base,snmp_trap_monitor]
+{module_use,snmp_trap_monitor}:
+    [snmp_trap_monitor]
+{module_call,snmp_trap_base}:
+    ['$M_EXPR',atomic_monitor,io,io_lib,lists,regexp,snmp_trap_base,
+     sv_datetime]
+{module_use,snmp_trap_base}:
+    [snmp_trap_base,snmp_trap_monitor]
+{module_call,snmp_session}:
+    ['$M_EXPR',lists,snmp_ex2_manager,snmp_session]
+{module_use,snmp_session}:
+    [browsable_mib,browsable_snmp_base,checkpoint_monitor,dynamo_monitor,
+     f5_monitor,snmp_monitor,snmp_session,weblogic5x_monitor]
+{module_call,snmp_preferences}:
+    [proplists]
+{module_use,snmp_preferences}:
+    []
+{module_call,snmp_monitor}:
+    ['$M_EXPR',atomic_monitor,inet,io_lib,ip_utils,lists,platform,proplists,
+     regexp,snmp_ex2_manager,snmp_monitor,snmp_session,string,sv_datetime]
+{module_use,snmp_monitor}:
+    [snmp_monitor]
+{module_call,snmp_ex2_manager}:
+    ['$M_EXPR',error_logger,file,gen_server,io,lists,rpc,snmp_config,
+     snmp_ex2_manager,snmpm]
+{module_use,snmp_ex2_manager}:
+    [snmp_ex2_manager,snmp_monitor,snmp_session,snmp_trap_monitor]
+{module_call,snmp_base}:
+    ['$M_EXPR',application_base,snmp_base]
+{module_use,snmp_base}:
+    [checkpoint_monitor,dynamo_monitor,snmp_base,weblogic5x_monitor]
+{module_call,siteview_object_static}:
+    ['$M_EXPR',siteview_object_static]
+{module_use,siteview_object_static}:
+    [siteview_object_static]
+{module_call,siteview_object}:
+    ['$M_EXPR',propertied_object,siteview_object]
+{module_use,siteview_object}:
+    [action,historyreport,monitor,rule,siteview_object]
+{module_call,siteview_group}:
+    ['$M_EXPR',api_report,dbcs_group,dbcs_rule,file,filelib,filename,
+     historyreport_static,io,io_lib,lists,log_manager,monitor_group,proplists,
+     rule,scheduler,siteview,siteview_group,sv_datetime]
+{module_use,siteview_group}:
+    [siteview,siteview_group]
+{module_call,siteview}:
+    ['$M_EXPR',api_usergroup,dbcs_device,dbcs_group,dbcs_monitor,file,inet,
+     io_lib,lists,log_manager,nitrogen,proc_lib,siteview,siteview_group,
+     sv_datetime]
+{module_use,siteview}:
+    [action,api_alert,api_group,api_monitor,api_siteview,atomic_monitor,
+     bandwidth_monitor,browsable_exe_base,composite_base,
+     database_counter_monitor,db_monitor_base,dbcs_alert,dbcs_device,
+     dbcs_deviceversion,dbcs_group,dbcs_machine,dbcs_monitor,
+     dbcs_monitor_data,dbcs_node,dbcs_report,dbcs_rule,dbcs_schedule,
+     dbcs_user,dbcs_usergroup,health,historyreport,java_node,monitor,
+     monitor_group,oracle_jdbc_monitor,propertied_object,
+     propertied_object_ets,siteview,siteview_group,sub_group,xml_monitor]
+{module_call,service_monitor}:
+    ['$M_EXPR',iconv,io_lib,lists,machine,platform,proplists,regexp,
+     server_monitor,service_monitor,string]
+{module_use,service_monitor}:
+    [service_monitor]
+{module_call,server_monitor}:
+    ['$M_EXPR',atomic_monitor,machine,platform,proplists,server_monitor]
+{module_use,server_monitor}:
+    [cpu_utilization_monitor,diskspace_monitor,memory_monitor,ntcounter_base,
+     ntcounter_monitor,script_monitor,server_monitor,service_monitor,
+     tr069_RTP_monitor,tr069_callsdrop_monitor,tr069_calltime_monitor,
+     tr069_incomingcalls_monitor,tr069_outgoingcalls_monitor,
+     tr069_packetlossrate_monitor,web_server_monitor]
+{module_call,scriptmonitorcache}:
+    [calendar,file,file_lib,platform,scriptmonitorcache,string,timer]
+{module_use,scriptmonitorcache}:
+    [scriptmonitorcache]
+{module_call,script_monitor}:
+    ['$M_EXPR',dbcs_machine,file,io,lists,machine,osAdapter,platform,
+     proplists,regexp,remotefile,script_monitor,server_monitor,sshcommandline,
+     string,textutils,timer]
+{module_use,script_monitor}:
+    [script_monitor]
+{module_call,scheduler}:
+    ['$M_EXPR',absolute_event,compound_event,daily_event,dated_event,erlang,
+     io,lists,log_manager,periodic_event,scheduler,string,sv_datetime]
+{module_use,scheduler}:
+    [scheduler,siteview_group]
+{module_call,schedule_property}:
+    [io,proplists,schedule_property,sv_datetime]
+{module_use,schedule_property}:
+    [atomic_monitor,monitor,schedule_property]
+{module_call,schedule_manager}:
+    ['$M_EXPR',api_schedule,lists,proplists,schedule_manager,string,
+     sv_datetime]
+{module_use,schedule_manager}:
+    [monitor,schedule_manager]
+{module_call,schedule_event}:
+    ['$M_EXPR',schedule_event]
+{module_use,schedule_event}:
+    [absolute_event,compound_event,daily_event,dated_event,periodic_event,
+     schedule_event]
+{module_call,samplestatistics}:
+    [ets,samplestatistics]
+{module_use,samplestatistics}:
+    [bucket,samplecollector,samplestatistics]
+{module_call,samplecollector}:
+    ['$M_EXPR',bucket,calendar,historyreport_static,io,lists,samplecollector,
+     samplestatistics,string]
+{module_use,samplecollector}:
+    [historyreport,samplecollector]
+{module_call,rule}:
+    ['$M_EXPR',regexp,rule,siteview_object]
+{module_use,rule}:
+    [api_alert,monitor,rule,siteview_group]
+{module_call,rlogin_command}:
+    [gen_tcp,lists,regexp,rlogin_command,string]
+{module_use,rlogin_command}:
+    [rlogin_command]
+{module_call,reportscheduletest}:
+    [io]
+{module_use,reportscheduletest}:
+    []
+{module_call,reportchart}:
+    ['$M_EXPR',ists,lists,reportchart]
+{module_use,reportchart}:
+    [reportchart]
+{module_call,report}:
+    [api_schedule,lists,monitor,proplists,report]
+{module_use,report}:
+    [report]
+{module_call,remotefile}:
+    [io,lists,machine,platform,remotefile,sshcommandline,string]
+{module_use,remotefile}:
+    [remotefile,script_monitor]
+{module_call,rawxmlwriter}:
+    ['$M_EXPR',rawxmlwriter,string,textutils]
+{module_use,rawxmlwriter}:
+    [rawxmlwriter,soaprpc]
+{module_call,propertied_object_static2}:
+    [dict,propertied_object_static2,regexp]
+{module_use,propertied_object_static2}:
+    [propertied_object_static2]
+{module_call,propertied_object_static}:
+    [lists,propertied_object_static,regexp]
+{module_use,propertied_object_static}:
+    [propertied_object,propertied_object_static]
+{module_call,propertied_object_ets}:
+    ['$M_EXPR',ets,io,propertied_object_ets,proplists,regexp,siteview]
+{module_use,propertied_object_ets}:
+    [propertied_object_ets]
+{module_call,propertied_object}:
+    ['$M_EXPR',erlang,propertied_object,propertied_object_static,proplists,
+     siteview]
+{module_use,propertied_object}:
+    [propertied_object,siteview_object]
+{module_call,process_xml}:
+    [erlsom,lists,process_xml]
+{module_use,process_xml}:
+    [process_xml,websphere_servlet_monitor]
+{module_call,preferences}:
+    [dets,ets,gen_server,io,io_lib,preferences]
+{module_use,preferences}:
+    [api_preferences,log_manager,mail_preferences,mailto,preferences]
+{module_call,portal_siteview}:
+    [monitor_group,portal_siteview]
+{module_use,portal_siteview}:
+    [portal_siteview]
+{module_call,port_monitor}:
+    ['$M_EXPR',atomic_monitor,gen_tcp,gen_udp,io,io_lib,port_monitor,
+     proplists,string]
+{module_use,port_monitor}:
+    [port_monitor]
+{module_call,platform}:
+    ['$M_EXPR',calendar,command_line,dbcs_machine,file,filelib,io,io_lib,
+     lineReader,lists,machine,masterConfig,masterconfig,os,osAdapter,platform,
+     regexp,sshcommandline,string,textutils,timer]
+{module_use,platform}:
+    [api_monitor_template,browsableNTCounter_monitor,complus_monitor,
+     cpu_utilization_monitor,directory_monitor,diskspace_monitor,dns_monitor,
+     health,healthserverload_monitor,historyreport,machine,masterconfig,
+     memory_monitor,network_monitor,ntcounter_base,ntcounter_monitor,
+     ntcounter_util,osAdapter,platform,remotefile,script_monitor,
+     scriptmonitorcache,server_monitor,service_monitor,snmp_monitor,
+     sshcommandline,url_sequence_monitor,web_server_monitor]
+{module_call,ping_monitor}:
+    ['$M_EXPR',atomic_monitor,iconv,lists,os,ping_monitor,proplists,string,
+     timer]
+{module_use,ping_monitor}:
+    [ping_monitor]
+{module_call,periodic_event}:
+    ['$M_EXPR',periodic_event,schedule_event,sv_datetime]
+{module_use,periodic_event}:
+    [periodic_event,scheduler]
+{module_call,perfchartfile}:
+    [file,lists,perfchartfile,regexp]
+{module_use,perfchartfile}:
+    [ntcounter_monitor,perfchartfile]
+{module_call,osAdapter}:
+    ['$M_EXPR',file,io_lib,lists,osAdapter,platform,string,textutils]
+{module_use,osAdapter}:
+    [lineReader,machine,osAdapter,platform,script_monitor]
+{module_call,oracle_jdbc_monitor}:
+    ['$M_EXPR',browsable_base,io,lists,net_adm,oracle_jdbc_monitor,proplists,
+     siteview,str_utils]
+{module_use,oracle_jdbc_monitor}:
+    [oracle_jdbc_monitor]
+{module_call,oracle9i_monitor}:
+    ['$M_EXPR',httputils,io,io_lib,lists,oracle9i_monitor,proplists,string,
+     url_monitor,urlcontent_base]
+{module_use,oracle9i_monitor}:
+    [oracle9i_monitor]
+{module_call,numeric_utils}:
+    [io,string]
+{module_use,numeric_utils}:
+    [bandwidth_monitor]
+{module_call,ntcounter_util}:
+    ['$M_EXPR',command_line,lists,ntcounter_util,platform,regexp,string]
+{module_use,ntcounter_util}:
+    [browsableNTCounter_monitor,healthserverload_monitor,ntcounter_monitor,
+     ntcounter_util]
+{module_call,ntcounter_monitor}:
+    ['$M_EXPR',filelib,filename,io,io_lib,lists,log_manager,ntcounter_monitor,
+     ntcounter_util,perfchartfile,platform,proplists,regexp,server_monitor]
+{module_use,ntcounter_monitor}:
+    [ntcounter_monitor]
+{module_call,ntcounter_base}:
+    ['$M_EXPR',command_line,iconv,io,io_lib,lists,log_manager,ntcounter_base,
+     platform,proplists,regexp,server_monitor,string]
+{module_use,ntcounter_base}:
+    [adperformance_monitor,asp_monitor,iisserver_monitor,ntcounter_base,
+     sqlserver_monitor]
+{module_call,network_monitor}:
+    ['$M_EXPR',atomic_monitor,httputils,lists,network_monitor,platform]
+{module_use,network_monitor}:
+    [network_monitor]
+{module_call,network_bandwidth_monitor}:
+    ['$M_EXPR',browsable_snmp_base,iftable,lists,network_bandwidth_monitor,
+     proplists,string]
+{module_use,network_bandwidth_monitor}:
+    [network_bandwidth_monitor]
+{module_call,netping_monitor}:
+    ['$M_EXPR',atomic_monitor,io,net_adm,netping_monitor]
+{module_use,netping_monitor}:
+    [netping_monitor]
+{module_call,netbios_command}:
+    [os]
+{module_use,netbios_command}:
+    []
+{module_call,multiContent_base}:
+    ['$M_EXPR',application_base,multiContent_base]
+{module_use,multiContent_base}:
+    [health_unixserver_monitor,logevent_health_monitor,multiContent_base]
+{module_call,monitor_set_template}:
+    [file,filelib,filename,lists,monitor_set_template,regexp]
+{module_use,monitor_set_template}:
+    [api_monitor_set,monitor_set_template]
+{module_call,monitor_runner}:
+    ['$M_EXPR']
+{module_use,monitor_runner}:
+    []
+{module_call,monitor_manager}:
+    [erlang,supervisor]
+{module_use,monitor_manager}:
+    [svecc_app]
+{module_call,monitor_logger}:
+    [calendar,disk_log,gen_server,io_lib,lists,monitor_logger,sv_datetime]
+{module_use,monitor_logger}:
+    [historyreport,monitor,monitor_logger]
+{module_call,monitor_group}:
+    ['$M_EXPR',dbcs_group,dbcs_monitor,file,io,io_lib,lists,log_manager,
+     monitor,monitor_group,random,siteview,sv_datetime,update_group]
+{module_use,monitor_group}:
+    [device,monitor_group,portal_siteview,siteview_group]
+{module_call,monitor}:
+    ['$M_EXPR',api_monitor_template,dbcs_monitor,dbcs_rule,lists,monitor,
+     monitor_logger,proplists,rule,schedule_manager,schedule_property,sets,
+     siteview,siteview_object,string,sv_datetime]
+{module_use,monitor}:
+    [atomic_monitor,monitor,monitor_group,report,sub_group]
+{module_call,memory_monitor}:
+    ['$M_EXPR',erlang,io,lists,memory_monitor,os,platform,server_monitor,
+     string]
+{module_use,memory_monitor}:
+    [memory_monitor]
+{module_call,masterconfig}:
+    [ets,file,lists,masterconfig,platform,string]
+{module_use,masterconfig}:
+    [masterconfig,platform,svecc_app]
+{module_call,mailto}:
+    ['$M_EXPR',action,calendar,filelib,filename,lists,mail,mailto,preferences,
+     string,sv_datetime]
+{module_use,mailto}:
+    [mailto]
+{module_call,mail_preferences}:
+    [mail,preferences]
+{module_use,mail_preferences}:
+    []
+{module_call,mail_monitor}:
+    ['$M_EXPR',atomic_monitor,iconv,mail_monitor,proplists,string,sv_datetime,
+     timer]
+{module_use,mail_monitor}:
+    [mail_monitor]
+{module_call,mail}:
+    [base64,calendar,file,filelib,filename,gen_tcp,lists,mail,net_adm,string]
+{module_use,mail}:
+    [api_preferences,mail,mail_preferences,mailto]
+{module_call,machine}:
+    ['$M_EXPR',dbcs_base,dbcs_machine,machine,osAdapter,platform,regexp,
+     string]
+{module_use,machine}:
+    [cpu_utilization_monitor,machine,platform,remotefile,script_monitor,
+     server_monitor,service_monitor]
+{module_call,logger}:
+    ['$M_EXPR',io,io_lib,logger]
+{module_use,logger}:
+    [base_file_logger,console_logger,logger]
+{module_call,logevent_health_monitor}:
+    ['$M_EXPR',io_lib,lists,logevent_health,logevent_health_monitor,
+     multiContent_base,proplists]
+{module_use,logevent_health_monitor}:
+    [logevent_health_monitor]
+{module_call,logevent_health}:
+    [dict,gen_server,logevent_health,regexp]
+{module_use,logevent_health}:
+    [log_manager,logevent_health,logevent_health_monitor]
+{module_call,log_preferences}:
+    [proplists,regexp]
+{module_use,log_preferences}:
+    []
+{module_call,log_manager}:
+    ['$M_EXPR',console_logger,dialy_file_logger,file_logger,gen_server,io_lib,
+     lists,log_manager,logevent_health,preferences,proplists,sv_datetime]
+{module_use,log_manager}:
+    [atomic_monitor,dialy_file_logger,log_manager,monitor_group,
+     ntcounter_base,ntcounter_monitor,scheduler,siteview,siteview_group]
+{module_call,log}:
+    [file,io,io_lib,log]
+{module_use,log}:
+    [log]
+{module_call,list2xml}:
+    [list2xml]
+{module_use,list2xml}:
+    [list2xml]
+{module_call,linkfinder}:
+    ['$M_EXPR',http,http_uri,inets,io,linkfinder,lists,proplists,string,timer]
+{module_use,linkfinder}:
+    [link_monitor,linkfinder]
+{module_call,link_monitor}:
+    ['$M_EXPR',atomic_monitor,io,link_monitor,linkfinder,lists,string]
+{module_use,link_monitor}:
+    [link_monitor]
+{module_call,lineReader}:
+    ['$M_EXPR',lineReader,lists,osAdapter,regexp,string]
+{module_use,lineReader}:
+    [lineReader,platform]
+{module_call,ldap_monitor}:
+    ['$M_EXPR',atomic_monitor,eldap,ldap_monitor,lists,proplists,regexp,
+     string,sv_datetime,timer]
+{module_use,ldap_monitor}:
+    [ldap_monitor]
+{module_call,java_node}:
+    [io_lib,siteview]
+{module_use,java_node}:
+    [dhcp_monitor,ipmi_monitor,sybase_monitor,vmwareperformance_monitor,
+     weblogic6x_monitor]
+{module_call,ipmi_monitor}:
+    ['$M_EXPR',browsable_base,io,io_lib,ip_utils,ipmi_monitor,java_node,lists,
+     proplists,string]
+{module_use,ipmi_monitor}:
+    [ipmi_monitor]
+{module_call,iplanet_server_monitor}:
+    ['$M_EXPR',httputils,io,io_lib,iplanet_server_monitor,lists,proplists,
+     string,url_monitor,urlcontent_base]
+{module_use,iplanet_server_monitor}:
+    [iplanet_server_monitor]
+{module_call,ip_utils}:
+    [lists,string]
+{module_use,ip_utils}:
+    [browsable_mib,browsable_snmp_base,checkpoint_monitor,dynamo_monitor,
+     f5_monitor,ipmi_monitor,snmp_monitor,sybase_monitor,weblogic5x_monitor,
+     weblogic6x_monitor]
+{module_call,iisserver_monitor}:
+    ['$M_EXPR',iisserver_monitor,lists,ntcounter_base,proplists]
+{module_use,iisserver_monitor}:
+    [iisserver_monitor]
+{module_call,iftable}:
+    ['$M_EXPR',iftable,lists,string]
+{module_use,iftable}:
+    [iftable,network_bandwidth_monitor]
+{module_call,httputils}:
+    ['$M_EXPR',file,httputils,io_lib,lists,random,string]
+{module_use,httputils}:
+    [adperformance_monitor,apache_monitor,browsableNTCounter_monitor,
+     complusconnector,healthserverload_monitor,htmltagparser,httputils,
+     iplanet_server_monitor,network_monitor,oracle9i_monitor,url_monitor,
+     url_sequence_monitor,web_server_monitor,yaws_soap_lib]
+{module_call,http_receive}:
+    [http,http_receive]
+{module_use,http_receive}:
+    [http_receive,websphere_servlet_monitor]
+{module_call,htmltagparser}:
+    [htmltagparser,httputils,lists,string]
+{module_use,htmltagparser}:
+    [htmltagparser]
+{module_call,historyreport_static}:
+    ['$M_EXPR',historyreport]
+{module_use,historyreport_static}:
+    [bucket,samplecollector,siteview_group]
+{module_call,historyreport}:
+    ['$M_EXPR',api_monitor,api_monitor_template,api_schedule,api_siteview,
+     calendar,dict,file,generatehistoryreport,historyreport,io,lists,
+     monitor_logger,platform,proplists,samplecollector,siteview,
+     siteview_object,string]
+{module_use,historyreport}:
+    [historyreport,historyreport_static]
+{module_call,history_health_monitor}:
+    ['$M_EXPR',healthmonitor_base,history_health_monitor,historyhealth,io]
+{module_use,history_health_monitor}:
+    [history_health_monitor]
+{module_call,healthserverload_monitor}:
+    ['$M_EXPR',browsable_base,command_line,erlsom,file,
+     healthserverload_monitor,httputils,iconv,io_lib,lists,ntcounter_util,
+     platform,string]
+{module_use,healthserverload_monitor}:
+    [healthserverload_monitor]
+{module_call,healthmonitor_base}:
+    ['$M_EXPR',atomic_monitor,healthmonitor_base]
+{module_use,healthmonitor_base}:
+    [healthmonitor_base,history_health_monitor]
+{module_call,health_unixserver_monitor}:
+    ['$M_EXPR',erlang,health_unixserver_monitor,io_lib,lists,
+     multiContent_base,proplists]
+{module_use,health_unixserver_monitor}:
+    [health_unixserver_monitor]
+{module_call,health}:
+    ['$M_EXPR',dbcs_group,dbcs_monitor,file,health,platform,proplists,
+     siteview]
+{module_use,health}:
+    [api_group,health]
+{module_call,generatehistoryreport}:
+    ['$M_EXPR',action,generatehistoryreport]
+{module_use,generatehistoryreport}:
+    [generatehistoryreport,historyreport]
+{module_call,general_preferences}:
+    [proplists,regexp]
+{module_use,general_preferences}:
+    []
+{module_call,ftp_util}:
+    [ftp_util,gen_tcp,inet,lists,proc_lib]
+{module_use,ftp_util}:
+    [ftp_util]
+{module_call,ftp_monitor}:
+    ['$M_EXPR',atomic_monitor,ftp,ftp_monitor,http,inet,inets,lists,proplists,
+     string,sv_datetime,timer,zlib]
+{module_use,ftp_monitor}:
+    [ftp_monitor]
+{module_call,ftp}:
+    [base64,ftp,gen_tcp,inet,io,lists,proc_lib,regexp,string]
+{module_use,ftp}:
+    [ftp,ftp_monitor]
+{module_call,file_utils}:
+    [file,io]
+{module_use,file_utils}:
+    [db_monitor_base]
+{module_call,file_monitor}:
+    ['$M_EXPR',atomic_monitor,calendar,file,file_monitor,iconv,io,lists,
+     proplists,regexp,string]
+{module_use,file_monitor}:
+    [file_monitor]
+{module_call,file_logger}:
+    ['$M_EXPR',base_file_logger,file,file_logger,io,string,sv_datetime]
+{module_use,file_logger}:
+    [file_logger,log_manager]
+{module_call,f5_monitor}:
+    ['$M_EXPR',browsable_mib,browsable_snmp_base,f5_monitor,file,inet,
+     ip_utils,lists,proplists,snmp_session,string]
+{module_use,f5_monitor}:
+    [f5_monitor]
+{module_call,eview}:
+    [erlang,eview,wx,wxBitmap,wxBufferedDC,wxClientDC,wxDC,wxFrame,wxImage,
+     wxWindow]
+{module_use,eview}:
+    [eplot_main,eview]
+{module_call,eplot_main}:
+    [egd,egd_chart,eplot_analyse,eplot_main,eview,file,filename,iconv,io,
+     lists,proplists,string,unicode]
+{module_use,eplot_main}:
+    [eplot_main]
+{module_call,eplot_analyse}:
+    [calendar,eplot_analyse,file,filename,io,lists,string]
+{module_use,eplot_analyse}:
+    [eplot_analyse,eplot_main]
+{module_call,eldap_auth}:
+    [eldap,eldap_auth,proplists,string]
+{module_use,eldap_auth}:
+    [api_usergroup,eldap_auth]
+{module_call,eldap}:
+    ['$M_EXPR',asn1rt,asn1rt_ber_bin,eldap,erlang,gen_tcp,inet,inet_parse,
+     lists,ssl,string]
+{module_use,eldap}:
+    [api_usergroup,eldap,eldap_auth,ldap_monitor]
+{module_call,egd_render}:
+    [dict,egd_font,egd_primitives,egd_render,erlang,io_lib,lists]
+{module_use,egd_render}:
+    [egd,egd_render]
+{module_call,egd_primitives}:
+    [egd_font,egd_primitives,io,lists]
+{module_use,egd_primitives}:
+    [egd,egd_primitives,egd_render]
+{module_call,egd_png}:
+    [egd_png,lists,zlib]
+{module_use,egd_png}:
+    [egd,egd_png]
+{module_call,egd_font}:
+    [egd_font,file]
+{module_use,egd_font}:
+    [egd_chart,egd_font,egd_primitives,egd_render]
+{module_call,egd_chart}:
+    [calendar,egd,egd_chart,egd_font,iconv,io,io_lib,lists,proplists]
+{module_use,egd_chart}:
+    [egd_chart,eplot_main]
+{module_call,egd}:
+    [egd,egd_png,egd_primitives,egd_render,erlang,file,proplists]
+{module_use,egd}:
+    [egd,egd_chart,eplot_main]
+{module_call,dynamo_monitor}:
+    ['$M_EXPR',dynamo_monitor,inet,io_lib,ip_utils,lists,proplists,snmp_base,
+     snmp_session,string]
+{module_use,dynamo_monitor}:
+    [dynamo_monitor]
+{module_call,dns_monitor}:
+    ['$M_EXPR',atomic_monitor,dns_monitor,platform,proplists,string,
+     sv_datetime,textutils]
+{module_use,dns_monitor}:
+    [dns_monitor]
+{module_call,diskspace_monitor}:
+    ['$M_EXPR',diskspace_monitor,io_lib,lists,platform,proplists,
+     server_monitor,string]
+{module_use,diskspace_monitor}:
+    [diskspace_monitor]
+{module_call,directory_monitor}:
+    ['$M_EXPR',atomic_monitor,calendar,directory_monitor,file,filelib,iconv,
+     lists,platform,proplists,string,textutils,timer]
+{module_use,directory_monitor}:
+    [directory_monitor]
+{module_call,dialy_file_logger}:
+    ['$M_EXPR',base_file_logger,dialy_file_logger,file,filelib,filename,io,
+     lists,log_manager,string,sv_datetime]
+{module_use,dialy_file_logger}:
+    [dialy_file_logger,log_manager]
+{module_call,dhcp_monitor}:
+    ['$M_EXPR',atomic_monitor,dhcp_monitor,io_lib,java_node,proplists,string,
+     timer]
+{module_use,dhcp_monitor}:
+    [dhcp_monitor]
+{module_call,dhcp_lib}:
+    [dhcp_lib,error_logger]
+{module_use,dhcp_lib}:
+    [dhcp_lib]
+{module_call,device}:
+    ['$M_EXPR',dbcs_device,device,lists,monitor_group]
+{module_use,device}:
+    [device]
+{module_call,dbcs_usergroup}:
+    [db_ecc,db_mnesia,dbcs_base,dbcs_usergroup,lists,proplists,siteview,
+     string]
+{module_use,dbcs_usergroup}:
+    [api_usergroup,dbcs_user,dbcs_usergroup]
+{module_call,dbcs_user}:
+    [db_ecc,dbcs_base,dbcs_user,dbcs_usergroup,lists,proplists,siteview,
+     string]
+{module_use,dbcs_user}:
+    [api_usergroup,dbcs_user]
+{module_call,dbcs_schedule}:
+    [db_ecc,dbcs_base,dbcs_schedule,lists,siteview]
+{module_use,dbcs_schedule}:
+    [api_schedule,dbcs_schedule]
+{module_call,dbcs_rule}:
+    [db_ecc,dbcs_base,dbcs_rule,siteview]
+{module_use,dbcs_rule}:
+    [api_alert,dbcs_alert,dbcs_monitor,dbcs_rule,monitor,siteview_group]
+{module_call,dbcs_report}:
+    [db_ecc,dbcs_base,dbcs_report,siteview]
+{module_use,dbcs_report}:
+    [api_report,dbcs_report]
+{module_call,dbcs_node}:
+    [db_ecc,dbcs_node,siteview]
+{module_use,dbcs_node}:
+    [api_usergroup,dbcs_node]
+{module_call,dbcs_monitor_data}:
+    [db_ecc,dbcs_base,dbcs_monitor_data,random,siteview]
+{module_use,dbcs_monitor_data}:
+    [dbcs_monitor_data]
+{module_call,dbcs_monitor}:
+    [db_ecc,dbcs_base,dbcs_monitor,dbcs_rule,lists,siteview]
+{module_use,dbcs_monitor}:
+    [api_monitor,atomic_monitor,dbcs_device,dbcs_group,dbcs_monitor,health,
+     monitor,monitor_group,siteview]
+{module_call,dbcs_machine}:
+    [db_ecc,dbcs_base,dbcs_machine,proplists,siteview]
+{module_use,dbcs_machine}:
+    [api_monitor_template,dbcs_machine,machine,platform,script_monitor]
+{module_call,dbcs_group}:
+    [db_ecc,dbcs_base,dbcs_device,dbcs_group,dbcs_monitor,io_lib,lists,
+     siteview]
+{module_use,dbcs_group}:
+    [api_device,api_group,api_monitor,dbcs_group,health,monitor_group,
+     siteview,siteview_group]
+{module_call,dbcs_deviceversion}:
+    [db_ecc,dbcs_base,dbcs_deviceversion,siteview]
+{module_use,dbcs_deviceversion}:
+    [dbcs_deviceversion]
+{module_call,dbcs_device}:
+    [db_ecc,dbcs_base,dbcs_device,dbcs_monitor,lists,siteview]
+{module_use,dbcs_device}:
+    [acs_proxy,api_device,dbcs_device,dbcs_group,device,siteview]
+{module_call,dbcs_base}:
+    [crypto,dbcs_base,erlang,io_lib,lists,random]
+{module_use,dbcs_base}:
+    [api_alert,api_report,dbcs_alert,dbcs_base,dbcs_device,dbcs_deviceversion,
+     dbcs_group,dbcs_machine,dbcs_monitor,dbcs_monitor_data,dbcs_report,
+     dbcs_rule,dbcs_schedule,dbcs_user,dbcs_usergroup,machine]
+{module_call,dbcs_alert}:
+    [db_ecc,dbcs_alert,dbcs_base,dbcs_rule,siteview]
+{module_use,dbcs_alert}:
+    [dbcs_alert]
+{module_call,db_monitor_base}:
+    ['$M_EXPR',atomic_monitor,calendar,db_monitor_base,file_utils,io,net_adm,
+     proplists,siteview,str_utils]
+{module_use,db_monitor_base}:
+    [database_monitor,db_monitor_base]
+{module_call,db_mnesia}:
+    [db_mnesia,lists,mnesia,qlc]
+{module_use,db_mnesia}:
+    [api_usergroup,db_mnesia,dbcs_usergroup]
+{module_call,db_ecc}:
+    [db_ecc,net_adm,rpc]
+{module_use,db_ecc}:
+    [db_ecc,dbcs_alert,dbcs_device,dbcs_deviceversion,dbcs_group,dbcs_machine,
+     dbcs_monitor,dbcs_monitor_data,dbcs_node,dbcs_report,dbcs_rule,
+     dbcs_schedule,dbcs_user,dbcs_usergroup]
+{module_call,db2_monitor}:
+    ['$M_EXPR',browsable_exe_base,db2_monitor]
+{module_use,db2_monitor}:
+    [db2_monitor]
+{module_call,dated_event}:
+    ['$M_EXPR',dated_event,schedule_event,sv_datetime]
+{module_use,dated_event}:
+    [dated_event,scheduler]
+{module_call,database_monitor}:
+    ['$M_EXPR',database_monitor,db_monitor_base]
+{module_use,database_monitor}:
+    [database_monitor]
+{module_call,database_counter_monitor}:
+    ['$M_EXPR',browsable_base,database_counter_monitor,lists,net_adm,
+     proplists,siteview,str_utils,string]
+{module_use,database_counter_monitor}:
+    [database_counter_monitor]
+{module_call,data_conversion}:
+    [proplists]
+{module_use,data_conversion}:
+    [acs_proxy,tr069_RTP_monitor,tr069_callsdrop_monitor,
+     tr069_calltime_monitor,tr069_incomingcalls_monitor,
+     tr069_outgoingcalls_monitor,tr069_packetlossrate_monitor]
+{module_call,daily_event}:
+    ['$M_EXPR',daily_event,schedule_event,sv_datetime]
+{module_use,daily_event}:
+    [daily_event,scheduler]
+{module_call,cpu_utilization_monitor}:
+    ['$M_EXPR',cpu_utilization_monitor,lists,machine,os,platform,
+     server_monitor,sshcommandline,string]
+{module_use,cpu_utilization_monitor}:
+    [cpu_utilization_monitor]
+{module_call,console_logger}:
+    [console_logger,io,logger]
+{module_use,console_logger}:
+    [console_logger,log_manager]
+{module_call,compound_event}:
+    ['$M_EXPR',compound_event,io,schedule_event,sv_datetime]
+{module_use,compound_event}:
+    [compound_event,scheduler]
+{module_call,composite_monitor}:
+    ['$M_EXPR',api_siteview,composite_base,composite_monitor]
+{module_use,composite_monitor}:
+    [composite_monitor]
+{module_call,composite_base}:
+    ['$M_EXPR',application_base,composite_base,lists,proplists,siteview]
+{module_use,composite_base}:
+    [composite_base,composite_monitor]
+{module_call,complusconnector}:
+    ['$M_EXPR',complusconnector,http,httputils,inets,io,lists,string]
+{module_use,complusconnector}:
+    [complus_monitor,complusconnector]
+{module_call,complus_monitor}:
+    ['$M_EXPR',browsable_urlcontent_base,complus_monitor,complusconnector,io,
+     io_lib,lists,platform,proplists,string]
+{module_use,complus_monitor}:
+    [complus_monitor]
+{module_call,command_line}:
+    ['$M_EXPR',command_line,os]
+{module_use,command_line}:
+    [browsableNTCounter_monitor,command_line,healthserverload_monitor,
+     ntcounter_base,ntcounter_util,platform,web_server_monitor]
+{module_call,command}:
+    []
+{module_use,command}:
+    []
+{module_call,cisco_monitor}:
+    ['$M_EXPR',browsable_mib,browsable_snmp_base,cisco_monitor,lists]
+{module_use,cisco_monitor}:
+    [cisco_monitor]
+{module_call,checkpoint_monitor}:
+    ['$M_EXPR',checkpoint_monitor,inet,io_lib,ip_utils,lists,proplists,
+     snmp_base,snmp_session,string]
+{module_use,checkpoint_monitor}:
+    [checkpoint_monitor]
+{module_call,bucket}:
+    ['$M_EXPR',bucket,historyreport_static,samplestatistics]
+{module_use,bucket}:
+    [bucket,samplecollector]
+{module_call,browsable_urlcontent_base}:
+    ['$M_EXPR',browsable_base,browsable_urlcontent_base,lists,proplists,
+     string]
+{module_use,browsable_urlcontent_base}:
+    [browsable_urlcontent_base,complus_monitor]
+{module_call,browsable_snmp_monitor}:
+    ['$M_EXPR',browsable_mib,browsable_snmp_base,browsable_snmp_monitor,lists]
+{module_use,browsable_snmp_monitor}:
+    [browsable_snmp_monitor]
+{module_call,browsable_snmp_base}:
+    ['$M_EXPR',browsable_base,browsable_mib,browsable_snmp_base,inet,io_lib,
+     ip_utils,lists,proplists,regexp,snmp_session,string]
+{module_use,browsable_snmp_base}:
+    [browsable_snmp_base,browsable_snmp_monitor,cisco_monitor,f5_monitor,
+     network_bandwidth_monitor]
+{module_call,browsable_mib}:
+    ['$M_EXPR',browsable_mib,filelib,filename,inet,ip_utils,lists,proplists,
+     snmp_misc,snmp_session,snmpc,string]
+{module_use,browsable_mib}:
+    [browsable_mib,browsable_snmp_base,browsable_snmp_monitor,cisco_monitor,
+     f5_monitor]
+{module_call,browsable_mdr_base}:
+    ['$M_EXPR',browsable_base,browsable_mdr_base,string]
+{module_use,browsable_mdr_base}:
+    [browsable_mdr_base,sybase_monitor]
+{module_call,browsable_exe_base}:
+    ['$M_EXPR',browsable_base,browsable_exe_base,io,lists,net_adm,proplists,
+     siteview,str_utils,string]
+{module_use,browsable_exe_base}:
+    [browsable_exe_base,db2_monitor]
+{module_call,browsable_base}:
+    ['$M_EXPR',atomic_monitor,browsable_base,proplists]
+{module_use,browsable_base}:
+    [browsableNTCounter_monitor,browsable_base,browsable_exe_base,
+     browsable_mdr_base,browsable_snmp_base,browsable_urlcontent_base,
+     database_counter_monitor,healthserverload_monitor,ipmi_monitor,
+     oracle_jdbc_monitor,vmwareperformance_monitor,weblogic6x_monitor,
+     websphere_servlet_monitor,xml_monitor]
+{module_call,browsableNTCounter_monitor}:
+    ['$M_EXPR',browsableNTCounter_monitor,browsable_base,command_line,erlsom,
+     file,httputils,iconv,io,io_lib,lists,ntcounter_util,platform,proplists,
+     string]
+{module_use,browsableNTCounter_monitor}:
+    [browsableNTCounter_monitor]
+{module_call,base_file_logger}:
+    [base_file_logger,io,logger]
+{module_use,base_file_logger}:
+    [base_file_logger,dialy_file_logger,file_logger]
+{module_call,bandwidth_monitor}:
+    ['$M_EXPR',api_siteview,atomic_monitor,bandwidth_monitor,io,io_lib,lists,
+     numeric_utils,proplists,regexp,siteview,string]
+{module_use,bandwidth_monitor}:
+    [bandwidth_monitor]
+{module_call,atomic_monitor}:
+    ['$M_EXPR',api_schedule,api_siteview,atomic_monitor,dbcs_monitor,io,
+     io_lib,lists,log_manager,monitor,proplists,random,rpc,schedule_property,
+     siteview,sv_datetime,update_monitor]
+{module_use,atomic_monitor}:
+    [application_base,atomic_monitor,bandwidth_monitor,browsable_base,
+     db_monitor_base,dhcp_monitor,directory_monitor,dns_monitor,file_monitor,
+     ftp_monitor,healthmonitor_base,ldap_monitor,link_monitor,mail_monitor,
+     netping_monitor,network_monitor,ping_monitor,port_monitor,server_monitor,
+     snmp_monitor,snmp_trap_base,telnet_monitor,tr069base,url_content_monitor,
+     url_list_monitor,url_monitor,url_sequence_monitor,web_service_monitor]
+{module_call,asp_monitor}:
+    ['$M_EXPR',asp_monitor,lists,ntcounter_base,proplists]
+{module_use,asp_monitor}:
+    [asp_monitor]
+{module_call,application_base}:
+    ['$M_EXPR',application_base,atomic_monitor,file,filename,lists,string]
+{module_use,application_base}:
+    [application_base,composite_base,multiContent_base,snmp_base,
+     urlcontent_base]
+{module_call,api_usergroup}:
+    [api_usergroup,db_mnesia,dbcs_node,dbcs_user,dbcs_usergroup,eldap,
+     eldap_auth,io,lists,proplists,string]
+{module_use,api_usergroup}:
+    [api_usergroup,siteview]
+{module_call,api_siteview}:
+    ['$M_EXPR',api_siteview,lists,siteview]
+{module_use,api_siteview}:
+    [api_alert,api_device,api_group,api_monitor,api_monitor_template,
+     api_siteview,atomic_monitor,bandwidth_monitor,composite_monitor,
+     historyreport]
+{module_call,api_schedule}:
+    [api_schedule,dbcs_schedule]
+{module_use,api_schedule}:
+    [api_report,api_schedule,atomic_monitor,historyreport,report,
+     schedule_manager]
+{module_call,api_report}:
+    [api_report,api_schedule,dbcs_base,dbcs_report,filelib,filename,lists,
+     proplists,string]
+{module_use,api_report}:
+    [api_report,siteview_group]
+{module_call,api_preferences}:
+    ['$M_EXPR',api_preferences,mail,preferences]
+{module_use,api_preferences}:
+    [api_preferences]
+{module_call,api_monitor_template}:
+    ['$M_EXPR',api_monitor_template,api_siteview,dbcs_machine,file,lists,
+     platform,proplists]
+{module_use,api_monitor_template}:
+    [api_monitor,api_monitor_template,historyreport,monitor]
+{module_call,api_monitor_set}:
+    ['$M_EXPR',api_monitor,api_monitor_set,lists,monitor_set_template,
+     proplists]
+{module_use,api_monitor_set}:
+    [api_monitor_set]
+{module_call,api_monitor}:
+    ['$M_EXPR',api_group,api_monitor,api_monitor_template,api_siteview,
+     dbcs_group,dbcs_monitor,io,lists,proplists,regexp,siteview]
+{module_use,api_monitor}:
+    [api_monitor,api_monitor_set,historyreport]
+{module_call,api_group}:
+    ['$M_EXPR',api_group,api_siteview,dbcs_group,health,regexp,siteview]
+{module_use,api_group}:
+    [api_group,api_monitor,update_group]
+{module_call,api_device}:
+    ['$M_EXPR',api_device,api_siteview,dbcs_device,dbcs_group]
+{module_use,api_device}:
+    [api_device]
+{module_call,api_alert}:
+    ['$M_EXPR',alert_logger,api_siteview,dbcs_base,dbcs_rule,io_lib,lists,
+     proplists,rule,siteview,string]
+{module_use,api_alert}:
+    []
+{module_call,apache_monitor}:
+    ['$M_EXPR',apache_monitor,httputils,io,io_lib,lists,proplists,string,
+     url_monitor,urlcontent_base]
+{module_use,apache_monitor}:
+    [apache_monitor]
+{module_call,alert_logger}:
+    [alert_logger,disk_log,gen_server,io_lib,lists]
+{module_use,alert_logger}:
+    [action,alert_logger,api_alert]
+{module_call,adperformance_monitor}:
+    ['$M_EXPR',adperformance_monitor,file,httputils,lists,ntcounter_base,
+     proplists]
+{module_use,adperformance_monitor}:
+    [adperformance_monitor]
+{module_call,action}:
+    ['$M_EXPR',action,alert_logger,file,io_lib,siteview,siteview_object,
+     string,sv_datetime]
+{module_use,action}:
+    [action,generatehistoryreport,mailto,update_device,update_group,
+     update_monitor]
+{module_call,acs_proxy}:
+    [acs_helper,acs_proxy,data_conversion,dbcs_device,erlang,proplists,random,
+     rpc]
+{module_use,acs_proxy}:
+    [acs_proxy]
+{module_call,acs_helper}:
+    [pg]
+{module_use,acs_helper}:
+    [acs_proxy,tr069_RTP_monitor,tr069_callsdrop_monitor,
+     tr069_calltime_monitor,tr069_incomingcalls_monitor,
+     tr069_outgoingcalls_monitor,tr069_packetlossrate_monitor]
+{module_call,absolute_event}:
+    ['$M_EXPR',absolute_event,proplists,schedule_event,sv_datetime]
+{module_use,absolute_event}:
+    [absolute_event,scheduler]
+{module_call,'ELDAPv3'}:
+    ['ELDAPv3',asn1rt_ber_bin,lists]
+{module_use,'ELDAPv3'}:
+    ['ELDAPv3']
+

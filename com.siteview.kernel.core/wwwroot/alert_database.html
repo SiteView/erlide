@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">
+	
+		</style>		
+	</head>
+	<body>		
+		<div class=header>
+
+		</div>
+		<div class=topmenu1>
+			[[[topmenu:render(Group)]]]
+		</div>
+		<div class=topmenu2>
+			[[[topmenu:render5(Group)]]]
+			<div class=clear></div>
+		</div>
+		<div align=left>
+			[[[page:print_title]]]
+			<b>Alert Name</b>
+			[[[page:print_alert_name(Rule)]]]
+			<hr>
+			<p><b>警报主题</b></p>
+			[[[page:print_groups_monitors(Rule)]]]<br>
+			为警报选择组或监测器。当单击项名时按下Ctrl键可选择多个选项(在大部分平台上)
+		</div>
+		<hr>
+		<div align=left>
+			<b>Alert Database Database Connection URL</b><br>
+			[[[page:print_database(Rule)]]]
+			<br>Enter the URL to the database connection (for example, if the ODBC connection is called test, the URL would be jdbc:odbc:test) 
+			<br>SQL Statement<br>
+			[[[page:print_sql(Rule)]]]
+			<br>the SQL statement to call a stored procedure or insert a record
+		</div>
+		<hr>
+		<div align=left>
+			<p><b>当</b></p>
+			[[[page:print_when(Rule)]]]
+		</div>
+		<hr>
+		<div align=left>
+			[[[page:print_add_button(Rule)]]] Database 报警
+		</div>
+		<hr>
+		<div align=left>
+			<h3>高级设置</h3>
+			[[[page:print_advance_databaseoptions(Rule)]]]
+			<table border=0 width=100% cellspacing=0 cellpadding=0>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			<tr><td></td><td>禁用报警</td><td></td></tr>
+			[[[page:print_advance_options(Rule)]]]
+			</table>
+		</div>
+		<hr>
+		<div align=left>
+			<p><b>报警过滤</b></p>
+			<table border=0 width=100%>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			[[[page:print_alert_filtering(Rule)]]]
+			</table>
+		</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

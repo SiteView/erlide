@@ -1,0 +1,15 @@
+erlang节点发送至java节点的消息格式为：
+	｛Request_Monitor_Type, Pid_erland, Request_Msg}
+	说明：
+	Request_Monitor_Type,	原子类型，指明java节点按此类型动态生成一个处理此请求的类的实例。
+	action			动作名称
+	erlang_node,		erlang节点名
+	Pid_erlang,	erlang节点的Pid, 如：self()。
+	Request_Msg,	列表类型， 是发送至java节点的参数。 该列表中的请求参数是用键值对形式的元组来表示。
+
+java节点发送至erlang节点的消息格式为：
+	Response_Status_Type, Pid_java, Response_Msg}
+	说明：
+	Response_Status_Type,	原子类型， 指示java节点处理请求后的响应状态类型。 erlang节点根据响应类型进行相关处理。
+	Pid_java,	java节点的Pid。
+	Response_Msg,	列表类型， 是发送至erlang节点的参数。 该列表中的响应参数是用键值对形式的元组来表示。

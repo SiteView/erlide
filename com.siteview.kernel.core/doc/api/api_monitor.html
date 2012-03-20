@@ -1,0 +1,464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_monitor</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_monitor</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of monitor operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of monitor operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#browse-2">browse/2</a></td><td>filter all monitor with conditions.</td></tr>
+<tr><td valign="top"><a href="#copy-2">copy/2</a></td><td>copy monitor to a group.</td></tr>
+<tr><td valign="top"><a href="#create-2">create/2</a></td><td>create a monitor with parent id and list of data.</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete monitor by monitor id.</td></tr>
+<tr><td valign="top"><a href="#disable-2">disable/2</a></td><td>disable monitor.</td></tr>
+<tr><td valign="top"><a href="#disable-4">disable/4</a></td><td>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}}.</td></tr>
+<tr><td valign="top"><a href="#disable_alert-3">disable_alert/3</a></td><td>disable monitor' alert.</td></tr>
+<tr><td valign="top"><a href="#disable_alert-4">disable_alert/4</a></td><td>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}}.</td></tr>
+<tr><td valign="top"><a href="#enable-1">enable/1</a></td><td>enable a monitor.</td></tr>
+<tr><td valign="top"><a href="#enable-2">enable/2</a></td><td>enable monitor.</td></tr>
+<tr><td valign="top"><a href="#enable_alert-1">enable_alert/1</a></td><td>enable monitor's alert.</td></tr>
+<tr><td valign="top"><a href="#getBrowseData-2">getBrowseData/2</a></td><td>get data of  browsable property ,Oper is the operation status when call this function,when add monitor Oper will be "add",edit monitor is "edit".</td></tr>
+<tr><td valign="top"><a href="#getStatePropertyObjects-1">getStatePropertyObjects/1</a></td><td>get monitor's state property and values,Id is monitor identify,Prop is state property,value is monitor value.</td></tr>
+<tr><td valign="top"><a href="#get_all_classifier-1">get_all_classifier/1</a></td><td>get classifier of a monitor.</td></tr>
+<tr><td valign="top"><a href="#get_all_ids-0">get_all_ids/0</a></td><td></td></tr>
+<tr><td valign="top"><a href="#get_all_monitors-0">get_all_monitors/0</a></td><td>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#get_all_monitorsforjs-0">get_all_monitorsforjs/0</a></td><td>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list.</td></tr>
+<tr><td valign="top"><a href="#get_classifier-2">get_classifier/2</a></td><td>get classifier of a monitor.</td></tr>
+<tr><td valign="top"><a href="#get_conprop-2">get_conprop/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#get_log-1">get_log/1</a></td><td>get monitor log by date.</td></tr>
+<tr><td valign="top"><a href="#get_log-2">get_log/2</a></td><td>get monitor log by date and id.</td></tr>
+<tr><td valign="top"><a href="#get_log-5">get_log/5</a></td><td>get monitor log by start time endtime and id.</td></tr>
+<tr><td valign="top"><a href="#get_recent-0">get_recent/0</a></td><td>get recent running monitor.</td></tr>
+<tr><td valign="top"><a href="#get_run_info-1">get_run_info/1</a></td><td>runtime information of a monitor.</td></tr>
+<tr><td valign="top"><a href="#get_running-0">get_running/0</a></td><td>get Running monitor.</td></tr>
+<tr><td valign="top"><a href="#get_stat-0">get_stat/0</a></td><td>get stat data of monitor.</td></tr>
+<tr><td valign="top"><a href="#info-1">info/1</a></td><td>information of a monitor.</td></tr>
+<tr><td valign="top"><a href="#move-2">move/2</a></td><td>move monitor to a group.</td></tr>
+<tr><td valign="top"><a href="#refresh-1">refresh/1</a></td><td>refresh a monitor.</td></tr>
+<tr><td valign="top"><a href="#update-1">update/1</a></td><td>update monitor, MonitorData is a key-value tuple list.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="browse-2">browse/2</a></h3>
+<div class="spec">
+<p><tt>browse(Type, Params) -&gt; Monitors</tt>
+<ul class="definitions"><li><tt>Type = atom()</tt></li>
+<li><tt>Params = [{FilterKey, FilterValue}]</tt></li>
+<li><tt>Monitors = [Monitor]</tt></li>
+<li><tt>Monitor = [{Key, Val}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Val = term()</tt></li>
+<li><tt>FilterKey = string()</tt></li>
+<li><tt>FilterValue = string()</tt></li>
+</ul></p>
+</div><p>filter all monitor with conditions
+ 	<br>Type is 'all_type' or monitor type(example:'ping_monitor')
+ 	<br>FilterKey = ("filter_category" | "match_status" | "match_name" | "match_machine")
+ 	<br>if FilterKey = "filter_category",FilterValue can be:
+ 	<dl>
+ 		<dt>"show_error_or_warning"</dt><dd></dd>
+ 		<dt>"show_error"</dt><dd></dd>
+ 		<dt>"show_warning"</dt><dd></dd>
+ 		<dt>"show_ok"</dt><dd></dd>
+ 		<dt>"show_nodata"</dt><dd></dd>
+ 		<dt>"show_disabled"</dt><dd></dd>
+ 		<dt>"hide_error_or_warning"</dt><dd></dd>
+ 		<dt>"hide_error"</dt><dd></dd>
+ 		<dt>"hide_warning"</dt><dd></dd>
+ 		<dt>"hide_ok"</dt><dd></dd>
+ 		<dt>"hide_nodata"</dt><dd></dd>
+ 		<dt>"hide_disabled"</dt><dd></dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="copy-2">copy/2</a></h3>
+<div class="spec">
+<p><tt>copy(MonitorId, ParentId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>ParentId = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = create_monitor_error | not_found_parent | parameter_error</tt></li>
+</ul></p>
+</div><p>copy monitor to a group
+   <br>error reason:
+ 	<dl>
+ 		<dt>create_monitor_error</dt><dd>failed to create monitor data </dd>
+ 		<dt>not_found_parent</dt><dd>target group not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="create-2">create/2</a></h3>
+<div class="spec">
+<p><tt>create(ParentId, MonitorData) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>ParentId = atom()</tt></li>
+<li><tt>MonitorData = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Result = [{atom(), term()}]</tt></li>
+<li><tt>Reason = parameter_error | parent_not_exist | start_monitor_error | save_monitor_error | id_generate_error | {verify_error, Err}</tt></li>
+<li><tt>Err = [{FieldName, ErrDesc}]</tt></li>
+<li><tt>FieldName = atom()</tt></li>
+<li><tt>ErrDesc = string()</tt></li>
+</ul></p>
+</div><p>create a monitor with parent id and list of data
+ 	<br>MonitorData is a key-value tuple list,it must contains monitor's property,name of property can get by api_monitor_template:get_template/1.
+ 	<br>example:api_monitor_template:get_template(ping_monitor).
+  	<br>you can call api_monitor_template:get_templates/0 to get monitor types
+   <br>error reason:
+ 	<dl>
+ 		<dt>id_generate_error</dt><dd>can not get id of the monitor.</dd>
+ 		<dt>parent_not_exist</dt><dd>parent group not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>start_monitor_error</dt><dd>failed to start monitor</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data.</dd>
+ 		<dt>{verify_error,Err}</dt><dd>verify data error, MonitorData contains invalid data,Err is a list of tuple contains {key,error_string}</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(MonitorId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Reason = monitor_is_running | parameter_error | monitor_not_found</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p><p>delete monitor by monitor id</p>
+ 
+   <br>error reason:
+ 	<dl>
+ 		<dt>monitor_not_found</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>monitor_is_running</dt><dd>monitor can not delete because it is running</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="disable-2">disable/2</a></h3>
+<div class="spec">
+<p><tt>disable(MonitorId, DisableDesc) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = not_found_monitor | save_monitor_error | parameter_error</tt></li>
+</ul></p>
+</div><p>disable monitor
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_monitor</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="disable-4">disable/4</a></h3>
+<div class="spec">
+<p><tt>disable(MonitorId, DisableDesc, X3::StartTime, X4::EndTime) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>StartTime = tuple()</tt></li>
+<li><tt>EndTime = tuple()</tt></li>
+<li><tt>Reason = not_found_monitor | save_monitor_error | parameter_error</tt></li>
+</ul></p>
+</div><p>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}}
+ 	<br>(example:{{2009,11,9},{12,11,23}})
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_monitor</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="disable_alert-3">disable_alert/3</a></h3>
+<div class="spec">
+<p><tt>disable_alert(Id, DisableDesc, NextSeconds) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>NextSeconds = integer</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = not_found_monitor | save_monitor_error | parameter_error</tt></li>
+</ul></p>
+</div><p>disable monitor' alert
+ </p>
+
+<h3 class="function"><a name="disable_alert-4">disable_alert/4</a></h3>
+<div class="spec">
+<p><tt>disable_alert(MonitorId, DisableDesc, X3::StartTime, X4::EndTime) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>DisableDesc = string()</tt></li>
+<li><tt>StartTime = tuple()</tt></li>
+<li><tt>EndTime = tuple()</tt></li>
+<li><tt>Reason = not_found_monitor | parameter_error | save_monitor_error</tt></li>
+</ul></p>
+</div><p>disable monitor within a periodic time,the format of StartTime and EndTime is {{Y,M,D},{HH,MM,SS}}
+ 	<br>(example:{{2009,11,9},{12,11,23}})</p>
+
+<h3 class="function"><a name="enable-1">enable/1</a></h3>
+<div class="spec">
+<p><tt>enable(MonitorId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Reason = parameter_error | not_found_monitor | save_monitor_error</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>enable a monitor
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_monitor</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="enable-2">enable/2</a></h3>
+<div class="spec">
+<p><tt>enable(MonitorId, Flag) -&gt; any()</tt></p>
+</div><p>enable monitor. if Flag is true,Only enable items that are temporarily disabled
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_monitor</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="enable_alert-1">enable_alert/1</a></h3>
+<div class="spec">
+<p><tt>enable_alert(MonitorId) -&gt; any()</tt></p>
+</div><p>enable monitor's alert.</p>
+
+<h3 class="function"><a name="getBrowseData-2">getBrowseData/2</a></h3>
+<div class="spec">
+<p><tt>getBrowseData(Oper, Params) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Oper = string()</tt></li>
+<li><tt>Params = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Result = [{Id, Title}]</tt></li>
+<li><tt>Id = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+</ul></p>
+</div><p>get data of  browsable property ,Oper is the operation status when call this function,when add monitor Oper will be "add",edit monitor is "edit"</p>
+
+<h3 class="function"><a name="getStatePropertyObjects-1">getStatePropertyObjects/1</a></h3>
+<div class="spec">
+<p><tt>getStatePropertyObjects(Id) -&gt; {ok, [{Prop, Value}]} | {error, not_found_monitor}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Prop = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get monitor's state property and values,Id is monitor identify,Prop is state property,value is monitor value
+ </p>
+
+<h3 class="function"><a name="get_all_classifier-1">get_all_classifier/1</a></h3>
+<div class="spec">
+<p><tt>get_all_classifier(Id) -&gt; [{Key, Classfier}] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Key = error | warning | good</tt></li>
+<li><tt>Classfier = [{Prop, Oper, Value}]</tt></li>
+<li><tt>Prop = atom() | string()</tt></li>
+<li><tt>Oper = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get classifier of a monitor</p>
+
+<h3 class="function"><a name="get_all_ids-0">get_all_ids/0</a></h3>
+<div class="spec">
+<p><tt>get_all_ids() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="get_all_monitors-0">get_all_monitors/0</a></h3>
+<div class="spec">
+<p><tt>get_all_monitors() -&gt; [Monitor]</tt>
+<ul class="definitions"><li><tt>Monitor = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list
+ </p>
+
+<h3 class="function"><a name="get_all_monitorsforjs-0">get_all_monitorsforjs/0</a></h3>
+<div class="spec">
+<p><tt>get_all_monitorsforjs() -&gt; [Monitor]</tt>
+<ul class="definitions"><li><tt>Monitor = [{Key, Value}]</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get all monitors,return a list of Monitor,each Monitor is a key-value tuple list
+ </p>
+
+<h3 class="function"><a name="get_classifier-2">get_classifier/2</a></h3>
+<div class="spec">
+<p><tt>get_classifier(Id, Category) -&gt; [Classfier] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Category = error | warning | good</tt></li>
+<li><tt>Classfier = [{Prop, Oper, Value}]</tt></li>
+<li><tt>Prop = atom() | string()</tt></li>
+<li><tt>Oper = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Reason = not_found_monitor</tt></li>
+</ul></p>
+</div><p>get classifier of a monitor</p>
+
+<h3 class="function"><a name="get_conprop-2">get_conprop/2</a></h3>
+<div class="spec">
+<p><tt>get_conprop(Oper, Params) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="get_log-1">get_log/1</a></h3>
+<div class="spec">
+<p><tt>get_log(Date) -&gt; {ok, Log} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Date = {Y, M, D}</tt></li>
+<li><tt>Y = integer()</tt></li>
+<li><tt>M = integer()</tt></li>
+<li><tt>D = integer()</tt></li>
+<li><tt>Log = [#monitorlog{}]</tt></li>
+</ul></p>
+</div><p>get monitor log by date
+ 	<br>#monitorlog{} is defined in <a href="monitor.hrl">monitor.hrl</a></p>
+
+<h3 class="function"><a name="get_log-2">get_log/2</a></h3>
+<div class="spec">
+<p><tt>get_log(Date, Id) -&gt; {ok, Log} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Date = {Y, M, D}</tt></li>
+<li><tt>Y = integer()</tt></li>
+<li><tt>M = integer()</tt></li>
+<li><tt>D = integer()</tt></li>
+<li><tt>Id = atom()</tt></li>
+<li><tt>Log = [#monitorlog{}]</tt></li>
+<li><tt>Reason = parameter_error | string()</tt></li>
+</ul></p>
+</div><p>get monitor log by date and id.
+ 	<br>#monitorlog{} is defined in <a href="monitor.hrl">monitor.hrl</a></p>
+
+<h3 class="function"><a name="get_log-5">get_log/5</a></h3>
+<div class="spec">
+<p><tt>get_log(Id, StartDate, StartTime, EndDate, EndTime) -&gt; {ok, Log} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>StartDate = {Year, Month, Day}</tt></li>
+<li><tt>StartTime = {Houre, Minute, Seconds}</tt></li>
+<li><tt>EndDate = {Year, Month, Day}</tt></li>
+<li><tt>EndTime = {Houre, Minute, Seconds}</tt></li>
+<li><tt>Log = [#monitorlog{}]</tt></li>
+</ul></p>
+</div><p>get monitor log by start time endtime and id
+ 	<br>#monitorlog{} is defined in <a href="monitor.hrl">monitor.hrl</a></p>
+
+<h3 class="function"><a name="get_recent-0">get_recent/0</a></h3>
+<div class="spec">
+<p><tt>get_recent() -&gt; {ok, RecentData} | {error, Err}</tt>
+<ul class="definitions"><li><tt>RunData = [{App, #monitorlog{}}]</tt></li>
+<li><tt>App = atom()</tt></li>
+</ul></p>
+</div><p>get recent running monitor	
+ 	<br>#monitorlog{} is defined in <a href="monitor.hrl">monitor.hrl</a></p>
+
+<h3 class="function"><a name="get_run_info-1">get_run_info/1</a></h3>
+<div class="spec">
+<p><tt>get_run_info(MonitorId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+<li><tt>Reason = monitor_not_found | parameter_error</tt></li>
+</ul></p>
+</div><p>runtime information of a monitor
+   <br>error reason:
+ 	<dl>
+ 		<dt>monitor_not_found</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="get_running-0">get_running/0</a></h3>
+<div class="spec">
+<p><tt>get_running() -&gt; {ok, RunData} | undefined</tt>
+<ul class="definitions"><li><tt>RunData = [{Time, {App, Id}}]</tt></li>
+<li><tt>Time = string()</tt></li>
+<li><tt>App = atom()</tt></li>
+<li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>get Running monitor</p>
+
+<h3 class="function"><a name="get_stat-0">get_stat/0</a></h3>
+<div class="spec">
+<p><tt>get_stat() -&gt; {ok, StatData} | undefined</tt>
+<ul class="definitions"><li><tt>StatData = {RunningCount, CurMinutesCount, MaxRunningCount, MaxRunningTime, MaxMinutesRun, MaxMinutesRunTime}</tt></li>
+<li><tt>RunningCount = integer()</tt></li>
+<li><tt>CurMinutesCount = integer()</tt></li>
+<li><tt>MaxRunningCount = integer()</tt></li>
+<li><tt>MaxRunningTime = integer()</tt></li>
+<li><tt>MaxMinutesRun = integer()</tt></li>
+<li><tt>MaxMinutesRunTime = integer()</tt></li>
+</ul></p>
+</div><p>get stat data of monitor
+ 	<br>RunningCount is count of running monitor
+ 	<br>CurMinutesCount is count of monitor run at current 1 minute
+ 	<br>MaxRunningCount is max value of RunningCount 
+ 	<br>MaxRunningTime is time of MaxRunningCount Occur
+ 	<br>MaxMinutesRun is max value of CurMinutesCount
+ 	<br>MaxMinutesRunTime is time of MaxMinutesRun Occur
+ 	<br>MaxRunningTime and MaxMinutesRunTime is the elapsed time since 00:00 GMT, January 1, 1970 (zero hour)
+ 	<br>Time unit is Millisecond</p>
+
+<h3 class="function"><a name="info-1">info/1</a></h3>
+<div class="spec">
+<p><tt>info(MonitorId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+<li><tt>Reason = monitor_not_found | parameter_error</tt></li>
+</ul></p>
+</div><p>information of a monitor
+   <br>error reason:
+ 	<dl>
+ 		<dt>monitor_not_found</dt><dd>monitor not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="move-2">move/2</a></h3>
+<div class="spec">
+<p><tt>move(MonitorId, ParentId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorId = atom()</tt></li>
+<li><tt>ParentId = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = parameter_error | not_found_monitor | not_found_parent</tt></li>
+</ul></p>
+</div><p>move monitor to a group
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_monitor</dt><dd>monitor not exist </dd>
+ 		<dt>not_found_parent</dt><dd>target group not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 	</dl></p>
+
+<h3 class="function"><a name="refresh-1">refresh/1</a></h3>
+<div class="spec">
+<p><tt>refresh(Id) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>refresh a monitor</p>
+
+<h3 class="function"><a name="update-1">update/1</a></h3>
+<div class="spec">
+<p><tt>update(MonitorData) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>MonitorData = [{key, value}]</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = parameter_error | monitordata_error | not_found_parent | {verify_error, Err}</tt></li>
+<li><tt>Err = [{FieldName, ErrDesc}]</tt></li>
+<li><tt>FieldName = atom()</tt></li>
+<li><tt>ErrDesc = string()</tt></li>
+</ul></p>
+</div><p>update monitor, MonitorData is a key-value tuple list
+   <br>error reason:
+ 	<dl>
+ 		<dt>not_found_parent</dt><dd>parent group not exist </dd>
+ 		<dt>parameter_error</dt><dd>input parameter is error</dd>
+ 		<dt>monitordata_error</dt><dd>MonitorData is invalid,maybe not contains id</dd>
+ 		<dt>save_monitor_error</dt><dd>failed to save monitor data.</dd>
+ 		<dt>{verify_error,Err}</dt><dd>data verify error, GroupData contains invalid data,Err is a list of tuple contains {key,error_string}</dd>
+ 	</dl></p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 7 2010, 10:20:54.</i></p>
+</body>
+</html>

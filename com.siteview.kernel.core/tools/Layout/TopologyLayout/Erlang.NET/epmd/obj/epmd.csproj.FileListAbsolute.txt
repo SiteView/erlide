@@ -1,0 +1,10 @@
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\epmd.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\bin\epmd.pdb
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\epmd\obj\Debug\ResolveAssemblyReference.cache
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\epmd\obj\Debug\epmd.exe
+D:\我的文档\下载\takayuki-Erlang.NET-3964e84\takayuki-Erlang.NET-3964e84\epmd\obj\Debug\epmd.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\bin\epmd.exe
+E:\yFiles\TopologyLayout\Erlang.NET\bin\epmd.pdb
+E:\yFiles\TopologyLayout\Erlang.NET\epmd\obj\Debug\ResolveAssemblyReference.cache
+E:\yFiles\TopologyLayout\Erlang.NET\epmd\obj\Debug\epmd.exe
+E:\yFiles\TopologyLayout\Erlang.NET\epmd\obj\Debug\epmd.pdb

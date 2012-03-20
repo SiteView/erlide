@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">
+	
+		</style>		
+	</head>
+	<body>		
+		<div class=header>
+
+		</div>
+		<div class=topmenu1>
+			[[[topmenu:render(Group)]]]
+		</div>
+		<div class=topmenu2>
+			[[[topmenu:render4(Group)]]]
+			<div class=clear></div>
+		</div>
+		<div>
+			<div align=left>
+			<h2>监测器集模板的属性:[[[page:print_title(Item)]]]</h2>
+			</div>
+			<div align=left>
+			<h3>监测器集样例的描述: </h3>
+				[[[page:print_desc(Item)]]]
+			</div>
+			<br>
+			<table border=1 width=100%>
+			<thead>
+			<tr>
+				<th>变量名称</th>
+				<th>描述</th>
+				<th>输入数值</th>
+				<th>监测器类型</th>
+			</tr>
+			</thead>
+			[[[page:print_variable(Item)]]]
+			</table>
+			<p align=left>
+				输入在监测器集中将要用的监测器的数值。
+			</p>
+			<br>
+			<div align=left>
+			[[[page:print_button()]]] 这些值
+			</div>
+		</div>
+		<hr>
+		<div align=left>
+			<p>
+			使用监测器集快速复制跨服务器平台和跨区域的一系列监测器。选择一个监测器集模板并且单击配置菜单进入该系列监测器的设置页面。单击帮助可以获得新建监测器集的相关说明。  
+			</p>
+		</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

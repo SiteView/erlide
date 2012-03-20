@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">			
+							
+			#page__maintable
+			  { 	
+			  line-height: 22px;
+			  margin-top:6px;
+			  margin-bottom:32px;
+			  margin-left:0px;
+			  margin-right:0px;
+				border-collapse: collapse;
+				border: solid  #cccfFf 0px;	
+				}  			
+			 	#gendiv {text-align:left; }		 			
+						
+		</style>		
+	</head>
+	<body>			
+			<div class=topmenu1>
+				[[[topmenu:render(Group)]]]
+			</div>
+        <div class=topmenu2>
+			[[[itsm_topmenu:renderapp(Group)]]]
+			<div class=clear></div>
+		</div>
+        <div class=topmenu3>
+			[[[itsm_topmenu:rendermodule(Group)]]]
+			<div class=clear></div>
+         <div>
+	
+			<div style="text-align:left;">		
+				[[[page:body()]]]	
+			</div>
+            <br>
+            <br>  
+           <table>
+			[[[page:head()]]]
+			</table>            
+           <table width=100% style="text-align:left;">
+			[[[page:add_status()]]]
+			</table>
+
+            
+			<!--
+			<table class=fine border=0 cellspacing=0 width=500 align=center>
+				<tr>
+					<td>
+						<p class=fine align=center>					
+						<a href="http://www.dragonflow.com/" target="web"><img src="/images/DragonFlow2_Websafe_xsml.gif"  border="" alt=""></a> 
+						<p>
+						<p class=fine align=center>
+							<small>SiteView , <a href="http://www.dragonflow.com/company/copyright.html" target="web"> Copyright &copy; 2004 </a> , All rights reserved.</small>
+						</p>
+					</td>
+				</tr>
+			</table>
+			-->
+		<br>
+        <!--<hr>-->
+		<div align=left>
+			<!--<h3>Add to Group:</h3>-->
+			<table border=0 width=100%>
+			<tr>
+				<th width=200px></th>
+				<th></th>
+			</tr>
+			[[[page:dev_oper_link()]]]
+			</table>
+		</div>
+		<!--<hr>-->
+		<div align=left>
+			<!--<h3>Group Actions:</h3>-->
+			<table border=0 width=100%>
+			<tr>
+				<th width=200px></th>
+				<th></th>
+			</tr>
+			[[[page:alert_oper_link()]]]
+			</table>
+		</div>
+		<!--<hr>-->
+		<div align=left>
+			<!--<h3>View:</h3>-->
+			<table border=0 width=100%>
+			<tr>
+				<th width=200px></th>
+				<th></th>
+			</tr>
+			[[[page:devupgrade_oper_link()]]]
+			</table>
+		</div>
+		<!--<hr>-->
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+ 
+<SCRIPT language=javascript>
+	 var y=document.getElementById("page__continueButton_option");
+   if(y!=null)
+	 {
+		y.onclick=function(){
+							 setValue();
+							 };  //为y对象的onclick事件绑定事件处理程序
+	 };
+	 function setValue()
+	 {
+		//document.location.reload();
+		//alert(document.getElementById("page__nameTextBox").value);
+		if(document.getElementById("page__nameTextBox").value=="")
+		{
+			//alert("yes");
+			document.getElementById("page__hintcolumm").innerHTML ="required.";
+			document.getElementById("page__nameTextBox").focus();
+			//alert(tt.innerHTML);
+		}
+		
+	 };
+</SCRIPT>
+	
+	<script>
+	[[[script]]]
+	</script>	
+	</body>
+</html>

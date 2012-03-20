@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_user_spl</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_user_spl</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>interface of simple user manager.
+<p>Copyright © 2009 dragonflow.com</p>
+
+
+<h2><a name="description">Description</a></h2>interface of simple user manager
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#add_right-3">add_right/3</a></td><td>grants rights of a object to user.</td></tr>
+<tr><td valign="top"><a href="#browse_users-0">browse_users/0</a></td><td></td></tr>
+<tr><td valign="top"><a href="#changePassword-2">changePassword/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#check_permission-2">check_permission/2</a></td><td>check permission of user.</td></tr>
+<tr><td valign="top"><a href="#check_permission-3">check_permission/3</a></td><td>check permission of user.</td></tr>
+<tr><td valign="top"><a href="#check_right-3">check_right/3</a></td><td>check right.</td></tr>
+<tr><td valign="top"><a href="#create_user-1">create_user/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#delete_user-1">delete_user/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#get_right-2">get_right/2</a></td><td>get rights.</td></tr>
+<tr><td valign="top"><a href="#get_user-1">get_user/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#remove_right-2">remove_right/2</a></td><td>remove user's rights.</td></tr>
+<tr><td valign="top"><a href="#update_right-3">update_right/3</a></td><td>update user's rights.</td></tr>
+<tr><td valign="top"><a href="#update_user-1">update_user/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#user_create-12">user_create/12</a></td><td>create a new user,return {ok,create_user_ok} is ok,else is error.</td></tr>
+<tr><td valign="top"><a href="#user_update-13">user_update/13</a></td><td>update user's infomation.</td></tr>
+<tr><td valign="top"><a href="#user_validate-2">user_validate/2</a></td><td>validate a user with name and password.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="add_right-3">add_right/3</a></h3>
+<div class="spec">
+<p><tt>add_right(UId, GId, Rights) -&gt; {ok, {UId, GId, Rights}} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>GId = atom()</tt></li>
+<li><tt>Rights = list()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>grants rights of a object to user</p>
+
+<h3 class="function"><a name="browse_users-0">browse_users/0</a></h3>
+<div class="spec">
+<p><tt>browse_users() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="changePassword-2">changePassword/2</a></h3>
+<div class="spec">
+<p><tt>changePassword(UId, NewPassword) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="check_permission-2">check_permission/2</a></h3>
+<div class="spec">
+<p><tt>check_permission(UId, Right) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>Right = atom()</tt></li>
+</ul></p>
+</div><p>check permission of user</p>
+
+<h3 class="function"><a name="check_permission-3">check_permission/3</a></h3>
+<div class="spec">
+<p><tt>check_permission(UId, Group, Right) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>Group = atom()</tt></li>
+<li><tt>Right = atom()</tt></li>
+</ul></p>
+</div><p>check permission of user</p>
+
+<h3 class="function"><a name="check_right-3">check_right/3</a></h3>
+<div class="spec">
+<p><tt>check_right(UId, GId, Right) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>GId = atom()</tt></li>
+<li><tt>Right = term()</tt></li>
+</ul></p>
+</div><p>check right</p>
+
+<h3 class="function"><a name="create_user-1">create_user/1</a></h3>
+<div class="spec">
+<p><tt>create_user(Data) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="delete_user-1">delete_user/1</a></h3>
+<div class="spec">
+<p><tt>delete_user(Id) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="get_right-2">get_right/2</a></h3>
+<div class="spec">
+<p><tt>get_right(UId, GId) -&gt; {ok, {UId, GId, Rights}} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>GId = atom()</tt></li>
+<li><tt>Rights = list()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get rights</p>
+
+<h3 class="function"><a name="get_user-1">get_user/1</a></h3>
+<div class="spec">
+<p><tt>get_user(Id) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="remove_right-2">remove_right/2</a></h3>
+<div class="spec">
+<p><tt>remove_right(UId, GId) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>GId = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>remove user's rights</p>
+
+<h3 class="function"><a name="update_right-3">update_right/3</a></h3>
+<div class="spec">
+<p><tt>update_right(UId, GId, Rights) -&gt; {ok, {UId, GId, Rights}} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>UId = string()</tt></li>
+<li><tt>GId = atom()</tt></li>
+<li><tt>Rights = list()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>update user's rights 	</p>
+
+<h3 class="function"><a name="update_user-1">update_user/1</a></h3>
+<div class="spec">
+<p><tt>update_user(Data) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="user_create-12">user_create/12</a></h3>
+<div class="spec">
+<p><tt>user_create(Name, Password, LdapServer, LdapSecurity, Desc, Title, Disabled, Groups, Rights, Cpes, NT, Unix) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+<li><tt>LdapServer = string()</tt></li>
+<li><tt>LdapSecurity = string()</tt></li>
+<li><tt>Desc = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+<li><tt>Disabled = string()</tt></li>
+<li><tt>Group = list()</tt></li>
+<li><tt>Rights = list()</tt></li>
+<li><tt>Cpes = list()</tt></li>
+<li><tt>NT = list()</tt></li>
+<li><tt>Unix = list()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>create a new user,return {ok,create_user_ok} is ok,else is error
+ </p>
+
+<h3 class="function"><a name="user_update-13">user_update/13</a></h3>
+<div class="spec">
+<p><tt>user_update(Id, Name, Password, LdapServer, LdapSecurity, Desc, Title, Disabled, Groups, Rights, Cpes, NT, Unix) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+<li><tt>LdapServer = string()</tt></li>
+<li><tt>Desc = string()</tt></li>
+<li><tt>Title = string()</tt></li>
+<li><tt>Email = string()</tt></li>
+<li><tt>Disabled = string()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>update user's infomation
+ </p>
+
+<h3 class="function"><a name="user_validate-2">user_validate/2</a></h3>
+<div class="spec">
+<p><tt>user_validate(Name, Password) -&gt; {ok, Info, GroupName} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Name = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+<li><tt>Info = string()</tt></li>
+<li><tt>GroupName = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>validate a user with name and password</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 23 2010, 17:20:06.</i></p>
+</body>
+</html>

@@ -1,0 +1,121 @@
+监测器说明文档：
+
+一、概述：
+  监测器是监测特定服务、主机、文件等对象的模块，监测器的整个体系采用类继承机制，监测器的任务
+是取得这些对象的状态，并将状态保存到类中。atomic_monitor是所有监测器的基类模块。
+
+
+二、监测器的属性
+  监测器的属性：监测器的属性有配置属性（property)和运行时属性(attribute).
+property属性在get_template_property（）方法中被定义，界面面会显示定义的属性，同时新建或者修改
+的时候，会保存到数据库，监测器被加载的时候，这些属性会作为(property)属性保存在对象中，在监测器
+运行期间可以通过THIS:get_property/1,THIS:set_property/2方法进行存取（THIS:set_property/2方法只会
+改变监测器对象中的数据，不会保存到数据库),
+  attribute是运行时属性，一些中间变量，监测的结果都可以当成attribute保存，attribute属性可以通过
+THIS:get_attribute/1,THIS:set_attribute/2方法进行访问。
+  property属性的定义，参考monitor_template.hrl中property 记录的定义。
+
+
+二、模块的结构
+-module(foo,[]).					%%参数化模块的定义
+-extends(atomic_monitor).			%%继承基类atomic_monitor,如果有更复杂的扩展基类，则从扩展基类继承
+-compile(export_all).				%%导出函数
+
+-include("monitor.hrl").			%% 包含头文件，monitor.hrl定义了监测器基类中用到的一些属性的宏定义
+-include("monitor_template.hrl").		%%
+
+new()->								%% new函数，构造对象
+	Obj = ?BASE_MODULE:new(), 
+	instance(Obj).
+
+update()->							%%update函数定义，update函数会被监测器Schedule定期调用
+	ok.
+
+get_classifier(error)->				%%get_classifier阀值函数，定义阀值条件
+  case THIS:get_property(error_classifier) of
+	{ok,{error_classifier,Classifier}}->
+		Classifier;
+	_->
+		[{percentFull,'>',90}]
+	end;
+get_classifier(warning)->
+	case THIS:get_property(warning_classifier) of
+		{ok,{warning_classifier,Classifier}}->
+			Classifier;
+		_->
+			[{percentFull,'>',80}]
+	end;
+get_classifier(good)->
+	case THIS:get_property(good_classifier) of
+		{ok,{good_classifier,Classifier}}->
+			Classifier;
+		_->
+			[{percentFull,'<=',80}]
+	end.
+
+get_template_property()->			%%get_template_property定义监测器的属性(property)
+	BASE:get_template_property() ++
+	[].
+
+在一个实现监测器时，以上方法必须实现。
+
+
+可选方法：
+（1）getScalarValues/2 : 当get_template_property()中定义的的属性的type字段为scalar时，此函数必须定义
+	其返回值是list,会显示在界面的下拉框中。
+
+（2） verify(Params):
+	数据检查的方法，Params是页面上的参数的键值列表
+	返回{ok,_}|{error,[{key,Reason}]}:Reason=string()
+
+（3）defaultTitle(Params):
+	生成默认的标题，Params是页面上的参数的键值列表
+	返回：string()
+
+（4）getCostInLicensePoints():
+	当监测器消耗的license点数不是1点时，重载它
+
+（5）getLogProperties(This):
+	自定义哪些属性要写入监测记录日志,This是监测器的对象指针
+	返回:list()
+
+（6）getStateProperties(This,Params):
+	自定义哪些是阀值属性，Params是页面上的参数的键值列表
+	返回property 记录的列表
+
+（7）runOwnRules/0:是不是使用监测器自己写的规则处理。
+
+
+注意事项：
+（1）创建监测器模板时应注意：
+	a，要建成参数化模块形式，形如： -module(foo,[Bar, Baz]).用于生成实例
+	b，继承atomic_monitor模块，并包含monitor，monitor_template这两个头文件
+（2）new（）：
+	a，需要时设置在监测器运行过程中的状态值set_attribute，并为其赋初值
+	b，在new（）函数之后，THIS为默认当前模块名
+（3）update（）：
+	a，从数据库中取属性值THIS：get_property()
+	b,在监测器运行过程中需要向界面显示状态时设置state_string，后接描述字符
+	c，当属性property的type为text时，取回的property为原子类型
+（4）get_classifier():
+	a,此函数用来设置默认门限值
+	b，比较运算符的正确使用，有如下比较运算符：“>,>=,<,<=,!=,==,contains,!contains”
+（5）get_template_property():
+	a,继承了monitor中的属性
+	b，属性选项的设置介绍：
+	相关文件：monitor_template.hrl
+		type：  text 文本类型,scalar 标量类型 显示为下拉列表框,
+			frequency 频率类型 显示为文本框与下拉列表框结合,
+	      		server 服务器类型 显示为超链接，
+			bool 布尔类型true|false 显示为文本框，
+			numeric 数值类型 显示为文本框
+			默认为text
+		description: 描述，默认为""
+		order：属性值在网页中排列的顺序，若order相同则按设置的顺序排列，默认为99
+		editable：是否可编辑，默认为true
+		configurable：是否可配置，默认为true
+		advance：设置属性为进阶选项，默认false
+		state：设置属性为门限选项，默认为false
+		optional：设置属性为可选，默认为false
+		default：设置默认值，默认为""
+

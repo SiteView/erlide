@@ -1,0 +1,40 @@
+1. AssetComposer.getCurrentServiceMgr()       这是一个静态方法
+说明： 获取当前服务管理的顶级对象, 这个对象是整个系统的顶级对象，可以用它得到其下面的客户元素等。
+
+
+2. assetTreeComposer.selectCurrentNode()	这是一个实例方法
+说明： 因为这个对象是模块树，也是一个很重要的对象，连接所有模块的交互，用这个方法会选择到当前已经进入的模块。
+
+
+3. assetTreeComposer.SelectDataNode(currNode)	这是一个实例方法
+说明： 通过树指定你要选择的模块。
+
+
+
+备注：assetTreeComposer对象的获取方式是这样：AssetComposer.getCurrentServiceMgr().assetTreeComposer, 通过调用这个就可以获取到整个树型框架对象
+
+4. 自己做的触发事件必须要添加如下操作，比如构造的操作的每个菜单项加上类似下面的语句
+
+item.setAttribute(IAssetNode.SERVICE_DESK_REDIRCT_URL, "/main/asset/CustomizeListView.zul?"+IAssetNode.SERVICE_DESK_TEMPLATEID+"=" + IAssetNode.SERVICE_DESK_TMP_ID_CHANGEREQUEST);
+item.setAttribute(IAssetNode.SERVICE_DESK_FORM_TARGET, IAssetNode.SERVICE_DESK_FORM_TARGET_BLANK);
+
+即是， 第一个attribute为你要弹出的url以及参数；第二个attribute是你的窗体呈现方式，我目前指出的呈现方式为内嵌，IAssetNode.SERVICE_DESK_FORM_TARGET_BLANK为弹出的方式。
+
+
+具体的处理在你的url所指定的程序里面处理
+
+5. 如果你的CI业务组件需要事件触发器和对应的监听回调，那么，你的业务组件需要继承于AbstractCISR, 这样你的CI业务组件就可以拥有事件的监听触发功能以及一些基本的功能。
+
+如：CISRSave业务组件（这个组件是作为新建和更新Service Request模块的时候作保存的业务组件）是继承于AbstractCISR的，那么我可以对其添加一些事件以及监听器，
+
+saveSRCI(CI_UIMapOperator uiMapOp) 方法， 这个方法是CISRSave这个业务组件的公开接口，用于新建模块的保存执行。
+
+// 保存前触发器触发
+		Map<String, Object> param = new LinkedHashMap<String, Object>();
+		CISREvent event = new CISREvent(this);
+		param.put("event", CISREvents.ON_BEFORESAVE);
+		param.put("eventObject", event);
+		this.trigger(param);
+
+
+以上代码是在真正执行保存前执行，表示，执行前执行外部传来的事件监听器，从而在保存前执行外部传来的客户逻辑，以上代码事件为 "保存前(BeforeSave)", 如果你要阻断你的这个程序的执行，那么你在你的监听器实体中的代码执行完后，丢出一个异常，那么这个异常会返回到上层，并且被封装为一个CISRException异常出来，这样触发这个事件后，后面的程序就不会执行了，而直接跳出到外部，保存这个动作就不会去执行。

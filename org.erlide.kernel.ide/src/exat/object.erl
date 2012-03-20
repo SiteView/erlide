@@ -170,9 +170,7 @@ getTimedValue(Object, AttributeName) when is_record(Object,object), is_atom(Attr
         _ -> exit({undef, [attribute, Object, AttributeName]})
     end;
 %% js call erlang's js_getTimedValue
-getTimedValue(#erlv8_fun_invocation{ vm = VM} = _Invocation, [MonitorName, AttrNames]) ->	
-%% 	io:format("---------------------object getTimedValue MonitorName: ~p~n", [MonitorName]),
-%% 	io:format("---------------------object getTimedValue AttrNames: ~p~n", [AttrNames]),
+getTimedValue(#erlv8_fun_invocation{ vm = VM} = _Invocation, [MonitorName, AttrNames]) when is_list(AttrNames)->	
 	[getTimedValue(?V8TERM_TO_ATOM(MonitorName),?V8TERM_TO_ATOM(X))||X<-AttrNames:list()].
 
 %% @doc get the attribute value with time tuple

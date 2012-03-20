@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_machineLabel</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_machineLabel</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of machine label operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Ning Cai (<a href="mailto:ning.cai@dragonflow.com"><tt>ning.cai@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of machine label operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#create_label-1">create_label/1</a></td><td>insert a new machine to database.</td></tr>
+<tr><td valign="top"><a href="#getUserDefineTag-4">getUserDefineTag/4</a></td><td>get user defined label
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_LabelById-1">get_LabelById/1</a></td><td>get label by id
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_all_label-0">get_all_label/0</a></td><td>get all label of machine.</td></tr>
+<tr><td valign="top"><a href="#get_children_label-1">get_children_label/1</a></td><td>remove all labels
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_label_type-1">get_label_type/1</a></td><td>get label of machine by type.</td></tr>
+<tr><td valign="top"><a href="#get_root_label-0">get_root_label/0</a></td><td>get all label which is root.</td></tr>
+<tr><td valign="top"><a href="#remove_AllLabel-0">remove_AllLabel/0</a></td><td>remove all labels
+  release.</td></tr>
+<tr><td valign="top"><a href="#remove_label-1">remove_label/1</a></td><td>remove label and set machine's property label for empty
+  release.</td></tr>
+<tr><td valign="top"><a href="#update_label-1">update_label/1</a></td><td>update a new machine to database
+  release.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="create_label-1">create_label/1</a></h3>
+<div class="spec">
+<p><tt>create_label(Label) -&gt; {error, Reason} | {ok, Id}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Reason = atom() | string()</tt></li>
+<li><tt>Machine = #machine{}</tt></li>
+</ul></p>
+</div><p>insert a new machine to database.
+  release</p>
+
+<h3 class="function"><a name="getUserDefineTag-4">getUserDefineTag/4</a></h3>
+<div class="spec">
+<p><tt>getUserDefineTag(Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = integer()</tt></li>
+<li><tt>SortType = integer()</tt></li>
+<li><tt>Result = [#machine_label{} | T]</tt></li>
+</ul></p>
+</div><p>get user defined label
+  release</p>
+
+<h3 class="function"><a name="get_LabelById-1">get_LabelById/1</a></h3>
+<div class="spec">
+<p><tt>get_LabelById(Id) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>Result = [#machine_label{} | T]</tt></li>
+</ul></p>
+</div><p>get label by id
+  release</p>
+
+<h3 class="function"><a name="get_all_label-0">get_all_label/0</a></h3>
+<div class="spec">
+<p><tt>get_all_label() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = [#machine_label{} | T]</tt></li>
+</ul></p>
+</div><p>get all label of machine.
+  release</p>
+
+<h3 class="function"><a name="get_children_label-1">get_children_label/1</a></h3>
+<div class="spec">
+<p><tt>get_children_label(Lid) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>remove all labels
+  release</p>
+
+<h3 class="function"><a name="get_label_type-1">get_label_type/1</a></h3>
+<div class="spec">
+<p><tt>get_label_type(Type) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Type = string()</tt></li>
+<li><tt>Result = [#machine_label{} | T]</tt></li>
+</ul></p>
+</div><p>get label of machine by type.
+  release</p>
+
+<h3 class="function"><a name="get_root_label-0">get_root_label/0</a></h3>
+<div class="spec">
+<p><tt>get_root_label() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = [#machine_label{} | T]</tt></li>
+</ul></p>
+</div><p>get all label which is root.
+  release</p>
+
+<h3 class="function"><a name="remove_AllLabel-0">remove_AllLabel/0</a></h3>
+<div class="spec">
+<p><tt>remove_AllLabel() -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>remove all labels
+  release</p>
+
+<h3 class="function"><a name="remove_label-1">remove_label/1</a></h3>
+<div class="spec">
+<p><tt>remove_label(Id) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Id = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>remove label and set machine's property label for empty
+  release</p>
+
+<h3 class="function"><a name="update_label-1">update_label/1</a></h3>
+<div class="spec">
+<p><tt>update_label(Label) -&gt; {error, Reason} | {ok, Id}</tt>
+<ul class="definitions"><li><tt>Label = #machine_label{}</tt></li>
+<li><tt>Reason = atom() | string()</tt></li>
+<li><tt>Id = string()</tt></li>
+</ul></p>
+</div><p>update a new machine to database
+  release</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 17 2010, 17:20:20.</i></p>
+</body>
+</html>

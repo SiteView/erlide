@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_machine</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_machine</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of group operation.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of group operation
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#configure_template-2">configure_template/2</a></td><td>configure monitor set with input value
+  release.</td></tr>
+<tr><td valign="top"><a href="#crate_monitors-2">crate_monitors/2</a></td><td>create monitor by parent and monitor's param
+  release.</td></tr>
+<tr><td valign="top"><a href="#create_machine-1">create_machine/1</a></td><td>insert a new machine to database
+  release.</td></tr>
+<tr><td valign="top"><a href="#delete_machine-1">delete_machine/1</a></td><td>delete a machine from database
+  release.</td></tr>
+<tr><td valign="top"><a href="#delete_machines-1">delete_machines/1</a></td><td>delete machines by some machine id
+  release.</td></tr>
+<tr><td valign="top"><a href="#getAllMachine-4">getAllMachine/4</a></td><td>get All Machine
+  release.</td></tr>
+<tr><td valign="top"><a href="#getDisks-1">getDisks/1</a></td><td>get disks of this ip
+  release.</td></tr>
+<tr><td valign="top"><a href="#getDynamicData-1">getDynamicData/1</a></td><td>get dynamic data
+  release.</td></tr>
+<tr><td valign="top"><a href="#getMachineByNotOs-5">getMachineByNotOs/5</a></td><td>get machine by not ostype
+  release.</td></tr>
+<tr><td valign="top"><a href="#getMachineByOs-5">getMachineByOs/5</a></td><td>get machine by not ostype
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_DeviceByType-5">get_DeviceByType/5</a></td><td>get Device by Device TypeList.</td></tr>
+<tr><td valign="top"><a href="#get_MachineTemplateNames-0">get_MachineTemplateNames/0</a></td><td>get machine os template names
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_Machine_ByTag-5">get_Machine_ByTag/5</a></td><td>get machine by tag
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_Machine_ByTagTree-5">get_Machine_ByTagTree/5</a></td><td>get machine by tag
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_machine-1">get_machine/1</a></td><td>get a machine's information
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_machinename-1">get_machinename/1</a></td><td>get Machine by id
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_ntmachine-0">get_ntmachine/0</a></td><td>get nt machine list,return a list of machine record
+  release.</td></tr>
+<tr><td valign="top"><a href="#get_refreshes-1">get_refreshes/1</a></td><td>refresh monitor some monitor id.</td></tr>
+<tr><td valign="top"><a href="#get_unixmachine-0">get_unixmachine/0</a></td><td>get unix machine list,return a list of machine record
+  release.</td></tr>
+<tr><td valign="top"><a href="#removeFromLabel-2">removeFromLabel/2</a></td><td>remove machine from label
+  release.</td></tr>
+<tr><td valign="top"><a href="#save_tagToMachine-2">save_tagToMachine/2</a></td><td>save tag to machines
+  release.</td></tr>
+<tr><td valign="top"><a href="#update_Machines-1">update_Machines/1</a></td><td>update machines
+  release.</td></tr>
+<tr><td valign="top"><a href="#update_machine-1">update_machine/1</a></td><td>update a machine's setting data
+  release.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="configure_template-2">configure_template/2</a></h3>
+<div class="spec">
+<p><tt>configure_template(File, Params) -&gt; {ok, MonitorSet} | {error, Err}</tt>
+<ul class="definitions"><li><tt>File = string()</tt></li>
+<li><tt>Params = [{Key, Value}]</tt></li>
+<li><tt>Key = string()</tt></li>
+<li><tt>Value = string()</tt></li>
+<li><tt>MonitorSet = #monitor_set{}</tt></li>
+</ul></p>
+</div><p>configure monitor set with input value
+  release</p>
+
+<h3 class="function"><a name="crate_monitors-2">crate_monitors/2</a></h3>
+<div class="spec">
+<p><tt>crate_monitors(Parent, T::Params) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Params = [{Parent, Items}]</tt></li>
+<li><tt>Parent = term()</tt></li>
+<li><tt>Items = list()</tt></li>
+</ul></p>
+</div><p>create monitor by parent and monitor's param
+  release</p>
+
+<h3 class="function"><a name="create_machine-1">create_machine/1</a></h3>
+<div class="spec">
+<p><tt>create_machine(Machine) -&gt; {error, Reason} | {ok, Id}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Reason = atom() | string()</tt></li>
+<li><tt>Machine = #machine{}</tt></li>
+</ul></p>
+</div><p>insert a new machine to database
+  release</p>
+
+<h3 class="function"><a name="delete_machine-1">delete_machine/1</a></h3>
+<div class="spec">
+<p><tt>delete_machine(Id) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Id = atom() | string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>delete a machine from database
+  release</p>
+
+<h3 class="function"><a name="delete_machines-1">delete_machines/1</a></h3>
+<div class="spec">
+<p><tt>delete_machines(Ids) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Ids = [string()]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Result = {ok, [string()]}</tt></li>
+</ul></p>
+</div><p>delete machines by some machine id
+  release</p>
+
+<h3 class="function"><a name="getAllMachine-4">getAllMachine/4</a></h3>
+<div class="spec">
+<p><tt>getAllMachine(Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = string()</tt></li>
+<li><tt>SortType = string()</tt></li>
+<li><tt>Result = [#machine{} | T]</tt></li>
+</ul></p>
+</div><p>get All Machine
+  release</p>
+
+<h3 class="function"><a name="getDisks-1">getDisks/1</a></h3>
+<div class="spec">
+<p><tt>getDisks(Machine) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Machine = string()</tt></li>
+<li><tt>Result = [{string(), string()} | T]</tt></li>
+</ul></p>
+</div><p>get disks of this ip
+  release</p>
+
+<h3 class="function"><a name="getDynamicData-1">getDynamicData/1</a></h3>
+<div class="spec">
+<p><tt>getDynamicData(Params) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Params = [{atom(), atom()}]</tt></li>
+<li><tt>Result = [{string(), string()} | T]</tt></li>
+</ul></p>
+</div><p>get dynamic data
+  release</p>
+
+<h3 class="function"><a name="getMachineByNotOs-5">getMachineByNotOs/5</a></h3>
+<div class="spec">
+<p><tt>getMachineByNotOs(OsType, Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>OsType = string()</tt></li>
+<li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = string()</tt></li>
+<li><tt>SortType = string()</tt></li>
+<li><tt>Result = [#machine{} | T]</tt></li>
+</ul></p>
+</div><p>get machine by not ostype
+  release</p>
+
+<h3 class="function"><a name="getMachineByOs-5">getMachineByOs/5</a></h3>
+<div class="spec">
+<p><tt>getMachineByOs(OsType, Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>OsType = string()</tt></li>
+<li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = string()</tt></li>
+<li><tt>SortType = string()</tt></li>
+<li><tt>Result = [#machine{} | T]</tt></li>
+</ul></p>
+</div><p>get machine by not ostype
+  release</p>
+
+<h3 class="function"><a name="get_DeviceByType-5">get_DeviceByType/5</a></h3>
+<div class="spec">
+<p><tt>get_DeviceByType(Type, Index, Count, Sort, SortType) -&gt; {error, Reason} | Result</tt>
+<ul class="definitions"><li><tt>Type = [Device]</tt></li>
+</ul></p>
+</div><p>get Device by Device TypeList. Device = ("SWITCH" | "ROUTE_SWITCH" | "ROUTE" | "FIREWALL" | "SERVER")
+  release</p>
+
+<h3 class="function"><a name="get_MachineTemplateNames-0">get_MachineTemplateNames/0</a></h3>
+<div class="spec">
+<p><tt>get_MachineTemplateNames() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = [{string(), string()} | T]</tt></li>
+</ul></p>
+</div><p>get machine os template names
+  release</p>
+
+<h3 class="function"><a name="get_Machine_ByTag-5">get_Machine_ByTag/5</a></h3>
+<div class="spec">
+<p><tt>get_Machine_ByTag(TagId, Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>TagId = string()</tt></li>
+<li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = string()</tt></li>
+<li><tt>SortType = string()</tt></li>
+<li><tt>Result = [#machine{} | T]</tt></li>
+</ul></p>
+</div><p>get machine by tag
+  release</p>
+
+<h3 class="function"><a name="get_Machine_ByTagTree-5">get_Machine_ByTagTree/5</a></h3>
+<div class="spec">
+<p><tt>get_Machine_ByTagTree(TagId, Index, Count, Sort, SortType) -&gt; Result</tt>
+<ul class="definitions"><li><tt>TagId = string()</tt></li>
+<li><tt>Index = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Sort = string()</tt></li>
+<li><tt>SortType = string()</tt></li>
+<li><tt>Result = [#machine{} | T]</tt></li>
+</ul></p>
+</div><p>get machine by tag
+  release</p>
+
+<h3 class="function"><a name="get_machine-1">get_machine/1</a></h3>
+<div class="spec">
+<p><tt>get_machine(Id) -&gt; {error, Reason} | Result</tt>
+<ul class="definitions"><li><tt>Reason = atom()</tt></li>
+<li><tt>Result = #machine{}</tt></li>
+</ul></p>
+</div><p>get a machine's information
+  release</p>
+
+<h3 class="function"><a name="get_machinename-1">get_machinename/1</a></h3>
+<div class="spec">
+<p><tt>get_machinename(Id) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Id = list()</tt></li>
+<li><tt>Result = #machine{}</tt></li>
+</ul></p>
+</div><p>get Machine by id
+  release</p>
+
+<h3 class="function"><a name="get_ntmachine-0">get_ntmachine/0</a></h3>
+<div class="spec">
+<p><tt>get_ntmachine() -&gt; {error, Reason} | Result</tt>
+<ul class="definitions"><li><tt>Reason = atom()</tt></li>
+<li><tt>Result = [#machine{}]</tt></li>
+</ul></p>
+</div><p>get nt machine list,return a list of machine record
+  release</p>
+
+<h3 class="function"><a name="get_refreshes-1">get_refreshes/1</a></h3>
+<div class="spec">
+<p><tt>get_refreshes(Ids) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Ids = list()</tt></li>
+<li><tt>Result = list()</tt></li>
+</ul></p>
+</div><p>refresh monitor some monitor id.
+  release</p>
+
+<h3 class="function"><a name="get_unixmachine-0">get_unixmachine/0</a></h3>
+<div class="spec">
+<p><tt>get_unixmachine() -&gt; {error, Reason} | Result</tt>
+<ul class="definitions"><li><tt>Reason = atom()</tt></li>
+<li><tt>Result = [#machine{}]</tt></li>
+</ul></p>
+</div><p>get unix machine list,return a list of machine record
+  release</p>
+
+<h3 class="function"><a name="removeFromLabel-2">removeFromLabel/2</a></h3>
+<div class="spec">
+<p><tt>removeFromLabel(TagId, MacId) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>TagId = string()</tt></li>
+<li><tt>MacId = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>remove machine from label
+  release</p>
+
+<h3 class="function"><a name="save_tagToMachine-2">save_tagToMachine/2</a></h3>
+<div class="spec">
+<p><tt>save_tagToMachine(T::Machs, Tag) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Machs = [#machine{} | T]</tt></li>
+<li><tt>Tag = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>save tag to machines
+  release</p>
+
+<h3 class="function"><a name="update_Machines-1">update_Machines/1</a></h3>
+<div class="spec">
+<p><tt>update_Machines(Maches::Machs) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Machs = [#machine{} | T]</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>update machines
+  release</p>
+
+<h3 class="function"><a name="update_machine-1">update_machine/1</a></h3>
+<div class="spec">
+<p><tt>update_machine(Machine) -&gt; {error, Reason} | {ok, update_ok}</tt>
+<ul class="definitions"><li><tt>Reason = atom() | string()</tt></li>
+<li><tt>Machine = #machine{}</tt></li>
+</ul></p>
+</div><p>update a machine's setting data
+  release</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 17 2010, 17:31:31.</i></p>
+</body>
+</html>

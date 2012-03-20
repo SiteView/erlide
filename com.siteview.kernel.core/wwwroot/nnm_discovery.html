@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+		
+		<link rel="stylesheet" href="/topo/css/common.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" href="/topo/css/explorer.css" type="text/css" media="screen" charset="utf-8">
+		
+		<script type="text/JavaScript" src="/topo/js/mxclient-un.js"></script>
+		<script type="text/JavaScript" src="/topo/js/jquery-1.4.2.js"></script>
+		<script type="text/JavaScript" src="/topo/js/jquery.siteview.js"></script>
+		<style type="text/css">
+		.backcolor{ background-color:Transparent;}
+		</style>
+<script type="text/javascript">
+<!--
+    var nodeSize = 34;
+    var maxx = 0;
+    var maxy = 0;
+
+
+    function main(div) {
+        // Tooltip
+        mxGraph.prototype.getTooltipForCell = function(cell) {
+            if (cell.isVertex()) {
+                var label = this.convertValueToString(cell);
+                return '设备信息：\nIP: ' + label;
+            }
+            else if (cell.isEdge()) {
+                var link = siteview.FindLinkFromArray(linkArr, cell.id);
+                if (link != null) {
+                    var n1 = siteview.FindNodeFromArray(nodeArr, link.From());
+                    if (n1 != null) {
+                        var n2 = siteview.FindNodeFromArray(nodeArr, link.To());
+                        if (n2 != null) {
+                            var descr1 = link.FromPortDescr();
+                            descr1 = descr1 ? "(" + descr1 + ")" : '';
+                            var descr2 = link.ToPortDescr();
+                            descr2 = descr2 ? "(" + descr2 + ")" : '';
+                            return "链路信息：\n设备1: " + n1.Ip() + ":" + link.FromPort() + descr1 + "\n设备2: " + n2.Ip() + ":" + link.ToPort() + descr2;
+                        }
+                    }
+                }
+            }
+        };
+        
+        var cnv = document.getElementById(div);
+        var graph = new mxGraph(cnv);
+        graph.setResizeContainer(true);
+        graph.setTooltips(true);
+        graph.setAutoSizeCells(true);
+        graph.setPanning(true);
+        graph.panningHandler.useLeftButtonForPanning = true;
+
+        var parent = graph.getDefaultParent();
+
+        // Displays a popupmenu when the user clicks
+        // on a cell (using the left mouse button) but
+        // do not select the cell when the popup menu
+        // is displayed
+        graph.panningHandler.useLeftButtonForPopup = true;
+        graph.panningHandler.selectOnPopup = true;
+        graph.panningHandler.factoryMethod = function(menu, cell, evt) {
+            return createPopupMenu(graph, menu, cell, evt);
+        };
+        // 点击事件
+        //        graph.addListener(mxEvent.CLICK, function(sender, evt) {
+        //            var cell = evt.getProperty('cell');
+
+        //            if (cell != null) {
+        //                var overlays = graph.getCellOverlays(cell);
+
+        //                if (overlays == null) {
+        //                    // Creates a new overlay with an image and a tooltip
+        //                    var overlay = new mxCellOverlay(
+        //								new mxImage('images/alarmpic.bmp', 15, 15), '告警');
+
+        //                    // Installs a handler for clicks on the overlay							
+        //                    //                    overlay.addListener(mxEvent.CLICK, function(sender, evt2) {
+        //                    //                        mxUtils.alert('Overlay clicked');
+        //                    //                    });
+
+        //                    // Sets the overlay for the cell in the graph
+        //                    graph.addCellOverlay(cell, overlay);
+        //                }
+        //                else {
+        //                    graph.removeCellOverlays(cell);
+        //                }
+        //            }
+        //        });
+
+        var nodeArr; // = new Array();
+        var linkArr; // = new Array();
+        var vertexArr; // = new Array();
+        var edgeArr; // = new Array();
+
+        function DrawTopoChart(xml, graph) {
+
+
+            var layout = new mxFastOrganicLayout(graph);
+            layout.forceConstant = 80;
+            graph.getModel().beginUpdate();
+            try {
+                var RouterStyle = graph.getStylesheet().getDefaultVertexStyle();
+                RouterStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
+                RouterStyle[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+                RouterStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Router_Blue.bmp';
+                RouterStyle[mxConstants.STYLE_FONTCOLOR] = '#000';
+                RouterStyle[mxConstants.STYLE_FILLCOLOR] = mxClient.IS_GC ? '#FFF' : 'Transparent';
+
+                RouterStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_LABEL;
+                RouterStyle[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = mxClient.IS_GC ? '#FFF' : 'Transparent';
+                RouterStyle[mxConstants.STYLE_STROKECOLOR] = '#FFF';
+                RouterStyle[mxConstants.STYLE_ALIGN] = mxConstants.ALIGN_CENTER;
+                RouterStyle[mxConstants.STYLE_VERTICAL_ALIGN] = mxConstants.ALIGN_TOP;
+                RouterStyle[mxConstants.STYLE_IMAGE_ALIGN] = mxConstants.ALIGN_CENTER;
+                RouterStyle[mxConstants.STYLE_IMAGE_VERTICAL_ALIGN] = mxConstants.ALIGN_TOP;
+                RouterStyle[mxConstants.STYLE_IMAGE_WIDTH] = '32';
+                RouterStyle[mxConstants.STYLE_IMAGE_HEIGHT] = '32';
+                RouterStyle[mxConstants.STYLE_SPACING_TOP] = '36';
+                RouterStyle[mxConstants.STYLE_SPACING] = '1';
+                graph.getStylesheet().putCellStyle('RouterStyle', RouterStyle);
+
+                var SwitchStyle = mxUtils.clone(RouterStyle);
+                SwitchStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Switch_Blue.bmp';
+                graph.getStylesheet().putCellStyle('SwitchStyle', SwitchStyle);
+
+                var SwitchRouterStyle = mxUtils.clone(RouterStyle);
+                SwitchRouterStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_SwitchRouter_Blue.bmp';
+                graph.getStylesheet().putCellStyle('SwitchRouterStyle', SwitchRouterStyle);
+
+                var FirewallStyle = mxUtils.clone(RouterStyle);
+                FirewallStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Firewall_Blue.bmp';
+                graph.getStylesheet().putCellStyle('FirewallStyle', FirewallStyle);
+
+                var ServerStyle = mxUtils.clone(RouterStyle);
+                ServerStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Server_Blue.bmp';
+                graph.getStylesheet().putCellStyle('ServerStyle', ServerStyle);
+
+                var PCStyle = mxUtils.clone(RouterStyle);
+                PCStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_PC_Blue.bmp';
+                graph.getStylesheet().putCellStyle('PCStyle', PCStyle);
+
+                var OtherStyle = mxUtils.clone(RouterStyle);
+                OtherStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Other_Blue.bmp';
+                graph.getStylesheet().putCellStyle('OtherStyle', OtherStyle);
+
+                var HubStyle = mxUtils.clone(RouterStyle);
+                HubStyle[mxConstants.STYLE_IMAGE] = '/topo/images/bmp_Hub.bmp';
+                graph.getStylesheet().putCellStyle('HubStyle', HubStyle);
+
+                var linkStyle = new Object();
+                linkStyle[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_SHAPE;
+                graph.getStylesheet().putCellStyle('linkStyle', linkStyle);
+
+                nodeArr = new Array();
+                linkArr = new Array();
+                vertexArr = new Array();
+                edgeArr = new Array();
+
+                var temp, nodes, lines;
+                var root = xml.getElementsByTagName('TopGraph');
+                temp = root.item(0).getElementsByTagName('Nodes');
+                if (temp.length > 0) {
+                    nodes = temp.item(0).getElementsByTagName('Node');
+
+                    for (var i = 0; i < nodes.length; i++) {
+                        var node = nodes.item(i);
+                        var id, ip, x, y, type;
+                        id = node.firstChild ? node.firstChild.nodeValue : undefined;
+                        ip = node.getAttribute("ip");
+                        x = node.getAttribute("x");
+                        y = node.getAttribute("y");
+                        type = node.getAttribute("type");
+                        var nd = new siteview.Node(id, ip, x, y, type);
+                        nodeArr.push(nd);
+                        DrawTopoNode(nd);
+                    }
+                }
+
+                temp = root.item(0).getElementsByTagName('Lines');
+                if (temp.length > 0) {
+                    lines = temp.item(0).getElementsByTagName('Line');
+
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines.item(i);
+                        var from, fromport, to, toport;
+                        var n1 = line.getElementsByTagName('From').item(0);
+                        var n2 = line.getElementsByTagName('To').item(0);
+
+                        from = n1.firstChild ? n1.firstChild.nodeValue : undefined;
+                        fromport = n1.getAttribute("port");
+                        to = n2.firstChild ? n2.firstChild.nodeValue : undefined;
+                        toport = n2.getAttribute("port");
+
+                        var ln = new siteview.Link(from, fromport, to, toport);
+                        ln.Id(from + ":" + fromport + "-" + to + ":" + toport);
+                        ln.FromPortDescr(n1.getAttribute("desc"));
+                        ln.ToPortDescr(n2.getAttribute("desc"));
+                        linkArr.push(ln);
+                        DrawTopoLine(ln);
+                    }
+                }
+
+                //              告警
+                //            var f = function() {
+                //                var overlays = graph.getCellOverlays(v1);
+
+                //                //                if (overlays == null) {
+                //                //                    graph.setCellWarning(v1, '告警');
+                //                //                }
+                //                //                else {
+                //                //                    graph.removeCellOverlays(v1);
+                //                //                }
+                //                if (overlays == null) {
+                //                    var overlay = new mxCellOverlay(
+                //								new mxImage('images/alarmpic.bmp', 15, 15), '告警');
+                //                    graph.addCellOverlay(v1, overlay);
+                //                }
+                //                else {
+                //                    graph.removeCellOverlays(v1);
+                //                }
+                //            };
+
+                //            window.setInterval(f, 300);
+                //            f();
+
+                //layout.execute(parent);
+
+            }
+            finally {
+                // Updates the display
+                graph.getModel().endUpdate();
+            }
+
+            cnv.style.width = maxx + 100;
+            cnv.style.height = maxy + 100;
+        }
+
+        function DrawTopoLine(line) {
+            var id1 = line.From();
+            var id2 = line.To();
+
+            var v1 = siteview.FindVertexFromArray(vertexArr, id1);
+            if (v1) {
+                var v2 = siteview.FindVertexFromArray(vertexArr, id2);
+                if (v2) {
+                    var e1 = graph.insertEdge(parent, line.Id(), ''/*"链路信息：\n设备1: " + ip1 + ":" + port1 + "\n设备2: " + ip2 + ":" + port2 + "\n带宽占用: 12.96%(100MBps)"*/, v1, v2);
+                    edgeArr.push(e1);
+                }
+            }
+
+        };
+
+        function DrawTopoNode(node) {
+            var x1 = 50 + parseInt(node.X());
+            var y1 = parseInt(node.Y());
+            var type = node.Type();
+            var id = node.Id();
+            var ip = node.Ip();
+
+            if (x1 > maxx) maxx = x1;
+            if (y1 > maxy) maxy = y1;
+
+            var imgStyle;
+
+            switch (type) { //0-三层交换机，1-二层交换机，2-路由器，3-防火墙，4-服务器，5-PC终端，6-其他
+                case "0":
+                    imgStyle = 'SwitchRouterStyle'; break;
+                case "1":
+                    imgStyle = 'SwitchStyle'; break;
+                case "2":
+                    imgStyle = 'RouterStyle'; break;
+                case "3":
+                    imgStyle = 'FirewallStyle'; break;
+                case "4":
+                    imgStyle = 'ServerStyle'; break;
+                case "5":
+                    imgStyle = 'PCStyle'; break;
+                case "6":
+                    {
+                        if (id.indexOf('Hub') >= 0)
+                        { imgStyle = 'HubStyle'; break; }
+                        else
+                        { imgStyle = 'OtherStyle'; break; }
+                    }
+            }
+
+            var v1 = graph.insertVertex(parent, id, ip, x1, y1, nodeSize, nodeSize, imgStyle);
+            vertexArr.push(v1);
+        };
+
+        function createPopupMenu(graph, menu, cell, evt) {
+            var model = graph.getModel();
+
+            if (cell != null) {
+                if (model.isVertex(cell)) {
+                    menu.addItem('详细信息', 'images/properties.gif', function() {
+                        window.open('http://siteview.quikview.net/web/page_t?page=node_details.html&id=' + cell.id + '&menu=snmp_node&type=node');
+                    });
+                }
+                else {
+                    menu.addItem('放大', 'images/zoomin.gif', function() {
+                        graph.zoomIn();
+                    });
+                    menu.addItem('缩小', 'images/zoomout.gif', function() {
+                        graph.zoomOut();
+                    });
+                    menu.addItem('满屏', 'images/zoom.gif', function() {
+                        graph.fit();
+                    });
+
+                    menu.addItem('原始大小', 'images/zoomactual.gif', function() {
+                        graph.zoomActual();
+                    });
+
+                    menu.addSeparator();
+
+                    menu.addItem('打印', 'images/print.gif', function() {
+                        var preview = new mxPrintPreview(graph, 1);
+                        preview.open();
+                    });
+
+                    menu.addItem('Poster Print', 'images/print.gif', function() {
+                        var pageCount = mxUtils.prompt('Enter maximum page count', '1');
+
+                        if (pageCount != null) {
+                            var scale = mxUtils.getScaleForPageCount(pageCount, graph);
+                            var preview = new mxPrintPreview(graph, scale);
+                            preview.open();
+                        }
+                    });
+                }
+
+                menu.addSeparator();
+
+                menu.addItem('Close', null, function() {
+                    // nop
+                });
+            }
+
+
+        };
+
+        // Tooltip 代理
+        var file = siteview.QueryString("file");
+        if (!file || file == "") file = "top1.xml";
+
+        $.ajax({
+            url: file,
+            type: "GET",
+            processData: false,
+            dataType: "xml",
+            success: function(msg) {
+                DrawTopoChart(msg, graph);
+            },
+            error: function(req, status, err) {
+                alert("加载拓扑图文件失败：" + status);
+            }
+        });
+    }
+//-->
+</script> 		
+	</head>
+	<body>
+			<div class=topmenu1>
+				[[[topmenu:render(Group)]]]
+			</div>
+			<div class=topmenu2>
+				[[[topmenu:render4(Group)]]]
+				<div class=clear></div>
+			</div>
+			<div style="text-align:left;">		
+				[[[page:body()]]]	
+			</div>
+<!--			<div id="graphContainer" style="overflow:visible; background-color:#ffffff;padding-left:50px; padding-top:50px; width:821px;height:641px;background-image:url('/topo/images/grid.gif');"></div>
+-->		<br>
+		<div class=clear></div>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

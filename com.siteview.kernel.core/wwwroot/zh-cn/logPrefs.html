@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">			
+							
+			#page__maintable
+			  { 	
+			  line-height: 22px;
+			  margin-top:6px;
+			  margin-bottom:32px;
+			  margin-left:0px;
+			  margin-right:0px;
+				border-collapse: collapse;
+				border: solid  #cccfFf 0px;	
+				}  			
+			 	#gendiv {text-align:left; }		 			
+						
+		</style>		
+	</head>
+	<body>			
+			<div class=topmenu1>
+				[[[topmenu:render(Group)]]]
+			</div>
+			<div class=topmenu2>
+				<div class=clear></div>
+			</div>
+			<div class=topmenu3>
+				[[[topmenu:render3(Group)]]]
+				<div class=clear></div>
+			</div>
+			<div>
+				<h3>日志文件参数</h3>
+			</div>
+			<div align="left">
+				<p>web系统持续的监测操作会产生大量的数据。[[[topmenu:productname()]]]将这些数据写进日志文件保存在[[[topmenu:productname()]]]机器上。下面的设置可以限制[[[topmenu:productname()]]]日志文件的大小。
+				</p>
+			</div>
+			<hr>
+			<div aligth="left">
+				<table border=0 width=100% cellspacing=0 cellpadding=5>
+				<tr>
+					<th width="250px"></th>
+					<th width="350px"></th>
+					<th></th>
+				</tr>
+				[[[page:print_settings()]]]
+				</table>
+			</div>
+			<hr>
+			<div>
+				<h3>数据库登录</h3>
+				
+			</div>
+			<div align="left">
+				<p>[[[topmenu:productname()]]]提供可选的将监测数据的日志副本记录到数据库中。任何支持标准JDBC的数据库都能使用，包括微软的SQL Server和Oracle.
+				<br>(<b>注意:</b> 对数据库登录参数的改变需要重启[[[topmenu:productname()]]]的服务才能发生作用。) 
+				</p>
+			</div>
+			<hr>
+			<div align="left">
+				<table border=0 width=100% cellspacing=0 cellpadding=5>
+				<tr>
+					<th width="250px"></th>
+					<th width="350px"></th>
+					<th></th>
+				</tr>
+				[[[page:print_database_log()]]]
+				</table>
+			</div>
+			<hr>
+			<div align="left">
+				[[[page:print_test_button()]]]
+			</div>
+			<hr>
+			<div align="left">
+				[[[page:print_button()]]]
+			</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>	
+	</body>
+</html>

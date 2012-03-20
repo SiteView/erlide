@@ -1,0 +1,33 @@
+全局config
+width，
+height，
+type, %制定chart的种类，有line,bar,pie
+title,
+title_color,
+font_size, %title的字体
+x-title,%x轴title
+y_title, %y轴title
+show_x_value, %显示x轴坐标
+show_x_value, %显示y轴坐标
+tooltip, 参数格式同x_scale
+axis_color, %坐标轴颜色
+axis_valuecolor, %坐标轴label的颜色
+left_padding， %左边空余
+right_padding，
+top_padding，
+bottom_padding，
+axis_decimal， %坐标轴数值精度
+grid_color，%坐标线颜色
+flag_color，%tooltip颜色
+flag_radius，%tooltip半径
+x_scale，横坐标刻度名称，[{Value,Name}] value值和所给的横坐标值相同，name为希望显示的名字,参数从开始到结束需按照顺序排列
+
+
+单个曲线config
+line_color，
+line_width，
+
+y_scale，
+
+注意：
+除个别属性外，其它值均要求为string类型

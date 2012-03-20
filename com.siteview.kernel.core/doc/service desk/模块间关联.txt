@@ -1,0 +1,40 @@
+1. filter
+
+
+表名 DesktopFilter
+
+表结构:
+id	templateid	...
+
+
+2. view
+
+表名 DesktopView
+
+表结构:
+id	templateid	...
+
+3. 框架树
+
+表名 DesktopTree
+
+表结构:
+id	templateid	currentView	currentFilter		....
+
+
+
+
+
+说明:
+
+以上三个模块
+
+框架树 是整个程序的整体架构以及模块分类.
+filter模块 是针对某个template构造相应的filter实体数据.
+view模块 是针对某个template构造相应的view实体数据.
+
+
+三者关系, filter模块和view模块之间不会产生直接关联, 两者都和框架树模块产生直接关系,如: 框架树的一条数据, templateid是incident,那么这个incident是表示为一个incident模块,那么这条数据的currentView就表示关联一个当前的view实体, 那么当选择这个incident模块的时候就会展示这个view所对应的ci列表了, 这条数据的currentFilter表示关联一个当前的filter实体, 那么当选择这个incident的时候这个ci列表就会按照当前的filter进行过滤了.
+
+
+

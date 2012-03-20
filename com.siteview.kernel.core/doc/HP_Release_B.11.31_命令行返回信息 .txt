@@ -1,0 +1,654 @@
+15
+
+/usr/bin/uname -i
+root@p15-dbci[/]#/usr/bin/uname -i
+1057450004
+
+16
+
+/usr/sbin/swlist -l bundle
+
+root@p15-dbci[/]#/usr/sbin/swlist -l bundle
+# Initializing...
+# Contacting target "p15-dbci"...
+#
+# Target:  p15-dbci:/
+#
+ 
+  B2491BA               B.11.31        MirrorDisk/UX (Server) 
+  B3701AA               C.04.73.000    HP GlancePlus/UX Pak for 11.31 
+  B3835DA               C.03.04        HP Process Resource Manager 
+  B3929EA               B.11.31        HP OnLineJFS (Server) 
+  B5140BA               A.11.31.03     Serviceguard NFS Toolkit 
+  B5736DA               A.04.20.31.02  HA Monitors    
+  B6848BA               1.4.gm.46.16   Ximian GNOME 1.4 GTK+ Libraries for HP-UX 
+  B8843CA               A.03.04        HP-UX Workload Manager 
+  BUNDLE                B.2008.11.03   Patch Bundle   
+  Base-VXFS             B.11.31        Base VxFS File System 4.1 Bundle for HP-UX 
+  BaseLVM               B.11.31.0809   Logical Volume Manager 
+  CDE-ChineseS          B.11.31        Simplified Chinese CDE Environment 
+  CIFS-CLIENT           A.02.02.02     HP CIFS Client 
+  CIFS-SERVER           A.02.03.03     HP CIFS Server 
+  CPB_job-10583         2008.09.22     HPUX 11.31 Megpatch for Sep 2008 
+  CommonIO              B.11.31.0809   Common IO Drivers 
+  DSAUtilities          C.01.00.16     HP-UX Distributed Systems Administration Utilities 
+  DynRootDisk           B.1131.A.3.2.1959 Dynamic Root Disk 
+  DynamicNPars          B.11.31.0709   Dynamic nPartitions enablement 
+  FEATURE11i            B.11.31.0809.326a Feature Enablement Patches for HP-UX 11i v3, September 2008 
+  FIREFOX               A.2.0.0.12.01  Firefox for HP-UX 
+  FIREFOXsrc            A.2.0.0.12.01  Firefox Source distribution 
+  FibrChanl-00          B.11.31.0809   FibreChannel;HW=A6795A,A5158A 
+  FibrChanl-01          B.11.31.0809   FibrChnl;HW=A6826A,A9782A,A9784A,AB378A/B,AB379A/B,AB465A,AD193A,AD194A,AD300A 
+  FibrChanl-02          B.11.31.0809   PCIe FibreChannel;HW=AD299A,AD355A,AD221A,AD222A,AD393A 
+  GTK                   2.6.8.00.01    GTK+ 2.6 The Gnome GUI Runtime  Toolkit 
+  GTKsrc                2.6.8.00.01    Gtk Source distribution 
+  GigEther-00           B.11.31.0709   PCI GigEther;Supptd HW=A4926A/A4929A/A6096A;SW=J1642AA 
+  GigEther-01           B.11.31.0809   PCI GigEther;Supptd HW=A6825A/A6794A/A6847A/A8685A/A9782A/A9784A/A7109A/AB465A 
+  GuestAVIOStor         B.11.31.0809   HPVM Guest AVIO Storage Software 
+  GuestAvioLan          B.11.31.0809   HPVM Guest AVIO LAN Software 
+  HP-ACC-Link           C.11.31.03     HP aCC_link Bundle 
+  HP-Caliper-PERF       C.11.31.04     HP Caliper OE Bundle 
+  HP-WDB-DEBUGGER       C.11.31.04     HP DEBUGGER OE Bundle 
+  HPUX-DHCPv4           B.11.31        HPUX DHCPv4 Server 
+  HPUX-DHCPv6           B.11.31        HPUX DHCPv6 Server 
+  HPUX-FTPServer        C.2.6.1.4.0    HPUX FTP Server 
+  HPUX-MailServer       C.8.13.3.2     HPUX Mail Server 
+  HPUX-NTP              B.11.31        HPUX NTP Server 
+  HPUX-NameServer       C.9.3.2.3.0    HPUX Name Server 
+  HPUX-RAMD             B.11.31        HPUX IPv6 routing Server 
+  HPUX-TCPWRAP          B.11.31        HPUX TCPWrapper daemon 
+  HPUX11i-VSE-OE        B.11.31.0809   HP-UX Virtual Server Operating Environment 
+  HPUXBastille          B.3.0.31       Bastille Security Hardening Tool 
+  HPUXEssential         B.11.31        Essential HP-UX Utilities 
+  HPUXExtns-Jpn         B.11.31        Japanese font, input methods and printer extensions 
+  HPUXExtns-Kor         B.11.31        Korean font, input methods and printer extensions 
+  HPUXExtns-SCh         B.11.31        Simplified Chinese font, input methods and printer extensions 
+  HPUXExtns-TCh         B.11.31        Traditional Chinese font, input methods and printer extensions 
+  HPUXGatedMrouted      B.11.31        HPUX Gated and Mrouted Server 
+  HPUXLocales           B.11.31        Internationalization Support 
+  HPUXMan-Eng           B.11.31        Minimum and Essential English man pages 
+  HPUXMan-Jpn           B.11.31        Minimum and Essential Japanese man pages 
+  HPUXMinRuntime        B.11.31        Minimum Runtime Environment 
+  HPUXMsgs-Fre          B.11.31        Minimum and Essential HP-UX French Language Message Catalogs 
+  HPUXMsgs-Ger          B.11.31        Minimum and Essential HP-UX German Language Message Catalogs 
+  HPUXMsgs-Ita          B.11.31        Minimum and Essential HP-UX Italian Language Message Catalogs 
+  HPUXMsgs-Jpn          B.11.31        Minimum and Essential HP-UX Japanese Language Message Catalogs 
+  HPUXMsgs-Kor          B.11.31        Minimum and Essential HP-UX Korean Language Message Catalogs 
+  HPUXMsgs-SCh          B.11.31        Minimum and Essential HP-UX Simplified Chinese Language Message Catalogs 
+  HPUXMsgs-Spa          B.11.31        Minimum and Essential HP-UX Spanish Language Message Catalogs 
+  HPUXMsgs-Swe          B.11.31        Minimum and Essential HP-UX Swedish Language Message Catalogs 
+  HPUXMsgs-TCh          B.11.31        Minimum and Essential HP-UX Traditional Chinese Language Message Catalogs 
+  HWEnable11i           B.11.31.0809.326a Hardware Enablement Patches for HP-UX 11i v3, September 2008 
+  HostAVIOStor          B.11.31.0809   HPVM Host AVIO Storage Software 
+  HostAvioLan           B.11.31.0809   HPVM Host AVIO LAN Software 
+  IEther-00             B.11.31.0810   PCI/PCI-X/PCIe IEther 
+  IGNITE                C.7.7.93       HP-UX Installation Utilities (Ignite-UX) 
+  IPFilter              A.11.31.15.01  HP IPFilter 3.5alpha5 
+  J4240AA               B.11.31.20     Auto-Port Aggregation Software 
+  Java15JDK             1.5.0.13.00    Java 1.5 JDK for HP-UX 
+  Java15JRE             1.5.0.13.00    Java 1.5 JRE for HP-UX 
+  Java60JDK             1.6.0.01.01    Java 6.0 JDK for HP-UX 
+  Java60JRE             1.6.0.01.01    Java 6.0 JRE for HP-UX 
+  LDAPUX                B.04.17        LDAP-UX Integration 
+  MOZILLA               1.7.13.01.01   Mozilla for HP-UX 
+  MOZILLAsrc            1.7.13.01.01   Mozilla Source distribution 
+  NParCmds              B.11.31.0809.01 NPartition Commands 
+  ONCplus               B.11.31.04     ONC+ 2.3       
+  OVsnmpAgent           B.11.31        OpenView SNMP Agent 
+  OnlineDiag            B.11.31.04.05  HPUX 11.31 Support Tools Bundle, September 2008 
+  PAMKerberos           D.01.24        PAM-Kerberos Version 1.24 
+  PRMKernelSW           C.03.04        HP PRM Kernel Software 
+  PRMLibraries          C.03.04        HP PRM Software Libraries 
+  ParMgr                B.31.02.04.01  Partition Manager - HP-UX 
+  ProviderDefault       B.11.31.0809   Select WBEM Providers 
+  QPKBASE               B.11.31.0809.326 Base Quality Pack Bundle for HP-UX 11i v3, September 2008 
+  RAID-01               B.11.31.0809   RAID SA; Supptd HW=A7143A/A9890A/A9891A 
+  Sec00Tools            B.01.04.10     Install-Time security infrastructure. 
+  SecureShell           A.05.00.023    HP-UX Secure Shell 
+  SerialSCSI-00         B.11.31.0809   PCI-X/PCI-E SerialSCSI 
+  SwAssistant           C.01.05        HP-UX Software Assistant 
+  SwMgmtMin             B.11.31.0809.326 HP-UX Software Management Tools 
+  SysFaultMgmt          C.04.00.05.01  HPUX System Fault Management 
+  SysMgmtMin            B.11.31.0809   Minimum Software Deployment Tools 
+  SysMgmtWeb            A.2.2.9        HP-UX Web Based System Management User Interfaces 
+  T1335CC               A.05.04.01     HP-UX Virtual Partitions for 11.31 
+  T1456AA               1.4.2.19.01    Java2 1.4 SDK for HP-UX 
+  T1457AA               1.4.2.19.01    Java2 1.4 RTE for HP-UX 
+  T1458AA               1.4.2.19.01    Java2 1.4 Netscape Plugin for HP-UX 
+  T1905CA               A.11.18.00     Serviceguard   
+  T2762AA               A.03.00.01.05  HP Global Workload Manager Agent LTU 
+  T2782AC               A.03.00.02.01  HP Virtualization Manager for HPUX LTU 
+  T2784AC               A.03.00.02.01  HP Capacity Advisor for HPUX LTU 
+  T2786AC               A.03.00.02.01  HP VSE Suite for HP-UX 11i LTU 
+  T2803BA               B.04.51        Serviceguard Extension for SAP 
+  TBIRD                 A.2.0.0.12.00  Thunderbird for HP-UX 
+  TBIRDsrc              A.2.0.0.12.00  Thunderbird Source distribution 
+  Tune-N-Tools          B.11.31.02     Optimized Kernel Tunables and Tools for Database and Application Servers 
+  USB-00                C.01.05.08     USB Subsystem and Drivers 
+  VMGuestLib            B.04.00        Integrity VM Guest Support Libraries 
+  WLMToolkits           A.01.10.01     HP-UX Workload Manager Toolkits 
+  hpuxwsApache          B.2.0.59.07    HPUX Apache Web Server 
+  hpuxwsTomcat          B.5.5.23.02    HPUX Tomcat    
+  hpuxwsWebmin          A.1.070.10     HPUX Webmin    
+  hpuxwsXml             A.2.03         HPUX XML       
+  perl                  D.5.8.8.F      Perl Programming Language 
+
+17
+
+root@p15-dbci[/]#/usr/sbin/swlist
+# Initializing...
+# Contacting target "p15-dbci"...
+#
+# Target:  p15-dbci:/
+#
+ 
+#
+# Bundle(s):
+#
+ 
+  B2491BA                       B.11.31        MirrorDisk/UX (Server) 
+  B3701AA                       C.04.73.000    HP GlancePlus/UX Pak for 11.31 
+  B3835DA                       C.03.04        HP Process Resource Manager 
+  B3929EA                       B.11.31        HP OnLineJFS (Server) 
+  B5140BA                       A.11.31.03     Serviceguard NFS Toolkit 
+  B5736DA                       A.04.20.31.02  HA Monitors    
+  B6848BA                       1.4.gm.46.16   Ximian GNOME 1.4 GTK+ Libraries for HP-UX 
+  B8843CA                       A.03.04        HP-UX Workload Manager 
+  BUNDLE                        B.2008.11.03   Patch Bundle   
+  Base-VXFS                     B.11.31        Base VxFS File System 4.1 Bundle for HP-UX 
+  BaseLVM                       B.11.31.0809   Logical Volume Manager 
+  CDE-ChineseS                  B.11.31        Simplified Chinese CDE Environment 
+  CIFS-CLIENT                   A.02.02.02     HP CIFS Client 
+  CIFS-SERVER                   A.02.03.03     HP CIFS Server 
+  CPB_job-10583                 2008.09.22     HPUX 11.31 Megpatch for Sep 2008 
+  CommonIO                      B.11.31.0809   Common IO Drivers 
+  DSAUtilities                  C.01.00.16     HP-UX Distributed Systems Administration Utilities 
+  DynRootDisk                   B.1131.A.3.2.1959 Dynamic Root Disk 
+  DynamicNPars                  B.11.31.0709   Dynamic nPartitions enablement 
+  FEATURE11i                    B.11.31.0809.326a Feature Enablement Patches for HP-UX 11i v3, September 2008 
+  FIREFOX                       A.2.0.0.12.01  Firefox for HP-UX 
+  FIREFOXsrc                    A.2.0.0.12.01  Firefox Source distribution 
+  FibrChanl-00                  B.11.31.0809   FibreChannel;HW=A6795A,A5158A 
+  FibrChanl-01                  B.11.31.0809   FibrChnl;HW=A6826A,A9782A,A9784A,AB378A/B,AB379A/B,AB465A,AD193A,AD194A,AD300A 
+  FibrChanl-02                  B.11.31.0809   PCIe FibreChannel;HW=AD299A,AD355A,AD221A,AD222A,AD393A 
+  GTK                           2.6.8.00.01    GTK+ 2.6 The Gnome GUI Runtime  Toolkit 
+  GTKsrc                        2.6.8.00.01    Gtk Source distribution 
+  GigEther-00                   B.11.31.0709   PCI GigEther;Supptd HW=A4926A/A4929A/A6096A;SW=J1642AA 
+  GigEther-01                   B.11.31.0809   PCI GigEther;Supptd HW=A6825A/A6794A/A6847A/A8685A/A9782A/A9784A/A7109A/AB465A 
+  GuestAVIOStor                 B.11.31.0809   HPVM Guest AVIO Storage Software 
+  GuestAvioLan                  B.11.31.0809   HPVM Guest AVIO LAN Software 
+  HP-ACC-Link                   C.11.31.03     HP aCC_link Bundle 
+  HP-Caliper-PERF               C.11.31.04     HP Caliper OE Bundle 
+  HP-WDB-DEBUGGER               C.11.31.04     HP DEBUGGER OE Bundle 
+  HPUX-DHCPv4                   B.11.31        HPUX DHCPv4 Server 
+  HPUX-DHCPv6                   B.11.31        HPUX DHCPv6 Server 
+  HPUX-FTPServer                C.2.6.1.4.0    HPUX FTP Server 
+  HPUX-MailServer               C.8.13.3.2     HPUX Mail Server 
+  HPUX-NTP                      B.11.31        HPUX NTP Server 
+  HPUX-NameServer               C.9.3.2.3.0    HPUX Name Server 
+  HPUX-RAMD                     B.11.31        HPUX IPv6 routing Server 
+  HPUX-TCPWRAP                  B.11.31        HPUX TCPWrapper daemon 
+  HPUX11i-VSE-OE                B.11.31.0809   HP-UX Virtual Server Operating Environment 
+  HPUXBastille                  B.3.0.31       Bastille Security Hardening Tool 
+  HPUXEssential                 B.11.31        Essential HP-UX Utilities 
+  HPUXExtns-Jpn                 B.11.31        Japanese font, input methods and printer extensions 
+  HPUXExtns-Kor                 B.11.31        Korean font, input methods and printer extensions 
+  HPUXExtns-SCh                 B.11.31        Simplified Chinese font, input methods and printer extensions 
+  HPUXExtns-TCh                 B.11.31        Traditional Chinese font, input methods and printer extensions 
+  HPUXGatedMrouted              B.11.31        HPUX Gated and Mrouted Server 
+  HPUXLocales                   B.11.31        Internationalization Support 
+  HPUXMan-Eng                   B.11.31        Minimum and Essential English man pages 
+  HPUXMan-Jpn                   B.11.31        Minimum and Essential Japanese man pages 
+  HPUXMinRuntime                B.11.31        Minimum Runtime Environment 
+  HPUXMsgs-Fre                  B.11.31        Minimum and Essential HP-UX French Language Message Catalogs 
+  HPUXMsgs-Ger                  B.11.31        Minimum and Essential HP-UX German Language Message Catalogs 
+  HPUXMsgs-Ita                  B.11.31        Minimum and Essential HP-UX Italian Language Message Catalogs 
+  HPUXMsgs-Jpn                  B.11.31        Minimum and Essential HP-UX Japanese Language Message Catalogs 
+  HPUXMsgs-Kor                  B.11.31        Minimum and Essential HP-UX Korean Language Message Catalogs 
+  HPUXMsgs-SCh                  B.11.31        Minimum and Essential HP-UX Simplified Chinese Language Message Catalogs 
+  HPUXMsgs-Spa                  B.11.31        Minimum and Essential HP-UX Spanish Language Message Catalogs 
+  HPUXMsgs-Swe                  B.11.31        Minimum and Essential HP-UX Swedish Language Message Catalogs 
+  HPUXMsgs-TCh                  B.11.31        Minimum and Essential HP-UX Traditional Chinese Language Message Catalogs 
+  HWEnable11i                   B.11.31.0809.326a Hardware Enablement Patches for HP-UX 11i v3, September 2008 
+  HostAVIOStor                  B.11.31.0809   HPVM Host AVIO Storage Software 
+  HostAvioLan                   B.11.31.0809   HPVM Host AVIO LAN Software 
+  IEther-00                     B.11.31.0810   PCI/PCI-X/PCIe IEther 
+  IGNITE                        C.7.7.93       HP-UX Installation Utilities (Ignite-UX) 
+  IPFilter                      A.11.31.15.01  HP IPFilter 3.5alpha5 
+  J4240AA                       B.11.31.20     Auto-Port Aggregation Software 
+  Java15JDK                     1.5.0.13.00    Java 1.5 JDK for HP-UX 
+  Java15JRE                     1.5.0.13.00    Java 1.5 JRE for HP-UX 
+  Java60JDK                     1.6.0.01.01    Java 6.0 JDK for HP-UX 
+  Java60JRE                     1.6.0.01.01    Java 6.0 JRE for HP-UX 
+  LDAPUX                        B.04.17        LDAP-UX Integration 
+  MOZILLA                       1.7.13.01.01   Mozilla for HP-UX 
+  MOZILLAsrc                    1.7.13.01.01   Mozilla Source distribution 
+  NParCmds                      B.11.31.0809.01 NPartition Commands 
+  ONCplus                       B.11.31.04     ONC+ 2.3       
+  OVsnmpAgent                   B.11.31        OpenView SNMP Agent 
+  OnlineDiag                    B.11.31.04.05  HPUX 11.31 Support Tools Bundle, September 2008 
+  PAMKerberos                   D.01.24        PAM-Kerberos Version 1.24 
+  PRMKernelSW                   C.03.04        HP PRM Kernel Software 
+  PRMLibraries                  C.03.04        HP PRM Software Libraries 
+  ParMgr                        B.31.02.04.01  Partition Manager - HP-UX 
+  ProviderDefault               B.11.31.0809   Select WBEM Providers 
+  QPKBASE                       B.11.31.0809.326 Base Quality Pack Bundle for HP-UX 11i v3, September 2008 
+  RAID-01                       B.11.31.0809   RAID SA; Supptd HW=A7143A/A9890A/A9891A 
+  Sec00Tools                    B.01.04.10     Install-Time security infrastructure. 
+  SecureShell                   A.05.00.023    HP-UX Secure Shell 
+  SerialSCSI-00                 B.11.31.0809   PCI-X/PCI-E SerialSCSI 
+  SwAssistant                   C.01.05        HP-UX Software Assistant 
+  SwMgmtMin                     B.11.31.0809.326 HP-UX Software Management Tools 
+  SysFaultMgmt                  C.04.00.05.01  HPUX System Fault Management 
+  SysMgmtMin                    B.11.31.0809   Minimum Software Deployment Tools 
+  SysMgmtWeb                    A.2.2.9        HP-UX Web Based System Management User Interfaces 
+  T1335CC                       A.05.04.01     HP-UX Virtual Partitions for 11.31 
+  T1456AA                       1.4.2.19.01    Java2 1.4 SDK for HP-UX 
+  T1457AA                       1.4.2.19.01    Java2 1.4 RTE for HP-UX 
+  T1458AA                       1.4.2.19.01    Java2 1.4 Netscape Plugin for HP-UX 
+  T1905CA                       A.11.18.00     Serviceguard   
+  T2762AA                       A.03.00.01.05  HP Global Workload Manager Agent LTU 
+  T2782AC                       A.03.00.02.01  HP Virtualization Manager for HPUX LTU 
+  T2784AC                       A.03.00.02.01  HP Capacity Advisor for HPUX LTU 
+  T2786AC                       A.03.00.02.01  HP VSE Suite for HP-UX 11i LTU 
+  T2803BA                       B.04.51        Serviceguard Extension for SAP 
+  TBIRD                         A.2.0.0.12.00  Thunderbird for HP-UX 
+  TBIRDsrc                      A.2.0.0.12.00  Thunderbird Source distribution 
+  Tune-N-Tools                  B.11.31.02     Optimized Kernel Tunables and Tools for Database and Application Servers 
+  USB-00                        C.01.05.08     USB Subsystem and Drivers 
+  VMGuestLib                    B.04.00        Integrity VM Guest Support Libraries 
+  WLMToolkits                   A.01.10.01     HP-UX Workload Manager Toolkits 
+  hpuxwsApache                  B.2.0.59.07    HPUX Apache Web Server 
+  hpuxwsTomcat                  B.5.5.23.02    HPUX Tomcat    
+  hpuxwsWebmin                  A.1.070.10     HPUX Webmin    
+  hpuxwsXml                     A.2.03         HPUX XML       
+  perl                          D.5.8.8.F      Perl Programming Language 
+  scsiU320-00                   B.11.31.0809   PCI-X SCSI U320;Supptd HW=A7173A/AB290A 
+#
+# Product(s) not contained in a Bundle:
+#
+ 
+  PHCO_36525                    1.0            auto_parms/set_parms/dhcpdb2conf cumulative patch 
+  VRTSicsco                     1.3.25.1       Symantec Infrastructure Core Services Common 
+  VRTSpbx                       1.3.25.1       Symantec Private Branch Exchange 
+  VRTSvlic                      3.02.24.0      Symantec License Utilities 
+
+18
+
+/usr/bin/netstat -i -n
+
+root@p15-dbci[/]#/usr/bin/netstat -i -n
+Name      Mtu  Network         Address         Ipkts              Ierrs Opkts              Oerrs Coll
+lo0      32808 127.0.0.0       127.0.0.1       65477199           0     65477208           0     0   
+lan3      1500 192.168.1.0     192.168.1.1     5473675            0     2799167            0     0   
+lan900    1500 10.228.8.0      10.228.8.2      370582095          0     1691098114         0     0   
+lan900:1  1500 10.228.8.0      10.228.8.1      2250884962         0     1396996944         0     0   
+
+19
+
+/usr/bin/netstat -i
+
+root@p15-dbci[/]#/usr/bin/netstat -i
+Name      Mtu  Network         Address         Ipkts              Ierrs Opkts              Oerrs Coll
+lo0      32808 loopback        localhost       65479520           0     65479529           0     0   
+lan3      1500 192.168.1.0     p15-dbci-heart  5473753            0     2799206            0     0   
+lan900    1500 10.228.8.0      p15-dbci        370582584          0     1691133028         0     0   
+lan900:1  1500 10.228.8.0      p15-dbci-vip    2250946532         0     1397026124         0     0   
+
+20
+
+/usr/bin/ls -A -1 -p
+
+root@p15-dbci[/]#/usr/bin/ls -A -1 -p
+AUTO
+TT_DB/
+a.tar
+bin/
+core
+dev/
+dvd/
+etc/
+export/
+home/
+interface/
+lib/
+lost+found/
+mapfile
+memory.log
+nbu_software/
+net/
+nohup.out
+opt/
+oracle/
+p15_bakcold/
+p15_oracle/
+sap-veritas-backup/
+sapbackup/
+sapbak.sh
+sapdoc/
+sapmnt/
+sbin/
+stand/
+test/
+tmp/
+usr/
+var/
+y/
+
+21
+
+/usr/bin/ls -l
+
+root@p15-dbci[/]#/usr/bin/ls -l
+total 10198
+-rw-------   1 root       sys           7732 Oct 17  2009 .ICEauthority
+-rw-------   1 root       sys            655 Oct 17  2009 .TTauthority
+-rw-------   1 root       sys            588 Oct 17  2009 .Xauthority
+drwxr-xr-x  11 root       sys           8192 Oct 17  2009 .dt
+-rwxr-xr-x   1 root       sys           5451 Nov  3  2008 .dtprofile
+-rw-rw-r--   1 root       sys              9 Nov  3  2008 .firefox-license
+-rw-rw-rw-   1 root       sys         646765 Dec  2 18:32 .fonts.cache-1
+-rw-------   1 root       sys          44242 May 13 16:36 .history
+-rw-rw-r--   1 root       sys              7 Nov  3  2008 .hpjconfig_license
+drwx------   3 root       sys             96 Nov  3  2008 .mozilla
+-r--r--r--   1 bin        bin           1188 Feb  6  2009 .profile
+-rw-rw-rw-   1 root       sys            146 Apr 13 09:54 .rhosts
+-rw-------   1 root       sys           1024 Oct 12  2008 .rnd
+drwxr-x---   2 root       sys           8192 Nov 16  2008 .sdtgui
+-rw-------   1 root       sys           1196 Nov  4  2008 .sh_history
+drwx------   6 root       sys           8192 Nov 10  2008 .sw
+-rw-rw-rw-   1 root       sys             16 Nov 21  2008 AUTO
+drwxr-xr-x   2 root       sys           8192 Nov 10  2008 TT_DB
+-rw-rw-rw-   1 root       sys          10240 Nov 19  2008 a.tar
+lr-xr-xr-x   1 bin        bin              8 Nov  4  2008 bin -> /usr/bin
+-rw-------   1 root       root       9069680 Nov  3  2008 core
+dr-xr-xr-x  31 bin        bin           8192 Apr 10 19:21 dev
+drwxrwxrwx   2 root       sys             96 Nov  3  2008 dvd
+dr-xr-xr-x  39 bin        bin           8192 May 13 16:20 etc
+drwxrwxrwx   5 root       sys             96 Apr 11 00:24 export
+drwxr-xr-x   7 root       root            96 Nov 16  2008 home
+drwxrwxrwx   4 p15adm     sapsys          96 Feb  2  2009 interface
+lr-xr-xr-x   1 bin        bin              8 Nov  4  2008 lib -> /usr/lib
+drwxr-xr-x   2 root       root            96 Oct 12  2008 lost+found
+-rw-rw-rw-   1 root       sys              8 Feb 10  2009 mapfile
+-rw-rw-r--   1 root       sys           9420 Nov  5  2009 memory.log
+drwxrwxrwx   6 root       sys           8192 Feb  9  2009 nbu_software
+dr-xr-xr-x   1 root       root             1 Apr 10 19:20 net
+-rw-------   1 root       sys              0 Jan 22 00:15 nohup.out
+dr-xr-xr-x  88 bin        bin           8192 Nov 15 16:55 opt
+drwxrwxr-x   7 orap15     dba           1024 Nov 15 17:05 oracle
+drwxr-xr-x   6 root       root          9216 Apr  9 10:55 p15_bakcold
+drwxr-xr-x   3 root       root         40960 May 13 01:55 p15_oracle
+drwxr-xr-x   2 root       sys             96 Feb  6  2009 sap-veritas-backup
+drwxrwxr-x   3 root       sys             96 Dec  9  2008 sapbackup
+-rwxrwx---   1 root       sys            115 Nov 19  2008 sapbak.sh
+lrwxrwxrwx   1 root       sys             14 Apr 10 11:30 sapdoc -> /export/sapdoc
+lrwxrwxrwx   1 root       sys             14 Apr 10 11:17 sapmnt -> /export/sapmnt
+dr-xr-xr-x  15 bin        bin           8192 Nov  4  2008 sbin
+dr-xr-xr-x   9 bin        bin           1024 Apr 10 19:20 stand
+drwxrwxrwx   2 root       sys             96 Apr 12 12:02 test
+drwxrwxrwt  21 root       sys          24576 May 13 16:36 tmp
+dr-xr-xr-x  25 bin        bin           8192 Apr 20  2009 usr
+dr-xr-xr-x  29 bin        bin           8192 Feb  6  2009 var
+drwxr-xr-x   2 root       sys           8192 Mar 16 15:24 y
+
+22.
+
+root@p15-dbci[/]#/usr/bin/netstat -s
+tcp:
+        3094354310 packets sent
+                3051736162 data packets (2514433518129 bytes)
+                121227 data packets (101321437 bytes) retransmitted
+                40557487 ack-only packets (9090416 delayed)
+                240 URG only packets
+                250730 window probe packets
+                154428 window update packets
+                2061313 control packets
+        2630039696 packets received
+                2526114442 acks (for 2514476600562 bytes)
+                248638 duplicate acks
+                0 acks for unsent data
+                2154531279 packets (1061015061007 bytes) received in-sequence
+                13 completely duplicate packets (2187 bytes)
+                54 packets with some dup data (33721 bytes duped)
+                3999 out of order packets (3832339 bytes)
+                0 packets (0 bytes) of data after window
+                0 window probes
+                938099 window update packets
+                928 packets received after close
+                20 segments discarded for bad checksum
+                0 bad TCP segments dropped due to state change
+        563713 connection requests
+        285870 connection accepts
+        849583 connections established (including accepts)
+        1181098 connections closed (including 336245 drops)
+        330390 embryonic connections dropped
+        2525266902 segments updated rtt (of 2525266902 attempts)
+        53493 retransmit timeouts
+                1114 connections dropped by rexmit timeout
+        250730 persist timeouts
+        289097 keepalive timeouts
+                287163 keepalive probes sent
+                532 connections dropped by keepalive
+        0 connect requests dropped due to full queue
+        394204 connect requests dropped due to no listener
+        0 suspect connect requests dropped due to aging
+        0 suspect connect requests dropped due to rate
+udp:
+        0 incomplete headers
+        0 bad checksums
+        0 socket overflows
+ip:
+        1230170588 total packets received
+        0 bad IP headers
+        110 fragments received
+        0 fragments dropped (dup or out of space)
+        0 fragments dropped after timeout
+        2 packets forwarded
+        0 packets not forwardable
+icmp:
+        2908459 calls to generate an ICMP error message
+        36468 ICMP messages dropped
+        Output histogram:
+         echo reply: 236853
+         destination unreachable: 2671417
+         source quench: 184
+         routing redirect: 0
+         echo: 0
+         time exceeded: 0
+         parameter problem: 0
+         time stamp: 0
+         time stamp reply: 0
+         address mask request: 0
+         address mask reply: 0
+        0 bad ICMP messages
+        Input histogram:
+         echo reply: 15816
+         destination unreachable: 2639354
+         source quench: 6
+         routing redirect: 75
+         echo: 236853
+         time exceeded: 335
+         parameter problem: 0
+         time stamp request: 0
+         time stamp reply: 0
+         address mask request: 0
+         address mask reply: 0
+        236853 responses sent
+igmp:
+        0 messages received
+        0 messages received with too few bytes
+        0 messages received with bad checksum
+        0 membership queries received
+        0 membership queries received with incorrect field(s)
+        0 membership reports received
+        0 membership reports received with incorrect field(s)
+        0 membership reports received for groups to which this host belongs
+        0 membership reports sent
+
+23
+
+root@p15-dbci[/]#/usr/bin/ls -l
+total 10198
+-rw-------   1 root       sys           7732 Oct 17  2009 .ICEauthority
+-rw-------   1 root       sys            655 Oct 17  2009 .TTauthority
+-rw-------   1 root       sys            588 Oct 17  2009 .Xauthority
+drwxr-xr-x  11 root       sys           8192 Oct 17  2009 .dt
+-rwxr-xr-x   1 root       sys           5451 Nov  3  2008 .dtprofile
+-rw-rw-r--   1 root       sys              9 Nov  3  2008 .firefox-license
+-rw-rw-rw-   1 root       sys         646765 Dec  2 18:32 .fonts.cache-1
+-rw-------   1 root       sys          44838 May 13 16:41 .history
+-rw-rw-r--   1 root       sys              7 Nov  3  2008 .hpjconfig_license
+drwx------   3 root       sys             96 Nov  3  2008 .mozilla
+-r--r--r--   1 bin        bin           1188 Feb  6  2009 .profile
+-rw-rw-rw-   1 root       sys            146 Apr 13 09:54 .rhosts
+-rw-------   1 root       sys           1024 Oct 12  2008 .rnd
+drwxr-x---   2 root       sys           8192 Nov 16  2008 .sdtgui
+-rw-------   1 root       sys           1196 Nov  4  2008 .sh_history
+drwx------   6 root       sys           8192 Nov 10  2008 .sw
+-rw-rw-rw-   1 root       sys             16 Nov 21  2008 AUTO
+drwxr-xr-x   2 root       sys           8192 Nov 10  2008 TT_DB
+-rw-rw-rw-   1 root       sys          10240 Nov 19  2008 a.tar
+lr-xr-xr-x   1 bin        bin              8 Nov  4  2008 bin -> /usr/bin
+-rw-------   1 root       root       9069680 Nov  3  2008 core
+dr-xr-xr-x  31 bin        bin           8192 Apr 10 19:21 dev
+drwxrwxrwx   2 root       sys             96 Nov  3  2008 dvd
+dr-xr-xr-x  39 bin        bin           8192 May 13 16:20 etc
+drwxrwxrwx   5 root       sys             96 Apr 11 00:24 export
+drwxr-xr-x   7 root       root            96 Nov 16  2008 home
+drwxrwxrwx   4 p15adm     sapsys          96 Feb  2  2009 interface
+lr-xr-xr-x   1 bin        bin              8 Nov  4  2008 lib -> /usr/lib
+drwxr-xr-x   2 root       root            96 Oct 12  2008 lost+found
+-rw-rw-rw-   1 root       sys              8 Feb 10  2009 mapfile
+-rw-rw-r--   1 root       sys           9420 Nov  5  2009 memory.log
+drwxrwxrwx   6 root       sys           8192 Feb  9  2009 nbu_software
+dr-xr-xr-x   1 root       root             1 Apr 10 19:20 net
+-rw-------   1 root       sys              0 Jan 22 00:15 nohup.out
+dr-xr-xr-x  88 bin        bin           8192 Nov 15 16:55 opt
+drwxrwxr-x   7 orap15     dba           1024 Nov 15 17:05 oracle
+drwxr-xr-x   6 root       root          9216 Apr  9 10:55 p15_bakcold
+drwxr-xr-x   3 root       root         40960 May 13 01:55 p15_oracle
+drwxr-xr-x   2 root       sys             96 Feb  6  2009 sap-veritas-backup
+drwxrwxr-x   3 root       sys             96 Dec  9  2008 sapbackup
+-rwxrwx---   1 root       sys            115 Nov 19  2008 sapbak.sh
+lrwxrwxrwx   1 root       sys             14 Apr 10 11:30 sapdoc -> /export/sapdoc
+lrwxrwxrwx   1 root       sys             14 Apr 10 11:17 sapmnt -> /export/sapmnt
+dr-xr-xr-x  15 bin        bin           8192 Nov  4  2008 sbin
+dr-xr-xr-x   9 bin        bin           1024 Apr 10 19:20 stand
+drwxrwxrwx   2 root       sys             96 Apr 12 12:02 test
+drwxrwxrwt  21 root       sys          24576 May 13 16:39 tmp
+dr-xr-xr-x  25 bin        bin           8192 Apr 20  2009 usr
+dr-xr-xr-x  29 bin        bin           8192 Feb  6  2009 var
+drwxr-xr-x   2 root       sys           8192 Mar 16 15:24 y
+
+24
+/usr/bin/ls -F -1 -p
+
+root@p15-dbci[/]#/usr/bin/ls -F -1 -p
+.ICEauthority
+.TTauthority
+.Xauthority
+.dt/
+.dtprofile*
+.firefox-license
+.fonts.cache-1
+.history
+.hpjconfig_license
+.mozilla/
+.profile
+.rhosts
+.rnd
+.sdtgui/
+.sh_history
+.sw/
+AUTO
+TT_DB/
+a.tar
+bin/
+core
+dev/
+dvd/
+etc/
+export/
+home/
+interface/
+lib/
+lost+found/
+mapfile
+memory.log
+nbu_software/
+net/
+nohup.out
+opt/
+oracle/
+p15_bakcold/
+p15_oracle/
+sap-veritas-backup/
+sapbackup/
+sapbak.sh*
+sapdoc/
+sapmnt/
+sbin/
+stand/
+test/
+tmp/
+usr/
+var/
+y/
+
+25
+
+root@p15-dbci[/]#/usr/bin/ls
+.ICEauthority       .hpjconfig_license  AUTO                export              net                 sapbak.sh           var
+.TTauthority        .mozilla            TT_DB               home                nohup.out           sapdoc              y
+.Xauthority         .profile            a.tar               interface           opt                 sapmnt
+.dt                 .rhosts             bin                 lib                 oracle              sbin
+.dtprofile          .rnd                core                lost+found          p15_bakcold         stand
+.firefox-license    .sdtgui             dev                 mapfile             p15_oracle          test
+.fonts.cache-1      .sh_history         dvd                 memory.log          sap-veritas-backup  tmp
+.history            .sw                 etc                 nbu_software        sapbackup           usr
+
+26
+
+root@p15-dbci[/]#/usr/bin/date
+Thu May 13 16:47:37 EAT 2010
+
+27
+/usr/bin/date -u 
+
+root@p15-dbci[/]#/usr/bin/date -u 
+Thu May 13 08:48:32 UTC 2010
+
+28
+
+root@p15-dbci[/]#uname -a
+HP-UX p15-dbci B.11.31 U ia64 1057450004 unlimited-user license
+
+29
+
+cat /proc/version
+
+root@p15-dbci[/]#cat   /proc/version
+cat: Cannot open /proc/version: No such file or directory
+root@p15-dbci[/]#/usr/bin/cat proc/version
+cat: Cannot open proc/version: No such file or directory
+root@p15-dbci[/]#/cat proc/version
+sh: /cat:  not found.
+
+30
+
+cat   /etc/issue
+
+root@p15-dbci[/]#cat   /etc/issue
+GenericSysName [HP Release B.11.31] (see /etc/issue)
+
+
+
+
+
+
+
+
+
+
+

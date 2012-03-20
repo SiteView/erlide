@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module machine</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module machine</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>machine.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Version:</b> 1.0</p>
+<p><b>Authors:</b> <a href="mailto:lei.lin@dragonflow.com"><tt>lei.lin@dragonflow.com</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2>machine
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#addNTMachineLogin-3">addNTMachineLogin/3</a></td><td> create windows machine recode.</td></tr>
+<tr><td valign="top"><a href="#createMachine-1">createMachine/1</a></td><td>create Machine,parameter is  record.</td></tr>
+<tr><td valign="top"><a href="#createMachines-1">createMachines/1</a></td><td>create Machines,parameter is list of records.</td></tr>
+<tr><td valign="top"><a href="#getAdapter-1">getAdapter/1</a></td><td>get Adapter object.</td></tr>
+<tr><td valign="top"><a href="#getCommandSetting-3">getCommandSetting/3</a></td><td>get os template subitem value.</td></tr>
+<tr><td valign="top"><a href="#getCommandString-3">getCommandString/3</a></td><td>get command.</td></tr>
+<tr><td valign="top"><a href="#getCurrentUser-0">getCurrentUser/0</a></td><td>get current user.</td></tr>
+<tr><td valign="top"><a href="#getMachine-1">getMachine/1</a></td><td>get machine by Ip.</td></tr>
+<tr><td valign="top"><a href="#getMachineByHost-1">getMachineByHost/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#getMachineName-1">getMachineName/1</a></td><td>get machine name by host.</td></tr>
+<tr><td valign="top"><a href="#getMachinePathSeparator-1">getMachinePathSeparator/1</a></td><td>get Machine Path Separator,windows is \"\\\",unix is \"/\"
+return string.</td></tr>
+<tr><td valign="top"><a href="#getMachineTable-0">getMachineTable/0</a></td><td>get all machine,value is list of records.</td></tr>
+<tr><td valign="top"><a href="#getNTMachineTable-0">getNTMachineTable/0</a></td><td>get all windows machine,value is list of records.</td></tr>
+<tr><td valign="top"><a href="#getOS-1">getOS/1</a></td><td>get os name by number.</td></tr>
+<tr><td valign="top"><a href="#stringToOS-1">stringToOS/1</a></td><td>get os  number by os name.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="addNTMachineLogin-3">addNTMachineLogin/3</a></h3>
+<div class="spec">
+<p><tt>addNTMachineLogin(Host, Login::Username, Pass::Password) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Username = string()</tt></li>
+<li><tt>Password = string()</tt></li>
+</ul></p>
+</div><p> create windows machine recode.</p>
+
+<h3 class="function"><a name="createMachine-1">createMachine/1</a></h3>
+<div class="spec">
+<p><tt>createMachine(Machi::Machine) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Machine = term()</tt></li>
+</ul></p>
+</div><p>create Machine,parameter is  record.
+create machine</p>
+
+<h3 class="function"><a name="createMachines-1">createMachines/1</a></h3>
+<div class="spec">
+<p><tt>createMachines(MachsList) -&gt; ok</tt>
+<ul class="definitions"><li><tt>MachsList = [term()]</tt></li>
+</ul></p>
+</div><p>create Machines,parameter is list of records.
+create Machines,parameter is list of records</p>
+
+<h3 class="function"><a name="getAdapter-1">getAdapter/1</a></h3>
+<div class="spec">
+<p><tt>getAdapter(Host) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Result = term()</tt></li>
+</ul></p>
+</div><p>get Adapter object.	</p>
+
+<h3 class="function"><a name="getCommandSetting-3">getCommandSetting/3</a></h3>
+<div class="spec">
+<p><tt>getCommandSetting(Host, TemplateTermName::TemplateItemName, SubTemplateTermName::SubTemplateItemName) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>TemplateItemName = atom()</tt></li>
+<li><tt>SubTemplateItemName = atom()</tt></li>
+<li><tt>Result = term()</tt></li>
+</ul></p>
+</div><p>get os template subitem value.
+just call osAdapter's getCommandSetting()</p>
+
+<h3 class="function"><a name="getCommandString-3">getCommandString/3</a></h3>
+<div class="spec">
+<p><tt>getCommandString(TemplateItemName, Host, List) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>TemplateItemName = atom()</tt></li>
+<li><tt>List = [term()]</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>get command.
+TemplateItemName is atom,OsName is string,Params is list,if not find just return {error,command_undefined}</p>
+
+<h3 class="function"><a name="getCurrentUser-0">getCurrentUser/0</a></h3>
+<div class="spec">
+<p><tt>getCurrentUser() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = atom()</tt></li>
+</ul></p>
+</div><p>get current user</p>
+
+<h3 class="function"><a name="getMachine-1">getMachine/1</a></h3>
+<div class="spec">
+<p><tt>getMachine(Host) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Result = term()</tt></li>
+</ul></p>
+</div><p>get machine by Ip</p>
+
+<h3 class="function"><a name="getMachineByHost-1">getMachineByHost/1</a></h3>
+<div class="spec">
+<p><tt>getMachineByHost(Host) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="getMachineName-1">getMachineName/1</a></h3>
+<div class="spec">
+<p><tt>getMachineName(Host) -&gt; Result | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>get machine name by host.
+get machine name by host</p>
+
+<h3 class="function"><a name="getMachinePathSeparator-1">getMachinePathSeparator/1</a></h3>
+<div class="spec">
+<p><tt>getMachinePathSeparator(Host) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>get Machine Path Separator,windows is \"\\\",unix is \"/\"
+return string</p>
+
+<h3 class="function"><a name="getMachineTable-0">getMachineTable/0</a></h3>
+<div class="spec">
+<p><tt>getMachineTable() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = [tuple()]</tt></li>
+</ul></p>
+</div><p>get all machine,value is list of records.
+get all machine,value is list of records</p>
+
+<h3 class="function"><a name="getNTMachineTable-0">getNTMachineTable/0</a></h3>
+<div class="spec">
+<p><tt>getNTMachineTable() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = [tuple()]</tt></li>
+</ul></p>
+</div><p>get all windows machine,value is list of records.
+get all NT machine,value is list of records</p>
+
+<h3 class="function"><a name="getOS-1">getOS/1</a></h3>
+<div class="spec">
+<p><tt>getOS(S::Host) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Host = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+</ul></p>
+</div><p>get os name by number.</p>
+
+<h3 class="function"><a name="stringToOS-1">stringToOS/1</a></h3>
+<div class="spec">
+<p><tt>stringToOS(Name::Osname) -&gt; Result</tt>
+<ul class="definitions"><li><tt>Osname = string()</tt></li>
+<li><tt>Result = integer()</tt></li>
+</ul></p>
+</div><p>get os  number by os name.		</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 30 2009, 11:29:01.</i></p>
+</body>
+</html>

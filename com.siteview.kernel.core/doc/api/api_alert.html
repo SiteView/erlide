@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_alert</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_alert</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api of alert.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api of alert
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#alert_test-2">alert_test/2</a></td><td>test a alert with a monitor.</td></tr>
+<tr><td valign="top"><a href="#create-1">create/1</a></td><td>create a new alert.</td></tr>
+<tr><td valign="top"><a href="#delete-1">delete/1</a></td><td>delete a alert.</td></tr>
+<tr><td valign="top"><a href="#disable_all-0">disable_all/0</a></td><td>disable all alerts.</td></tr>
+<tr><td valign="top"><a href="#enable_all-0">enable_all/0</a></td><td>enable all alerts.</td></tr>
+<tr><td valign="top"><a href="#get-1">get/1</a></td><td>get a alert.</td></tr>
+<tr><td valign="top"><a href="#get_all-0">get_all/0</a></td><td>get all alerts.</td></tr>
+<tr><td valign="top"><a href="#get_log-1">get_log/1</a></td><td>get alert log by date.</td></tr>
+<tr><td valign="top"><a href="#get_log-2">get_log/2</a></td><td>get alert log by date and id.</td></tr>
+<tr><td valign="top"><a href="#get_log-3">get_log/3</a></td><td>get alert log by log type,Start time and end time.</td></tr>
+<tr><td valign="top"><a href="#get_log-5">get_log/5</a></td><td>get alert log by log type,Start time and end time.</td></tr>
+<tr><td valign="top"><a href="#get_scalar_property-3">get_scalar_property/3</a></td><td>get options of scalar property.</td></tr>
+<tr><td valign="top"><a href="#get_template_file_list-1">get_template_file_list/1</a></td><td>get template files.</td></tr>
+<tr><td valign="top"><a href="#log_types-0">log_types/0</a></td><td>return alert log's type.</td></tr>
+<tr><td valign="top"><a href="#query_log-5">query_log/5</a></td><td>query alert log by Start time , end time and other conditions.</td></tr>
+<tr><td valign="top"><a href="#query_log-7">query_log/7</a></td><td>query alert log by Start time , end time and other conditions.</td></tr>
+<tr><td valign="top"><a href="#read_template_file-2">read_template_file/2</a></td><td>read content of template file.</td></tr>
+<tr><td valign="top"><a href="#remove_template_file-2">remove_template_file/2</a></td><td>remove template file.</td></tr>
+<tr><td valign="top"><a href="#update-1">update/1</a></td><td>update a new alert.</td></tr>
+<tr><td valign="top"><a href="#write_template_file-3">write_template_file/3</a></td><td>write content to template file.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="alert_test-2">alert_test/2</a></h3>
+<div class="spec">
+<p><tt>alert_test(Monitor, Id) -&gt; {ok, Result} | {error, Reason}</tt></p>
+</div><p>test a alert with a monitor
+ </p>
+
+<h3 class="function"><a name="create-1">create/1</a></h3>
+<div class="spec">
+<p><tt>create(AlertData) -&gt; {error, Reason} | {ok, Result}</tt>
+<ul class="definitions"><li><tt>Reason = atom()</tt></li>
+<li><tt>AlertData = [{key, value}]</tt></li>
+<li><tt>Result = [{key, value}]</tt></li>
+</ul></p>
+</div><p>create a new alert
+  <br>
+ 	<dl>
+ 	<dt>AlertData</dt>
+ 	<dd>[{id,atom()},{name,string()},{class,rule},{target,Target},{action,ActionType},{action_param,Param},
+ 					{category,Category},{condition,Condition},{enabled,Enabled},
+ 					{name_match,string()},{status_match,string()},{type_match,string()}]
+   </dd>
+ 	<dt>Target</dt><dd>string(),example:"&lt;id1&gt;,&lt;id2&gt;"</dd>
+ 	<dt>ActionType</dt><dd> mailto | sound | sms | script | post | database | snmptrap | syslog</dd>
+ 	<dt>Param</dt> <dd>#mail_alert{} | #sms_alert{} | #script_alert{} | #snmptrap_alert{} | #sound_alert{}
+ 				| #syslog_alert{} | database_alert |  #disable_alert{} | #post_alert{}</dd>
+ 	<dd>        action_param record is defined in file <a href="alert.hrl">alert.hrl</a></dd>
+ 	<dt>Category </dt> <dd>error | warning | good</dd>
+ 	<dt>Condition </dt><dd><li>{condition,{always,X}} -- alway trigger alert after X times</li></dd>
+   <dd><li>            {condition,{once,X}}   -- trigger alert once at X times</li></dd>
+   <dd><li>            {condition,{select,{X,Y}}} -- trigger alert every Y times after X     </li></dd>
+   <dd><li>            {condition,{group,X}} -- trigger alert when group category reach X times </li></dd>
+   <dd><li>            {condition,all}  -- trigger alert when all monitor in group at category</li></dd>
+ 	<dt>Enabled</dt>
+ 			<dd><li>true -- enabled</li></dd>
+           <dd><li>{false,permanently} -- permanently disabled</li></dd>
+           <dd><li>{false,{next,NOW,X,TimeUnit}} -- disabled next X TimeUnit from NOW, TimeUnit = minutes | hours | days</li></dd>
+           <dd><li>{false,{schedule,"16:13","8/21/09","17:13","8/21/09"}} -- disabled in a period time </li></dd>
+  </dl>
+ 	</p>
+
+<h3 class="function"><a name="delete-1">delete/1</a></h3>
+<div class="spec">
+<p><tt>delete(Id) -&gt; {error, Reason} | {ok, Msg}</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>delete a alert
+ </p>
+
+<h3 class="function"><a name="disable_all-0">disable_all/0</a></h3>
+<div class="spec">
+<p><tt>disable_all() -&gt; {ok, Result} | {error, Reason}</tt></p>
+</div><p>disable all alerts
+ </p>
+
+<h3 class="function"><a name="enable_all-0">enable_all/0</a></h3>
+<div class="spec">
+<p><tt>enable_all() -&gt; {ok, Result} | {error, Reason}</tt></p>
+</div><p>enable all alerts
+ </p>
+
+<h3 class="function"><a name="get-1">get/1</a></h3>
+<div class="spec">
+<p><tt>get(Id) -&gt; {error, Reason} | Alert</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>Alert = [{key, value}]</tt></li>
+</ul></p>
+</div><p>get a alert
+  <br>
+  <dl>
+ 	<dt>Alert</dt><dd>See AlertData in <a href="#create-1"><code>create/1</code></a></dd>
+  </dl></p>
+
+<h3 class="function"><a name="get_all-0">get_all/0</a></h3>
+<div class="spec">
+<p><tt>get_all() -&gt; {error, Reason} | Alerts</tt>
+<ul class="definitions"><li><tt>Reason = atom()</tt></li>
+<li><tt>Alerts = [AlertData]</tt></li>
+</ul></p>
+</div><p>get all alerts
+  <br>
+  <dl><dt>AlertData</dt> <dd>See <a href="#create-1"><code>create/1</code></a></dd></dl></p>
+
+<h3 class="function"><a name="get_log-1">get_log/1</a></h3>
+<div class="spec">
+<p><tt>get_log(Date) -&gt; {ok, Log} | {error, Reason}</tt></p>
+</div><p>get alert log by date
+ </p>
+
+<h3 class="function"><a name="get_log-2">get_log/2</a></h3>
+<div class="spec">
+<p><tt>get_log(Date, Id) -&gt; {ok, Log} | {error, Reason}</tt></p>
+</div><p>get alert log by date and id
+ </p>
+
+<h3 class="function"><a name="get_log-3">get_log/3</a></h3>
+<div class="spec">
+<p><tt>get_log(LogType, StartTime, EndTime) -&gt; {eof, Data} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>LogType = <a href="#type-log_types">log_types()</a></tt></li>
+<li><tt>StartTime = {Year, Month, Day}</tt></li>
+<li><tt>EndTime = {Year, Month, Day}</tt></li>
+<li><tt>Data = [#alertlog{}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get alert log by log type,Start time and end time
+  <br>
+  <dl>
+ 	<dt>#alertlog{}</dt><dd>See <a href="alert.hrl">alert.hrl</a></dd>
+  </dl>
+ 	</p>
+
+<h3 class="function"><a name="get_log-5">get_log/5</a></h3>
+<div class="spec">
+<p><tt>get_log(LogType, StartDate, StartTime, EndDate, EndTime) -&gt; {eof, Data} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>LogType = <a href="#type-log_types">log_types()</a></tt></li>
+<li><tt>StartDate = {Year, Month, Day}</tt></li>
+<li><tt>StartTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>EndData = {Year, Month, Day}</tt></li>
+<li><tt>EndTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>Data = [#alertlog{}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get alert log by log type,Start time and end time
+  <br>
+  <dl>
+ 	<dt>#alertlog{}</dt><dd>See <a href="alert.hrl">alert.hrl</a></dd>
+  </dl>
+ 	</p>
+
+<h3 class="function"><a name="get_scalar_property-3">get_scalar_property/3</a></h3>
+<div class="spec">
+<p><tt>get_scalar_property(Key, Prop, Parms) -&gt; [{Id, Name}]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Prop = atom()</tt></li>
+<li><tt>Params = [{Key1, Value}]</tt></li>
+<li><tt>Key1 = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Id = string()</tt></li>
+<li><tt>Name = string()</tt></li>
+</ul></p>
+</div><p>get options of scalar property.
+  <br>when property's type is scalar, this function will be called
+  the function will return a list to display in a dropdown box</p>
+
+<h3 class="function"><a name="get_template_file_list-1">get_template_file_list/1</a></h3>
+<div class="spec">
+<p><tt>get_template_file_list(Key) -&gt; [FileName]</tt>
+<ul class="definitions"><li><tt>Key = mailto | sms</tt></li>
+<li><tt>FileName = string()</tt></li>
+</ul></p>
+</div><p>get template files</p>
+
+<h3 class="function"><a name="log_types-0">log_types/0</a></h3>
+<div class="spec">
+<p><tt>log_types() -&gt; [string()]</tt></p>
+</div><p>return alert log's type
+ </p>
+
+<h3 class="function"><a name="query_log-5">query_log/5</a></h3>
+<div class="spec">
+<p><tt>query_log(StartDate, StartTime, EndDate, EndTime, Params) -&gt; {eof, Data} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>StartDate = {Year, Month, Day}</tt></li>
+<li><tt>StartTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>EndData = {Year, Month, Day}</tt></li>
+<li><tt>EndTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>Params = [{Field, Op, Val}]</tt></li>
+<li><tt>Field = id | name | receiver | type</tt></li>
+<li><tt>Op = '='</tt></li>
+<li><tt>Data = [#alertlog{}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>query alert log by Start time , end time and other conditions
+  <br>
+  <dl>
+ 	<dt>#alertlog{}</dt><dd>See <a href="alert.hrl">alert.hrl</a></dd>
+  </dl>
+ 	</p>
+
+<h3 class="function"><a name="query_log-7">query_log/7</a></h3>
+<div class="spec">
+<p><tt>query_log(StartDate, StartTime, EndDate, EndTime, Params, From, Count) -&gt; {eof, Data} | {Left, Data} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>StartDate = {Year, Month, Day}</tt></li>
+<li><tt>StartTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>EndData = {Year, Month, Day}</tt></li>
+<li><tt>EndTime = {Hour, Minute, Seconds}</tt></li>
+<li><tt>Params = [{Field, Op, Val}]</tt></li>
+<li><tt>Field = id | name | receiver | type</tt></li>
+<li><tt>Op = '='</tt></li>
+<li><tt>Data = [#alertlog{}]</tt></li>
+<li><tt>Reason = atom()</tt></li>
+<li><tt>From = integer()</tt></li>
+<li><tt>Count = integer()</tt></li>
+<li><tt>Left = integer()</tt></li>
+</ul></p>
+</div><p>query alert log by Start time , end time and other conditions
+  <br>return data limit by From and Count. 
+  <dl>
+ 	<dt>#alertlog{}</dt><dd>See <a href="alert.hrl">alert.hrl</a></dd>
+  </dl>
+ 	</p>
+
+<h3 class="function"><a name="read_template_file-2">read_template_file/2</a></h3>
+<div class="spec">
+<p><tt>read_template_file(Key, Name) -&gt; {ok, Content} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = mailto | sms</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Content = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p><p>read content of template file</p>
+ 
+  <br>Typical error reasons:
+  <dl>
+ 	<dt>enoent</dt><dd>The file does not exist.</dd>
+ 	<dt>eacces</dt><dd>Missing permission for reading the file, or for searching one of the parent directories.</dd>
+ 	<dt>eisdir</dt><dd>The named file is a directory.</dd>
+ 	<dt>enotdir</dt><dd>A component of the file name is not a directory. On some platforms, enoent is returned instead.</dd>
+ 	<dt>enomem</dt><dd>There is not enough memory for the contents of the file.</dd>
+  </dl></p>
+
+<h3 class="function"><a name="remove_template_file-2">remove_template_file/2</a></h3>
+<div class="spec">
+<p><tt>remove_template_file(Key, Name) -&gt; {ok, Content} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = mailto | sms</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Content = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p><p>remove template file</p>
+ 
+  <br>Typical error reasons:
+  <dl>
+ 	<dt>enoent</dt><dd>The file does not exist.</dd>
+ 	<dt>eacces</dt><dd>Missing permission for reading the file, or for searching one of the parent directories.</dd>
+ 	<dt>eisdir</dt><dd>The named file is a directory.</dd>
+ 	<dt>enotdir</dt><dd>A component of the file name is not a directory. On some platforms, enoent is returned instead.</dd>
+  </dl></p>
+
+<h3 class="function"><a name="update-1">update/1</a></h3>
+<div class="spec">
+<p><tt>update(AlertData) -&gt; {error, Reason} | {ok, Msg}</tt>
+<ul class="definitions"><li><tt>AlertData = [{key, value}]</tt></li>
+</ul></p>
+</div><p>update a new alert
+  <br>
+  <dl><dt>AlertData</dt><dd>See <a href="#create-1"><code>create/1</code></a></dd></dl>
+ </p>
+
+<h3 class="function"><a name="write_template_file-3">write_template_file/3</a></h3>
+<div class="spec">
+<p><tt>write_template_file(Key, Name, Data) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = mailto | sms</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Result = string()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p><p>write content to template file</p>
+ 
+  <br>Typical error reasons:
+  <dl>
+ 	<dt>enoent</dt><dd>A component of the file name does not exist.</dd>
+ 	<dt>eacces</dt><dd>Missing permission for writing the file or searching one of the parent directories.</dd>
+ 	<dt>eisdir</dt><dd>The named file is a directory.</dd>
+ 	<dt>enotdir</dt><dd>A component of the file name is not a directory. On some platforms, enoent is returned instead.</dd>
+ 	<dt>enospc</dt><dd>There is a no space left on the device.</dd>
+  </dl></p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Aug 17 2010, 17:31:03.</i></p>
+</body>
+</html>

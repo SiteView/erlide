@@ -1,0 +1,19 @@
+ecc9 后台架构说明：
+
+1. 主要子系统 
+主系统在svecc node：
+ebin\svecc.app
+
+java\java_node: 主要是java的监测器
+nnm：
+
+
+2.数据说明
+ets:
+contentstore:
+PostgresSQL:存储了采集的log数据，每天一个table，有svecc_log node处理
+
+
+3. 监测器： 见文档 《监测器说明.txt》
+
+4. 如何运行后台：《ECC9 后台开发环境搭建指南.txt》

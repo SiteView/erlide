@@ -1,0 +1,40 @@
+schedule and monitor:
+
+1. schedule_manager从数据库取出页面设置的schedule信息，转换成#schedule{}记录
+schedule_event 是schedule里的轮询事件。
+
+2. 事件循环：event loop
+svecc_app:start()
+svecc_sup:init() ->... siteview:startLink()
+siteview:init()->
+siteview_group:start_siteview() ->
+monitor_group:start_scheduler   monitor_group:startMonitor()
+
+scheduler:event_loop() -> ...... do_action()
+schedule_event:do_action/0 -> 
+action:trigger/1 -> 
+update_monitor:execute/0 -> 
+atomic_monitor:runUpdate/3 ->
+atomic_monitor:run/2 ->
+atomic_monitor:monitorUpdate_RPC ->
+atomic_monitor:monitorUpdate:localhost monitor server
+or rpc:call(Node,monitor_runner,run_rpc,[Data,[]]): remote monitor server
+
+3. 采集数据后，监测器状态分类（good, warning,error）
+monitor:runClassifiers/1
+monitor:classifier_all
+xxxx_monitor:get_classifier/1, 比如ping_monitor:get_classifier/1， diskspace_monitor:get_classifier/1
+
+monitor加载流程：
+siteview_group:start_siteview()
+siteview_group:signalReload()
+siteview_group:adjustGroups()
+siteview_group:load_group()
+
+存储流程
+atomic_monitor:run()
+monitor:save_result()
+monitor_logger:log(Log),
+
+
+备注： 一个常用的套路：由于erlide无法像Java一样在继承的module之间跳转，需要手工寻找方法在哪一个继承的module中实现，使用notepad++的全文search的功能，或者erlide的erlang search。

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src='/css/calendar.js' type='text/javascript'></script>
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">
+	
+		</style>		
+	</head>
+	<body>		
+		<div class=header>
+
+		</div>
+		<div class=topmenu1>
+			[[[topmenu:render(Group)]]]
+		</div>
+		<div class=topmenu2>
+			[[[topmenu:render4(Group)]]]
+			<div class=clear></div>
+		</div>
+		<div>
+			<div align=left>
+			<h2>Monitor Set Properties for template:[[[page:print_title(Item)]]]</h2>
+			</div>
+			<div align=left>
+			<h3>Description for Example Monitor Set: </h3>
+				[[[page:print_desc(Item)]]]
+			</div>
+			<br>
+			<table border=1 width=100%>
+			<thead>
+			<tr>
+				<th>Variable Name</th>
+				<th>Description</th>
+				<th>Enter Value</th>
+				<th>Monitor Type</th>
+			</tr>
+			</thead>
+			[[[page:print_variable(Item)]]]
+			</table>
+			<p align=left>
+				Enter the values to be used by the monitors in this Monitor Set.
+			</p>
+			<br>
+			<div align=left>
+			[[[page:print_button()]]] these values
+			</div>
+		</div>
+		<hr>
+		<div align=left>
+			<p>
+			Use Monitor Sets to quickly replicate a set of monitors across multiple servers or locations. Select a Monitor Set Template and click Configure to enter settings for this set of monitors. Click Help for instructions on creating new Monitor Set Templates. 
+			</p>
+		</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

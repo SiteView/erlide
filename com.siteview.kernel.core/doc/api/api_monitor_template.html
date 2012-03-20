@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_monitor_template</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_monitor_template</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>api function of monitor template.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>api function of monitor template
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#delete_template-1">delete_template/1</a></td><td>delete a template from template list.</td></tr>
+<tr><td valign="top"><a href="#get_classifier-2">get_classifier/2</a></td><td>get default threshold condition of monitor,Key is the monitor type.</td></tr>
+<tr><td valign="top"><a href="#get_monitor_counters-2">get_monitor_counters/2</a></td><td>get monitor's available counters.</td></tr>
+<tr><td valign="top"><a href="#get_scalar_property-3">get_scalar_property/3</a></td><td>get options of scalar property,when property's type is scalar this function will be called
+  the function will return a list which display in a dropdown box.</td></tr>
+<tr><td valign="top"><a href="#get_servers-1">get_servers/1</a></td><td>get available servers of a monitor,Params is the input from UI.</td></tr>
+<tr><td valign="top"><a href="#get_template-1">get_template/1</a></td><td>get detail information of monitor template by key.</td></tr>
+<tr><td valign="top"><a href="#get_template-2">get_template/2</a></td><td>get detail information of monitor by key.</td></tr>
+<tr><td valign="top"><a href="#get_template_name-1">get_template_name/1</a></td><td>get a template name by key,if not found template,will return "".</td></tr>
+<tr><td valign="top"><a href="#get_template_state-2">get_template_state/2</a></td><td>get monitor's threshold property,,Params is the input from UI.</td></tr>
+<tr><td valign="top"><a href="#get_template_state-3">get_template_state/3</a></td><td>get monitor's threshold property,,Params is the input from UI
+  Id is monitor'id.</td></tr>
+<tr><td valign="top"><a href="#get_template_type-1">get_template_type/1</a></td><td>get a template type by key,if not found template,will return {error,"NOT FOUND"}.</td></tr>
+<tr><td valign="top"><a href="#get_templates-0">get_templates/0</a></td><td>get list of monitor template.</td></tr>
+<tr><td valign="top"><a href="#get_templates_beta-0">get_templates_beta/0</a></td><td>get list of beta monitor.</td></tr>
+<tr><td valign="top"><a href="#get_templates_release-0">get_templates_release/0</a></td><td>get list of release monitor.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="delete_template-1">delete_template/1</a></h3>
+<div class="spec">
+<p><tt>delete_template(Key) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Result = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>delete a template from template list</p>
+
+<h3 class="function"><a name="get_classifier-2">get_classifier/2</a></h3>
+<div class="spec">
+<p><tt>get_classifier(Key, Category) -&gt; [Classifier]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Category = error | warning | good</tt></li>
+<li><tt>Classifier = {property, Oper, Value}</tt></li>
+<li><tt>Oper = '&gt;' | '&lt;' | '&gt;=' | '&lt;=' | '==' | '!=' | contains | '!contains'</tt></li>
+</ul></p>
+</div><p>get default threshold condition of monitor,Key is the monitor type</p>
+
+<h3 class="function"><a name="get_monitor_counters-2">get_monitor_counters/2</a></h3>
+<div class="spec">
+<p><tt>get_monitor_counters(Key, Params) -&gt; {error, parameter_error} | [Counter]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Counter = {string(), string()}</tt></li>
+</ul></p>
+</div><p>get monitor's available counters</p>
+
+<h3 class="function"><a name="get_scalar_property-3">get_scalar_property/3</a></h3>
+<div class="spec">
+<p><tt>get_scalar_property(Key, Prop, Parms) -&gt; [{Id, Name}]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Prop = atom()</tt></li>
+<li><tt>Params = [{Key1, Value}]</tt></li>
+<li><tt>Key1 = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Id = string()</tt></li>
+<li><tt>Name = string()</tt></li>
+</ul></p>
+</div><p>get options of scalar property,when property's type is scalar this function will be called
+  the function will return a list which display in a dropdown box</p>
+
+<h3 class="function"><a name="get_servers-1">get_servers/1</a></h3>
+<div class="spec">
+<p><tt>get_servers(Params) -&gt; [{Name, Addr}]</tt>
+<ul class="definitions"><li><tt>Params = [{key, term()}]</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Addr = string()</tt></li>
+</ul></p>
+</div><p>get available servers of a monitor,Params is the input from UI</p>
+
+<h3 class="function"><a name="get_template-1">get_template/1</a></h3>
+<div class="spec">
+<p><tt>get_template(Key) -&gt; [#property{}] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get detail information of monitor template by key
+ 	<br>return list of #property{}
+ 	<br>#property{} is defined in <a href="monitor_template.hrl">monitor_template.hrl</a></p>
+
+<h3 class="function"><a name="get_template-2">get_template/2</a></h3>
+<div class="spec">
+<p><tt>get_template(Key, Params) -&gt; [#property{}] | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Params = [{Prop, Value}]</tt></li>
+<li><tt>Prop = atom()</tt></li>
+<li><tt>Value = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p><p>get detail information of monitor by key</p>
+ 	
+ 	<br>return list of #property{}
+ 	<br>#property{} is defined in <a href="monitor_template.hrl">monitor_template.hrl</a></p>
+
+<h3 class="function"><a name="get_template_name-1">get_template_name/1</a></h3>
+<div class="spec">
+<p><tt>get_template_name(Key) -&gt; string() | {error, Err}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+</ul></p>
+</div><p>get a template name by key,if not found template,will return ""
+ </p>
+
+<h3 class="function"><a name="get_template_state-2">get_template_state/2</a></h3>
+<div class="spec">
+<p><tt>get_template_state(Key, Params) -&gt; {error, parameter_error} | [#property{}]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Params = [{key, term()}]</tt></li>
+</ul></p>
+</div><p>get monitor's threshold property,,Params is the input from UI</p>
+
+<h3 class="function"><a name="get_template_state-3">get_template_state/3</a></h3>
+<div class="spec">
+<p><tt>get_template_state(Id, Key, Params) -&gt; {error, parameter_error} | [#property{}]</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Id = atom()</tt></li>
+<li><tt>Params = [{key, term()}]</tt></li>
+</ul></p>
+</div><p>get monitor's threshold property,,Params is the input from UI
+  Id is monitor'id</p>
+
+<h3 class="function"><a name="get_template_type-1">get_template_type/1</a></h3>
+<div class="spec">
+<p><tt>get_template_type(Key) -&gt; Type | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Type = string()</tt></li>
+</ul></p>
+</div><p>get a template type by key,if not found template,will return {error,"NOT FOUND"}
+ </p>
+
+<h3 class="function"><a name="get_templates-0">get_templates/0</a></h3>
+<div class="spec">
+<p><tt>get_templates() -&gt; [Temp]</tt>
+<ul class="definitions"><li><tt>Temp = {Key, Name, Options}</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Options = list()</tt></li>
+</ul></p>
+</div><p>get list of monitor template</p>
+
+<h3 class="function"><a name="get_templates_beta-0">get_templates_beta/0</a></h3>
+<div class="spec">
+<p><tt>get_templates_beta() -&gt; [Temp]</tt>
+<ul class="definitions"><li><tt>Temp = {Key, Name, Options}</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Options = list()</tt></li>
+</ul></p>
+</div><p>get list of beta monitor</p>
+
+<h3 class="function"><a name="get_templates_release-0">get_templates_release/0</a></h3>
+<div class="spec">
+<p><tt>get_templates_release() -&gt; [Temp]</tt>
+<ul class="definitions"><li><tt>Temp = {Key, Name, Options}</tt></li>
+<li><tt>Key = atom()</tt></li>
+<li><tt>Name = string()</tt></li>
+<li><tt>Options = list()</tt></li>
+</ul></p>
+</div><p>get list of release monitor</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 9 2010, 13:47:21.</i></p>
+</body>
+</html>

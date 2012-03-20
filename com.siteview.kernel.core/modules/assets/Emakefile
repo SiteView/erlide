@@ -1,0 +1,3 @@
+
+{"./src/*", [{ i, "./include" },{ i, "../../core/src" },{outdir,"./ebin"}]}.
+

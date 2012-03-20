@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<link rel="stylesheet" href="/nitrogen/jquery-ui/jquery-ui.css" type="text/css" media="screen" charset="utf-8">
+
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">
+	
+		</style>		
+	</head>
+	<body>		
+		<div class=header>
+
+		</div>
+		<div class=topmenu1>
+			[[[topmenu:render(Group)]]]
+		</div>
+		<div class=topmenu2>
+			[[[topmenu:render5(Group)]]]
+			<div class=clear></div>
+		</div>
+		<div align=left>
+			[[[page:print_title]]]
+			<b>报警名称</b>
+			[[[page:print_alert_name(Rule)]]]
+			<hr>
+			<p><b>报警目标</b></p>
+			[[[page:print_groups_monitors(Rule)]]]<br>
+			为警报选择组或监测器。当单击项目名时按下Ctrl键可选择多个选项(在大部分平台上)
+		</div>
+		<hr>
+		<div align=left>
+			<b>运行脚本服务</b><br>
+            <p>
+				<table width="100%">				
+				[[[page:print_server(Rule)]]]
+				</table>
+			</p>
+            <table width="100%">				
+            脚本<br> 
+			[[[page:print_script(Rule)]]]
+			<br>被运行脚本的名字。脚本必须属于在一个叫做“脚本”服务器上的选择。<br> 
+			</table>				
+            <br>模板<br>
+			[[[page:print_template(Rule)]]]
+			<br>这个模板用于创建这个文件参考的脚本。<br> 
+            <br>参数<br>
+			[[[page:print_parameters(Rule)]]]
+		   额外的参数传递到脚本
+		</div>
+		<hr>
+		<div align=left>
+			<p><b>当</b></p>
+			[[[page:print_when(Rule)]]]
+		</div>
+		<hr>
+		<div align=left>
+			[[[page:print_add_button(Rule)]]] 脚本报警
+		</div>
+		<hr>
+		<div align=left>
+			<h3>高级选项</h3>
+			<table border=0 width=100%>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			<tr><td></td><td>禁用报警</td><td></td></tr>
+			[[[page:print_advance_options(Rule)]]]
+			</table>
+		</div>
+		<hr>
+		<div align=left>
+			<p><b>整体视图和组的报警过滤</b></p>
+			<table border=0 width=100%>
+			<tr>
+				<th width=50></th>
+				<th width=100></th>
+				<th></th>
+			</tr>
+			[[[page:print_alert_filtering(Rule)]]]
+			</table>
+		</div>
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+	<script>
+	[[[script]]]
+	</script>
+	</body>
+</html>

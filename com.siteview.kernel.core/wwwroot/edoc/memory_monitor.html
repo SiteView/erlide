@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module memory_monitor []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module memory_monitor []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>memory monitor.
+<p>Copyright © 2008-2009 Dragonflow</p>
+
+<p><b>Version:</b> 1.0</p>
+<p><b>Authors:</b> <a href="mailto:lei.lin@dragonflow.com"><tt>lei.lin@dragonflow.com</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2>memory monitor
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#get_classifier-1">get_classifier/1</a></td><td>get_classifier is run function called by schedule to decide the condition of good, warning and error.</td></tr>
+<tr><td valign="top"><a href="#get_memory_info_linux-1">get_memory_info_linux/1</a></td><td> Get unix machine memory information.</td></tr>
+<tr><td valign="top"><a href="#get_memory_info_win32-1">get_memory_info_win32/1</a></td><td> Get windows machine memory information.</td></tr>
+<tr><td valign="top"><a href="#get_template_property-0">get_template_property/0</a></td><td>get_template_property is the function called by schedule to determinate two sections of value:.</td></tr>
+<tr><td valign="top"><a href="#new-0">new/0</a></td><td>create a new instance for memory monitor.</td></tr>
+<tr><td valign="top"><a href="#update-0">update/0</a></td><td>update is the run function called by schedule to test the  memory monitor.</td></tr>
+<tr><td valign="top"><a href="#verify-1">verify/1</a></td><td>verify is the function called by schedule to verify the parameter of monitor inputed by user.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="get_classifier-1">get_classifier/1</a></h3>
+<div class="spec">
+<p><tt>get_classifier(X1::Param) -&gt; List</tt>
+<ul class="definitions"><li><tt>Param = atom()</tt></li>
+<li><tt>List = [Tuple]</tt></li>
+<li><tt>Tuple = {Status, Logic, Value}</tt></li>
+<li><tt>Status = error | warning | good</tt></li>
+<li><tt>Logic = '!=' | '==' | '&gt;' | '&lt;' | contain</tt></li>
+<li><tt>Value = term()</tt></li>
+</ul></p>
+</div><p>get_classifier is run function called by schedule to decide the condition of good, warning and error</p>
+
+<h3 class="function"><a name="get_memory_info_linux-1">get_memory_info_linux/1</a></h3>
+<div class="spec">
+<p><tt>get_memory_info_linux(Data) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Data = string()</tt></li>
+</ul></p>
+</div><p> Get unix machine memory information</p>
+
+<h3 class="function"><a name="get_memory_info_win32-1">get_memory_info_win32/1</a></h3>
+<div class="spec">
+<p><tt>get_memory_info_win32(Data) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Data = string()</tt></li>
+</ul></p>
+</div><p> Get windows machine memory information</p>
+
+<h3 class="function"><a name="get_template_property-0">get_template_property/0</a></h3>
+<div class="spec">
+<p><tt>get_template_property() -&gt; list()</tt></p>
+</div><p>get_template_property is the function called by schedule to determinate two sections of value:</p>
+
+<h3 class="function"><a name="new-0">new/0</a></h3>
+<div class="spec">
+<p><tt>new() -&gt; Obj</tt>
+<ul class="definitions"><li><tt>Obj = term()</tt></li>
+</ul></p>
+</div><p>create a new instance for memory monitor</p>
+
+<h3 class="function"><a name="update-0">update/0</a></h3>
+<div class="spec">
+<p><tt>update() -&gt; Result</tt>
+<ul class="definitions"><li><tt>Result = term()</tt></li>
+</ul></p>
+</div><p>update is the run function called by schedule to test the  memory monitor</p>
+
+<h3 class="function"><a name="verify-1">verify/1</a></h3>
+<div class="spec">
+<p><tt>verify(Params) -&gt; {ok, []} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Params = [term()]</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>verify is the function called by schedule to verify the parameter of monitor inputed by user</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Nov 30 2009, 09:30:16.</i></p>
+</body>
+</html>

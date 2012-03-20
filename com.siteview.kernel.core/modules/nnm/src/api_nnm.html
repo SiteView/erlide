@@ -1,0 +1,734 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Module api_nnm</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module api_nnm</h1>
+<ul class="index"><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#calculateCoordinate-5">calculateCoordinate/5</a></td><td>
+  Calculate the coordinates
+  Point: [Id,...]
+  Line: [{LeftId,RightId},...]
+  Shape: organic | circular | rectangular | vertical
+  Size:{width,height}
+  Options:[{exclude,Point}]
+  Data: [{Id1,{X1,Y1}},{Id2,{X2,Y2}},...].</td></tr>
+<tr><td valign="top"><a href="#db_delete-2">db_delete/2</a></td><td>
+  delete data in db.</td></tr>
+<tr><td valign="top"><a href="#db_read-4">db_read/4</a></td><td>
+  get data from db.</td></tr>
+<tr><td valign="top"><a href="#db_write-2">db_write/2</a></td><td>
+  add or update data to db.</td></tr>
+<tr><td valign="top"><a href="#device_refresh-1">device_refresh/1</a></td><td>
+  get device info.</td></tr>
+<tr><td valign="top"><a href="#device_submit-1">device_submit/1</a></td><td>
+  add or update device info.</td></tr>
+<tr><td valign="top"><a href="#ipDistribution-2">ipDistribution/2</a></td><td>.</td></tr>
+<tr><td valign="top"><a href="#monitor_get_device_data-2">monitor_get_device_data/2</a></td><td>
+  get (ipTable,arpTable,aftTable,cpuTable,memoryTable,linkchart) from monitor service.</td></tr>
+<tr><td valign="top"><a href="#monitor_get_interval-0">monitor_get_interval/0</a></td><td>
+  get monitor interval time.</td></tr>
+<tr><td valign="top"><a href="#monitor_get_port_data-2">monitor_get_port_data/2</a></td><td>
+  get flow from monitor service.</td></tr>
+<tr><td valign="top"><a href="#monitor_set_interval-1">monitor_set_interval/1</a></td><td>
+  set monitor interval time.</td></tr>
+<tr><td valign="top"><a href="#reLayout-2">reLayout/2</a></td><td>
+  Shape: organic | circular | rectangular | vertical.</td></tr>
+<tr><td valign="top"><a href="#realtime_target_get-2">realtime_target_get/2</a></td><td>
+  get (ipTable,interfaceTable,routeTable,arpTable,aftTable,cpuTable,memoryTable) real-time.</td></tr>
+<tr><td valign="top"><a href="#scan_config_delete-1">scan_config_delete/1</a></td><td>
+  delete scan config.</td></tr>
+<tr><td valign="top"><a href="#scan_config_get-1">scan_config_get/1</a></td><td>
+  get scan config.</td></tr>
+<tr><td valign="top"><a href="#scan_config_submit-1">scan_config_submit/1</a></td><td>
+  add or update scan config.ScanConfig contain {id,''} is update,not is add.</td></tr>
+<tr><td valign="top"><a href="#scan_info_get-1">scan_info_get/1</a></td><td>
+  if return list contain "end scan",scan overy.</td></tr>
+<tr><td valign="top"><a href="#scan_start-1">scan_start/1</a></td><td>
+  start scan.</td></tr>
+<tr><td valign="top"><a href="#scan_stop-1">scan_stop/1</a></td><td>
+  stop scan.</td></tr>
+<tr><td valign="top"><a href="#snmp_get-2">snmp_get/2</a></td><td>snmp get.</td></tr>
+<tr><td valign="top"><a href="#snmp_get_bulk-4">snmp_get_bulk/4</a></td><td>
+  snmp get bulk.</td></tr>
+<tr><td valign="top"><a href="#snmp_get_next-2">snmp_get_next/2</a></td><td>snmp get next.</td></tr>
+<tr><td valign="top"><a href="#snmp_get_tree-2">snmp_get_tree/2</a></td><td>
+  snmp get col.</td></tr>
+<tr><td valign="top"><a href="#snmp_set-2">snmp_set/2</a></td><td>snmp set.</td></tr>
+<tr><td valign="top"><a href="#telnet_close-1">telnet_close/1</a></td><td>
+  close telnet connect.</td></tr>
+<tr><td valign="top"><a href="#telnet_connect-1">telnet_connect/1</a></td><td>
+  init telnet connection.</td></tr>
+<tr><td valign="top"><a href="#telnet_send-2">telnet_send/2</a></td><td>
+  send telnet command.</td></tr>
+<tr><td valign="top"><a href="#topochart_delete-1">topochart_delete/1</a></td><td>
+  delete topo chart.</td></tr>
+<tr><td valign="top"><a href="#topochart_get-1">topochart_get/1</a></td><td>
+  get topo chart.</td></tr>
+<tr><td valign="top"><a href="#topochart_submit-1">topochart_submit/1</a></td><td>
+  add or update topo chart.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="calculateCoordinate-5">calculateCoordinate/5</a></h3>
+<div class="spec">
+<p><tt>calculateCoordinate(Point, Line, Shape, Size, Options) -&gt; {ok, Data} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Point = list()</tt></li>
+<li><tt>Line = list()</tt></li>
+<li><tt>Shape = atom()</tt></li>
+<li><tt>Size = tuple()</tt></li>
+<li><tt>Options = list()</tt></li>
+<li><tt>Data = list()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>
+  Calculate the coordinates
+  Point: [Id,...]
+  Line: [{LeftId,RightId},...]
+  Shape: organic | circular | rectangular | vertical
+  Size:{width,height}
+  Options:[{exclude,Point}]
+  Data: [{Id1,{X1,Y1}},{Id2,{X2,Y2}},...]
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre> api_nnm:calculateCoordinate(['1','2','3','4'],[{'1','3'},{'2','4'},{'1','2'},{'1','4'}],circular,{32.0,32.0},[{exclude,[{'1',{1,3}},{'2',{3,4}}]}]).
+  	return: {ok,[{'1',"15","15"},
+       {'2',"15","90"},
+       {'3',"90","15"},
+       {'4',"90","90"}]}
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="db_delete-2">db_delete/2</a></h3>
+<div class="spec">
+<p><tt>db_delete(TableName, IdList) -&gt; ok | error</tt>
+<ul class="definitions"><li><tt>TableName = string()</tt></li>
+<li><tt>IdList = list()</tt></li>
+</ul></p>
+</div><p>
+  delete data in db</p>
+
+<h3 class="function"><a name="db_read-4">db_read/4</a></h3>
+<div class="spec">
+<p><tt>db_read(TableName, ColList, Where, Order) -&gt; [] | Data</tt>
+<ul class="definitions"><li><tt>TableName = string()</tt></li>
+<li><tt>ColList = list()</tt></li>
+<li><tt>Where = list()</tt></li>
+<li><tt>Order = list()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get data from db
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>api_nnm:db_read("machine",[id,host],[],"")
+ 
+  	[[{id,'1290:674274:47002'},{host,"192.168.9.16"}],
+   [{id,'1290:674274:62002'},{host,"192.168.9.47"}],
+   [{id,'1290:674274:78002'},{host,"192.168.9.116"}],
+   [{id,'1290:674274:93000'},{host,"192.168.9.134"}],
+   [{id,'1290:674274:109002'},{host,"192.168.0.248"}],
+   [{id,'1290:674274:31003'},{host,"192.168.0.238"}],
+   [{id,'1290:674274:15002'},{host,"192.168.0.251"}],
+   [{id,'1290:674274:2'},{host,"192.168.0.176"}],
+   [{id,'1290:674273:984005'},{host,"192.168.0.162"}],
+   [{id,'1290:674273:984001'},{host,"192.168.0.52"}],
+   [{id,'1290:674273:937001'},{host,"192.168.0.50"}],
+   [{id,'1290:674273:968002'},{host,"192.168.0.51"}],
+   [{id,'1290:674273:937000'},{host,"192.168.0.16"}]]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="db_write-2">db_write/2</a></h3>
+<div class="spec">
+<p><tt>db_write(TableName, Data) -&gt; [] | IdList</tt>
+<ul class="definitions"><li><tt>TableName = string()</tt></li>
+<li><tt>Data = list()</tt></li>
+<li><tt>IdList = list()</tt></li>
+</ul></p>
+</div><p>
+  add or update data to db</p>
+
+<h3 class="function"><a name="device_refresh-1">device_refresh/1</a></h3>
+<div class="spec">
+<p><tt>device_refresh(Params::Param) -&gt; Data | []</tt>
+<ul class="definitions"><li><tt>Param = list()</tt></li>
+<li><tt>Data = <a href="#type-machine">machine()</a></tt></li>
+</ul></p>
+</div><p>
+  get device info</p>
+
+<h3 class="function"><a name="device_submit-1">device_submit/1</a></h3>
+<div class="spec">
+<p><tt>device_submit(Device) -&gt; Id</tt>
+<ul class="definitions"><li><tt>Device = list()</tt></li>
+<li><tt>Id = atom()</tt></li>
+</ul></p>
+</div><p>
+  add or update device info
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre> Device = [{id,''},{name,""},{sysName,""},{ip,""},{devTypeName,""},{baseMac,""},{snmpFlag,""},{snmpParam,[]},{telnetFlag,[]},{telnetParam,[]},
+  {devType,""},{devFactory,""},{devModel,""},{sysDescr,""},{sysobjectId,""},{sysSvcs,""},{ipAddr,[]},{macs,[]},{infs,[]}],
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="ipDistribution-2">ipDistribution/2</a></h3>
+<div class="spec">
+<p><tt>ipDistribution(StartIp, EndIp) -&gt; Data | []</tt>
+<ul class="definitions"><li><tt>StartIp = string()</tt></li>
+<li><tt>EndIp = string()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>api_nnm:ipDistribution("192.168.0.1", "192.168.0.10")
+  return:[{active,[[{id,'98587B2AF9799CAAB5EC2DE6157C0AEB4B606E57'},
+             {ip,"192.168.0.8"},
+             {mac,"5AAC.B43C.6862"},
+             {name,[]},
+             {type,[]},
+             {discoverTime,"2011-03-07 11:38:17"},
+             {activeTime,"2011-04-18 10:44:29"}],
+            [{id,'A5FF1A858A6824B0E8E645FD281B3C7156A83E4C'},
+             {ip,"192.168.0.5"},
+             {mac,"000C.29C5.3389"},
+             {name,[]},
+             {type,[]},
+             {discoverTime,"2011-03-07 11:38:17"},
+             {activeTime,"2011-04-18 10:44:29"}],
+            [{id,'2231C977487E9396587C353ADAC2AF68DAB730C7'},
+             {ip,"192.168.0.3"},
+             {mac,"0014.784E.0143"},
+             {name,[]},
+             {type,[]},
+             {discoverTime,"2011-03-07 11:38:17"},
+             {activeTime,"2011-04-18 10:44:29"}],
+            [{id,'BED19489B29BA57C635239456F61A649941BE1C8'},
+             {ip,"192.168.0.1"},
+             {mac,"0014.784D.2851"},
+             {name,[]},
+             {type,[]},
+             {discoverTime,"2011-03-07 11:38:17"},
+             {activeTime,"2011-04-18 10:44:29"}]]},
+   {inactive,[]},
+   {invalid,["192.168.0.10","192.168.0.9","192.168.0.7",
+             "192.168.0.6","192.168.0.4","192.168.0.2"]}]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="monitor_get_device_data-2">monitor_get_device_data/2</a></h3>
+<div class="spec">
+<p><tt>monitor_get_device_data(Target, Param) -&gt; Data</tt>
+<ul class="definitions"><li><tt>Target = aftTable | arpTable | cpuTable | memoryTable | linkchart</tt></li>
+<li><tt>Param = {id, list()} | {ip, list()} | {mac, list()}</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get (ipTable,arpTable,aftTable,cpuTable,memoryTable,linkchart) from monitor service
+  <br>
+  <dl>
+  <dt><em>return data format: [{id,ip,data}]</em></dt>
+  	<dd><pre>target:
+  aftTable:[{portIndex,mac,ip,status}]
+  arpTable:[{ifIndex,mac,ip,type}]
+  cpuTable:[used]
+  memoryTable:[{size,used}]
+ 
+  linkchart:[{leftDeviceId,leftPort,leftIf,leftDescr,leftAlias,rightDeviceId,rightPort,rightIf,rightDescr,rightAlias}]
+  	</pre></dd>
+  	</dl>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>Id = ['1288:93026:981001','1288:93026:934000']
+    Target = ipTable
+ 
+  return:[{'1288:93026:981001',"192.168.0.254",
+   [{"127.0.0.1","128","255.0.0.0"},
+    {"192.168.0.254","4358","255.255.255.0"},
+    {"192.168.3.1","3846","255.255.255.0"},
+    {"192.168.4.1","3974","255.255.255.0"}]},
+  {'1288:93026:934000',"192.168.0.252",
+   [{"127.0.0.1","128","255.0.0.0"},
+    {"192.168.0.252","3718","255.255.255.0"}]}]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="monitor_get_interval-0">monitor_get_interval/0</a></h3>
+<div class="spec">
+<p><tt>monitor_get_interval() -&gt; [] | Data</tt>
+<ul class="definitions"><li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get monitor interval time
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>
+    return:[{flowTable,600},{arpTable,180},{aftTable,300}]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="monitor_get_port_data-2">monitor_get_port_data/2</a></h3>
+<div class="spec">
+<p><tt>monitor_get_port_data(Target, IfList::PortList) -&gt; Data</tt>
+<ul class="definitions"><li><tt>Target = octets | ucastPkts | nUcastPkts | discards | errors | bandwidthRate | operStatus</tt></li>
+<li><tt>PortList = list()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get flow from monitor service
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>PortList = [{'1290:674274:109002',["10004","10005"]}]
+    Target = octets
+ 
+  return:[{'1290:674274:109002',"192.168.0.248",
+                         [{"10004",["0","0","0"]},
+                          {"10005",["864296","818399","45897"]}]}]
+ 
+  target = bandwidthRate
+  return:[{'1290:674274:109002',"192.168.0.248",
+                         [{"10004","0.00"},{"10005","0.01"}]}]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="monitor_set_interval-1">monitor_set_interval/1</a></h3>
+<div class="spec">
+<p><tt>monitor_set_interval(Time) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Time = list()</tt></li>
+</ul></p>
+</div><p>
+  set monitor interval time.
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>Time = [{flowTable,600},{arpTable,180},{aftTable,300}]
+ 
+    return:ok
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="reLayout-2">reLayout/2</a></h3>
+<div class="spec">
+<p><tt>reLayout(TopochartId, Shape) -&gt; true | false</tt>
+<ul class="definitions"><li><tt>TopochartId = atom()</tt></li>
+<li><tt>Shape = atom()</tt></li>
+</ul></p>
+</div><p>
+  Shape: organic | circular | rectangular | vertical</p>
+
+<h3 class="function"><a name="realtime_target_get-2">realtime_target_get/2</a></h3>
+<div class="spec">
+<p><tt>realtime_target_get(Id, Target) -&gt; {Ip, Value} | []</tt>
+<ul class="definitions"><li><tt>Id = atom()</tt></li>
+<li><tt>Target = ipTable | interfaceTable | routeTable | aftTable | arpTable | cpuTable | memoryTable | directTable | ospfTable | bgpTable</tt></li>
+<li><tt>Ip = string()</tt></li>
+<li><tt>Value = list()</tt></li>
+</ul></p>
+</div><p>
+  get (ipTable,interfaceTable,routeTable,arpTable,aftTable,cpuTable,memoryTable) real-time
+  <br>
+  <dl>
+  <dt><em>return data format: {ip,data}</em></dt>
+  	<dd><pre>target:
+  ipTable:[{ip,ifIndex,mask}]
+  interfaceTable:[{ifIndex,ifDescr,ifType,ifMtu,ifSpeed,ifMac,ifAdminStatus,ifOperStatus,ifLastChange,ifInOctets,ifInUcastPkts,
+  						  	ifInNUcastPkts,ifInDiscards,ifInErrors,ifInUnknownProtos,ifOutOctets,ifOutUcastPkts,ifOutNUcastPkts,
+  							ifOutDiscards,ifOutErrors,ifOutQLen,ifAlias}]
+  routeTable:[{destIp,ifIndex,nextHop,type,proto,mask}]
+  aftTable:[{portIndex,mac,status}]
+  arpTable:[{ifIndex,mac,ip,type}]
+  cpuTable:[used]
+  memoryTable:[{size,used}]
+  directTable:[{address,ifIndex,version,deviceId,devicePort,platform,vtpMgmtDomain,nativeVLAN,duplex,mtu}]
+  ospfTable:[{index,ipAddr}]
+  bgpTable:[{localAddr,localPort,remoteAddr,remotePort}]
+  	</pre></dd>
+  	</dl>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>Id = '1288:93026:981001'
+    Target = ipTable
+ 
+  return:{"192.168.0.254",
+   [{"127.0.0.1","128","255.0.0.0"},
+    {"192.168.0.254","4358","255.255.255.0"},
+    {"192.168.3.1","3846","255.255.255.0"},
+    {"192.168.4.1","3974","255.255.255.0"}]}
+ 
+  Target = routeTable
+ 
+    return:{"192.168.0.254",
+   [{"0.0.0.0","4358","192.168.0.1","4",2,"0.0.0.0"},
+    {"192.168.0.0","4358","192.168.0.254","3",2,"255.255.255.0"},
+    {"192.168.0.254","128","127.0.0.1","3",2,"255.255.255.255"},
+    {"192.168.1.0","4358","192.168.0.249","4",2,"255.255.255.0"},
+    {"192.168.3.0","4358","192.168.0.249","4",2,"255.255.255.0"},
+    {"192.168.4.0","4358","192.168.0.249","4",2,"255.255.255.0"},
+    {"192.168.5.0","4358","192.168.0.249","4",2,"255.255.255.0"},
+    {"192.168.7.0","4358","192.168.4.3","4",2,"255.255.255.0"}]}
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="scan_config_delete-1">scan_config_delete/1</a></h3>
+<div class="spec">
+<p><tt>scan_config_delete(Param) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Param = [] | [{id, atom()}] | [{name, string()}]</tt></li>
+<li><tt>Id = atom()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  delete scan config
+  <br>
+  	<pre>
+  when Param is [],delete all config except default.default config can not be deleted
+  </pre></p>
+
+<h3 class="function"><a name="scan_config_get-1">scan_config_get/1</a></h3>
+<div class="spec">
+<p><tt>scan_config_get(Param) -&gt; [] | Data</tt>
+<ul class="definitions"><li><tt>Param = [] | [{id, atom()}] | [{name, string()}]</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get scan config
+  <br>
+  <dl>
+  <dt><em>example:</em></dt>
+  	<dd><pre>Param = [{name,"default"}] | [{id,'5940A1A4283A7495D4C956C4648045FB055BA3E7'}]
+ 
+  return: [{id,'5940A1A4283A7495D4C956C4648045FB055BA3E7'},
+   {name,"default"},
+   {defaultSnmpParam,[{snmpVer,"v2"},
+                      {port,161},
+                      {getCommunity,"public"},
+                      {timeout,500},
+                      {authType,[]},
+                      {user,[]},
+                      {passwd,[]},
+                      {privPasswd,[]},
+                      {contextId,[]},
+                      {contextName,[]}]},
+   {defineSnmpParam,[[{ip,"192.168.0.248"},
+                      {snmpVer,"v2"},
+                      {port,161},
+                      {getCommunity,"dragon"},
+                      {timeout,500}],
+                     [{ip,"192.168.0.251"},
+                      {snmpVer,"v2"},
+                      {port,161},
+                      {getCommunity,"public1"},
+                      {timeout,500}],
+                     [{ip,"192.168.0.254"},
+                      {snmpVer,"v2"},
+                      {port,161},
+                      {getCommunity,"public1"},
+                      {timeout,500}]]},
+   {scanParam,[{scanSeed,"192.168.0.248"},
+               {threads,30},
+               {depth,3},
+               {scanType,"snmpping"}]}]
+  	</pre></dd>
+  </dl></p>
+
+<h3 class="function"><a name="scan_config_submit-1">scan_config_submit/1</a></h3>
+<div class="spec">
+<p><tt>scan_config_submit(ScanConfig) -&gt; {error, Reason} | {ok, Id}</tt>
+<ul class="definitions"><li><tt>ScanConfig = list()</tt></li>
+<li><tt>Id = atom()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  add or update scan config.ScanConfig contain {id,''} is update,not is add
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>DefaultSnmpParam = [{snmpVer,"v1"},{port,161},{getCommunity,"public"},{timeout,500},{authType,""},
+  	  	{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""}]
+  DefineSnmpParam = [[{ip,"192.168.0.249"},{snmpVer,"v1"},{port,161},{getCommunity,"public"},{timeout,500}],[{ip,"192.168.0.254"},{snmpVer,"v1"},{port,161},{getCommunity,"public1"},{timeout,500}]]
+  ScanParam = [{scanSeed,"192.168.0.249"},{includeIp,"192.168.1.0-192.168.1.11"},{excludeIp,"192.168.1.2-192.168.1.5"},{threads,50},{depth,3},{scanType,"snmpping"}]
+  Name = "default"
+  ScanConfig = [{name,Name},{defaultSnmpParam,DefaultSnmpParam},{defineSnmpParam,DefineSnmpParam},{scanParam,ScanParam}]
+ 
+  return: {ok,'FBDA2E26073DF6FEF5770E1AC554717F979BF411'}
+ 
+  scanType: "snmpping" | "nmap" | "arp"
+  snmpVer: "v1" | "v2" | "v3"
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="scan_info_get-1">scan_info_get/1</a></h3>
+<div class="spec">
+<p><tt>scan_info_get(Param) -&gt; [] | Info</tt>
+<ul class="definitions"><li><tt>Param = [{index, integer()}]</tt></li>
+<li><tt>Info = list()</tt></li>
+</ul></p>
+</div><p>
+  if return list contain "end scan",scan overy.
+  <br>
+  	<dl>
+  	<dt><em>example: </em></dt>	
+  	<dd><pre>return:
+  ["start scan...",
+   "find device:192.168.0.248 ROUTE_SWITCH Cisco",
+   "find device:192.168.9.134 Host Microsoft",
+   "find device:192.168.9.116 Host Microsoft",
+   "find device:192.168.9.63 Host Microsoft",
+   "find device:192.168.9.16 Host Microsoft",
+   "find device:192.168.0.238 Host Microsoft",
+   "find device:192.168.0.251 SWITCH Cisco",
+   "find device:192.168.0.181 SERVER Linux",
+   "find device:192.168.0.176 Host Microsoft",
+   "find device:192.168.0.254 ROUTE_SWITCH Huawei",
+   "find device:192.168.0.162 Host CheckPoint",
+   "find device:192.168.0.52 Host Microsoft",
+   "find device:192.168.0.50 Host Microsoft",
+   "find device:192.168.0.51 Host Microsoft",
+   "find device:192.168.0.16 SERVER Linux","end scan"]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="scan_start-1">scan_start/1</a></h3>
+<div class="spec">
+<p><tt>scan_start(Param) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Scan = [{configId, atom()}]</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  start scan</p>
+
+<h3 class="function"><a name="scan_stop-1">scan_stop/1</a></h3>
+<div class="spec">
+<p><tt>scan_stop(Param::_Param) -&gt; ok | error</tt></p>
+</div><p>
+  stop scan</p>
+
+<h3 class="function"><a name="snmp_get-2">snmp_get/2</a></h3>
+<div class="spec">
+<p><tt>snmp_get(SnmpParam, Oid) -&gt; {ok, {Oid, Value}} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>SnmpParam = list()</tt></li>
+<li><tt>Oid = string()</tt></li>
+<li><tt>Value = binary()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>snmp get
+ 	<br>
+   <dl>
+  	<dt><em>example: </em></dt>
+   <dd><pre> SnmpParam = [{ip,"192.168.0.254"},{port,161},{snmpVer,"v1"},{getCommunity,"public1"},{setCommunity,"private"},{authType,""},
+  	  	{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""},{timeout,500}]
+ Oid = "1.3.6.1.2.1.1.1"
+ 
+ return:{ok,{"1.3.6.1.2.1.1.1",&lt;&lt;131,107,0,173,72,117,97,119,101,105,32,86,101,114,115, 97,116,105,108,101,32,82,111,117,116,...&gt;&gt;&gt;}}
+  </pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="snmp_get_bulk-4">snmp_get_bulk/4</a></h3>
+<div class="spec">
+<p><tt>snmp_get_bulk(SnmpParam, Oid, NRep, MaxRep) -&gt; {ok, Data} | {error, []}</tt>
+<ul class="definitions"><li><tt>SnmpParam = list()</tt></li>
+<li><tt>Oid = string()</tt></li>
+<li><tt>NRep = integer()</tt></li>
+<li><tt>MaxRep = integer()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  snmp get bulk</p>
+
+<h3 class="function"><a name="snmp_get_next-2">snmp_get_next/2</a></h3>
+<div class="spec">
+<p><tt>snmp_get_next(SnmpParam, Oid) -&gt; {ok, {Oid, Value}} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>SnmpParam = list()</tt></li>
+<li><tt>Oid = string()</tt></li>
+<li><tt>Value = binary()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>snmp get next
+ 	<br>
+   <dl>
+  	<dt><em>example: </em></dt>
+   <dd><pre> SnmpParam = [{ip,"192.168.0.254"},{port,161},{snmpVer,"v1"},{getCommunity,"public1"},{setCommunity,"private"},{authType,""},
+  	  	{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""},{timeout,500}]
+ Oid = "1.3.6.1.2.1.1.1"
+ 
+ return:{ok,{"1.3.6.1.2.1.1.1",&lt;&lt;131,107,0,173,72,117,97,119,101,105,32,86,101,114,115, 97,116,105,108,101,32,82,111,117,116,...&gt;&gt;&gt;}}
+  </pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="snmp_get_tree-2">snmp_get_tree/2</a></h3>
+<div class="spec">
+<p><tt>snmp_get_tree(SnmpParam, Oid) -&gt; {ok, Data} | {error, []}</tt>
+<ul class="definitions"><li><tt>SnmpParam = list()</tt></li>
+<li><tt>Oid = string()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  snmp get col
+ 	<br>
+   <dl>
+  	<dt><em>example: </em></dt>
+   <dd><pre> SnmpParam = [{ip,"192.168.0.254"},{port,161},{snmpVer,"v1"},{getCommunity,"public1"},{setCommunity,"private"},{authType,""},
+  	  	{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""},{timeout,500}]
+ Oid = "1.3.6.1.2.1.1.1"
+ 
+ return: {ok,[{"1.3.6.1.2.1.1.1.0",
+        &lt;&lt;131,107,0,173,72,117,97,119,101,105,32,86,101,114,115,
+          97,116,105,108,101,32,82,111,117,...&gt;&gt;},
+       {"1.3.6.1.2.1.1.2.0",
+        &lt;&lt;131,108,0,0,0,10,97,1,97,3,97,6,97,1,97,4,97,1,98,0,0,
+          7,219,...&gt;&gt;},
+       {"1.3.6.1.2.1.1.3.0",&lt;&lt;131,98,1,30,167,152&gt;&gt;},
+       {"1.3.6.1.2.1.1.4.0",
+        &lt;&lt;131,107,0,41,82,38,68,32,66,101,105,106,105,110,103,44,
+          32,72,117,97,119,...&gt;&gt;},
+       {"1.3.6.1.2.1.1.5.0",
+        &lt;&lt;131,107,0,7,81,117,105,100,119,97,121&gt;&gt;},
+       {"1.3.6.1.2.1.1.6.0",
+        &lt;&lt;131,107,0,13,66,101,105,106,105,110,103,32,67,104,105,
+          110,97&gt;&gt;},
+       {"1.3.6.1.2.1.1.7.0",&lt;&lt;131,97,78&gt;&gt;}]}
+  </pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="snmp_set-2">snmp_set/2</a></h3>
+<div class="spec">
+<p><tt>snmp_set(SnmpParam, VarsAndVals) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>SnmpParam = list()</tt></li>
+<li><tt>VarsAndVals = [{<a href="#type-oid">oid()</a>, <a href="#type-type">type()</a>, <a href="#type-value">value()</a>}]</tt></li>
+<li><tt>Reason = string()</tt></li>
+<li><tt><a name="type-oid">oid()</a> = string()</tt></li>
+<li><tt><a name="type-type">type()</a> = <a href="#type-o">o('OBJECT IDENTIFIER')</a> | <a href="#type-i">i('INTEGER')</a> | <a href="#type-u">u('Unsigned32')</a> | <a href="#type-g">g('Unsigned32')</a> | <a href="#type-s">s('OCTET SRING')</a> | <a href="#type-b">b('BITS')</a> | <a href="#type-ip">ip('IpAddress')</a> | <a href="#type-op">op('Opaque')</a> | <a href="#type-c32">c32('Counter32')</a> | <a href="#type-c64">c64('Counter64')</a> | <a href="#type-tt">tt('TimeTicks')</a></tt></li>
+<li><tt><a name="type-value">value()</a> = term()</tt></li>
+</ul></p>
+</div><p>snmp set
+ 	<br>
+   <dl>
+  	<dt><em>example: </em></dt>
+   <dd><pre> SnmpParam = [{ip,"192.168.0.254"},{port,161},{snmpVer,"v1"},{getCommunity,"public1"},{setCommunity,"private1"},{authType,""},
+  	  	{user,""},{passwd,""},{privPasswd,""},{contextId,""},{contextName,""},{timeout,500}]
+ VarsAndVals = [{"1,3,6,1,2,1,2,2,1,7,1026",i,2},{"1,3,6,1,2,1,2,2,1,7,1026",i,2}]
+ 
+  </pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="telnet_close-1">telnet_close/1</a></h3>
+<div class="spec">
+<p><tt>telnet_close(Pid) -&gt; {ok, close} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Pid = pid()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>
+  close telnet connect</p>
+
+<h3 class="function"><a name="telnet_connect-1">telnet_connect/1</a></h3>
+<div class="spec">
+<p><tt>telnet_connect(Param) -&gt; {ok, Pid} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Param = list()</tt></li>
+<li><tt>Pid = pid()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  init telnet connection
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  <dd><pre>Param = [{host,"192.168.0.254"},{port,23}, {user,""}, {passwd,""}, {superUser,""}, {superPasswd,""},
+  					{userPrompt,""}, {passwdPrompt,""}, {prompt,""}, {superPrompt,""}, {timeout,5000}]
+ 
+  </pre></dd>
+  </dl></p>
+
+<h3 class="function"><a name="telnet_send-2">telnet_send/2</a></h3>
+<div class="spec">
+<p><tt>telnet_send(Pid, Cmd) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Cmd = string()</tt></li>
+<li><tt>Pid = pid()</tt></li>
+<li><tt>Result = string()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  send telnet command</p>
+
+<h3 class="function"><a name="topochart_delete-1">topochart_delete/1</a></h3>
+<div class="spec">
+<p><tt>topochart_delete(Id) -&gt; ok | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Id = [] | atom()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  delete topo chart
+  <br>
+  	when Id is [],delete all topo chart</p>
+
+<h3 class="function"><a name="topochart_get-1">topochart_get/1</a></h3>
+<div class="spec">
+<p><tt>topochart_get(Id) -&gt; [] | Data</tt>
+<ul class="definitions"><li><tt>Id = [] | atom()</tt></li>
+<li><tt>Data = list()</tt></li>
+</ul></p>
+</div><p>
+  get topo chart
+  <br>
+  	<dl>
+  	<dt><em>example:</em></dt>
+  	<dd><pre>return:[{id,'9F21278AA33393597AD5332724DEA0D0DF0E6A0D'},
+   {version,[{name,""},{time,""}]},
+   {edge,[[{leftIndex,"16"},
+           {leftPort,"16"},
+           {leftDescr,"FastEthernet0/16"},
+           {leftAlias,[]},
+           {leftDeviceId,[]},
+           {rightIndex,"0"},
+           {rightPort,"PX"},
+           {rightDescr,[]},
+           {rightAlias,[]},
+           {rightDeviceId,[]}],
+          [{leftIndex,"21"},
+           {leftPort,"21"},
+           {leftDescr,"FastEthernet0/21"},
+           {leftAlias,[]},
+           {leftDeviceId,[]},
+           {rightIndex,"0"},
+           {rightPort,"PX"},
+           {rightDescr,[]},
+           {rightAlias,[]},
+           {rightDeviceId,[]}],
+          [{leftIndex,"0"},{leftPort,[...]},{leftDescr,...},{...}|...],
+          [{leftIndex,[...]},{leftPort,...},{...}|...],
+          [{leftIndex,...},{...}|...],
+          [{...}|...],
+          [...]|...]}]
+  	</pre></dd>
+  	</dl></p>
+
+<h3 class="function"><a name="topochart_submit-1">topochart_submit/1</a></h3>
+<div class="spec">
+<p><tt>topochart_submit(TopoData) -&gt; {error, Reason} | {ok, Id}</tt>
+<ul class="definitions"><li><tt>TopoData = <a href="#type-topochart_get">topochart_get(Id)</a></tt></li>
+<li><tt>Id = atom()</tt></li>
+<li><tt>Reason = string()</tt></li>
+</ul></p>
+</div><p>
+  add or update topo chart</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Apr 18 2011, 11:21:55.</i></p>
+</body>
+</html>

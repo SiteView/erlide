@@ -1,0 +1,33 @@
+目前使用selenium RC Server作为运行脚本的服务器
+
+1、需要系统安装firefox浏览器，下载selenium插件selenium IDE：http://seleniumhq.org/download/，有java环境并设置
+java的环境变量
+
+2、selenium IDE是一个集成在firefox中的插件，作为生成监测器所需测试脚本的工具，安装好之后启动seleniumIDE，IDE会
+自动记录用户在firefox上的动作，将生成的脚本以html的形式导出到ecc安装路径/templates.webscripts/之下,在选项中需要
+勾选记录baseURL和指定编码，一般默认编码为utf-8
+
+3、在本机或其他机器上启动selenium RC Server，启动这个服务需要有java运行环境
+
+4、监测器配置：
+	1、Script，下拉框显示出在templates.webscripts目录下所有的脚本文件
+	2、浏览器，selenium需要利用浏览器完成脚本测试，选择一个浏览器，注意如果所选列表没有列出你所安装的浏览器，
+	需要选择others，并在下面的文本框中输入浏览器的安装路径，如：D:\Program Files\Mozilla Firefox\firefox.exe
+	3、安装路径，如果浏览器列表中含有你所需浏览器，但它不在默认的安装路径下，请在这里填写浏览器的安装路径
+	4、selenium server host、port：填写selenium server的主机和端口，如果selenium在本机启动，server：localhost
+	默认端口为：4444
+
+5、添加监测器
+
+6、bug处理：
+对于某些情况下脚本测试失败或监测器运行异常的处理，可能由于不同浏览器的设置导致
+1、在编辑浏览器时，如果选择others，并填写浏览器的安装路径，需要手动设置浏览器的http代理，主机和端口为selenium server
+默认为：localhost:4444（selenium server的默认浏览器会在启动时自动设置http代理）
+2、如果脚本中有类似弹出窗口的事件，需要将相应浏览器的阻止弹出窗口设置为false
+3、由于selenium ide生成的脚本指定页面元素使用XPath，如果网页中某些部分的元素id是动态的可能导致在运行脚本时无法找到该
+元素,这个是目前ide的问题，在今后的版本中会做出修改，但自动记录的脚本是无法完全符合需求的，需要做一些修改。
+4、在访问某些需要https的网页时浏览器会停下来确认访问，解决的办法是，想浏览器中导入selenium RC自带的根证书，
+在selenium目录下如：\selenium-server-1.0.3\sslSupport\cybervillainsCA。导入到受信任的根证书颁发机构中即可
+5、监测器报缺少base url的情形：1、可能录制脚本的时候没有勾选记录base url的选项，需要重新录制脚本；2、可能监测器被
+配置运行到其他的节点上，而此节点的templates.webscripts没有相应的脚本文件，在配置文件中加入templaltes.webscripts文件夹，
+服务器会定时让节点去同步这个文件下内容。

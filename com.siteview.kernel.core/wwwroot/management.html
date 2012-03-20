@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[[topmenu:title()]]] - [[[page:title()]]]</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<script src='/nitrogen/jquery.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/jquery-ui.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/livevalidation.js' type='text/javascript' charset='utf-8'></script>
+		<script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
+		
+		<script src="/nitrogen/jquery.tree.js" type="text/javascript" charset='utf-8'></script>
+
+		<script type="text/javascript" src="/nitrogen/plugins/jquery.tree.checkbox.js"></script>
+
+		<link rel="stylesheet" href="/css/SiteView.css" type="text/css" media="screen" charset="utf-8">
+				
+		<style type="text/css">								
+		</style>		
+	</head>
+	<body>			
+			<div class=topmenu1>
+				[[[topmenu:render(Group)]]]
+			</div>
+			<div class=topmenu2>
+				[[[topmenu:render4(Group)]]]
+				<div class=clear></div>
+			</div>			
+	
+			<div style="text-align:left;">		
+				[[[page:body()]]]	
+			</div>
+			<!--
+			<table class=fine border=0 cellspacing=0 width=500 align=center>
+				<tr>
+					<td>
+						<p class=fine align=center>					
+						<a href="http://www.dragonflow.com/" target="web"><img src="/images/DragonFlow2_Websafe_xsml.gif"  border="" alt=""></a> 
+						<p>
+						<p class=fine align=center>
+							<small>SiteView , <a href="http://www.dragonflow.com/company/copyright.html" target="web"> Copyright &copy; 2004 </a> , All rights reserved.</small>
+						</p>
+					</td>
+				</tr>
+			</table>
+			-->
+	<br>
+	<div align=center>
+		[[[footer:render()]]]
+	</div>
+ 
+<SCRIPT language=javascript>
+	 var y=document.getElementById("page__continueButton_option");
+   if(y!=null)
+	 {
+		y.onclick=function(){
+							 setValue();
+							 };  //Ϊy¶Տ󶃯nclick˂¼�¼�͐눉 };
+	 function setValue()
+	 {
+		//document.location.reload();
+		//alert(document.getElementById("page__nameTextBox").value);
+		if(document.getElementById("page__nameTextBox").value=="")
+		{
+			//alert("yes");
+			document.getElementById("page__hintcolumm").innerHTML ="required.";
+			document.getElementById("page__nameTextBox").focus();
+			//alert(tt.innerHTML);
+		}
+		
+	 };
+</SCRIPT>
+	
+	<script>
+	[[[script]]]
+	</script>	
+	
+	<script type="text/javascript">
+
+function Ob(o){
+ var o=document.getElementById(o)?document.getElementById(o):o;
+ return o;
+}
+function Hd(o) {
+ Ob(o).style.display="none";
+}
+function Sw(o) {
+ Ob(o).style.display="";
+}
+function ExCls(o,a,b,n){
+ var o=Ob(o);
+ for(i=0;i<n;i++) {o=o.parentNode;}
+ o.className=o.className==a?b:a;
+}
+function CNLTreeMenu(id,TagName0) {
+  this.id=id;
+  this.TagName0=TagName0==""?"li":TagName0;
+  this.AllNodes = Ob(this.id).getElementsByTagName(TagName0);
+  this.InitCss = function (ClassName0,ClassName1,ClassName2,ImgUrl) 
+  {
+	  this.ClassName0=ClassName0;
+	  this.ClassName1=ClassName1;
+	  this.ClassName2=ClassName2;
+	  this.ImgUrl=ImgUrl || "/images/empty1111.gif";
+	  this.ImgBlankA ="<img width=\"1\" src=\""+this.ImgUrl+"\" class=\"s\" onclick=\"ExCls(this,'"+ClassName0+"','"+ClassName1+"',1);\" alt=\"open/close\" />";
+	  this.ImgBlankB ="<img src=\""+this.ImgUrl+"\" class=\"s\" />";
+	  for (i=0;i<this.AllNodes.length;i++ ) 
+	  {
+	   this.AllNodes[i].className==""?this.AllNodes[i].className=ClassName1:"";
+	   this.AllNodes[i].innerHTML=(this.AllNodes[i].className==ClassName2?this.ImgBlankB:this.ImgBlankA)+this.AllNodes[i].innerHTML;
+	  }
+  }
+	this.SetNodes = function (n) 
+	{
+	  var sClsName=n==0?this.ClassName0:this.ClassName1;
+	  for (i=0;i<this.AllNodes.length;i++ ) 
+	  {
+	   this.AllNodes[i].className==this.ClassName2?"":this.AllNodes[i].className=sClsName;
+	  }
+	}
+}
+var MyCNLTreeMenu1=new CNLTreeMenu("page__dynamicpanel__CNLTreeMenu1","li");
+MyCNLTreeMenu1.InitCss("Opened","Closed","Child","/images/empty1111.gif");
+
+</script>
+	</body>
+</html>

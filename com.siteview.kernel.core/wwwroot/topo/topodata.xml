@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TopGraph>
+  <Nodes>
+    <Node port="1" x="150" y="150" isSon="" isHidden="" type="1" ip="192.168.0.251">guid1</Node>
+    <Node port="514" x="50" y="50" isSon="" isHidden="" type="2" ip="192.168.0.252">guid2</Node>
+    <Node port="11" x="150" y="50" isSon="" isHidden="" type="2" ip="192.168.0.253">guid3</Node>
+    <Node port="12" x="50" y="150" isSon="" isHidden="" type="3" ip="192.168.0.254">guid4</Node>
+  </Nodes>
+  <Lines>
+    <Line>
+      <From x="150" y="150">guid1</From>
+      <To x="50" y="50">guid2</To>
+    </Line>
+    <Line>
+      <From x="150" y="150">guid1</From>
+      <To x="150" y="50">guid3</To>
+    </Line>
+    <Line>
+      <From x="150" y="150">guid1</From>
+      <To x="50" y="150">guid4</To>
+    </Line>
+  </Lines>
+</TopGraph>

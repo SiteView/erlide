@@ -1,0 +1,35 @@
+
+
+基本方法： 利用 erlang 内置的分析工具 xref 生成模块间的引用关系，手工加代码将分析结果传递给 yed 生成图片。
+参考网址：
+     xref:          http://ftp.sunet.se/pub/lang/erlang/doc/apps/tools/xref_chapter.html
+     下载yed:       http://www.yworks.com/en/products_yed_about.html
+     相关文件地址： http://dev.siteview.com/svn/svIAD/trunk/Server/doc/xref
+
+
+具体步骤：
+1、 (建议拷贝一份代码作以下操作，以免对工作代码造成误操作) 重新编译需要分析的代码，加入 debug_info 。 
+The debug_info option ensures that the BEAM file contains debug information, which makes it possible to find unused local functions.
+c(my_module, debug_info).
+
+2、运行 ref:run("D:/erlang/erlang-ecc/Server_head_version-with_debuginfo/core/ebin").
+
+3、将屏幕输出的文字，截取成两个文件，以便 java 代码分析转换。
+分析所得的所有模块存入文件：modules.txt
+分析所得的模块间调用关系存入文件：xref.txt
+其他的分析结果，也对改进代码有一定帮助。
+
+4、运行 ref.java 生成 xref.tgf ，中间也许需要一些手工编辑和代码调整
+
+5、打开 yeb , open xref.tgf, 选择喜欢的排版方式，
+   目前的排版是 Circular\ General layout style:Single Cycle , 
+                          Partition Layout Style: Organic Disk 
+                          Minimal Node Distance: 50
+   ctrl + a 选中所有 node , 在 properties\Type: shape   set font size to 20+
+   save as xref.graphml , 用记事本替换所有的  target="none"  为  target="short" 。 
+ 
+6、重新打开 xref.graphml ， 手工调整一下图片，去掉一些遮盖或不美观的地方
+   选择 export , save as png(或其他图片格式)
+   导出过程中也许需要加大内存，需要重设 yeb 启动内存最大到1024MB.
+
+

@@ -1,0 +1,57 @@
+number, 		(工单号码)
+caller, 		(报告者)
+location, 		(所在地)
+configuration_item, 	(配置项)
+impact, 		(影响)
+urgency, 		(紧急程度)
+priority, 		(优先级)
+knowledge, 		
+short_description,	(摘要)
+opened, 		(打开时间)
+opened_by, 		(打开者)
+incident_state, 	(工单状态)
+category, 		(种类)
+escalation, 		
+assignment_group, 	(分配组)
+assigned_to, 		(分配者)
+additional_comments,	(备注)
+work_notes		(描述)
+
+以上是工单目前公开的字段
+
+说明：
+工单过滤，是根据以上字段的表达式进行过滤的
+
+
+关键字：System Definition（系统设置）, Application Definition（项目设置）,Choice Lists（选择列表配置）
+
+1. 添加Application
+
+	打开 System Definition 菜单的下级菜单 Application Definition, 这样可以看到目前所有的Application, 每个Application 即对应一个 项目（Application的标题就是项目名称）, 如果Application列表中没有任何数据，那么可以点添加，打开添加Application的页面，填上标题（即项目名），选上对应的工作流名，点保存，即在Application列表中会看到新添加的Application, 同时在与二级菜单System Definition同级的菜单上会多出一个菜单节点，比如，刚刚添加的Application如果标题是 Incident, 那么与System Definition 同级的菜单上会多出一个名为Incident的菜单项目，这表示已经出现一个项目，接下来是为所对应的 Application 添加 Module。
+
+
+2. 对Application添加Module
+
+	在Application列表中对一个Application（如上面说的Incident） 点module链接，可以看到当前Application下的模块列表， 如果没有，可以点 添加， 打开 添加Module的界面， 填上标题, 过滤表达式，点保存就添加了一Module， 比如： 在应用Incident下面，添加一个Module， 标题 Assigned to me, 填上过滤表达式， incident_state=1^assigned_to=@me， 点保存，这样就为应用Incideng添加了一个 名为Assigned to me 的module, 这样，你在上一步所说的， 点Incident二级菜单， 就可以看到在第三级菜单上多一个相应的module了，可以看到是Create New和Assigned to me, 其中Create New是默认的，每个应用都会必须有的，Assigned to me是刚刚我们添加的, 
+你点这个Assigned to me菜单就会对你当前这个项目的工单，根据这个module所填写的 过滤表达式进行过滤，比如：上面所说的表达式incident_state=1^assigned_to=@me，就是过滤工单状态为Active并且分配给我的工单。
+
+
+3. 填写工单表达式
+	目前所做的过滤还比较简单，上一步，我们在Incident下添加了 一个 Assigned to me, 在Application所对应的module列表里面，上步我们添加的Assigned to me, 对其点标题，打开编辑Module的页面，标题是必须的填写项目，其中里面有个Filter的字段项对应一个多行的文本框，可以在着里面填过滤表达式，如: incident_state=1^assigned_to=@me, 这上一步所添加的Assigned to me模块中所填写的过滤表达式, 下面来解释下这个表达式的填写格式：
+
+	以上所有工单字段中， 如果我们要过滤工单号码是INC0010101, 我们的表达式就是number=INC0010101, 如果要多加一个条件那么，条件是分给admin的工单，那么表达式是assigned_to=admin，如果要两个条件同时满足, 表达式为 number=INC0010101^assigned_to=admin, 意思是工单号码为INC0010101, 并且分配给用户admin的工单。
+	注意： 如果要填写分配给我的工单这个条件 assigned_to=@me，这就表示是分给我的工单的表达式，就会过滤出分配给当前用户的工单。所有字段的值，在添加工单的时候填写或者或选择。
+
+
+4. 工单的某些字段, 是可以配置的，点开System Definition, 选Choice Lists, 就可以看到所有Choices的列表，对一些工单字段进行配置了， 以下是可以添加的配置项
+
+目前可以配置的字段有：
+	
+	字 段		Table			Element		Label		值
+
+	impact，	task			impact		用户定义	用户定义
+	urgency，	task			urgency		用户定义	用户定义
+	priority，	task			priority	用户定义	用户定义
+	category，	incident		category	用户定义	用户定义
+	escalation，	Escalation		escalation	用户定义	用户定义
+	

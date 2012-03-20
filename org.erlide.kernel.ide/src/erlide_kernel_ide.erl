@@ -8,8 +8,18 @@ init() ->
 	spawn(fun()->
 				  erlide_scanner_listener:start(),
 				  object:start(),
-				  resource_pool:start(),
-				  loadtest:test(load,10),
+				  content_store:start(), %TODO: set the db directory
+				  application:start(quickstart_mochiweb),
+				  application:start(svecc),
+				  application:start(crypto),
+				  application:start(ssh),
+				  application:start(gettext),
+				  gettext:recreate_db(),
+				  license:start(),	
+				  wmic:start(),
+				  extension_sup:start(),
+				  nnm_start:start(),
+				  %%TODO: start java-node seperately
 				  ok
 		  end),
 	ok.

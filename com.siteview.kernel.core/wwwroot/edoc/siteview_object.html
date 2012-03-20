@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Abstract module siteview_object []</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Abstract module siteview_object []</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>object base class.
+<p>Copyright © 2009 dragonflow.com</p>
+
+<p><b>Authors:</b> Shi xianfang (<a href="mailto:xianfang.shi@dragonflow.com"><tt>xianfang.shi@dragonflow.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>object base class
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#createObject-1">createObject/1</a></td><td>user Data to create a object instance,the object Class contains in Data.</td></tr>
+<tr><td valign="top"><a href="#createObject-2">createObject/2</a></td><td>create a object,and set it's parent.</td></tr>
+<tr><td valign="top"><a href="#getFullID-0">getFullID/0</a></td><td>get object's indentify.</td></tr>
+<tr><td valign="top"><a href="#get_attribute_as_number-1">get_attribute_as_number/1</a></td><td>get a attribute's value as number format,if the Key's value can not format as a number format,return 0.</td></tr>
+<tr><td valign="top"><a href="#get_attribute_as_number-2">get_attribute_as_number/2</a></td><td>get a attribute's value as number format,if the Key's value can not format as a number format,return Default.</td></tr>
+<tr><td valign="top"><a href="#get_owner-0">get_owner/0</a></td><td>get the object's parent.</td></tr>
+<tr><td valign="top"><a href="#get_property_as_number-1">get_property_as_number/1</a></td><td>get a property's value as number format,if the Key's value can not format as a number format,return 0.</td></tr>
+<tr><td valign="top"><a href="#get_property_as_number-2">get_property_as_number/2</a></td><td>get a property's value as number format,if the Key's value can not format as a number format,return Default.</td></tr>
+<tr><td valign="top"><a href="#set_owner-1">set_owner/1</a></td><td>set the object's parent.</td></tr>
+<tr><td valign="top"><a href="#sleep-1">sleep/1</a></td><td></td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="createObject-1">createObject/1</a></h3>
+<div class="spec">
+<p><tt>createObject(Data) -&gt; Obj</tt>
+<ul class="definitions"><li><tt>Data = [{atom(), term()}]</tt></li>
+<li><tt>Obj = <a href="#type-instance">instance()</a></tt></li>
+</ul></p>
+</div><p>user Data to create a object instance,the object Class contains in Data</p>
+
+<h3 class="function"><a name="createObject-2">createObject/2</a></h3>
+<div class="spec">
+<p><tt>createObject(Parent, Data) -&gt; Obj</tt>
+<ul class="definitions"><li><tt>Parent = atom()</tt></li>
+<li><tt>Data = [{atom(), term()}]</tt></li>
+</ul></p>
+</div><p>create a object,and set it's parent</p>
+
+<h3 class="function"><a name="getFullID-0">getFullID/0</a></h3>
+<div class="spec">
+<p><tt>getFullID() -&gt; atom()</tt></p>
+</div><p>get object's indentify</p>
+
+<h3 class="function"><a name="get_attribute_as_number-1">get_attribute_as_number/1</a></h3>
+<div class="spec">
+<p><tt>get_attribute_as_number(Key) -&gt; integer()</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+</ul></p>
+</div><p>get a attribute's value as number format,if the Key's value can not format as a number format,return 0</p>
+
+<h3 class="function"><a name="get_attribute_as_number-2">get_attribute_as_number/2</a></h3>
+<div class="spec">
+<p><tt>get_attribute_as_number(Key, Default) -&gt; integer()</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Dafault = integer()</tt></li>
+</ul></p>
+</div><p>get a attribute's value as number format,if the Key's value can not format as a number format,return Default</p>
+
+<h3 class="function"><a name="get_owner-0">get_owner/0</a></h3>
+<div class="spec">
+<p><tt>get_owner() -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Result = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>get the object's parent</p>
+
+<h3 class="function"><a name="get_property_as_number-1">get_property_as_number/1</a></h3>
+<div class="spec">
+<p><tt>get_property_as_number(Key) -&gt; integer()</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+</ul></p>
+</div><p>get a property's value as number format,if the Key's value can not format as a number format,return 0</p>
+
+<h3 class="function"><a name="get_property_as_number-2">get_property_as_number/2</a></h3>
+<div class="spec">
+<p><tt>get_property_as_number(Key, Default) -&gt; integer()</tt>
+<ul class="definitions"><li><tt>Key = atom()</tt></li>
+<li><tt>Dafault = integer()</tt></li>
+</ul></p>
+</div><p>get a property's value as number format,if the Key's value can not format as a number format,return Default
+ </p>
+
+<h3 class="function"><a name="set_owner-1">set_owner/1</a></h3>
+<div class="spec">
+<p><tt>set_owner(Owner) -&gt; {ok, Result} | {error, Reason}</tt>
+<ul class="definitions"><li><tt>Owner = atom()</tt></li>
+<li><tt>Result = term()</tt></li>
+<li><tt>Reason = atom()</tt></li>
+</ul></p>
+</div><p>set the object's parent</p>
+
+<h3 class="function"><a name="sleep-1">sleep/1</a></h3>
+<div class="spec">
+<p><tt>sleep(Val) -&gt; ok</tt>
+<ul class="definitions"><li><tt>Val = integer</tt></li>
+</ul></p>
+</div>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Dec 21 2009, 10:35:15.</i></p>
+</body>
+</html>
