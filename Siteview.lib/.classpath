@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="dom4j-2.0.0-ALPHA-2.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-fileupload-1.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-io-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="groovy-all-1.8.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="siteview.client.jar" sourcepath="/siteview.client/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.remotingliaison.jar" sourcepath="/siteview.remotingliaison/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry exported="true" kind="lib" path="Accessibility.jar"/>
+	<classpathentry exported="true" kind="lib" path="activemq-all-5.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="AdminLoader.jar"/>
+	<classpathentry exported="true" kind="lib" path="adminstart.jar"/>
+	<classpathentry exported="true" kind="lib" path="BPCore.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.change.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.configuration.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.extensions.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.incident.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.main.jar"/>
+	<classpathentry exported="true" kind="lib" path="core.module.problem.jar"/>
+	<classpathentry exported="true" kind="lib" path="Dragonflow.logger.jar"/>
+	<classpathentry exported="true" kind="lib" path="DragonFlow.OutlookIntegration.jar"/>
+	<classpathentry exported="true" kind="lib" path="dragonflow.schedulerlib.jar" sourcepath="/dragonflow.schedulerlib/src"/>
+	<classpathentry exported="true" kind="lib" path="dragonflow.utils.jar"/>
+	<classpathentry exported="true" kind="lib" path="FSMTCommon.jar" sourcepath="/FSMTCommon/src"/>
+	<classpathentry exported="true" kind="lib" path="J2SE.Helpers.jar"/>
+	<classpathentry exported="true" kind="lib" path="log4j-1.2.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="Mainsoft.Configuration.jar"/>
+	<classpathentry exported="true" kind="lib" path="Mainsoft.Web.jar"/>
+	<classpathentry exported="true" kind="lib" path="mscorlib.jar"/>
+	<classpathentry exported="true" kind="lib" path="Novell.Directory.Ldap.jar"/>
+	<classpathentry exported="true" kind="lib" path="serializer.jar"/>
+	<classpathentry exported="true" kind="lib" path="Siteview.Api.jar" sourcepath="/siteview.api/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.asd.jar" sourcepath="/siteview.asd/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.businesslogic.jar" sourcepath="/siteview.businesslogic/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.database.jar" sourcepath="/siteview.database/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.dbliaison.jar" sourcepath="/siteview.dbliaison/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.definitionrepositories.jar" sourcepath="/siteview.definitionrepositories/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.definitiontransformation.jar" sourcepath="/siteview.definitiontransformation/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.email.jar" sourcepath="/siteview.email/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.foundation.internal.jar"/>
+	<classpathentry exported="true" kind="lib" path="siteview.foundation.jar" sourcepath="/siteview.foundation/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.instrumentation.jar"/>
+	<classpathentry exported="true" kind="lib" path="siteview.isolatestore.jar" sourcepath="/siteview.isolatestore/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.module.main.jar"/>
+	<classpathentry exported="true" kind="lib" path="siteview.presentation.jar" sourcepath="/siteview.presentation/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.server.jar" sourcepath="/siteview.server/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.services.jar" sourcepath="/siteview.services/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.settings.jar" sourcepath="/siteview.settings/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.utilities.jar" sourcepath="/sitview.utilities/src"/>
+	<classpathentry exported="true" kind="lib" path="siteview.xml.jar" sourcepath="/siteview.xml/src"/>
+	<classpathentry exported="true" kind="lib" path="sqljdbc4.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Configuration.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Data.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Data.OracleClient.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Deployment.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.DirectoryServices.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Drawing.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.EnterpriseServices.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Runtime.Remoting.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Runtime.Serialization.Formatters.Soap.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Web.Extensions.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Web.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Windows.Forms.jar"/>
+	<classpathentry exported="true" kind="lib" path="System.Xml.jar"/>
+	<classpathentry exported="true" kind="lib" path="xalan.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
