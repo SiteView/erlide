@@ -82,7 +82,8 @@ request(Name,Session,RequestType) ->
 	Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
 	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
 	eresye:assert(?LOGNAME, {Name,Session,now(),RequestType}),
-	if Counter < Max -> 
+	case length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})) < Max of  
+	   true -> 
 		   if  QueueLen == 0 ->
 				   eresye:assert(Name,{Session,resource_allocated}),%%trigger the pattern in monitor, invoking the update_action in indidual [NAME] monitor
 				   eresye:assert(?LOGNAME, {Name,Session,now(),allocate_resource}),
@@ -91,7 +92,7 @@ request(Name,Session,RequestType) ->
 				   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType}),
 		   		   allocate_next(ResourceType) 		   
 		   	   end;
-	   true -> %%add into queue
+	   _ -> %%add into queue
 		   eresye:assert(?POOLNAME, {ResourceType,Name,Session,now(),waiting_for_resource,RequestType})
 	end.
 
@@ -106,14 +107,16 @@ release(Name,Session) ->
 	eresye:retract_match(?POOLNAME,{ResourceType,Name,Session,'_'}),
 	QueueLen = erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})),
 
-	if QueueLen == 0 ->
-		  nil;
-	   true -> %get the next item to run and drop it from the queue
-		   allocate_next(ResourceType) ,
+	case erlang:length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_',waiting_for_resource,'_'})) == 0 of
+	   true -> nil;
+	   _ -> %get the next item to run and drop it from the queue
+		   allocate_next(ResourceType) 
 		   
-	   	   Max = get_max(ResourceType),
-		   Counter = length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})),
-		   if(Counter<Max) -> allocate_next(ResourceType) ; true->nil end
+%% 	   	   Max = get_max(ResourceType),
+%% 	   	   case length(eresye:query_kb(?POOLNAME, {ResourceType,'_','_','_'})) < Max of 
+%% 			   true -> allocate_next(ResourceType) ; 
+%% 			   Other-> nil 
+%% 		   end
 		  %%TODO: if run time out, should still release the resource
 	end.
 

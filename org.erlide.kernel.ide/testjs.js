@@ -1,6 +1,6 @@
 exports = {
     sys: require({module: "beamjs_mod_sys"}),
-    ping_monitor: require({module: "ping_monitor"})
+    object: require({module: "object"})
 };
 
 //var sys = require({module: "beamjs_mod_sys"});
@@ -27,7 +27,7 @@ analysis_ping_Data= function (name, attrnames, data)
 
 	//exports.ping_monitor.analysis_Data(x);
 	
-	var values = exports.ping_monitor.js_getTimedValue(name, attrnames);
+	var values = exports.object.getTimedValue(name, attrnames);
 
 	/*var beamjs = require({module: "beamjs_mod_beamjs"}),
 	 beamjs.VM.current.run(expr, function (result) {

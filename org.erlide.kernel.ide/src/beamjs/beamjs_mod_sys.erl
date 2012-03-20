@@ -12,6 +12,7 @@ exports(_VM) ->
 
 print(#erlv8_fun_invocation{ vm = VM} = _Invocation, [Expr]) ->
 	io:format("~s",[erlv8_vm:to_detail_string(VM,Expr)]),
+%% 	io:format("~s",[Expr]),
 	undefined.
 
 inspect(#erlv8_fun_invocation{ vm = VM} = _Invocation, [Expr]) ->

@@ -33,8 +33,15 @@ run_fun([], Global, Result)->
 run_fun([H|T], Global, Result)->
 	{File, FunName, Param} = H,
 	F = Global:get_value(FunName),
-	ChildResult = F:call(Param),
-	run_fun(T, Global, Result++[{File, FunName,ChildResult}]).
+	case FunName of 
+		"require"-> 
+			run_fun(T, Global, Result ++ [{File, FunName,"requiresucessed"}]);
+		_->
+			ChildResult = F:call(Param),
+			run_fun(T, Global, Result++[{File, FunName,ChildResult}])		
+	end.
+	
+	
 
 run_jsfun(Files, Params) ->
 	erlv8:start(),

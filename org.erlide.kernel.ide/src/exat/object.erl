@@ -16,6 +16,7 @@
 -module(object).
 -compile(export_all).
 -include("object.hrl").
+-include_lib("../include/erlv8.hrl"). 
 
 %%====================================================================
 %% External functions
@@ -24,7 +25,13 @@
 %% Func: start_link/1
 %% Arguments: none
 %%====================================================================
+
+%% beamjs exports
+exports(_VM) ->
+	?V8Obj([{"getTimedValue", fun getTimedValue/2}]).
+
 start_link() ->	
+	application:start(erlv8),
 	eresye:start(object_store),
 	log_analyzer:start(),
 	resource_pool:start().
@@ -152,16 +159,21 @@ get(Object, AttributeName) when is_record(Object,object)->
     end.
 
 %% @doc get the attribute value, without time stamp
--spec(getTimedValue/2 :: (atom(), atom()) -> term()).
-getTimedValue(Name,AttributeName) when is_atom(Name) -> getTimedValue(get_by_name(Name),AttributeName);
-getTimedValue(Object, AttributeName) when is_record(Object,object)->
+-spec(getTimedValue/2 :: (atom(), term()) -> term()).
+getTimedValue(Name,AttributeName) when is_atom(Name), is_atom(AttributeName) -> getTimedValue(get_by_name(Name),AttributeName);
+getTimedValue(Object, AttributeName) when is_record(Object,object), is_atom(AttributeName)->
 %% io:format("[~w]GET: ~w\n", [?LINE,[Object, AttributeName]]),
     V = server_call(Object#object.property_server,
                     {self(), getTimedValue, AttributeName}),
     case V of
         {value, Value} -> Value;
         _ -> exit({undef, [attribute, Object, AttributeName]})
-    end.
+    end;
+%% js call erlang's js_getTimedValue
+getTimedValue(#erlv8_fun_invocation{ vm = VM} = _Invocation, [MonitorName, AttrNames]) ->	
+%% 	io:format("---------------------object getTimedValue MonitorName: ~p~n", [MonitorName]),
+%% 	io:format("---------------------object getTimedValue AttrNames: ~p~n", [AttrNames]),
+	[getTimedValue(?V8TERM_TO_ATOM(MonitorName),?V8TERM_TO_ATOM(X))||X<-AttrNames:list()].
 
 %% @doc get the attribute value with time tuple
 -spec(getValueWithTime/2 :: (atom(), atom()) -> {term(),tuple()}).
@@ -589,7 +601,7 @@ executor_loop(Object) ->
         T  ->
             case catch(executor_do(Object, V)) of
                 {'EXIT', Reason} ->
-                    io:format("\n=ERROR REPORT====\nError in object behaviour ~w, state ~w, error value: ~w\n", [Object, V, Reason]),
+                    io:format("\n=ERROR REPORT====\nError in object behaviour ~w, state ~w, error value: ~p\n", [Object, V, Reason]),
                     set(Object, ?TERMINATING, true);
                 Other -> nil
             end,
