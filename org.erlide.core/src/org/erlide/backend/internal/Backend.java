@@ -57,6 +57,7 @@ import org.erlide.core.model.root.ErlModelManager;
 import org.erlide.core.model.root.IErlProject;
 import org.erlide.core.model.util.ErlideUtil;
 import org.erlide.jinterface.ErlLogger;
+import org.erlide.jinterface.rpc.IRpcCallSite;
 import org.erlide.jinterface.rpc.IRpcCallback;
 import org.erlide.jinterface.rpc.IRpcFuture;
 import org.erlide.jinterface.rpc.IRpcResultCallback;
@@ -69,6 +70,7 @@ import org.erlide.launch.debug.model.ErlangDebugNode;
 import org.erlide.launch.debug.model.ErlangDebugTarget;
 import org.osgi.framework.Bundle;
 
+import com.ericsson.otp.erlang.OtpConverter;
 import com.ericsson.otp.erlang.OtpErlang;
 import com.ericsson.otp.erlang.OtpErlangAtom;
 import com.ericsson.otp.erlang.OtpErlangBinary;
@@ -183,6 +185,12 @@ public abstract class Backend implements IStreamListener, IBackend {
     public OtpErlangObject call(final String m, final String f,
             final String signature, final Object... a) throws RpcException {
         return call(DEFAULT_TIMEOUT, m, f, signature, a);
+    }
+    
+    
+    public Object call2(final String m, final String f,
+            final String signature, final Object... a) throws RpcException {
+        return OtpConverter.OtpErlangObject2Object(call(DEFAULT_TIMEOUT, m, f, signature, a));
     }
 
     @Override
@@ -828,9 +836,20 @@ public abstract class Backend implements IStreamListener, IBackend {
 
             try {
                 postLaunch();
+                test();
             } catch (final DebugException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public void test() {
+        final IRpcCallSite b = BackendCore.getBackendManager().getIdeBackend();
+        try {
+            b.call2("api_monitor", "create", "al", "1.1");
+        } catch (RpcException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
