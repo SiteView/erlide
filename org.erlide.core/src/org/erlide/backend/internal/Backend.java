@@ -845,12 +845,12 @@ public abstract class Backend implements IStreamListener, IBackend {
     
     public void test() {
         final IRpcCallSite b = BackendCore.getBackendManager().getIdeBackend();
-        try {
-            b.call2("api_monitor", "create", "al", "1.1");
-        } catch (RpcException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        try {
+////            b.call2("api_monitor", "create", "al", "1.1");
+//        } catch (RpcException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
     }
 
     @Override
