@@ -13,6 +13,8 @@ extends () -> nil.
 %%@doc the constructor
 base_device (Self,Name) ->
 	?SETVALUE(model,""),
+	?SETVALUE(snmpver,"v2"),
+	?SETVALUE(community_string,"nn_mobile"),	
 	?SETVALUE(num_of_interface,24),
 	?SETVALUE(cpu,0),?VALUEMONITOR(cpu),?NEWATTRMONITOR(cpu),
 	?SETVALUE(mem,0),?VALUEMONITOR(mem),?NEWATTRMONITOR(mem),

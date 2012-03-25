@@ -90,7 +90,7 @@ newnode_action(Self,EventType,Pattern,State) ->
 		NodeInfoLen == 0 -> %% not discovered before
 			DiscoverMethods = discovermethod_monitor:run(Node) ,  %snmp,nmap,telnet,ssh,wmi,jdbc,tr069,packet,manual_input
 			%%create one object, and assign these DiscoverTypes to this object
-			NodeType = discover_type(DiscoverMethods,Node),
+			NodeType = discover_node_type(DiscoverMethods,Node),
 			erlang:apply(NodeType, start, [Node]), %%create a node object, e.g. network_switch object
 			ok;
 		true -> already_discovered 
@@ -98,7 +98,7 @@ newnode_action(Self,EventType,Pattern,State) ->
 
 %%@doc discover the node type with the Access Methods, in a sequence, if discoverred, then exit
 %% rules: is  
-discover_type(DiscoverMethods,Node)  ->
+discover_node_type(DiscoverMethods,Node)  ->
 	case DiscoverMethods of
 		snmp -> eresye:assert(discover_rule_engine,{Node,is,network_switch}), network_switch; 
 		nmap -> eresye:assert(discover_rule_engine,{Node,is,network_switch});
@@ -117,3 +117,9 @@ discover_type(DiscoverMethods,Node)  ->
 load_algorithm() ->
 	ok.
 
+start_scan(Node) when is_atom(Node) ->
+	eresys:assert(discover_rule_engine,{newnode,Node,'','',now()});
+start_scan([]) -> ok;
+start_scan(NodeList) ->
+	[Node|T] = NodeList,
+	start_scan(T).
