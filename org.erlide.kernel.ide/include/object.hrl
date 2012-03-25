@@ -40,6 +40,8 @@
 %% MACROS for simplifying the object 
 -define(VALUE(X), object:get(Self,X)).
 -define(SETVALUE(Key,Value),object:set(Self,Key,Value)).
+-define(NEWATTRMONITOR(Key),object:call(Self,create_monitor,[Key])).
+-define(ATTRMONITOR(Key),object:get(object:call(Self,get_monitor_object,[Key]), Key)).
 -define(QUEVALUE(X), object:getTimedValue(Self,X)).
 -define(SETQUEVALUE(Key,Value),object:setTimedValue(Self,Key,Value)).
 
@@ -51,3 +53,5 @@
 -define(LOGOBJ,'log_analyzer_object').
 -define(LOGNAME,'logger').
 -define(PROGRESSNAME,'report_progress').
+
+-define(LOG(X), io:format("{~p,~p}: ~p~n", [?MODULE,?LINE,X])).

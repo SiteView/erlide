@@ -86,7 +86,10 @@ new(Class,P) ->
 	end,
 
     Object.
-	
+
+%% @spec new(Class)->{ok,{parent,Parent}} | {error,Resean}
+%% @doc Create a new object, will call the object constructor, the parameters must be a @type List 
+%%
 new(Class) ->
     new(Class,[]).
 

@@ -1,4 +1,6 @@
 *.class
+*.beam
+ebin
 workspaces
 bin
 *.orig
