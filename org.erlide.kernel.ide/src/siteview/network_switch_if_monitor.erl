@@ -3,6 +3,7 @@
 -include("../../include/object.hrl").
 -include("../../include/monitor.hrl").
 -include_lib("../include/erlv8.hrl"). 
+-include("nnm_define.hrl").
 
 extends () -> atomic_monitor .
 
@@ -13,9 +14,11 @@ extends () -> atomic_monitor .
 
 %%@doc the constructor, specific the input parameters into the monitor
 network_switch_if_monitor(Self, Name)->
-	?SETVALUE(hostname,"localhost"),
-	?SETVALUE(timeout,1000),
-	?SETVALUE(size,4),
+	?SETVALUE(ip,"localhost"),
+	?SETVALUE(port,161),
+	?SETVALUE(snmpVer,"v2"),
+	?SETVALUE(getCommunity,"public"),
+	?SETVALUE(timeout,5000),
 	?SETVALUE(name,Name),	
 	object:super(Self, [Name]).
 
@@ -35,34 +38,85 @@ get_resource_type() -> ?MODULE.
 
 
 %% @doc run the monitor without logging and classifier, for run standalone and testing
-run(MonitorName, Hostname,Size,Timeout) ->
-	{Osfamily, Osname} = os:type(),
-	case Osfamily of 
-		win32 -> 
-			    Cmd = "ping -n 4 -l " ++ integer_to_list(Size) ++ " -w " ++ integer_to_list(Timeout) ++ "  " ++ Hostname,
-                Data = os:cmd(Cmd);
-		%@TODO: using erlv8 to processing the Data, using the string function in javascript, which is much more user friendly
-        unix ->
-			    Cmd = "ping -c 4 -s " ++ integer_to_list(Size)  ++ "  "  ++ Hostname,
-                Data =  os:cmd(Cmd)
-		%@TODO: using erlv8 to processing the Data
-        end,
+run(SnmpParam) ->
+%% 	SpecialOidValueList = getSpecialOid(SysobjectId,[ifIndex,ifDescr,ifType,ifMtu,ifMac,ifSpeed,ifAdminStatus,ifOperStatus,ifLastChange,
+%% 													 ifInOctets,ifInUcastPkts,ifInNUcastPkts,ifInDiscards,ifInErrors,ifInUnknownProtos,
+%% 													 ifOutOctets,ifOutUcastPkts,ifOutNUcastPkts,ifOutDiscards,ifOutErrors,ifOutQLen,
+%% 													 ifAlia]),
+	SpecialOidValueList = [],
+	IfIndex = getTreeValue(SnmpParam,?IFINDEX, proplists:get_value(ifIndex, SpecialOidValueList, "")),
+	IfDescr = getTreeValue(SnmpParam,?IFDESCR, proplists:get_value(ifDescr, SpecialOidValueList, "")),
+	IfType = getTreeValue(SnmpParam,?IFTYPE, proplists:get_value(ifType, SpecialOidValueList, "")),
+	IfMtu = getTreeValue(SnmpParam,?IFMTU, proplists:get_value(ifMtu, SpecialOidValueList, "")),
+	IfSpeed = getTreeValue(SnmpParam,?IFSPEED,proplists:get_value(ifMac, SpecialOidValueList, "")),
+	IfMac = getTreeValue(SnmpParam,?IFMAC,proplists:get_value(ifSpeed, SpecialOidValueList, "")),
+	IfAdminStatus = getTreeValue(SnmpParam,?IFADMINSTATUS,proplists:get_value(ifAdminStatus, SpecialOidValueList, "")),
+	IfOperStatus = getTreeValue(SnmpParam,?IFOPERSTATUS,proplists:get_value(ifOperStatus, SpecialOidValueList, "")),
+	IfLastChange = getTreeValue(SnmpParam,?IFLASTCHANGE,proplists:get_value(ifLastChange, SpecialOidValueList, "")),
+	IfInOctets = getTreeValue(SnmpParam,?IFINOCTETS,proplists:get_value(ifInOctets, SpecialOidValueList, "")),
+	IfInUcastPkts = getTreeValue(SnmpParam,?IFINUCASTPKTS,proplists:get_value(ifInUcastPkts, SpecialOidValueList, "")),
+	IfInNUcastPkts = getTreeValue(SnmpParam,?IFINNUCASTPKTS,proplists:get_value(ifInNUcastPkts, SpecialOidValueList, "")),
+	IfInDiscards = getTreeValue(SnmpParam,?IFINDISCARDS,proplists:get_value(ifInDiscards, SpecialOidValueList, "")),
+	IfInErrors = getTreeValue(SnmpParam,?IFINERRORS,proplists:get_value(ifInErrors, SpecialOidValueList, "")),
+	IfInUnknownProtos = getTreeValue(SnmpParam,?IFINUNKNOWNPROTOS,proplists:get_value(ifInUnknownProtos, SpecialOidValueList, "")),
+	IfOutOctets = getTreeValue(SnmpParam,?IFOUTOCTETS,proplists:get_value(ifOutOctets, SpecialOidValueList, "")),
+	IfOutUcastPkts = getTreeValue(SnmpParam,?IFOUTUCASTPKTS,proplists:get_value(ifOutUcastPkts, SpecialOidValueList, "")),
+	IfOutNUcastPkts = getTreeValue(SnmpParam,?IFOUTNUCASTPKTS,proplists:get_value(ifOutNUcastPkts, SpecialOidValueList, "")),
+	IfOutDiscards = getTreeValue(SnmpParam,?IFOUTDISCARDS,proplists:get_value(ifOutDiscards, SpecialOidValueList, "")),
+	IfOutErrors = getTreeValue(SnmpParam,?IFOUTERRORS,proplists:get_value(ifOutErrors, SpecialOidValueList, "")),
+	IfOutQLen = getTreeValue(SnmpParam,?IFOUTQLEN,proplists:get_value(ifOutQLen, SpecialOidValueList, "")),
+	IfAlias = getTreeValue(SnmpParam,?IFALIAS,proplists:get_value(ifAlias, SpecialOidValueList, "")),
+			
+	Result = connectInterfaceTable(IfIndex,IfDescr,IfType,IfMtu,IfSpeed,IfMac,IfAdminStatus,IfOperStatus,IfLastChange,IfInOctets,IfInUcastPkts,
+						  	IfInNUcastPkts,IfInDiscards,IfInErrors,IfInUnknownProtos,IfOutOctets,IfOutUcastPkts,IfOutNUcastPkts,
+							IfOutDiscards,IfOutErrors,IfOutQLen,IfAlias),
+	{proplists:get_value(ip,SnmpParam),Result}.
 	
-	
-%% 	simulated random data
-%% 	io:format("ping cmd : ~p~n", [Cmd]),
-%% 	io:format("ping data : ~p~n", [Data]),
-	
-	%%erlang call js_fun to AnalysisData
-	AnalysisData = beamjs:run_jsfun(["testjs.js"], [{"testjs.js", analysis_ping_Data, [MonitorName, ?V8Arr([round_trip_time, packetsgood]), Data]}]),
-	io:format("---------------------ping AnalysisData Return : ~p~n", [AnalysisData]),	
-	
-	
-	Round_trip_time = 10 * random:uniform(10),
-	Packetsgood = random:uniform(4),
-	timer:sleep(1*1000),
-	{Round_trip_time, Packetsgood}.
 
+getTreeValue(SnmpParam,O1,O2) ->
+	case nnm_snmp_api:readTreeValue(SnmpParam,O1) of
+		[] ->
+			case O2 of
+				"" -> [];
+				_ -> nnm_snmp_api:readTreeValue(SnmpParam,O2)
+			end;
+		V ->
+			V
+	end.
+
+connectInterfaceTable([],_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_) -> [];
+connectInterfaceTable([H|IfIndex],IfDescr,IfType,IfMtu,IfSpeed,IfMac,IfAdminStatus,IfOperStatus,IfLastChange,IfInOctets,IfInUcastPkts,
+					 	IfInNUcastPkts,IfInDiscards,IfInErrors,IfInUnknownProtos,IfOutOctets,IfOutUcastPkts,IfOutNUcastPkts,
+						IfOutDiscards,IfOutErrors,IfOutQLen,IfAlias) ->
+	{Key,Value} = H,
+	Index = nnm_discovery_util:integerToString(Value),
+	Descr = proplists:get_value(Key, IfDescr, ""),
+	Type = nnm_discovery_util:integerToString(proplists:get_value(Key, IfType, "")),
+	Mtu = proplists:get_value(Key, IfMtu, ""),
+	Speed = nnm_discovery_util:integerToString(proplists:get_value(Key, IfSpeed, "")),
+	Mac = nnm_discovery_util:toMac(proplists:get_value(Key, IfMac, "")),
+	AdminStatus = nnm_discovery_util:integerToString(proplists:get_value(Key, IfAdminStatus, "")),
+	OperStatus = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOperStatus, "")),
+	LastChange = nnm_discovery_util:integerToString(proplists:get_value(Key, IfLastChange, "")),
+	InOctets = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInOctets, "")),
+	InUcastPkts = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInUcastPkts, "")),
+	InNUcastPkts = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInNUcastPkts, "")),
+	InDiscards = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInDiscards, "")),
+	InErrors = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInErrors, "")),
+	InUnknownProtos = nnm_discovery_util:integerToString(proplists:get_value(Key, IfInUnknownProtos, "")),
+	OutOctets = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutOctets, "")),
+	OutUcastPkts = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutUcastPkts, "")),
+	OutNUcastPkts = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutNUcastPkts, "")),
+	OutDiscards = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutDiscards, "")),
+	OutErrors = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutErrors, "")),
+	OutQLen = nnm_discovery_util:integerToString(proplists:get_value(Key, IfOutQLen, "")),
+	Alias = proplists:get_value(Key, IfAlias, ""),
+	
+	[{Index,Descr,Type,Mtu,Speed,Mac,AdminStatus,OperStatus,LastChange,InOctets,InUcastPkts,InNUcastPkts,InDiscards,InErrors,InUnknownProtos,
+	  OutOctets,OutUcastPkts,OutNUcastPkts,OutDiscards,OutErrors,OutQLen,Alias}|
+		 connectInterfaceTable(IfIndex,IfDescr,IfType,IfMtu,IfSpeed,IfMac,IfAdminStatus,IfOperStatus,IfLastChange,IfInOctets,IfInUcastPkts,
+					 	IfInNUcastPkts,IfInDiscards,IfInErrors,IfInUnknownProtos,IfOutOctets,IfOutUcastPkts,IfOutNUcastPkts,
+						IfOutDiscards,IfOutErrors,IfOutQLen,IfAlias)].
 	
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
@@ -70,13 +124,18 @@ update_action(Self,EventType,Pattern,State) ->
 	eresye:wait(?LOGNAME, {?VALUE(name),Session,'_',allocate_resource}),
 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
-%% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
   	Start = erlang:now(),
 	object:do(Self,running),
 
-    {Round_trip_time, Packetsgood} = run(?VALUE(name), ?VALUE(hostname),?VALUE(size),?VALUE(timeout)),
-	?SETQUEVALUE(round_trip_time,Round_trip_time),
-	?SETQUEVALUE(packetsgood,Packetsgood),
+     SnmpParam = [{ip,?VALUE(ip)}, 
+				{port,?VALUE(port)}, 
+				{snmpVer,?VALUE(snmpversion)}, 
+				{getCommunity,?VALUE(getCommunity)}, 
+				{timeout,5000},
+				{bindPort,161}],
+	
+	InterfaceTB = run(SnmpParam),
+	?SETVALUE(interfaceTB,InterfaceTB),
 	
 %% 
 %% 	%cycle: connecting -> connected -> retriving data -> data received -> processing -> done

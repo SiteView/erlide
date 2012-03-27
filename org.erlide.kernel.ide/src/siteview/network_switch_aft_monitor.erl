@@ -2,7 +2,8 @@
 -compile(export_all).
 -include("../../include/object.hrl").
 -include("../../include/monitor.hrl").
--include_lib("../include/erlv8.hrl"). 
+-include_lib("../include/erlv8.hrl").
+-include("nnm_define.hrl").
 
 extends () -> atomic_monitor .
 
@@ -14,8 +15,10 @@ extends () -> atomic_monitor .
 %%@doc the constructor, specific the input parameters into the monitor
 network_switch_aft_monitor(Self, Name)->
 	?SETVALUE(ip,"localhost"),
-	?SETVALUE(snmpversion,"v2"),
-	?SETVALUE(community_string,"public"),
+	?SETVALUE(port,161),
+	?SETVALUE(snmpVer,"v2"),
+	?SETVALUE(getCommunity,"public"),
+	?SETVALUE(timeout,5000),
 	?SETVALUE(aft,[]),
 	?SETVALUE(name,Name),	
 	object:super(Self, [Name]).
@@ -36,11 +39,43 @@ get_resource_type() -> ?MODULE.
 
 
 %% @doc run the monitor without logging and classifier, for run standalone and testing
-run(Ip,SnmpVer,CommunityString) ->
-	ok.	
-%% 	[{MAC,If,ConnectedMAC}].
-
+run(SnmpParam) ->
+	%% SpecialOidValueList = ets:lookup_element(?MODULE, specialOidList, 2),
+	SpecialOidValueList = [],
+	DtpFdbAddress = getTreeValue(SnmpParam,?DTPFDBADDRESS, proplists:get_value(dtpFdbAddress, SpecialOidValueList, "")),
+	DtpFdbPort = getTreeValue(SnmpParam,?DTPFDBPORT, proplists:get_value(dtpFdbPort, SpecialOidValueList, "")),
+	DtpFdbStatus = getTreeValue(SnmpParam,?DTPFDBSTATUS, proplists:get_value(dtpFdbStatus, SpecialOidValueList, "")),
+	QtpFdbAddress = getTreeValue(SnmpParam,?QTPFDBADDRESS, proplists:get_value(qtpFdbAddress, SpecialOidValueList, "")),
+	QtpFdbPort = getTreeValue(SnmpParam,?QTPFDBPORT, proplists:get_value(qtpFdbPort, SpecialOidValueList, "")),
+	QtpFdbStatus = getTreeValue(SnmpParam,?QTPFDBSTATUS, proplists:get_value(qtpFdbStatus, SpecialOidValueList, "")),
 	
+	DtpFdb = connectAftTable(DtpFdbPort,DtpFdbAddress,DtpFdbStatus),
+	QtpFdb = connectAftTable(QtpFdbPort,QtpFdbAddress,QtpFdbStatus),
+	Result = nnm_discovery_util:mergerList(DtpFdb,QtpFdb),
+	{proplists:get_value(ip,SnmpParam),Result}.
+
+getTreeValue(SnmpParam,O1,O2) ->
+	case nnm_snmp_api:readTreeValue(SnmpParam,O1) of
+		[] ->
+			case O2 of
+				"" -> [];
+				_ -> nnm_snmp_api:readTreeValue(SnmpParam,O2)
+			end;
+		V ->
+			V
+	end.
+
+connectAftTable([],_,_) -> [];
+connectAftTable([H|FdbPort],FdbAddress,FdbStatus) ->
+	{Key,Value} = H,
+	BackAddress = lists:sublist(Key, length(Key)-5, 6),
+	Port = nnm_discovery_util:integerToString(Value),
+	Address = nnm_discovery_util:toMac(proplists:get_value(Key, FdbAddress, BackAddress)),
+	Status = nnm_discovery_util:integerToString(proplists:get_value(Key, FdbStatus, "")),
+	
+	[{Port,Address,Status}|connectAftTable(FdbPort,FdbAddress,FdbStatus)].
+
+
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
 	{Session,_} = Pattern,  %%resource_allocated
@@ -50,8 +85,15 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	io:format ( "[~w:~w] ~w-2 Counter=~w,Action=update_action,State=~w,Event=~w,Pattern=~w\n",	[?MODULE,?LINE,?VALUE(name),resource_pool:get_counter(?VALUE(name)),State,EventType,Pattern]),
   	Start = erlang:now(),
 	object:do(Self,running),
-
-    Aft = run(?VALUE(ip),?VALUE(snmpversion),?VALUE(community_string)),
+	
+    SnmpParam = [{ip,?VALUE(ip)}, 
+				{port,?VALUE(port)}, 
+				{snmpVer,?VALUE(snmpversion)}, 
+				{getCommunity,?VALUE(getCommunity)}, 
+				{timeout,5000},
+				{bindPort,161}],
+	
+	Aft = run(SnmpParam),
 	?SETVALUE(aft,Aft),
 	
 %% 

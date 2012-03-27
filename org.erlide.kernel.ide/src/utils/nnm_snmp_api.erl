@@ -2,7 +2,7 @@
 -compile(export_all).
 
 -include_lib("snmp/include/snmp_types.hrl").
--include_lib("nnm_discovery_setting.hrl").
+% -include_lib("nnm_discovery_setting.hrl").
 -include("nnm_define.hrl").
 
 -define(SNMP_PING_OID_1, [1,3,6,1,2,1,1,2,0]).
