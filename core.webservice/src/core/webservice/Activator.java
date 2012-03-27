@@ -34,7 +34,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		System.setProperty("core.service.conn", "{Personal}itsmdb");
+		System.setProperty("core.service.conn", "{Common}itsmdb");
 		System.setProperty("core.service.userName", "admin");
 		System.setProperty("core.service.password", "manage");
 		context.registerService(IBOService.class.getName(), new CoreBOService(), new Hashtable<String,String>());
