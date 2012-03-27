@@ -113,3 +113,5 @@ Export-Package: .,
  org.hamcrest.object,
  org.hamcrest.text,
  org.hamcrest.xml
+Import-Package: org.erlide.jinterface,
+ org.erlide.jinterface.rpc

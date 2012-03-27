@@ -8,7 +8,7 @@
             path="/ebin">
       </beam_dir>
       <init
-            function="init"
+            function="ecc_init"
             module="erlide_kernel_ide">
       </init>
    </extension>
