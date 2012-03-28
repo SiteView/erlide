@@ -66,6 +66,29 @@ run(MonitorName, Hostname,Size,Timeout) ->
 	
 %%@doc the main update action to collect the data
 update_action(Self,EventType,Pattern,State) ->
+	
+	%%run_Calendar test , Calendar info from ofbiz?...
+	beamjs:run_jsfun(["ijp-0.6.js", "testjs.js"], [ {"ijp-0.6.js", "require", []}, {"testjs.js", "run_Calendar", ["BEGIN:VCALENDAR
+METHOD:xyz
+VERSION:2.0
+PRODID:-//ABC Corporation//NONSGML My Product//EN
+BEGIN:VEVENT
+DTSTAMP:19970324T120000Z
+SEQUENCE:0
+UID:uid3@host1.com
+ORGANIZER:MAILTO:jdoe@host1.com
+ATTENDEE;RSVP=TRUE:MAILTO:jsmith@host1.com
+DTSTART:19970324T123000Z
+DTEND:19970324T210000Z
+CATEGORIES:MEETING,PROJECT
+CLASS:PUBLIC
+SUMMARY:Calendaring Interoperability Planning Meeting
+DESCRIPTION:Discuss how we can test c&s interoperability\nusing iCalendar and other IETF standards.
+LOCATION:LDB Lobby
+ATTACH;FMTTYPE=application/postscript:ftp://xyzCorp.com/pub/conf/bkgrnd.ps
+END:VEVENT
+END:VCALENDAR"]}]),
+
 	{Session,_} = Pattern,  %%resource_allocated
 	eresye:wait(?LOGNAME, {?VALUE(name),Session,'_',allocate_resource}),
 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
@@ -89,10 +112,12 @@ update_action(Self,EventType,Pattern,State) ->
 %% 	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),
 
 	set_classifier(Self),
+%% 	set_classifier1(Self),
 %% 	io:format("~p Classifier: Error_classifier:~p, Warning_classifier:~p, Ok_classifier:~p, round_trip_time:~p, packetsgood:~p ~n", 
 %% 			  [?VALUE(name), ?VALUE(error_classifier), ?VALUE(warning_classifier), ?VALUE(ok_classifier), ?QUEVALUE(round_trip_time),?QUEVALUE(packetsgood)]),
 
-%% 	runClassifiersJs(Self),
+	runClassifiersJs(Self),
+%% 	runClassifiersJs1(Self),
 	
 %% 	resource_pool:release(?VALUE(name),Session), 	
  	io:format("[~w:~w] ~w ~w,Counter=~w,Queue=~w,update time=~w,wait_time=~w,return:RoundTripTime:~w,PacketsGood:~w\n", 
@@ -111,6 +136,16 @@ set_classifier(Self) ->
 %% 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]]),
 	set_classifier(Self, [{error_classifier, Error_classifier},
 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]).
+
+set_classifier1(Self) ->
+	Error_classifier = "exports.object.getTimedValue(" ++ erlang:atom_to_list(?VALUE(name)) ++ ", 'round_trip_time') > 80 || exports.object.getTimedValue(" ++ erlang:atom_to_list(?VALUE(name)) ++ ", 'packetsgood') < 3",
+	Warning_classifier = "exports.object.getTimedValue(" ++ erlang:atom_to_list(?VALUE(name)) ++ ", 'round_trip_time') < 80 && exports.object.getTimedValue(" ++ erlang:atom_to_list(?VALUE(name)) ++", 'packetsgood') > 30",
+	Ok_classifier = "exports.object.getTimedValue(" ++ erlang:atom_to_list(?VALUE(name)) ++ ", 'packetsgood') > 1",
+%% 	io:format("---------------set_classifier------:~p~n", [[{error_classifier, Error_classifier},
+%% 	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]]),
+	set_classifier(Self, [{error_classifier, Error_classifier},
+	{warning_classifier, Warning_classifier}, {ok_classifier, Ok_classifier}]).
+
 
 set_classifier(Self, []) ->
 	ok;
@@ -141,6 +176,34 @@ runClassifiersJs(Self)->
 	   true -> un_classified
 	end,
  	erlv8_vm:stop(VM).
+
+runClassifiersJs1(Self)->
+%% 	{ok, VM} = erlv8_vm:start(),
+%% 	Global = erlv8_vm:global(VM),
+
+%% 	Global:set_value("Value", 
+%% 		 fun (#erlv8_fun_invocation{}, [String]) -> io:format("----~p~n", [String]), ?QUEVALUE(erlang:list_to_atom(erlang:binary_to_list(String))) end),
+
+%% 	Global:set_value("Value", 
+%% 		 fun (#erlv8_fun_invocation{}, [String]) -> ?QUEVALUE(erlang:list_to_atom(erlang:binary_to_list(String))) end),
+
+%% 	{ok,Error} = erlv8_vm:run(VM,?VALUE(error_classifier)),
+%% 	{ok,Warning} = erlv8_vm:run(VM,?VALUE(warning_classifier)),
+%% 	{ok,Ok} = erlv8_vm:run(VM,?VALUE(ok_classifier)),
+	
+	Error = beamjs:run_jseval(?VALUE(error_classifier)),
+	Warning = beamjs:run_jseval(?VALUE(warning_classifier)),
+	Ok = beamjs:run_jseval(?VALUE(ok_classifier)),
+  
+	io:format("---------------~p runClassifiers result:  Ok: ~p , Warning ~p,  Error: ~p~n", [?VALUE(name), Ok, Warning, Error]),
+	if Error -> ?SETVALUE(?CATEGORY,error);
+%% 	   Major -> ?SETVALUE(?CATEGORY,major);
+	   Warning -> ?SETVALUE(?CATEGORY,warning);
+%% 	   Minor -> ?SETVALUE(?CATEGORY,minor);
+	   Ok -> ?SETVALUE(?CATEGORY,ok);
+	   true -> un_classified
+	end.
+%%  	erlv8_vm:stop(VM).
 
 %%@doc startup, the name must be unique
 start(Name) ->

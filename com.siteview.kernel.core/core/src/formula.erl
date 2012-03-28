@@ -1,11 +1,11 @@
 -module(formula).
 -export([parse/1, parse_and_scan/1, format_error/1]).
 
--file("c:/PROGRA~1/erl5.9/lib/parsetools-2.0.7/include/yeccpre.hrl", 0).
+-file("d:/PROGRA~1/ERL58~1.5/lib/parsetools-2.0.6/include/yeccpre.hrl", 0).
 %%
 %% %CopyrightBegin%
 %%
-%% Copyright Ericsson AB 1996-2011. All Rights Reserved.
+%% Copyright Ericsson AB 1996-2010. All Rights Reserved.
 %%
 %% The contents of this file are subject to the Erlang Public License,
 %% Version 1.1, (the "License"); you may not use this file except in
@@ -32,11 +32,10 @@ parse(Tokens) ->
 
 -spec parse_and_scan({function() | {atom(), atom()}, [_]}
                      | {atom(), atom(), [_]}) -> yecc_ret().
-parse_and_scan({F, A}) ->
+parse_and_scan({F, A}) -> % Fun or {M, F}
     yeccpars0([], {{F, A}, no_line}, 0, [], []);
 parse_and_scan({M, F, A}) ->
-    Arity = length(A),
-    yeccpars0([], {{fun M:F/Arity, A}, no_line}, 0, [], []).
+    yeccpars0([], {{{M, F}, A}, no_line}, 0, [], []).
 
 -spec format_error(any()) -> [char() | list()].
 format_error(Message) ->
@@ -72,7 +71,7 @@ yeccpars0(Tokens, Tzr, State, States, Vstack) ->
             Error
     end.
 
-yecc_error_type(function_clause, [{?MODULE,F,ArityOrArgs,_} | _]) ->
+yecc_error_type(function_clause, [{?MODULE,F,ArityOrArgs} | _]) ->
     case atom_to_list(F) of
         "yeccgoto_" ++ SymbolL ->
             {ok,[{atom,_,Symbol}],_} = erl_scan:string(SymbolL),
@@ -185,7 +184,7 @@ yecctoken2string(Other) ->
 
 
 
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.erl", 188).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.erl", 187).
 
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(S, Cat, Ss, Stack, T, Ts, Tzr);
@@ -294,7 +293,7 @@ yeccgoto_literal(9=_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_1(_S, Cat, Ss, Stack, T, Ts, Tzr).
 
 -compile({inline,yeccpars2_1_/1}).
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.yrl", 6).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.yrl", 6).
 yeccpars2_1_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -302,7 +301,7 @@ yeccpars2_1_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_4_/1}).
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.yrl", 10).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.yrl", 10).
 yeccpars2_4_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -310,7 +309,7 @@ yeccpars2_4_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_8_/1}).
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.yrl", 12).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.yrl", 12).
 yeccpars2_8_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -318,7 +317,7 @@ yeccpars2_8_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_10_/1}).
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.yrl", 14).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.yrl", 14).
 yeccpars2_10_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -326,7 +325,7 @@ yeccpars2_10_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_11_/1}).
--file("C:/Users/John/git/siteviewerlide/com.siteview.kernel.core/core/src/formula.yrl", 8).
+-file("E:/Users/cxy/git/erlide/com.siteview.kernel.core/core/src/formula.yrl", 8).
 yeccpars2_11_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin

@@ -3,17 +3,16 @@
 -include("../../include/object.hrl").
 -include("../../include/monitor.hrl").
 
-extends() -> atomic_monitor.
+extends () -> browsable_base.
 
 ?SUPERCLAUSE(action).
 ?SUPERCLAUSE(event).
 ?SUPERCLAUSE(pattern).
 
-snmp_remote_ping_monitor(Self, Name) ->
-	?SETVALUE(oid,"1.3.6.1.2.1.1.1"),
-	?SETVALUE(host,"192.168.0.248"),
-	?SETVALUE(community,"dragon"),
-	?SETVALUE(timeout,5),
+snmp_remote_ping_monitor(Self, Name)->
+	?SETVALUE(browse,[]),
+	?SETVALUE(ping_device,[]),
+	?SETVALUE(remote_device,[]),
 
 	?SETVALUE(name,Name),
 	object:super(Self, [Name]).
@@ -21,31 +20,41 @@ snmp_remote_ping_monitor(Self, Name) ->
 snmp_remote_ping_monitor_(Self)->eresye:stop(?VALUE(name)).
 
 init_action(Self,EventType,Pattern,State) ->
-	io:format("----init-----~p~n"),
 	object:do(Self,waiting).
 
-get_resource_type() -> ?MODULE.
+get_max() -> 10.  %max number of this type of monitor can be run in parallel
+get_resource_type() -> ?MODULE.  %the type of resource consumpted from the system, e.g. mem, cpu, network, diskio etc.
+
+do_pong(Self,EventType,Pattern,State) ->
+	object:do(Self,start).
 
 update_action(Self,EventType,Pattern,State) ->
-  	{Session,_} = Pattern,
-	io:format("---update00-----~p~n"),
-	io:format("-------------------------aqc----~p~n"),
-	Host = ?VALUE(host),
-	Community = ?VALUE(community),
-	Timeout = ?VALUE(timeout),
-	Session = snmp_session:new(Host, 161, "V2", Community, "", "", "", "", "", "", Timeout*1000),
-	Session:test_snmp(),
-	
-	eresye:assert(?VALUE(name), {Session,logging}),
+	{Session,_} = Pattern,  %%resource_allocated  
+	eresye:wait(?LOGNAME, {?VALUE(name),Session,'_',allocate_resource}), 
+	eresye:assert(?LOGNAME, {?VALUE(name),Session,erlang:now(),update}),  
+   	Start = erlang:now(),
+	 object:do(Self,running),
+
+
+%% 	simulated random data
+	?SETVALUE(countersInError,[]),
+
+	Diff = timer:now_diff(erlang:now(), Start)/1000000,
+	?SETVALUE(?MEASUREMENTTIME,Diff),
+	?SETVALUE(?LASTUPDATE,erlang:now()),
+
+ 	io:format("---------------------module: ~p update_action :  ~p ~n", [?MODULE, ?VALUE(name)]),
+
+	resource_pool:release(?VALUE(name)), %%trigging the release_resource_pattern in resource_pool module
+	eresye:assert(?VALUE(name), {Session,logging}),	
 	object:do(Self,logging).
 
 start(Name) ->
 	case object:get_by_name(Name) of
 		[] -> 
 				X = object:new(?MODULE,[Name]),
-				object:start(X),				
-				%%resource_pool:register(object:getClass(Name)),
+				object:start(X),
 				eresye:assert(Name,{wakeup}),
-				Name;
+				X;
 		_ -> atom_to_list(Name) ++ " already existed, choose a new name"
 	end.

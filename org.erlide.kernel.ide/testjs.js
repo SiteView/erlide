@@ -4,7 +4,9 @@ exports = {
 };
 
 //var sys = require({module: "beamjs_mod_sys"});
+
 var strClassifier = "";
+
 f = function (x) { 
 	return x * 10 
 };
@@ -29,13 +31,14 @@ analysis_ping_Data = function (name, attrnames, data)
 	
 	var values = exports.object.getTimedValue(name, attrnames);
 
-	/*var beamjs = require({module: "beamjs_mod_beamjs"}),
-	 beamjs.VM.current.run(expr, function (result) {
+//	var beamjs = require({module: "beamjs_mod_beamjs"});
+//	var test = 	beamjs.vm_run("1+1");
+	/* beamjs.VM.current.run(expr, function (result) {
 							   if (result != null) {
 								   exports.sys.print("beamjs.VM.current.run expr:" + expr + result + "\n");
 							   }
 						   });*/
-
+	//values = exports.sys.run_jseval("3+7");
 	return values;
 };
 
@@ -58,4 +61,9 @@ run_Calendar = function (x)
 	icalParser.ical.freebusy;
 	
 	return x;
+};
+
+run_Classifier = function (name, attrnames, data)
+{
+	return name;
 };

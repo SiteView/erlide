@@ -1,6 +1,6 @@
 -module(beamjs).
 -include_lib("../include/erlv8.hrl"). 
--export([run_jsfun/2]).
+-export([run_jsfun/2, run_jseval/1]).
 
 %%%
 
@@ -14,7 +14,7 @@ load_jsfun(VM,Files) ->
 	Global:set_value("__dirname",filename:absname("")),
 	Global:set_value("module",?V8Obj([{"id","init"},{"exports", ?V8Obj([])}])),
 	lists:foreach(fun (File) ->
-	  	  io:format("load_jsfun ~p,  ~p~n", [VM, File]),
+%% 	  	  io:format("load_jsfun ~p,  ~p~n", [VM, File]),
 		  Require = Global:get_value("require"),
 		  Global:set_value("module",?V8Obj([])),
 		  Module = Global:get_value("module"),
@@ -51,6 +51,24 @@ run_jsfun(Files, Params) ->
 	
 	Global = erlv8_vm:global(VM),
 	Result = run_fun(Params, Global, []),	
+%% 	Global1 = erlv8_vm:global(VM),	
+%% 	F = Global1:get_value("f"),
+%% 	F1 = Global1:get_value("f2"),
+%% 	F2 = Global1:get_value("erlang_run"),
+%% 	io:format("load  : ~p ~n ", [F:call([2])]),
+%% 	io:format("load1 : ~p ~n ", [F1:call([44])]),
+%% 	io:format("load2 : ~p ~n ", [F2:call([5])]),
+	erlv8_vm:stop(VM),
+	Result.
+
+run_jseval(Js) ->
+	erlv8:start(),
+	{ok, VM} = erlv8_vm:start(),
+	install_require(VM),
+%% 	load_jsfun(VM, Files),
+	Result = erlv8_vm:run(VM, erlv8_context:get(VM), Js, {"(command line)",0,0}),
+	io:format("jseval ~p~n", [Result]),
+
 %% 	Global1 = erlv8_vm:global(VM),	
 %% 	F = Global1:get_value("f"),
 %% 	F1 = Global1:get_value("f2"),
