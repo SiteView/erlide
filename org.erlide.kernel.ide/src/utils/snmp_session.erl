@@ -6,7 +6,7 @@
 -compile(export_all).
 -include_lib("snmp/include/snmp_types.hrl").
 -include_lib("snmp/src/manager/snmpm_usm.hrl").
--include("../include/snmp_ecc.hrl").
+-include("snmp_ecc.hrl").
 
 new(Server,Port,Ver,Community,AuthType,User,Passwd,PrivPasswd,ContextID,ContextName,Timeout)-> 
 	Obj = instance(Server,Port,Ver,Community,AuthType,User,Passwd,PrivPasswd,ContextID,ContextName,Timeout, []),
@@ -181,7 +181,7 @@ get(OIds,Index)->
 gn(Oid)->
     Sec_Name = get_targetname_secname(),
     is_lock(Sec_Name),
-    start_config(),
+    %% start_config(), qicheng.ai
     Value =
     case Ver of
         "v3" ->
@@ -202,7 +202,7 @@ gn(Oid)->
 gb(NR, MR, Oids) ->
     Sec_Name = get_targetname_secname(),
     is_lock(Sec_Name),
-    start_config(),
+    %% start_config(), change by qicheng.ai
     Value =
     case Ver of
         "v3" ->
@@ -301,7 +301,7 @@ test_snmp() ->
 g(Oid) ->
     Sec_Name = get_targetname_secname(),
     is_lock(Sec_Name),
-    start_config(),
+    %% start_config(), change by qicheng,ai
     Extro =
             if
                 ContextID =:= [] ->
@@ -747,7 +747,7 @@ get_table_col_filter_column(Column,Oid)->
 gm(Oids)->
 	Sec_Name = get_targetname_secname(),
     is_lock(Sec_Name),
-    start_config(),
+    %% start_config(), change by qicheng.ai
     Extro =
             if
                 ContextID =:= [] ->
@@ -830,7 +830,7 @@ gt(Oid) ->
 s(VarsAndVals) ->
 	Sec_Name = get_targetname_secname(),
     is_lock(Sec_Name),
-    start_config(),
+    %% start_config(), change by qicheng.ai
     Value = snmp_ex2_manager:sync_set(Server, Port, VarsAndVals),
     release_lock(Sec_Name),
     Value.

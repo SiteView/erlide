@@ -126,7 +126,7 @@ handle_call(get_diff, _From, #state{diffs=Diffs}=State) ->
 			end,
 	{reply, Reply, State};
 handle_call(Request, From, State) ->
-	erlide_log:logp("monitor:: unrecognized call: ~p from ~p", [Request, From]),	
+	erlide_log:logp("[~w:~w]monitor:: unrecognized call: ~p from ~p", [?MODULE,?LINE,Request, From]),	
 	Reply = ok,
 	{reply, Reply, State}.
 
@@ -137,7 +137,7 @@ handle_call(Request, From, State) ->
 %%          {noreply, State, Timeout} |
 %%          {stop, Reason, State}            (terminate/2 is called)
 %% --------------------------------------------------------------------
-handle_cast(stop, State) ->
+handle_cast(stop, State) -> 
 	{stop, normal, State};
 handle_cast({subscribe, Pid}, #state{subscribers=Subs}=State) ->
 	Subs1 = case lists:member(Pid, Subs) of
@@ -151,10 +151,10 @@ handle_cast({unsubscribe, Pid}, #state{subscribers=Subs}=State) ->
 handle_cast({configure, poll_interval, Val}, State) ->
 	{noreply, State#state{poll_interval=Val}};
 handle_cast({configure, Key, Val}, State) ->
-	erlide_log:logp("monitor:: unrecognized configure option: ~p", [{Key, Val}]),	
+	erlide_log:logp("[~w:~w]monitor:: unrecognized configure option: ~p", [?MODULE,?LINE,{Key, Val}]),	
 	{noreply, State};
 handle_cast(Msg, State) ->
-	erlide_log:logp("monitor:: unrecognized cast: ~p", [Msg]),	
+	erlide_log:logp("[~w:~w]monitor:: unrecognized cast: ~p", [?MODULE,?LINE,Msg]),	
 	{noreply, State}.
 
 %% --------------------------------------------------------------------
@@ -180,7 +180,7 @@ handle_info(take_snapshot, #state{new_snapshot=Snap, diffs=Diffs}=State) ->
 	erlang:send_after(Time, ?MODULE, take_snapshot),
 	{noreply, State1};
 handle_info(Info, State) ->
-	erlide_log:logp("monitor:: unrecognized message: ~p", [Info]),	
+	erlide_log:logp("[~w:~w]monitor:: unrecognized message: ~p", [?MODULE,?LINE,Info]),	
 	{noreply, State}.
 
 %% --------------------------------------------------------------------
@@ -189,8 +189,8 @@ handle_info(Info, State) ->
 %% Returns: any (ignored by gen_server)
 %% --------------------------------------------------------------------
 terminate(Reason, _State) ->
-	erlide_log:logp("Monitor: terminated!!"),
-	erlide_log:logp("Reason ~p", [Reason]),
+	erlide_log:logp("[~w:~w]Monitor: terminated!!",[?MODULE,?LINE]),
+	erlide_log:logp("[~w:~w]Reason ~p", [?MODULE,?LINE,Reason]),
 	ok.
 
 %% --------------------------------------------------------------------
@@ -207,7 +207,7 @@ code_change(_OldVsn, State, _Extra) ->
 
 take_snapshot(IgnoredProcesses, IgnoredEts) ->
 	Now = calendar:local_time(),
-	%%erlide_log:logp("Taking system snapshot @ ~p", [Now]),
+	%%erlide_log:logp("[~w:~w]Taking system snapshot @ ~p", [?MODULE,?LINE,Now]),
 	Procs = lists:sort([lists:sort([{'Pid', X} | pinfo(X)]) || X<-processes()--IgnoredProcesses]),
 	Ets = lists:sort([lists:sort([{'Id', X} | einfo(X)]) || X<-ets:all()--IgnoredEts]),
 	Mem = lists:sort(erlang:system_info(allocated_areas)),

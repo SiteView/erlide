@@ -21,15 +21,23 @@ import com.ericsson.otp.erlang.OtpMbox;
 import com.ericsson.otp.erlang.OtpMsg;
 import com.ericsson.otp.erlang.OtpNode;
 
+import org.erlide.jinterface.ErlLogger;
+import org.erlide.jinterface.rpc.IRpcCallSite;
+
 
 public class ErlObject
 {
 	public final static String module = ErlObject.class.getName();
 	public String Name = null;
 	public String Type = null;
+    private static IRpcCallSite b=null;
 
     public ErlObject()
     {
+    }
+    
+    public static void setBackend(IRpcCallSite backend) {
+        b = backend;
     }
     
     public ErlObject(String ObjName) throws Exception
@@ -37,7 +45,7 @@ public class ErlObject
     	this.Name = ObjName;
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
-        this.Type = OtpGateway.getOtpInterface().call("object", "getClass", list).toString();
+        this.Type = b.call2("object", "getClass", "a",ObjName).toString();
     }
     
     public ErlObject(String ObjType, String ObjName)
@@ -52,7 +60,7 @@ public class ErlObject
 		list.add(new OtpErlangAtom(Name));
 		list.add(new OtpErlangAtom(AttributeName));
 		list.add(OtpConverter.Object2OtpErlangObject(AttributeValue));
-    	OtpGateway.getOtpInterface().call("object", "set", list);
+        b.call2("object", "set", "aax",Name,AttributeName,AttributeValue);
     }
     
     public void setTimedValue(String  AttributeName,Object AttributeValue) throws Exception
@@ -61,7 +69,7 @@ public class ErlObject
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
         list.add(OtpConverter.Object2OtpErlangObject(AttributeValue));
-        OtpGateway.getOtpInterface().call("object", "setTimedValue", list);
+        b.call2("object", "setTimedValue", "aax",Name,AttributeName,AttributeValue);
     }
 
     public Object get(String AttributeName) throws Exception
@@ -69,7 +77,7 @@ public class ErlObject
 		List<Object> list = new ArrayList<Object>();
 		list.add(new OtpErlangAtom(Name));
 		list.add(new OtpErlangAtom(AttributeName));
-    	return OtpGateway.getOtpInterface().call("object", "get", list);
+    	return b.call2("object", "get","aa",Name,AttributeName);
     }
 
 //  @doc get the latest value with timestamp map: {value=Value,timestamp=Time}    
@@ -78,7 +86,7 @@ public class ErlObject
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
-        Object[] timedValue =(Object[]) OtpGateway.getOtpInterface().call("object", "getValueWithTime", list);
+        Object[] timedValue =(Object[]) b.call2("object", "getValueWithTime", "aa",Name,AttributeName);
         Map <String,Object> map = new HashMap();
         map.put("value", timedValue[0]);
         map.put("timestamp", (Timestamp)timedValue[1]);
@@ -91,7 +99,7 @@ public class ErlObject
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
-        return OtpGateway.getOtpInterface().call("object", "getTimedValue", list);
+        return b.call2("object", "getTimedValue", "aa",Name,AttributeName);
     }
     
 //    @doc get a list of value [{value,timestamp}, ...]
@@ -101,7 +109,7 @@ public class ErlObject
         List<Object> rtnList = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
         list.add(new OtpErlangAtom(AttributeName));
-        List<Object> historyValue = (List)  OtpGateway.getOtpInterface().call("object", "getValueHistory", list);
+        List<Object> historyValue = (List)  b.call2("object", "getValueHistory", "aa",Name,AttributeName);
         for(Object obj : historyValue) {
             Map <String,Object> map = new HashMap();
             Object[] timedValue = (Object[]) obj;
@@ -117,7 +125,7 @@ public class ErlObject
 		list.add(new OtpErlangAtom(Name));   	
 		list.add(new OtpErlangAtom(Method));   	
 		list.add(OtpConverter.Object2OtpErlangObject(params));
-    	return OtpGateway.getOtpInterface().call("object", "call", list);
+    	return b.call2("object", "call", "aal",Name,Method,params);
     }
 
     public String getName () {
@@ -131,21 +139,21 @@ public class ErlObject
     public OtpErlangPid getExecutor () throws Exception {
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
-        return (OtpErlangPid) OtpGateway.getOtpInterface().call("object", "executorof", list);
+        return (OtpErlangPid) b.call2("object", "executorof", "a",Name);
 
     }
     
     public String getState () throws Exception {
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
-        return (String) OtpGateway.getOtpInterface().call("object", "stateof", list);
+        return (String) b.call2("object", "stateof", "a",Name);
 
     }
     
     public Long getMem () throws Exception {
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
-        return (Long) OtpGateway.getOtpInterface().call("object", "total_mem", list);
+        return (Long) b.call2("object", "total_mem", "a",Name);
 
     }
     
@@ -153,21 +161,21 @@ public class ErlObject
     {
 		List<Object> list = new ArrayList<Object>();
 		list.add(new OtpErlangAtom(Name));
-    	return (Map<String,Object>) OtpGateway.getOtpInterface().call("object", "get_defined_attrs", list);
+    	return (Map<String,Object>) b.call2("object", "get_defined_attrs", "a",Name);
     }
     
     public Map<String,Object> get_system_attrs() throws Exception
     {
 		List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Name));
-    	return (Map<String,Object>) OtpGateway.getOtpInterface().call("object", "get_system_attrs", list);
+    	return (Map<String,Object>) b.call2("object", "get_system_attrs", "a",Name);
     }
 
     public Long get_max() throws Exception
     {
         List<Object> list = new ArrayList<Object>();
 //        list.add(new OtpErlangAtom(Type));
-        return (Long) OtpGateway.getOtpInterface().call(Type, "get_max", list);
+        return (Long) b.call2(Type, "get_max", "");
     }
 
     public void add_fact(List<Object> fact) throws Exception{

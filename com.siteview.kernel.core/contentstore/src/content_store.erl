@@ -29,14 +29,17 @@
 %        end.
 
 start() ->
-	application:set_env(mnesia, dir, "../db").
+   	erlide_log:log("*******************Content Store 1*************************"),
+	application:set_env(mnesia, dir, "../db"),
+   	erlide_log:log("*******************Content Store 2*************************"),
     mnesia:create_schema([node()]),
+   	erlide_log:log("*******************Content Store 3*************************"),
     
     mnesia:start(),
+   	erlide_log:log("*******************Content Store 4*************************"),
     
     init(),
     
-%%    erlide_log:log("*******************Content Store OK*************************"),
 	io:format("*******************Content Store OK*************************~n").
 	
 

@@ -238,6 +238,10 @@ public class ObjectListView extends ViewPart {
         // TODO this is wrong - all backends should be inited
         final IRpcCallSite ideBackend = BackendCore.getBackendManager()
                 .getIdeBackend();
+        
+        ErlObjectStore.setBackend(ideBackend);
+        ErlObject.setBackend(ideBackend);
+        
         if (ideBackend != null) {
             Objectlist.objectListInit(ideBackend);
         }

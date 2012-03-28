@@ -66,6 +66,7 @@ is available from http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.erlide.kernel.common"/>
       <import plugin="org.erlide.kernel.debugger"/>
       <import plugin="org.erlide.kernel.ide"/>
+      <import plugin="com.siteview.kernel.core"/>
       <import plugin="org.erlide.core" version="0.9.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.browser"/>
       <import plugin="org.erlide.test_support" version="0.4.0" match="greaterOrEqual"/>

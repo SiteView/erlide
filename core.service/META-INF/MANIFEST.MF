@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CoreService
+Bundle-SymbolicName: core.service
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: core.service.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ Siteview.lib;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: core.service

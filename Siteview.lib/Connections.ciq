@@ -1,0 +1,26 @@
+<Siteview>
+  <DbConnectionDef Name="{Common}itsmdb" ID="4606E6A67AB64E27BCC3536ACF49D8FA" Category="STANDARD" StorageName="" StorageSource="Internal" Perspective="(Base)" Database="SQLSERVER" Provider="SQLCLIENT" Owner="" Location="INTERNAL" SynchronizedDatabase="FALSE">
+    <Alias>{Common}itsmdb</Alias>
+    <Description />
+    <Stored Value="FALSE" />
+    <DefinitionCache Level="PerspectiveOnly" />
+    <ConnectionList>
+      <Connection Type="USER" Method="CONNECTION" Encrypted="TRUE">Database=itsmdb;PWD=xKerLWuoqYxwnyGvOEVx8moUdYtLxFPIwEMieP5DUOoktsVW3g3olM+8AXlTUYM+;Address=192.168.0.131;UID=sa</Connection>
+      <Connection Type="ADMIN" Method="CONNECTION" Encrypted="TRUE">Database=itsmdb;PWD=8Cq/gZzW6TMuBrqXKI+2IEK22La5o7atgo00idG7ksgfpxQnxKQCaktpMKKEyLoL;Address=192.168.0.131;UID=sa</Connection>
+    </ConnectionList>
+    <Pooling>
+      <Connections Min="10" Max="100" Hold="30" />
+      <Timeout Fade="180" Available="600" />
+    </Pooling>
+    <CommandTimeoutList />
+    <RetrySettingList>
+      <RetrySetting RetryErrorNumber="8645" RetryCount="1" RetryInterval="0" />
+      <RetrySetting RetryErrorNumber="701" RetryCount="2" RetryInterval="1000" />
+      <RetrySetting RetryErrorNumber="1205" RetryCount="1" RetryInterval="0" />
+      <RetrySetting RetryErrorNumber="1204" RetryCount="2" RetryInterval="1000" />
+      <RetrySetting RetryErrorNumber="8651" RetryCount="2" RetryInterval="1500" />
+      <RetrySetting RetryErrorNumber="1222" RetryCount="1" RetryInterval="0" />
+      <RetrySetting RetryErrorNumber="0" RetryCount="2" RetryInterval="1000" />
+    </RetrySettingList>
+  </DbConnectionDef>
+</Siteview>

@@ -9,17 +9,26 @@ import javolution.util.FastList;
 import com.ericsson.otp.erlang.OtpConverter;
 import com.ericsson.otp.erlang.OtpErlangAtom;
 import com.ericsson.otp.erlang.OtpErlangObject;
+import com.ericsson.otp.erlang.OtpErlangString;
 import com.ericsson.otp.erlang.OtpGateway;
 import com.ericsson.otp.erlang.OtpMbox;
 import com.ericsson.otp.erlang.OtpNode;
+
+import org.erlide.jinterface.ErlLogger;
+import org.erlide.jinterface.rpc.IRpcCallSite;
 
 
 public final class ErlObjectStore
 {
 	public final static String module = ErlObjectStore.class.getName();
+	private static IRpcCallSite b=null;
 
     public ErlObjectStore()
     {
+    }
+    
+    public static void setBackend(IRpcCallSite backend) {
+        b = backend;
     }
   
     public static List<String> get_all_name() throws Exception
@@ -28,7 +37,8 @@ public final class ErlObjectStore
 
 		if (size() == 0)   return null;
 	
-    	return (List<String>) OtpGateway.getOtpInterface().call("object", "get_all_name", list);
+	    return (List<String>) b.call2("object", "get_all_name", "");
+//	    return (List<String>) b.call2("object", "get_all_name", list);
     }
     
     public static List<ErlObject> get_all() throws Exception
@@ -36,11 +46,10 @@ public final class ErlObjectStore
 		List<Object> list = new ArrayList<Object>();
 		List<String> rtnList = new ArrayList<String>();
 		List<ErlObject> erlObjList = FastList.newInstance();
-		Long size = (Long) OtpGateway.getOtpInterface().call("object", "get_size", list);
 		
-		if (size == 0)   return null;
+		if (size() == 0)   return null;
 	
-		rtnList = (List<String>) OtpGateway.getOtpInterface().call("object", "get_all_name", list);
+		rtnList = (List<String>) b.call2("object", "get_all_name", "");
 		
     	for(String ObjName :  rtnList) {
     		erlObjList.add(new ErlObject(ObjName));
@@ -50,29 +59,20 @@ public final class ErlObjectStore
     
     public static void delete_all() throws Exception
     {
-		List<Object> list = new ArrayList<Object>();
 		if (size() > 0)   
-		    OtpGateway.getOtpInterface().call("object", "delete_all", list);
+		    b.call2("object", "delete_all", "");
     }
     
     public static void delete(String Name) throws Exception
     {
 		List<Object> list = new ArrayList<Object>();
 		list.add(new OtpErlangAtom(Name));
-    	OtpGateway.getOtpInterface().call("object", "delete", list);
+    	b.call2("object", "delete", "a",Name);
     }
     
     public static void delete(List<String> NameList) throws Exception
     {
-		List<Object> list = new ArrayList<Object>();
-		List<OtpErlangAtom> paramList = new ArrayList<OtpErlangAtom>();
-		
-		for(String objName : NameList) {
-			paramList.add(new OtpErlangAtom(objName));		
-		}
-		list.add(paramList);
-		
-    	OtpGateway.getOtpInterface().call("object", "delete", list);
+    	b.call2("object", "delete", "l",NameList);
     }
     
     public static void delete(ErlObject Obj) throws Exception
@@ -91,12 +91,12 @@ public final class ErlObjectStore
     public static Boolean isValidName (String Value) throws Exception {
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(Value));      
-        return  (Boolean) OtpGateway.getOtpInterface().call("object", "isValidName", list);      
+        return  (Boolean) b.call2("object", "isValidName", "a",Value);      
     }
     
     public static Long size() throws  Exception {
         List<Object> list = new ArrayList<Object>();
-        return  (Long) OtpGateway.getOtpInterface().call("object", "get_size", list);        
+        return  (Long) b.call2("object", "get_size", "");        
     }
     
     public static ErlObject create(String Type, String Name) throws Exception{
@@ -106,7 +106,7 @@ public final class ErlObjectStore
 		List<Object> paramList = new ArrayList<Object>();
 		paramList.add(new OtpErlangAtom(Name));
 		list.add(paramList);
-		String rtnObj = (String) OtpGateway.getOtpInterface().call("erlang", "apply", list);
+		String rtnObj = (String) b.call2("erlang", "apply", "aal",Type,"start",paramList);
     	return new ErlObject(Type,rtnObj);
     }
     
@@ -119,7 +119,7 @@ public final class ErlObjectStore
         List<Object> list = new ArrayList<Object>();
         list.add(new OtpErlangAtom(engine));
         list.add(OtpConverter.Object2OtpErlangObject(fact.toArray()));        
-        OtpGateway.getOtpInterface().call("object", "add_fact", list);      
+        b.call2("object", "add_fact", "sl",engine,fact);      
     }
     
     public static List<ErlObject> get_by_attr(String AttributeName, String AttributeValue) throws Exception{
@@ -129,7 +129,7 @@ public final class ErlObjectStore
 		list.add(AttributeName);
 		list.add(AttributeValue);
 		
-		List<String> rtnList = (List<String>) OtpGateway.getOtpInterface().call("object", "jget_by_attr", list);		
+		List<String> rtnList = (List<String>) b.call2("object", "jget_by_attr", "");		
 		
 		for(String objname : rtnList) {
 			objList.add(new ErlObject(objname));			
@@ -150,7 +150,7 @@ public final class ErlObjectStore
 		list.add(AttributeName);
 		list.add(paramList);
 		
-		List<String> rtnList = (List<String>) OtpGateway.getOtpInterface().call("object", "jget_by_attr", list);		
+		List<String> rtnList = (List<String>) b.call2("object", "jget_by_attr", "");		
 		
 		for(String objname : rtnList) {
 			objList.add(new ErlObject(objname));			

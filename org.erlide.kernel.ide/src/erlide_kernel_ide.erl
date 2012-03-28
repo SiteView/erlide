@@ -5,6 +5,7 @@
 		]).
 
 init() ->	
+	erlide_log:log("*******************erlide_kernel_ide*************************"),
 	spawn(fun()->
 				  erlide_scanner_listener:start(),
 				  object:start(),
@@ -22,6 +23,37 @@ init() ->
 				  %%TODO: start java-node seperately
 				  ok
 		  end),
+	ok.
+
+ecc_init() ->	
+	erlide_log:log("*******************erlide_kernel_ide begin*************************"),
+	erlide_scanner_listener:start(),
+	erlide_log:log("*******************erlide_scanner_listener*************************"),
+	object:start(),
+	erlide_log:log("*******************object*************************"),
+	content_store:start(), %TODO: set the db directory
+	erlide_log:log("*******************content_store*************************"),
+	application:start(quickstart_mochiweb),
+	erlide_log:log("*******************quickstart_mochiweb*************************"),
+	application:start(svecc),
+	erlide_log:log("*******************svecc*************************"),
+	application:start(crypto),
+	erlide_log:log("*******************crypto*************************"),
+	application:start(ssh),
+	erlide_log:log("*******************ssh*************************"),
+	application:start(gettext),
+	erlide_log:log("*******************gettext*************************"),	
+%% 	extension_sup:start(),
+%% 	nnm_start:start(),
+%% 	erlide_log:log("*******************nnm_start*************************"),
+%% 	wmic:start(),
+%% 	erlide_log:log("*******************wmic*************************"),
+	gettext:recreate_db(),
+	erlide_log:log("*******************recreate_db*************************"),
+%% 	license:start(),
+%% 	erlide_log:log("*******************license*************************"),
+	%%TODO: start java-node seperately
+	
 	ok.
 
 init1(L) when is_list(L) ->
