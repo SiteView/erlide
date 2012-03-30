@@ -717,101 +717,105 @@ getSnmpMemory(Host,LastPageFaults,LastMeasurement) ->
 getMemoryFull(Host,LastPageFaults,LastMeasurement) ->
 	case object:get(Host, method) of
 		"Snmp"->
+			io:format("__________platform:getMemoryFull____________:~p~n",["Snmp"]),
 			 getSnmpMemory(Host,LastPageFaults,LastMeasurement);
 		_->
 			case object:get(Host, method) of
 				"WMI" ->
 					case object:get(Host, os) of
 						1 ->
+							io:format("__________platform:getMemoryFull____________:~p~n",["WMI"]),
 							proxy:memory(1, Host, object:get(Host, login), object:get(Host, passwd));
 						_->
+							io:format("__________platform:getMemoryFull____________:~p~n",["Command"]),
 							ok
 					end;
 				 _->
 					ok
 		     end
-	end,
-    case machine:getSnmpMachine(Host) of
-        {ok, Ma=#machine{}} ->
-            getSnmpMemory(Host,LastPageFaults,LastMeasurement);
-        _ ->
-	%%  Host1 =  case Host of
-	%%		"\\\\"++_HOST ->
-	%%			Host;
-	%%		_ ->
-	%%			"\\\\"++Host
-	%%    end,
-            OsNum = machine:getOS(Host),
-            WMI = case OsNum of
-            1 ->
-                is_wmi(Host);
-            _ ->
-                false
-            end,
-            case WMI of
-            true->
-                [Mach|_] = machine:getNTMachine(Host),
-                proxy:memory(OsNum, Host, Mach#machine.login, Mach#machine.passwd);
-            _ ->
-		
-                %get localhost type
-                Cmd = machine:getCommandString(memory,Host),
-                if Host == "" ->
-                    TMachine = "";
-                true ->    
-                    TMachine = machine:getMachine(Host)
-                end,
-                if length(TMachine) > 0 ->
-                    [Machine|_] = TMachine;
-                true ->
-                    Machine = ""
-                end,
-                %case Cmd of
-                %{ok,Val} ->
-                    %Command = Val,
-                    %String = sshcommandline:exec(Command,Machine,true);
-                %_ ->
-                %Command = memoryCommand(Host,OsNum),
-                %case Command of
-                %undefined ->
-                    %String = ""; 
-                %_ ->
-                    %if OsNum == 1 ->
-                    %String = os:cmd(Command);
-                    %true ->
-                    %String = sshcommandline:exec(Command,Machine,true)
-                    %end
-                %end            
-                %end,
-                %List = string:tokens(String,"\r\n"),
-                case Cmd of
-                {ok,Command} ->
-                    {Status,DateList} = siteview_commandline:exec(Host,Command);
-                _ ->
-                    {Status,DateList} = siteview_commandline:exec(Host,memoryCommand(Host,OsNum))  
-                end,
-                case  Status of
-                    ok ->
-                        % Tid = init_lineReader(),
-                        if length(DateList) == 0 ->
-                            {error,"no data"};  
-                        true ->
-                            Error = [X||X<-DateList,string:str(X,"ERROR:")>0],
-                            if length(Error) > 0 ->
-                            [Err|_] = Error,
-                            {error,Err};
-                            true ->
-                            Tid = init_lineReader(),
-                            Md = disposalMemoryData(Host,Tid,DateList,OsNum,LastPageFaults,LastMeasurement),
-                            ets:delete(Tid),
-                            {ok,Md}   
-                            end
-                        end;
-                _ ->
-                    {error,"no data"} 
-                end
-            end
-    end.
+	end,	
+%%     case machine:getSnmpMachine(Host) of
+%%         {ok, Ma=#machine{}} ->
+%%             getSnmpMemory(Host,LastPageFaults,LastMeasurement);
+%%         _ ->
+%% 	%%  Host1 =  case Host of
+%% 	%%		"\\\\"++_HOST ->
+%% 	%%			Host;
+%% 	%%		_ ->
+%% 	%%			"\\\\"++Host
+%% 	%%    end,
+%%             OsNum = machine:getOS(Host),
+%%             WMI = case OsNum of
+%%             1 ->
+%%                 is_wmi(Host);
+%%             _ ->
+%%                 false
+%%             end,
+%%             case WMI of
+%%             true->
+%%                 [Mach|_] = machine:getNTMachine(Host),
+%%                 proxy:memory(OsNum, Host, Mach#machine.login, Mach#machine.passwd);
+%%             _ ->
+%% 		
+%%                 %get localhost type
+%%                 Cmd = machine:getCommandString(memory,Host),
+%%                 if Host == "" ->
+%%                     TMachine = "";
+%%                 true ->    
+%%                     TMachine = machine:getMachine(Host)
+%%                 end,
+%%                 if length(TMachine) > 0 ->
+%%                     [Machine|_] = TMachine;
+%%                 true ->
+%%                     Machine = ""
+%%                 end,
+%%                 %case Cmd of
+%%                 %{ok,Val} ->
+%%                     %Command = Val,
+%%                     %String = sshcommandline:exec(Command,Machine,true);
+%%                 %_ ->
+%%                 %Command = memoryCommand(Host,OsNum),
+%%                 %case Command of
+%%                 %undefined ->
+%%                     %String = ""; 
+%%                 %_ ->
+%%                     %if OsNum == 1 ->
+%%                     %String = os:cmd(Command);
+%%                     %true ->
+%%                     %String = sshcommandline:exec(Command,Machine,true)
+%%                     %end
+%%                 %end            
+%%                 %end,
+%%                 %List = string:tokens(String,"\r\n"),
+%%                 case Cmd of
+%%                 {ok,Command} ->
+%%                     {Status,DateList} = siteview_commandline:exec(Host,Command);
+%%                 _ ->
+%%                     {Status,DateList} = siteview_commandline:exec(Host,memoryCommand(Host,OsNum))  
+%%                 end,
+%%                 case  Status of
+%%                     ok ->
+%%                         % Tid = init_lineReader(),
+%%                         if length(DateList) == 0 ->
+%%                             {error,"no data"};  
+%%                         true ->
+%%                             Error = [X||X<-DateList,string:str(X,"ERROR:")>0],
+%%                             if length(Error) > 0 ->
+%%                             [Err|_] = Error,
+%%                             {error,Err};
+%%                             true ->
+%%                             Tid = init_lineReader(),
+%%                             Md = disposalMemoryData(Host,Tid,DateList,OsNum,LastPageFaults,LastMeasurement),
+%%                             ets:delete(Tid),
+%%                             {ok,Md}   
+%%                             end
+%%                         end;
+%%                 _ ->
+%%                     {error,"no data"} 
+%%                 end
+%%             end
+%%     end.
+	   ok.
 
 %host is string,Ip or domain name,
 getMemoryFullold(Host,LastPageFaults,LastMeasurement) ->

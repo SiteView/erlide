@@ -45,7 +45,8 @@ update_action(Self,EventType,Pattern,State) ->
 	?SETVALUE(pPercentFull,[]),
 	?SETVALUE(pFreeSpace,[]),
 	?SETVALUE(pPageFaultsPerSecond,[]),	
-%% 	run(?VALUE(machine), 0,0),
+	io:format("__________memory update_action____________:~p~n", [?VALUE(machine)]),
+	run(?VALUE(machine), 0,0),
 	
 	Diff = timer:now_diff(erlang:now(), Start)/1000000,
 	?SETVALUE(?MEASUREMENTTIME,Diff),

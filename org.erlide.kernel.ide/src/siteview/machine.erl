@@ -12,7 +12,7 @@
 -define(OS_NAME,[{"nt",1},{"sunsolaris",2},{"sun_solaris",2},{"sgi",3},{"macosx",4},{"hp",5},{"linux",6},{"openserver",7},{"open_server",7},{"hp64",8},{"redhatenterpriselinux",9},{"red_hat_enterprise_linux",9},{"redhat4",9},{"suselinux10",9},{"suselinux11",9},{"sco",10},{"tru64",11},{"freebsd",12},{"digital",13},{"aix",14}]).
 
 -export([getMachineTable/0,addNTMachineLogin/3,getNTMachineTable/0,getNTMachine/1,getCurrentUser/0,createMachines/1,createMachine/1,getMachine/1,getMachinePathSeparator/1,getMachineByHost/1,getMachineName/1,getCommandSetting/3,getCommandString/3,getOS/1,stringToOS/1,getAdapter/1,
-		 get_id/0]).
+		 get_id/0, test_monitor/2, get_machineobj_mach/1]).
 
 %% @spec getMachineTable() -> Result
 %% Result = [tuple()]
@@ -21,7 +21,7 @@
 getMachineTable()->
 %% 	dbcs_machine:get_all().
 	object:get_by_class('machineobj').
-
+	
 %% @spec addNTMachineLogin(Host,Username,Password) -> ok
 %%  Host = string()
 %%  Username = string()
@@ -35,15 +35,19 @@ addNTMachineLogin(Host,Login,Pass)->
 %% 			dbcs_machine:remove_machine_by_host(Host),
 %% 			dbcs_machine:create_machine(#machine{id=dbcs_base:get_id(),host=Host,login=Login,passwd=Pass,os="nt",method="NetBIOS"})
 %% 	end.
-	case machineobj:start(Host) of
+	
+	case machineobj:start(get_id()) of
+%% 	case machineobj:start(Host) of
 		{error, Obj, _}->
 			object:set(Obj, host, Host),
 			object:set(Obj, login, Login),
-			object:set(Obj, passwd, Pass);
+			object:set(Obj, passwd, Pass),
+			Obj;
 		Obj ->
 			object:set(Obj, host, Host),
 			object:set(Obj, login, Login),
-			object:set(Obj, passwd, Pass)
+			object:set(Obj, passwd, Pass),
+			Obj
 	end.
 
 %% @spec getSnmpMachine(Host) -> {ok, [Machine=#machine{}]} | {error, _}
@@ -57,7 +61,8 @@ getSnmpMachine(Host) ->
 %% @doc get all windows machine,value is list of records.
 %get all NT machine,value is list of records
 getNTMachineTable()->
-	dbcs_machine:get_NTmachine().
+%% 	dbcs_machine:get_NTmachine().
+	get_machineobj_mach([{os, 'nt'}]).
 
 %% @spec getNTMachine(Host) -> Result
 %%  Host = string()
@@ -65,7 +70,7 @@ getNTMachineTable()->
 %% @doc get windows machine by Ip
 getNTMachine(Host)->
 %% 	dbcs_machine:get_machine_match("my.host=" ++ Host ++ "&my.os=nt").
-	object:get_by_name(Host).
+	get_machineobj_mach([{os, 'nt'},{host, Host}]).
 
 %% @spec getCurrentUser() -> Result
 %% Result = atom()
@@ -108,7 +113,7 @@ createMachine(Machi) ->
 %%  Result =  term()
 %% @doc get machine by Ip
 getMachine(Host)->
-	object:get_by_name(Host).
+	get_machineobj_mach([{host, Host}]).
 %% 	dbcs_machine:get_machine_by_host(Host).
 
 getMachine(Localhost,Host)->
@@ -485,8 +490,54 @@ get_id()->
 			list_to_atom("machine_"  ++ integer_to_list(random:uniform(1000000)))
 	end.
 
+test_monitor(MonitorType, MonitorId) ->
+	Machine = addNTMachineLogin("127.0.0.1", "cxy", "cxy"),
+%% 	object:set(Machine, method, "Snmp"),
+
+	object:set(Machine, method, "WMI"),
+	object:set(Machine, os, 1),
+	Monitor = MonitorType:start(MonitorId),	
+	object:set(Monitor, machine, Machine).	
+
+get_machineobj_mach(Conditions)->
+	MachineObjList = object:get_by_class('machineobj'),
+	FilterObjList = [X||X<-MachineObjList,filter(X, Conditions)],	
+	FilterObjList.
+
+filter(Obj, Conditions)->	
+	F = fun(X) ->
+		{Name,Value} = X,
+		case object:get(Obj, Name) of
+			Value->
+				true;
+			_->
+				false
+		end
+	end,
+	ResultList = lists:map(F, Conditions),
+	case lists:member(false, ResultList) of
+		true ->
+			false;
+		_ ->
+			true
+	end.
+
+get_machineobj_machold(Conditions)->
+	MachineObjList = [object:get_by_attr(Name, Value)||{Name, Value}<-Conditions],
+	MachineObjList.
+
+intersection(S1, S2)  -> 
+	intersection(S1, S2, []).
+intersection([], _, S) -> 
+	S;
+intersection([H|T], S1, S) ->
+ case lists:member(H,S1) of
+	true -> intersection(T, S1, [H|S]);
+	false -> intersection(T, S1, S)
+ end.
+
 record_to_obj(Mach) ->	
 	ok.
 
 obj_to_record(Mach) ->	
-	ok.
+	ok.	
